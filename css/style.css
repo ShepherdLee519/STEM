@@ -1,0 +1,35 @@
+body{
+    background-color: #eee;
+}
+
+#baseinfo-theme, #baseinfo-subject{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+
+.header{
+    background-color: #CCCCFF;
+    border-color: #CCCCFF;
+}
+#navbar .active a{
+    /*被选中的链接的底色*/
+    background-color: white;
+    border: white;
+}
+
+
+div[id^=baseinfo-]{
+    /* border: 2px solid lightgray; */
+    padding-top: 10px;
+    background-color: #eee;
+}
+
+.panel-primary .panel-heading {
+    background-color: skyblue;
+    border: skyblue;
+    color: #666;
+}
+
+.panel-title{
+    font-size: 1.5em;
+}
