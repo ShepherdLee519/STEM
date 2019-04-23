@@ -1,0 +1,8 @@
+@import url("style.css");
+
+#design-structure,
+#design-tasks,
+#design-activities{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}

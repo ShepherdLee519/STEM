@@ -1,5 +1,5 @@
 $(function(){
-    console.log("hello");
+    console.log("hello! - baseinfo");
     var scienceStd = [
         {
             "firstTitle" : "科学课标一",
