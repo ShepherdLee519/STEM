@@ -10,4 +10,6 @@
 
 
 <link rel="stylesheet" href="css/style.css" />
-<h1>gun</h1>
+<div class="well text-center">
+    <h1 style="font-size: 50px">404 Can't Go to This Page!</h1>
+</div>

@@ -1,0 +1,46 @@
+{
+    "tasktype" : "DBL",
+    "imagepath" : "image/nodes/DBL/",
+    "nodes" : [
+        {
+            "nodename" : "需求分析",
+            "imgsrc" : "pic.png",
+            "taskname" : "test",
+            "taskcontent" : "test-content",
+            "level" : 1,
+            "next" : ""
+        },
+        {
+            "nodename" : "设计方案",
+            "imgsrc" : "pic.png",
+            "taskname" : "",
+            "taskcontent" : "",
+            "level" : 1,
+            "next" : ""
+        },
+        {
+            "nodename" : "评价测试",
+            "imgsrc" : "pic.png",
+            "taskname" : "",
+            "taskcontent" : "",
+            "level" : 1,
+            "next" : ""
+        },
+        {
+            "nodename" : "改进设计",
+            "imgsrc" : "pic.png",
+            "taskname" : "",
+            "taskcontent" : "",
+            "level" : 1,
+            "next" : ""
+        },
+        {
+            "nodename" : "汇报与反思",
+            "imgsrc" : "pic.png",
+            "taskname" : "",
+            "taskcontent" : "",
+            "level" : 1,
+            "next" : ""
+        }
+    ]
+}

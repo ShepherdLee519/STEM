@@ -53,7 +53,7 @@
                     <ul class="nav navbar-nav" id="top-navbar" style="margin-left: 100px;">
                         <li><a href="index.php?p=baseinfo" id="baseinfo-link">基本信息</a></li>
                         <li><a href="index.php?p=design" id="design-link">学习设计</a></li>
-                        <li><a href="#" id="A-link">设计结果</a></li>
+                        <li><a href="index.php?p=result" id="A-link">设计结果</a></li>
                         <li><a href="#" id="B-link">分析数据</a></li>
                         <li><a href="#" id="C-link">定制模块</a></li>
                     </ul><!-- /end -->

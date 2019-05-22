@@ -1,0 +1,30 @@
+{
+    "tasktype" : "KC",
+    "imagepath" : "image/nodes/DBL/",
+    "nodes" : [
+        {
+            "nodename" : "KC1",
+            "imgsrc" : "pic.png",
+            "taskname" : "test",
+            "taskcontent" : "test-content",
+            "level" : 1,
+            "next" : ""
+        },
+        {
+            "nodename" : "KC2",
+            "imgsrc" : "pic.png",
+            "taskname" : "",
+            "taskcontent" : "",
+            "level" : 1,
+            "next" : ""
+        },
+        {
+            "nodename" : "KC3",
+            "imgsrc" : "pic.png",
+            "taskname" : "",
+            "taskcontent" : "",
+            "level" : 1,
+            "next" : ""
+        }
+    ]
+}

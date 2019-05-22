@@ -6,3 +6,215 @@
     margin-bottom: -99999px;
     padding-bottom: 99999px;
 }
+
+.row{
+    min-height: 660px;
+}
+
+div[id^=design-]{
+    background-color: white;
+}
+
+.row > div[id^=design-]:not(:first-child):not(:last-child){
+    border-left: 2px solid #999;
+    border-right: 2px solid #999;
+}
+
+div .design-header{
+    background-color: skyblue;
+    padding-top: 5px; 
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+
+
+
+
+
+
+
+
+/* 显示任务节点的区域
+------------------------------------------*/
+#design-tasksZone{
+    border: none;
+}
+
+#design-tasksZone > div{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+
+
+
+
+
+
+
+
+/* 添加任务的面板区域
+-------------------------------------------*/
+#design-initTaskZone #design-initTaskBtn{
+    display: block;
+    margin: 10px auto;
+}
+
+#design-initTaskZone div.panel{
+    margin: 0px 15%;
+}
+
+
+
+
+
+
+
+
+/* 节点本身的效果
+------------------------------------------*/
+#design-tasksZone div.node{
+    text-align: center;
+    position: relative;
+}
+
+#design-tasksZone div.node img{
+    width: 65%;
+    display: block;
+    padding: 5px;
+    margin: 0px auto;
+    /* border: 1.5px dashed #ccc; */
+}
+
+#design-tasksZone div.node img:hover{
+    cursor: pointer;
+}
+
+#design-tasksZone div.node .nodename{
+    position: relative;
+    font-weight: bold;
+    left: 5px;
+}
+
+#design-tasksZone div.node > span{
+    font-size: 25px;
+    color: #ccc;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#design-tasksZone div.node > span.hasSubNode{
+    color: red;
+    font-size: 27px;
+}
+
+#design-tasksZone div.node:last-child > span{
+    display: none;
+}
+
+
+
+
+
+
+
+
+/* 节点编辑区域
+------------------------------------------*/
+#design-tasksZone .design-editTaskZone{
+    position: absolute;
+    margin: 0px;
+    left: 95%;
+    top: 19%;
+    width:500px;
+    z-index: 1;
+}
+
+#design-tasksZone .design-initSubTaskZone{
+    text-align: left;
+    position: absolute;
+    margin: 0px;
+    left: 95%;
+    top: 19%;
+    width:300px;
+    z-index: 1;
+}
+
+.design-editTaskZone button,
+.design-initSubTaskZone button{
+    width: 80px;
+}
+
+.design-editTaskZone .panel-title span:hover{
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+/* 学习活动区域 - zone
+-----------------------------------------*/
+div.design-act-zone{
+    margin: 0px auto;
+    margin-bottom: 20px;
+    width: 300px;
+}
+
+div.design-act-zone .design-act-zone-title{
+    font-size: 13px;
+}
+
+div.design-act-zone .design-act-zone-title span{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+div.design-act-zone-content .init-act button{
+    display: block;
+    margin: 0px auto;
+}
+
+
+
+
+
+
+
+/* 学习活动区域 - node
+----------------------------*/
+div.design-act-node{
+    border-radius: 15px;
+}
+
+div.design-act-node .panel-heading{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    font-size: 10px;
+}
+
+div.design-act-node-wrapper > span.glyphicon{
+    font-size: 130%;
+    display: block;
+    color: #FF6666;
+    margin-left: 50%;
+}
+
+div.design-act-node-wrapper > span:last-child{
+    top: -18px;
+}
+
+div.design-act-node-wrapper > span.glyphicon:hover{
+    font-size: 150%;
+    color: red;
+}
+
+div.design-act-node-wrapper span.glyphicon-remove{
+    top: -15px;
+    font-size: 150%;
+    color: red;
+}
+

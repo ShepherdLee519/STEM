@@ -1,0 +1,30 @@
+{
+    "tasktype" : "PBL",
+    "imagepath" : "image/nodes/DBL/",
+    "nodes" : [
+        {
+            "nodename" : "PBL1",
+            "imgsrc" : "pic.png",
+            "taskname" : "test",
+            "taskcontent" : "test-content",
+            "level" : 1,
+            "next" : ""
+        },
+        {
+            "nodename" : "PBL2",
+            "imgsrc" : "pic.png",
+            "taskname" : "",
+            "taskcontent" : "",
+            "level" : 1,
+            "next" : ""
+        },
+        {
+            "nodename" : "PBL3",
+            "imgsrc" : "pic.png",
+            "taskname" : "",
+            "taskcontent" : "",
+            "level" : 1,
+            "next" : ""
+        }
+    ]
+}
