@@ -5,7 +5,7 @@
  * info: p=baseinfo 基本信息界面的js
  */
 
- const BASEINFO_PATH = "datas/baseinfo/",
+const BASEINFO_PATH = "datas/baseinfo/",
     STD = ["science", "technology", "engineering", "mathematics"];
 
 
@@ -62,6 +62,7 @@ function editTheme(){
 
     $("#editTheme").modal("hide");
 }
+
 
 
 

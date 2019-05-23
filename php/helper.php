@@ -3,7 +3,6 @@
  * author: Shepherd.Lee
  * Date: 2019-04-23
  * version: 1.0.0
- * caller: ./project.php
  * info: 简化一些操作的php辅助函数
  * index:
  *          1. _get()/_post()

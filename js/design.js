@@ -3,6 +3,17 @@
  * Date: 2019-05-22
  * version: 2.0.0
  * info: p=design 学习设计界面的功能实现
+ * index: 
+ *      initPanel() > createInitPanel()
+ *                  > initTaskNodes()
+ *                  > initSubTaskNode()
+ *      addTaskNode() - addSubTaskNode()
+ *      subNodeHandlerTools() - addSubNodeHandler()
+ *      editNodeHandler() - editTask()
+ *      showData()
+ *      Zones() - Zone() - Node()
+ *      initActivities()
+ *      
  */
 
 const TASKTYPE = [
@@ -131,6 +142,19 @@ function initTaskNodes($div, tasktype,
 
 
 
+//initTasksNodes() - addSubNodeHandler();
+function initSubTaskNode(type, parentIndex){
+    type = type.toLowerCase();
+    $("#design-tasksZone").append(`<div class='col-md-4' id="subTaskZone-${parentIndex}"></div>`);
+    $div = $(`#design-tasksZone > #subTaskZone-${parentIndex}`);
+    initTaskNodes($div, type, true, parentIndex);
+}
+
+
+
+
+
+
 
 //initTaskNodes()
 function addTaskNode($div, data, isSubNode, parentIndex){
@@ -175,19 +199,6 @@ function addTaskNode($div, data, isSubNode, parentIndex){
 
 
 //initTasksNodes() - addSubNodeHandler();
-function initSubTaskNode(type, parentIndex){
-    type = type.toLowerCase();
-    $("#design-tasksZone").append(`<div class='col-md-4' id="subTaskZone-${parentIndex}"></div>`);
-    $div = $(`#design-tasksZone > #subTaskZone-${parentIndex}`);
-    initTaskNodes($div, type, true, parentIndex);
-}
-
-
-
-
-
-
-//initTasksNodes() - addSubNodeHandler();
 function addSubTaskNode(type, parentIndex){
     type = type.toLowerCase();
     $("#design-tasksZone").append(`<div class='col-md-4' id="subTaskZone-${parentIndex}"></div>`);
@@ -197,6 +208,9 @@ function addSubTaskNode(type, parentIndex){
     ZONE.addSubActivities(parentIndex, data.nodes);//初始化子学习活动面板
     addTaskNode($div, data, true, parentIndex);
 }
+
+
+
 
 
 
@@ -380,24 +394,16 @@ function editTask($target, nodeInfo){
 
 //$(function())
 function showData(){
-    _async();
-    let path = PATH + "data.json" + "?time=" + new Date().getTime();
-    $.get(path, (data) => {
-        DATA = data;
+    //处理添加任务节点等
+    $("#design-tasksZone").removeClass("hidden");
+    $("#design-initTaskZone").addClass("hidden");
+    let $div = $("#design-tasksZone div:first-child");
 
-        //处理添加任务节点等
-        $("#design-tasksZone").removeClass("hidden");
-        $("#design-initTaskZone").addClass("hidden");
-        let $div = $("#design-tasksZone div:first-child");
+    initActivities();//初始化学习活动面板 
+    addTaskNode($div, DATA, false, -1);
 
-        initActivities();//初始化学习活动面板 
-        addTaskNode($div, data, false, -1);
-
-        let tools = new subNodeHandlerTools();
-        tools.hideSubNodes();
-
-    });
-    _async();
+    let tools = new subNodeHandlerTools();
+    tools.hideSubNodes();
 }
 
 
@@ -621,11 +627,29 @@ function initActivities(){
  */
 
 $("#test-save").click(() => {
-    $.post("./php/design/test_tojson.php", {data:DATA}, (res) => {
-        log("Response:" + res);
+    // $.post("./php/design/test_tojson.php", {data:DATA}, (res) => {
+    //     log("Response:" + res);
+    // });
+    let id = "1";
+    $.post("./php/design/test_save.php", {id:id, data:DATA}, (res) => {
+        log(res);
     });
 });
 
 $("#test-load").click(() => {
+    // _async();
+    // let path = PATH + "data.json" + "?time=" + new Date().getTime();
+    // $.get(path, (data) => {
+    //     DATA = data;
+
+    // });
+    // _async();
+    _async();
+    $.get("./php/design/test_load.php?id=1", (data) => {
+        data = JSON.parse(data);
+        data = JSON.parse(data);
+        DATA = data;
+    });
+    _async();
     showData();//加载并显示数据
 });
