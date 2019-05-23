@@ -158,17 +158,38 @@ div .design-header{
 
 /* 学习活动区域 - zone
 -----------------------------------------*/
-div.design-act-zone{
+div.design-act-zone,
+div.design-act-subZone{
     margin: 0px auto;
     margin-bottom: 20px;
     width: 300px;
 }
 
-div.design-act-zone .design-act-zone-title{
+div.design-act-subZone{
+    margin-left: 25%;
+    width: 250px;
+}
+
+div.design-act-zone .design-act-zone-title,
+div.design-act-subZone .design-act-zone-title{
     font-size: 13px;
 }
 
-div.design-act-zone .design-act-zone-title span{
+.design-act-zone-hassub{
+    margin: 0px auto;
+    text-align: center;
+    top: 20px;
+    border-top: 1px solid #EEE;
+}
+
+.design-act-zone-hassub span{
+    font-size: 25px;
+    display: block;
+    color: #0099CC !important;
+}
+
+div.design-act-zone .design-act-zone-title span,
+div.design-act-subZone .design-act-zone-title span{
     font-size: 16px;
     font-weight: bold;
 }

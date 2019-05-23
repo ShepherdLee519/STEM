@@ -20,7 +20,8 @@ const TASKTYPE = [
 ];//任务类型名 - 对应php/json
 const PATH = "datas/design/";//节点的模板json文件保存位置
 var DATA,  // 与任务环节相关的数据
-    ACTIVITY; // 与学习活动相关的数据
+    ACTIVITY, // 与学习活动相关的数据
+    ZONE; // 学习活动整个区域的Zones对象
 
 
 
@@ -31,10 +32,8 @@ var DATA,  // 与任务环节相关的数据
 $(function(){
     log("Hello! - design.js");
 
-    //if file exists in DB, load it
-    //loadDatabase();
-    //else init
     initPanel();//初始化添加任务的面板 - 主要是填充radio
+    // showData();//有数据，则加载，并显示
 });
 
 
@@ -122,36 +121,10 @@ function initTaskNodes($div, tasktype,
         }else{
             [...data.nodes].forEach((node) => node.level = 2);
             DATA.nodes[parentIndex].next = data;
+            ZONE.addSubActivities(parentIndex, data.nodes);//初始化子学习活动面板
         }
-        
-        let nodes = data.nodes, imagePath = data.imagepath;
-        // "nodes":
-        //     "nodename" - "imgsrc" - "taskname"
-        //     "taskcontent" - "level" - "next"
-        nodes.forEach((node, index) => {
-            //显示基本的节点
-            $div.append(`
-                <div class='node'>
-                    <p class='nodename'>${node.nodename}</p>
-                    <img title='点击以编辑/查看' src="${imagePath}${node.imgsrc}">
-                    <span class='glyphicon glyphicon-chevron-down'></span>
-                </div>
-            `.trim());
 
-            let $node = $div.find(".node").eq(index),
-                $span = $node.find("span.glyphicon"),
-                $img = $node.find("img"),
-                nodeInfo = {
-                    $div: $div, index: index,
-                    isSubNode: isSubNode, parentIndex: parentIndex,
-                    nodes: nodes, node: node
-                };
-            
-            //处理点击箭头的效果 - 添加或显示子节点
-            addSubNodeHandler($span, nodeInfo);
-            //处理点击图片的效果 - 编辑内容
-            editNodeHandler($img, nodeInfo);
-        });
+        addTaskNode($div, data, isSubNode, parentIndex);
     });
     _async();
 }
@@ -161,13 +134,71 @@ function initTaskNodes($div, tasktype,
 
 
 
+//initTaskNodes()
+function addTaskNode($div, data, isSubNode, parentIndex){
+    let nodes = data.nodes, imagePath = data.imagepath;
+    // "nodes":
+    //     "nodename" - "imgsrc" - "taskname"
+    //     "taskcontent" - "level" - "next"
+    nodes.forEach((node, index) => {
+        //显示基本的节点
+        $div.append(`
+            <div class='node'>
+                <p class='nodename'>${node.nodename}</p>
+                <img title='点击以编辑/查看' src="${imagePath}${node.imgsrc}">
+                <span class='glyphicon glyphicon-chevron-down'></span>
+            </div>
+        `.trim());
+
+        let $node = $div.find(".node").eq(index),
+            $span = $node.find("span.glyphicon"),
+            $img = $node.find("img"),
+            nodeInfo = {
+                $div: $div, index: index,
+                isSubNode: isSubNode, parentIndex: parentIndex,
+                nodes: nodes, node: node
+            };
+        
+        //处理点击箭头的效果 - 添加或显示子节点
+        addSubNodeHandler($span, nodeInfo);
+        //处理点击图片的效果 - 编辑内容
+        editNodeHandler($img, nodeInfo);
+
+        if(node.next != ""){
+            addSubTaskNode(node.next.tasktype, index);
+            $span.addClass("hasSubNode");
+        }
+    });
+}
+
+
+
+
 
 //initTasksNodes() - addSubNodeHandler();
 function initSubTaskNode(type, parentIndex){
+    type = type.toLowerCase();
     $("#design-tasksZone").append(`<div class='col-md-4' id="subTaskZone-${parentIndex}"></div>`);
     $div = $(`#design-tasksZone > #subTaskZone-${parentIndex}`);
     initTaskNodes($div, type, true, parentIndex);
 }
+
+
+
+
+
+
+//initTasksNodes() - addSubNodeHandler();
+function addSubTaskNode(type, parentIndex){
+    type = type.toLowerCase();
+    $("#design-tasksZone").append(`<div class='col-md-4' id="subTaskZone-${parentIndex}"></div>`);
+    $div = $(`#design-tasksZone > #subTaskZone-${parentIndex}`);
+
+    let data = DATA.nodes[parentIndex].next;
+    ZONE.addSubActivities(parentIndex, data.nodes);//初始化子学习活动面板
+    addTaskNode($div, data, true, parentIndex);
+}
+
 
 
 
@@ -199,6 +230,7 @@ function subNodeHandlerTools(){
         }
     };
 }
+
 
 
 
@@ -256,6 +288,7 @@ function addSubNodeHandler($span, nodeInfo){
 
 
 
+
 //initTaskNodes()
 function editNodeHandler($img, nodeInfo){
     let $div = nodeInfo.$div, index = nodeInfo.index,
@@ -275,7 +308,7 @@ function editNodeHandler($img, nodeInfo){
         }
 
         if(Number.parseInt(nodeInfo.node.level) == 1){
-            $div.find("#taskname").val(DATA.nodes[index].taskn8ame);
+            $div.find("#taskname").val(DATA.nodes[index].taskname);
             $div.find("#taskcontent").val(DATA.nodes[index].taskcontent);
         }else{
             let parentIndex = nodeInfo.parentIndex;
@@ -344,25 +377,90 @@ function editTask($target, nodeInfo){
 
 
 
+//$(function())
+function showData(){
+    _async();
+    $.get(PATH + "data.json", (data) => {
+        DATA = data;
+
+        //处理添加任务节点等
+        $("#design-tasksZone").removeClass("hidden");
+        $("#design-initTaskZone").addClass("hidden");
+        let $div = $("#design-tasksZone div:first-child");
+
+        initActivities();//初始化学习活动面板 
+        addTaskNode($div, data, false, -1);
+
+        let tools = new subNodeHandlerTools();
+        tools.hideSubNodes();
+
+    });
+    _async();
+}
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*---------------------------------------------------------------------------------*/
 /**
  * 学习活动区域相关
  */
 
 function Zones(){
-    let zones = [], newzone = null,
+    let zones = [], newzone = null, 
+        LEN = ACTIVITY.length, len = zones.length, 
         $div = $("#design-activities-zone");
 
-    [...ACTIVITY].forEach((node) => {
+    [...ACTIVITY].forEach((node, index) => {
+        if(index == LEN - 1) return;
         newzone = new Zone(node);
         zones.push(newzone);
         $div.append(newzone.self());
     });
+    zones.push(new Array(zones.length).fill([]));
     
+    /**
+     * Zones对外可见的方法
+     * addSubActivities - 添加子活动的，初始化子活动的Zone
+     */
+    this.addSubActivities = (index, nodes) => {
+        // ACTIVITY[ACTIVITY.length-1][index] = {nodes:nodes};
+        let subzones = zones[len][index],
+            $target = $div.children(".design-act-zone").eq(index);
+
+        subzones = [];
+        $target.after(`<div class="subZones"></div>`);
+        $target = $target.next();
+
+        [...nodes].forEach((node) => {
+            newzone = new Zone(node);
+            newzone.toSub();
+            subzones.push(newzone);
+            $target.append(newzone.self());
+        });
+        zones[index].mark();
+    };
 } 
+
+
 
 
 
@@ -384,8 +482,14 @@ function Zone(node){
                 <div class="panel-body design-act-zone-content">
                     ${initBtn}
                 </div>
+                
             </div>
         `.trim()),
+        hasSub = `
+            <div class="design-act-zone-hassub">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </div>
+        `.trim(),
         $heading = $self.find(".panel-heading"),
         $content = $self.find(".design-act-zone-content");
     
@@ -410,6 +514,8 @@ function Zone(node){
      * inserBefore - 在指定节点前插入节点
      * insertAfter - 在指定节点后插入节点
      * deleteNode - 删除指定节点
+     * toSub - 将当前Zone转为子节点的特征，修改一些样式
+     * mark - 表示当前Zone有附属子节点，修改一些样式与功能
      */
     this.self = () => $self;
     this.insertBefore = (target) => {
@@ -438,8 +544,20 @@ function Zone(node){
             initBtnHandler();
             num = 1;
         }
-    }
+    };
+    this.toSub = () => {
+        $self.removeClass("design-act-zone").removeClass("panel-info");
+        $self.addClass("design-act-subZone").addClass("panel-warning");
+    };
+    this.mark = () => {
+        $self.find(".panel-body").after(hasSub);
+        let $span = $self.find(".design-act-zone-hassub span");
+        $span.click(() => {
+            $self.next(".subZones").toggleClass("hidden");
+        });
+    };
 }
+
 
 
 
@@ -491,5 +609,6 @@ function Node(num){
 
 function initActivities(){
     ACTIVITY = Array.from(DATA.nodes);
-    let zones = new Zones();
+    ACTIVITY.push(new Array(ACTIVITY.length).fill(null));//空数组未来存放子学习活动
+    ZONE = new Zones();
 }
