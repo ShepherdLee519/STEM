@@ -6,21 +6,14 @@
  */
 
 const TASKTYPE = [
-    {
-        "task":"dbl", "name":"基于设计的学习"
-    }, {
-        "task":"ibl", "name":"基于探究的学习"
-    }, {
-        "task":"pbl", "name":"基于问题的学习"
-    }, {
-        "task":"kc", "name":"知识建构"
-    }, {
-        "task":"user","name":"自定义"
-    }
+    { "task": "dbl",    "name": "基于设计的学习"  }, 
+    { "task": "ibl",    "name": "基于探究的学习"  },
+    { "task": "pbl",    "name": "基于问题的学习"  }, 
+    { "task": "kc",     "name": "知识建构"       }, 
+    { "task": "user",   "name": "自定义"         }
 ];//任务类型名 - 对应php/json
 const PATH = "datas/design/";//节点的模板json文件保存位置
 var DATA,  // 与任务环节相关的数据
-    ACTIVITY, // 与学习活动相关的数据
     ZONE; // 学习活动整个区域的Zones对象
 
 
@@ -52,13 +45,16 @@ function initPanel(){
     $panelBtns.eq(1).attr("id", btnName[1]);
 
     let taskBtn = function(){
+        //显示添加任务的弹窗的点击事件处理
         $(this).next().removeClass("hidden");
         $(this).off('click');
     };
     $("#design-initTaskBtn").click(taskBtn);//点击添加任务按钮
 
+    //点击确定按钮
     $(`#${btnName[0]}`).click(() => {
         let value = $("input[name='design-taskSelect']:checked").val();//获取radio值
+
         if(typeof value === 'undefined'){
             alert("请先选择任务类型");
         }else{
@@ -67,12 +63,13 @@ function initPanel(){
             let $div = $("#design-tasksZone div:first-child");
             initTaskNodes($div, value);//新建节点
         }
-    });//点击确定按钮
+    });
 
+    //点击取消按钮
     $(`#${btnName[1]}`).click(function(){
         $("#design-initTaskZone > .panel-info").addClass("hidden");
-        $("#design-initTaskBtn").click(taskBtn);
-    });//点击取消按钮
+        $("#design-initTaskBtn").click(taskBtn);//取消后，重新绑定添加任务的点击事件
+    });
 
 }//end initPanel()
 
@@ -112,6 +109,7 @@ function createInitPanel($body){
 //initPanels()
 function initTaskNodes($div, tasktype,
     isSubNode = false, parentIndex = -1){
+    tasktype = tasktype.toLowerCase();
     log("The task type is: " + tasktype);
     _async();
     $.get(PATH + tasktype + ".json", (data) => {
@@ -169,7 +167,8 @@ function addTaskNode($div, data, isSubNode, parentIndex){
             $span.addClass("hasSubNode");
         }
     });
-}
+}//end addTaskNode()
+
 
 
 
@@ -377,10 +376,13 @@ function editTask($target, nodeInfo){
 
 
 
+
+
 //$(function())
 function showData(){
     _async();
-    $.get(PATH + "data.json", (data) => {
+    let path = PATH + "data.json" + "?time=" + new Date().getTime();
+    $.get(path, (data) => {
         DATA = data;
 
         //处理添加任务节点等
@@ -422,15 +424,15 @@ function showData(){
 /*---------------------------------------------------------------------------------*/
 /**
  * 学习活动区域相关
+ * Zones 包含 Zone的列表 Zone由Node组成
+ * Zone可能Sub化
  */
 
-function Zones(){
+function Zones(nodes){
     let zones = [], newzone = null, 
-        LEN = ACTIVITY.length, len = zones.length, 
         $div = $("#design-activities-zone");
 
-    [...ACTIVITY].forEach((node, index) => {
-        if(index == LEN - 1) return;
+    [...nodes].forEach((node) => {
         newzone = new Zone(node);
         zones.push(newzone);
         $div.append(newzone.self());
@@ -442,18 +444,14 @@ function Zones(){
      * addSubActivities - 添加子活动的，初始化子活动的Zone
      */
     this.addSubActivities = (index, nodes) => {
-        // ACTIVITY[ACTIVITY.length-1][index] = {nodes:nodes};
-        let subzones = zones[len][index],
-            $target = $div.children(".design-act-zone").eq(index);
+        let $target = $div.children(".design-act-zone").eq(index);
 
-        subzones = [];
         $target.after(`<div class="subZones"></div>`);
         $target = $target.next();
 
         [...nodes].forEach((node) => {
             newzone = new Zone(node);
             newzone.toSub();
-            subzones.push(newzone);
             $target.append(newzone.self());
         });
         zones[index].mark();
@@ -482,7 +480,6 @@ function Zone(node){
                 <div class="panel-body design-act-zone-content">
                     ${initBtn}
                 </div>
-                
             </div>
         `.trim()),
         hasSub = `
@@ -536,6 +533,7 @@ function Zone(node){
     };
     this.deleteNode = (target) => {
         let index = nodelist.indexOf(target);
+
         nodelist.splice(index, 1);
         $content.children().eq(index).remove();
         if(nodelist.length == 0){
@@ -599,8 +597,8 @@ function Node(num){
      */
     this.self = () => $self;
     this.bindZone = (that) => zone = that;
-
 }
+
 
 
 
@@ -608,7 +606,26 @@ function Node(num){
 
 
 function initActivities(){
-    ACTIVITY = Array.from(DATA.nodes);
-    ACTIVITY.push(new Array(ACTIVITY.length).fill(null));//空数组未来存放子学习活动
-    ZONE = new Zones();
+    ZONE = new Zones(DATA.nodes);
 }
+
+
+
+
+
+
+
+/*------------------------------------------------------------*/
+/**
+ * buttons: test-save/test-load
+ */
+
+$("#test-save").click(() => {
+    $.post("./php/design/test_tojson.php", {data:DATA}, (res) => {
+        log("Response:" + res);
+    });
+});
+
+$("#test-load").click(() => {
+    showData();//加载并显示数据
+});

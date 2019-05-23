@@ -12,6 +12,12 @@
 <div class="row" style="overflow: hidden;">
     <div class="col-md-2" id="design-structure">
         <div>结构</div>
+        <div id="test-design-SL" style="margin-top: 50px">
+            <div class="btn-group">
+                <button class="btn btn-default" id="test-save">Save</button>
+                <button class="btn btn-default" id="test-load">Load</button>
+            </div>
+        </div>
     </div>
 
 
