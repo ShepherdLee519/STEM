@@ -11,7 +11,11 @@
 
 <div class="row" style="overflow: hidden;">
     <div class="col-md-2" id="design-structure">
-        <div>结构</div>
+        <div class="text-center structure-header navbar navbar-default"><h4>结构</h4></div>
+
+        <div id="design-structureZone">
+        </div>
+
         <div id="test-design-SL" style="margin-top: 50px">
             <div class="btn-group">
                 <button class="btn btn-default" id="test-save">Save</button>
@@ -21,11 +25,14 @@
     </div>
 
 
-    <div class="col-md-5" id="design-tasks">
+    <div class="col-md-4" id="design-tasks">
         <div class="text-center design-header navbar navbar-default"><h4>任务环节</h4></div>
 
         <div id="design-tasksZone" class="row hidden" style="height: auto">
-            <div class="col-md-4"></div>
+            <div class="col-md-5 first-level taskZone">
+                <span class="glyphicon glyphicon-remove pull-right delete-task" 
+                        title="删除任务环节"></span>
+            </div>
         </div>
 
         <div id="design-initTaskZone">
@@ -82,14 +89,13 @@
     </div>
 
 
-    <div class="col-md-5" id="design-activities">
+    <div class="col-md-6" id="design-activities">
         <div class="text-center design-header navbar navbar-default"><h4>学习活动</h4></div>
         <div id="design-activities-zone">
         </div>
     </div>
 </div>
 
-
-
-
-
+<script src="js/design-tree.js"></script>
+<script src="js/design-zone.js"></script>
+<script src="js/design-tasks.js"></script>

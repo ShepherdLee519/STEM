@@ -27,7 +27,12 @@ div .design-header{
     margin-left: -15px;
 }
 
-
+div .structure-header{
+    background-color: #DDD;
+    padding-top: 5px; 
+    margin-right: -15px;
+    margin-left: -15px;
+}
 
 
 
@@ -41,11 +46,20 @@ div .design-header{
     border: none;
 }
 
-#design-tasksZone > div{
+/* #design-tasksZone > div{
     margin-bottom: -99999px;
     padding-bottom: 99999px;
+} */
+
+#design-activities-zone{
+    height: 660px;
+    /* background-color: pink; */
+    overflow-y: scroll;
 }
 
+#design-tasksZone{
+    height: 660px;
+}
 
 
 
@@ -86,6 +100,23 @@ div .design-header{
     /* border: 1.5px dashed #ccc; */
 }
 
+/* #design-tasksZone div.node img.arrow{
+    position: absolute;
+    left: -35px;
+    top: 19%;
+} */
+
+#design-tasksZone div .selected-parent{
+    background-color: white;
+    border-top-right-radius: 120px;
+    border-bottom-right-radius: 120px;
+    padding: 10px 0px 10px 17.7px;
+    margin-left: -17.7px;
+    margin-right: -10px;
+    border: 2px solid #999;
+    border-left-color: white;
+}
+
 #design-tasksZone div.node img:hover{
     cursor: pointer;
 }
@@ -113,8 +144,42 @@ div .design-header{
     display: none;
 }
 
+#design-tasksZone div.first-level{
+    margin-left: calc(50% - 20.83%);
+}
 
+/* #design-tasksZone div.taskZone:hover{
+    border-top: 1px solid;
+    border-bottom: 2px solid;
+    border-left: 1px solid;
+    border-right: 3px solid;
+    border-color: lightskyblue;
+    border-color: #ccc;
+} */
 
+#design-tasksZone div.taskZone .delete-task{
+    color: red !important;
+    position: absolute;
+    left: 85%;
+    top: 0px;
+    z-index: 100;
+}
+
+#design-tasksZone div.taskZone .delete-task:hover{
+    font-size: 150%;
+    /* left: 80%; */
+    /* top: -15px; */
+}
+
+/*------子任务节点-------*/
+#design-tasksZone div[id ^= "subTaskZone-"]{
+    /* background-color: pink; */
+    background-color: #EEE;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    margin-bottom: 10px;
+    border-radius: 95px;
+}
 
 
 
@@ -128,7 +193,7 @@ div .design-header{
     left: 95%;
     top: 19%;
     width:500px;
-    z-index: 1;
+    z-index: 200;
 }
 
 #design-tasksZone .design-initSubTaskZone{
@@ -136,9 +201,9 @@ div .design-header{
     position: absolute;
     margin: 0px;
     left: 95%;
-    top: 19%;
+    top: 8%;
     width:300px;
-    z-index: 1;
+    z-index: 200;
 }
 
 .design-editTaskZone button,
@@ -166,8 +231,9 @@ div.design-act-subZone{
 }
 
 div.design-act-subZone{
-    margin-left: 25%;
-    width: 250px;
+    width: 240px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
 
 div.design-act-zone .design-act-zone-title,
@@ -199,6 +265,13 @@ div.design-act-zone-content .init-act button{
     margin: 0px auto;
 }
 
+div.design-initActivityZone{
+    position: absolute;
+    width: 300px;
+    z-index: 200;
+    left: calc(50% - 150px);
+    top: 0px;
+}
 
 
 
@@ -239,3 +312,50 @@ div.design-act-node-wrapper span.glyphicon-remove{
     color: red;
 }
 
+
+
+
+
+
+
+
+
+
+/* 树形控件区域
+------------------------------------*/
+#design-structureZone .tree-title a,
+#design-structureZone .tree-title a:hover,
+#design-structureZone .tree-title a:active,
+#design-structureZone .tree-title a:visited{
+    text-decoration: none !important;
+}
+
+#design-structureZone .tree-nodename{
+    font-weight: bold;
+}
+
+#design-structureZone .tree-heading{
+    font-size: 10px;
+}
+
+#design-structureZone .tree-panel-node .tree-heading{
+    font-size: 9px;
+}
+
+#design-structureZone .tree-panel-sub .tree-heading{
+    font-size: 8px;
+}
+
+#design-structureZone .tree-panel-node{
+    margin-bottom: 10px;
+}
+
+#design-structureZone .tree-panel-sub{
+    margin-bottom: 8px;
+}
+
+#design-structureZone .tree-body{
+    padding-left: 7px;
+    padding-right: 7px;
+    margin: 0px;
+}
