@@ -8,10 +8,19 @@
  */
 ?>
 
-
-<div class="row" style="overflow: hidden;">
+<div class="btn-group hidden" style="margin-bottom: 20px;">
+    <!-- <button id="togglebtn1" class="btn btn-default">&lt;&gt;</button> -->
+    <button id="togglebtn2" class="btn btn-default">toggle2</button>
+    <button id="togglebtn3" class="btn btn-default">toggle3</button>
+</div>
+<div class="row" style="overflow: hidden;" id="design-container">
     <div class="col-md-2" id="design-structure">
-        <div class="text-center structure-header navbar navbar-default"><h4>结构</h4></div>
+        <div class="text-center structure-header navbar navbar-default">
+            <h4>结构
+                <span class="pull-right togglebtn" id="togglebtn1" data-direction = "right"
+                    title="点击此处展开">&gt;&gt;</span></a>
+            </h4>
+        </div>
 
         <div id="design-structureZone">
         </div>
@@ -96,6 +105,6 @@
     </div>
 </div>
 
-<script src="js/design-tree.js"></script>
+<!-- <script src="js/design-tree.js"></script> -->
 <script src="js/design-zone.js"></script>
 <script src="js/design-tasks.js"></script>

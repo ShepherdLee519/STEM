@@ -1,6 +1,6 @@
 /**
  * author: Shepherd.Lee
- * Date: 2019-05-30
+ * Date: 2019-06-06
  * info: 学习活动相关
  */
 
@@ -13,7 +13,7 @@ const TASKTYPE = [
 ];//任务类型名 - 对应php/json
 const PATH = "datas/design/";//节点的模板json文件保存位置
 var TASKS, TASKZONE, INIT, 
-    TREE,  //与左侧树形控件相关
+    // TREE,  //与左侧树形控件相关
     DATA,  // 与任务环节相关的数据
     ZONE;   // 学习活动整个区域的Zones对象
 
@@ -25,11 +25,14 @@ var TASKS, TASKZONE, INIT,
 
 
 $(function(){
+    // $("#design-container > div").css("height", ($(window).height()) + "px");
     log("Hello! - design.js");
     INIT = new Init();
     TASKS = new Task();
     TASKZONE = new TaskZone();
-    TREE = new Tree();
+    // TREE = new Tree();
+
+    initToggles();
     
     function adjust(){
         let height = $("#design-tasksZone").css("height");
@@ -86,5 +89,54 @@ $("#test-load").click(() => {
     });
     _async();
     TASKZONE.showData();//加载并显示数据
-    TREE.build();
+    // TREE.build();
 });
+
+
+
+
+
+
+
+
+function initToggles(){
+    const right = "&gt;&gt;", left = "&lt;&lt;";
+    let btn1 = $("#togglebtn1");
+        // btn2 = $("#togglebtn2"),
+        // btn3 = $("#togglebtn3");
+    let zone1 = $("#design-structure"),
+        zone2 = $("#design-tasks"),
+        zone3 = $("#design-activities");
+
+    function addAnimations(type){
+        zone1.addClass(`${type}-A`);
+        zone2.addClass(`${type}-B`);
+        zone3.addClass(`${type}-C`);
+        // log(zone1.attr("class") + " " + zone2.attr("class") + " " + zone3.attr("class"));
+    }
+
+    function removeAnimations(){
+        [zone1, zone2, zone3].forEach((zone) => {
+            let zone_class = $(zone).attr("class");
+            zone_class = (zone_class.split(" "))[0];
+            $(zone).attr("class", zone_class);
+        });
+        // log(zone1.attr("class") + " " + zone2.attr("class") + " " + zone3.attr("class"));
+    }
+
+    btn1.click(function(){
+        removeAnimations();
+        switch($(this).attr("data-direction")){
+            case "right":
+                $(this).html(left);
+                $(this).attr("data-direction", "left");
+                addAnimations("type-1");
+                break;
+            case "left":
+                $(this).html(right);
+                $(this).attr("data-direction", "right");
+                addAnimations("re-type-1");
+                break;
+        }
+    });
+}

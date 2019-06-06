@@ -96,12 +96,12 @@ function Init(){
         $.get(PATH + tasktype + ".json", (data) => {
             if(!isSubNode){
                 DATA = data;//数据绑定至全局
-                TREE.build();
+                // TREE.build();
                 that.initActivities();//初始化学习活动面板 
             }else{
                 [...data.nodes].forEach((node) => node.level = 2);
                 DATA.nodes[parentIndex].next = data;
-                TREE.build();
+                // TREE.build();
                 ZONE.addSubActivity(parentIndex, data.nodes);//初始化子学习活动面板
             }
             TASKS.addTaskNode($div, data, isSubNode, parentIndex);

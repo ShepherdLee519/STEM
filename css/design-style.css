@@ -1,14 +1,10 @@
 @import url("style.css");
 
-#design-structure,
-#design-tasks,
-#design-activities{
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
-}
-
 .row{
-    min-height: 660px;
+    /* max-height: 100%; */
+    min-height: 520px;
+    display: -moz-box;
+    display: -webkit-box;
 }
 
 div[id^=design-]{
@@ -44,21 +40,20 @@ div .structure-header{
 ------------------------------------------*/
 #design-tasksZone{
     border: none;
+    /* background-color: red; */
 }
-
-/* #design-tasksZone > div{
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
-} */
 
 #design-activities-zone{
     height: 660px;
+    /* height: 510px; */
     /* background-color: pink; */
     overflow-y: scroll;
 }
 
 #design-tasksZone{
-    height: 660px;
+    /* height: 660px; */
+    height: 100%;
+    /* overflow-y: scroll; */
 }
 
 
@@ -108,13 +103,14 @@ div .structure-header{
 
 #design-tasksZone div .selected-parent{
     background-color: white;
-    border-top-right-radius: 120px;
-    border-bottom-right-radius: 120px;
-    padding: 10px 0px 10px 17.7px;
-    margin-left: -17.7px;
-    margin-right: -10px;
-    border: 2px solid #999;
-    border-left-color: white;
+    border-top-left-radius: 120px;
+    border-bottom-left-radius: 120px;
+    padding: 10px 40.7px 10px 0px;
+    margin-right: -40.7px;
+    margin-left: -10px;
+    /* border: 12px solid #EEE;  */
+    border-right-color: white;
+    background-color: #F4F4F4;
 }
 
 #design-tasksZone div.node img:hover{
@@ -173,8 +169,10 @@ div .structure-header{
 
 /*------子任务节点-------*/
 #design-tasksZone div[id ^= "subTaskZone-"]{
+    min-height: 740px;
     /* background-color: pink; */
-    background-color: #EEE;
+    background-color: #F4F4F4;
+    /* border: 12px solid #EEE; */
     padding-top: 60px;
     padding-bottom: 60px;
     margin-bottom: 10px;
@@ -358,4 +356,100 @@ div.design-act-node-wrapper span.glyphicon-remove{
     padding-left: 7px;
     padding-right: 7px;
     margin: 0px;
+}
+
+
+
+
+
+
+
+/*切换节点的span
+--------------------------------------*/
+span.togglebtn{
+    display: block;
+    font-size: 110%;
+    color: #666;
+}
+
+span.togglebtn:hover{
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+/* 节点过渡的效果等
+----------------------------------------*/
+@keyframes firstA{
+    0% { width: 16.67%;}
+    75% { width: 58.33%;}
+    100% { width: 66.67%;}
+}
+@keyframes firstB{
+    0% { width: 33.33%;}
+    75% { width: 25%;}
+    100% { width: 16.67%;}
+}
+@keyframes firstC{
+    0% { width: 50%;}
+    75% { width: 25%;}
+    100% { width: 16.67%;}
+}
+
+/* type-1- */
+/* 2 4 6 -> 8 2 2 */
+#design-structure.type-1-A{
+    width: 66.67%;
+    animation: firstA 0.2s;
+}
+
+#design-tasks.type-1-B{
+    width: 16.67%;
+    animation: firstB 0.2s;
+}
+
+#design-activities.type-1-C{
+    width: 16.67%;
+    animation: firstC 0.2s;
+}
+
+
+
+
+
+@keyframes re-firstA{
+    0% { width: 66.67%;}
+    75% { width: 25%;}
+    100% { width: 16.67%;}
+}
+@keyframes re-firstB{
+    0% { width: 16.67%;}
+    75% { width: 41.67%;}
+    100% { width: 33.33%;}
+}
+@keyframes re-firstC{
+    0% { width: 16.67%;}
+    75% { width: 58.33%;}
+    100% { width: 50%;}
+}
+
+/* re-type-1- */
+/* 2 4 6 <- 8 2 2 */
+#design-structure.re-type-1-A{
+    width: 16.67%;
+    animation: re-firstA 0.2s;
+}
+
+#design-tasks.re-type-1-B{
+    width: 33.33%;
+    animation: re-firstB 0.2s;
+}
+
+#design-activities.re-type-1-C{
+    width: 50%;
+    animation: re-firstC 0.2s;
 }
