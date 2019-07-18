@@ -2,16 +2,13 @@
 /**
  * author: Shepherd.Lee
  * Date: 2019-07-18
- * version: 2.0.0
- * dependencies: php/helper.php; views视图; 
+ * version: 1.0.0
  * info: 
- *      网页工具的入口(相当于index.html)，根据querystring中的p值，来选择渲染对应的views/中的视图与css/js文件
- *      该index.php中包含网页的header/footer与导航栏、container等主要躯干
+ *      不同学习活动的视图的展示
  */
 
     require_once('php/helper.php'); //导入辅助函数
-    $VIEW_PATH = 'views/'; //视图php的文件夹
-    $p = _get('p'); //_get于helper中，安全获取$_GET中的变量
+    $VIEW_PATH = 'views/activity/'; //activity视图php的文件夹
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +17,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <title>STEM学习设计工具</title>
+        <title>STEM学习设计工具 - 活动预览</title>
 
         <!-- 网站的favicon -->
         <link rel="icon" href="image/icon/favicon.ico" type="image/x-icon" />
@@ -28,12 +25,20 @@
         <!------------------------- css & style ---------------------------->
         <!-- 导入bootstrap的css文件 -->
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
-        <!-- 导入自定义css文件 -->
-        <!-- ///////////////////////////////////////////////////////////////////// -->
-
-        <link rel="stylesheet" href="css/<?php echo $p;/* 渲染p值对应的css文件 */ ?>-style.css" />
-
-        <!-- ///////////////////////////////////////////////////////////////////// -->
+        <style>
+            div.activity-show{
+                /* border: 1px dashed #ccc; */
+            }
+            textarea{
+                overflow:auto;
+                background-attachment:fixed;
+                background-repeat:no-repeat;
+                border-style:solid;
+                border-color:#ccc; 
+                margin: -8px -30px -13px -8px;
+                width: 110%; height: 100%;
+            }
+        </style>
     </head>
     <body>
         <!-- ///导航栏 -->
@@ -51,7 +56,6 @@
                 <div>
                     <!-- /切换功能的静态按钮 -->
                     <ul class="nav navbar-nav" id="top-navbar" style="margin-left: 100px;">
-                        <!-- <li><a href="index.php?p=baseinfo" id="baseinfo-link">基本信息</a></li> -->
                         <li><a href="index.php?p=design" id="design-link">学习设计</a></li>
                         <li><a href="index.php?p=result" id="A-link">设计结果</a></li>
                         <li><a href="#" id="B-link">分析数据</a></li>
@@ -76,16 +80,30 @@
 
         <!-- 主要内容区域 -->
         <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 col-md-push-2">
             <!-- ///////////////////////////////////////////////////////////////////// -->
 
             <?php
-                /* 根据p值，渲染对应的视图php */
-                if(!@include $VIEW_PATH.$p.".php"){
-                    include $VIEW_PATH."default.php";
+                $activities = array(
+                    "pair", "pyramid", "jigsaw", 
+                    "roleplay", "game", "exp"
+                );
+
+                for($i = 0; $i < count($activities); $i++){
+                    ?>
+                        <div class="activity-show col-md-6">
+                            <?php
+                                @include $VIEW_PATH.$activities[$i].".php";
+                            ?>
+                        </div>
+                    <?php
                 }
             ?>
 
             <!-- ///////////////////////////////////////////////////////////////////// -->
+                </div>
+            </div>
         </div>
 
         <!-- 可能的页脚区域 -->
@@ -101,25 +119,5 @@
         <script src="js/bootstrap/bootstrapValidator.min.js"></script>
         <!-- 导入自定义的js文件 -->
         <script src="js/common.js"></script>
-        <!-- ///////////////////////////////////////////////////////////////////// -->
-
-        <?php
-            // 根据p值，加载对应的js文件 - 某个p值可能对应多个文件，这里用数组的方式记录js文件名
-            $design_js = array(
-                "design", "design-zone", "design-tasks", "design-activity",
-                "design-objectives", "design-introduction"
-            );
-            // $XXX.js = array();
-            
-            switch($p){
-                case "design":
-                    for($i = 0; $i < count($design_js); $i++){
-                        ?><script src="js/<?php echo $design_js[$i];?>.js"></script><?php
-                    }
-                    break;
-            }
-        ?>
-
-        <!-- ///////////////////////////////////////////////////////////////////// -->
     </body>
 </html>

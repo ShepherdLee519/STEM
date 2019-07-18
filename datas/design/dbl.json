@@ -4,7 +4,7 @@
     "nodes" : [
         {
             "nodename" : "需求分析",
-            "imgsrc" : "pic.png",
+            "imgsrc" : "DBL-1.png",
             "taskname" : "test",
             "taskcontent" : "test-content",
             "level" : 1,
@@ -12,7 +12,7 @@
         },
         {
             "nodename" : "设计方案",
-            "imgsrc" : "pic.png",
+            "imgsrc" : "DBL-2.png",
             "taskname" : "",
             "taskcontent" : "",
             "level" : 1,
@@ -20,7 +20,7 @@
         },
         {
             "nodename" : "评价测试",
-            "imgsrc" : "pic.png",
+            "imgsrc" : "DBL-3.png",
             "taskname" : "",
             "taskcontent" : "",
             "level" : 1,
@@ -28,7 +28,7 @@
         },
         {
             "nodename" : "改进设计",
-            "imgsrc" : "pic.png",
+            "imgsrc" : "DBL-4.png",
             "taskname" : "",
             "taskcontent" : "",
             "level" : 1,
@@ -36,7 +36,7 @@
         },
         {
             "nodename" : "汇报与反思",
-            "imgsrc" : "pic.png",
+            "imgsrc" : "DBL-5.png",
             "taskname" : "",
             "taskcontent" : "",
             "level" : 1,

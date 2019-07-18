@@ -1,0 +1,87 @@
+[
+	{
+		"type":"pair",
+		"typename":"思考-配对-共享",
+		"activity":{
+			"name":"活动名称",
+			"student":{
+				"think":"学生活动-思考",
+				"pair":"学生活动-配对",
+				"share":"学生活动-共享"
+			},
+			"teacher":{
+				"think":"教师活动-思考",
+				"pair":"教师活动-配对",
+				"share":"教师活动-共享"
+			}
+		}
+	},
+	{
+		"type":"pyramid",
+		"typename":"金字塔",
+		"activity":{
+			"name":"活动名称",
+			"question":"问题",
+			"floor":{
+				"top":"顶层 - 规则",
+				"middle":"第二层 - 规则",
+				"bottom":"底层 - 规则"
+			}
+		}
+	},
+	{
+		"type":"jigsaw",
+		"typename":"拼图策略",
+		"activity":{
+			"name":"活动名称",
+			"expert":{
+				"task":"专家组 - 任务",
+				"student":"专家组 - 学生活动",
+				"teacher":"专家组 - 教师活动"
+			},
+			"former":{
+				"task":"原组 - 任务",
+				"student":"原组 - 学生活动",
+				"teacher":"原组 - 教师活动"
+			}
+		}
+	},
+	{
+		"type":"roleplay",
+		"typename":"角色扮演",
+		"activity":{
+			"name":"活动名称",
+			"setting":"角色设置",
+			"student":{
+				"describe":"学生活动 - 角色刻画",
+				"show":"学生活动 - 模拟表演",
+				"evaluate":"学生活动 - 点评总结"
+			},
+			"teacher":{
+				"describe":"教师活动 - 角色刻画",
+				"show":"教师活动 - 模拟表演",
+				"evaluate":"教师活动 - 点评总结"
+			}
+		}
+	},
+	{
+		"type":"game",
+		"typename":"游戏教学",
+		"activity":{
+			"rule":"游戏规则",
+			"student":"学生活动",
+			"teacher":"教师活动",
+			"reward":"奖惩规则"
+		}
+	},
+	{
+		"type":"exp",
+		"typename":"实验教学",
+		"activity":{
+			"step":"实验安排",
+			"environment":"实验环境",
+			"student":"学生活动",
+			"teacher":"教师活动"
+		}
+	}
+]

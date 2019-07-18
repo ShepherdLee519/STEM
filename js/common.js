@@ -17,6 +17,7 @@ function _async(){
 }
 
 function _addClass(node, classname){
+    //安全添加class即检查是否已经有相关class
     let $node = $(node);
     if(!$node.hasClass(classname)){
         $node.addClass(classname);
@@ -24,6 +25,7 @@ function _addClass(node, classname){
 }
 
 function _removeClass(node, classname){
+    //安全删除class即先检查是否有对应class
     let $node = $(node);
     if($node.hasClass(classname)){
         $node.removeClass(classname);

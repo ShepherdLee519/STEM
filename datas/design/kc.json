@@ -1,26 +1,34 @@
 {
     "tasktype" : "KC",
-    "imagepath" : "image/nodes/DBL/",
+    "imagepath" : "image/nodes/KC/",
     "nodes" : [
         {
-            "nodename" : "KC1",
-            "imgsrc" : "pic.png",
+            "nodename" : "个人准备",
+            "imgsrc" : "KC-1.png",
             "taskname" : "test",
             "taskcontent" : "test-content",
             "level" : 1,
             "next" : ""
         },
         {
-            "nodename" : "KC2",
-            "imgsrc" : "pic.png",
+            "nodename" : "分组讨论",
+            "imgsrc" : "KC-2.png",
             "taskname" : "",
             "taskcontent" : "",
             "level" : 1,
             "next" : ""
         },
         {
-            "nodename" : "KC3",
-            "imgsrc" : "pic.png",
+            "nodename" : "深入讨论",
+            "imgsrc" : "KC-3.png",
+            "taskname" : "",
+            "taskcontent" : "",
+            "level" : 1,
+            "next" : ""
+        },
+        {
+            "nodename" : "总结反思",
+            "imgsrc" : "KC-4.png",
             "taskname" : "",
             "taskcontent" : "",
             "level" : 1,

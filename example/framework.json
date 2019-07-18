@@ -1,0 +1,36 @@
+{
+	"objectives-zone":{
+		"courseTheme":[
+			"-themeName",
+			"-themeSituation",
+			{
+				"-people":[
+					"science",
+					"technology",
+					"engineering",
+					"mathematics"
+				]
+			},
+			"-grade(select)"
+		],
+		"questionDesign":[
+			{
+				"courseStandard":[
+					"-science",
+					"-technology",
+					"-engineering",
+					"-mathematics"
+				]
+			},
+			"-driverQuestion",
+			{
+				"coreQuestion":[
+					"-science",
+					"-technology",
+					"-engineering",
+					"-mathematics"
+				]
+			},
+		]
+	}
+}

@@ -1,0 +1,185 @@
+/*
+ * author: Shepherd.Lee
+ * 拆分出来的学习任务(学习评价)区域的样式
+ * 需要在design-style.css 导入
+ * Date: 2019-07-18
+ */
+
+/* 学习评价区域的重选模式按钮的样式
+-------------------------------------------*/
+#design-tasks .design-header h4{
+    position: relative;
+}
+
+#design-tasks #design-tasks-resetModal{
+    position: absolute;
+    left: 100%;
+    display: block;
+    margin-left: -90px;
+    margin-top: -25px;
+    border-radius: 18px;
+    outline: none;
+}
+
+
+
+
+
+
+
+
+/* 添加任务的面板区域
+-------------------------------------------*/
+#design-initTaskZone #design-initTaskBtn{
+    display: block;
+    margin: 10px auto;
+}
+
+#design-initTaskZone div.panel{
+    margin: 0px 15%;
+}
+
+
+
+
+
+
+
+
+/* 节点本身的效果
+------------------------------------------*/
+#design-tasksZone div.node{
+    text-align: center;
+    position: relative;
+}
+
+#design-tasksZone div.node img{
+    width: 60%;
+    display: block;
+    padding: 5px;
+    margin: 0px auto;
+    /* border: 1.5px dashed #ccc; */
+}
+
+/* #design-tasksZone div.node img.arrow{
+    position: absolute;
+    left: -35px;
+    top: 19%;
+} */
+
+#design-tasksZone div .selected-parent{
+    border-top-left-radius: 120px;
+    border-bottom-left-radius: 120px;
+    padding: 10px 40.7px 10px 0px;
+    margin-right: -40.7px;
+    margin-left: -10px;
+    /* border: 12px solid #EEE;  */
+    border-right-color: white;
+    background-color: #F4F4F4;
+    /* background-color: pink; */
+}
+
+#design-tasksZone div.node img:hover{
+    cursor: pointer;
+}
+
+#design-tasksZone div.node .nodename{
+    position: relative;
+    font-weight: bold;
+    left: 5px;
+}
+
+#design-tasksZone div.node > span{
+    font-size: 25px;
+    color: #ccc;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#design-tasksZone div.node > span.hasSubNode{
+    color: red;
+    font-size: 27px;
+}
+
+#design-tasksZone div.node:last-child > span{
+    display: none;
+}
+
+#design-tasksZone div.first-level{
+    margin-left: calc(50% - 20.83%);
+}
+
+/* #design-tasksZone div.taskZone:hover{
+    border-top: 1px solid;
+    border-bottom: 2px solid;
+    border-left: 1px solid;
+    border-right: 3px solid;
+    border-color: lightskyblue;
+    border-color: #ccc;
+} */
+
+#design-tasksZone div.taskZone .delete-task{
+    color: red !important;
+    position: absolute;
+    left: 85%;
+    top: 0px;
+    z-index: 100;
+}
+
+#design-tasksZone div.taskZone .delete-task:hover{
+    font-size: 150%;
+    /* left: 80%; */
+    /* top: -15px; */
+}
+
+/*------子任务节点-------*/
+#design-tasksZone div[id ^= "subTaskZone-"]{
+    min-height: 740px;
+    /* background-color: pink; */
+    background-color: #F4F4F4;
+    /* border: 12px solid #EEE; */
+    padding-top: 60px;
+    padding-bottom: 60px;
+    margin-bottom: 10px;
+    border-radius: 95px;
+}
+
+#design-tasksZone div[id ^= "subTaskZone-"] img{
+    width: 55%;
+}
+
+
+
+
+
+
+/* 节点编辑区域
+------------------------------------------*/
+#design-tasksZone .design-editTaskZone{
+    position: absolute;
+    margin: 0px;
+    left: 95%;
+    top: 19%;
+    width:500px;
+    z-index: 200;
+}
+
+#design-tasksZone .design-initSubTaskZone{
+    text-align: left;
+    position: absolute;
+    margin: 0px;
+    left: 95%;
+    top: 8%;
+    width:300px;
+    z-index: 200;
+}
+
+.design-editTaskZone button,
+.design-initSubTaskZone button{
+    width: 80px;
+}
+
+.design-editTaskZone .panel-title span:hover{
+    cursor: pointer;
+}

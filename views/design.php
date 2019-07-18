@@ -1,7 +1,7 @@
 <?php
 /**
  * author: Shepherd.Lee
- * Date: 2019-05-22
+ * Date: 2019-07-18
  * version: 2.0.0
  * info: 
  *      p=design => 渲染的学习设计页面
@@ -13,29 +13,51 @@
     <button id="togglebtn2" class="btn btn-default">toggle2</button>
     <button id="togglebtn3" class="btn btn-default">toggle3</button>
 </div>
+
+
 <div class="row" style="overflow: hidden;" id="design-container">
-    <div class="col-md-2" id="design-structure">
+    <!-- 学习目标区域 -->
+    <div class="col-md-4" id="design-objectives">
         <div class="text-center structure-header navbar navbar-default">
-            <h4>结构
-                <span class="pull-right togglebtn" id="togglebtn1" data-direction = "right"
-                    title="点击此处展开">&gt;&gt;</span></a>
+            <h4>学习目标
+                <!-- <a><span class="pull-right togglebtn" id="togglebtn1" data-direction = "right"
+                    title="点击此处展开">&gt;&gt;</span></a> -->
             </h4>
         </div>
-
-        <div id="design-structureZone">
-        </div>
-
-        <div id="test-design-SL" style="margin-top: 50px">
+        <!-- <div id="design-structureZone">
+        </div> -->
+        <!-- <div id="test-design-SL" style="margin-top: 50px">
             <div class="btn-group">
                 <button class="btn btn-default" id="test-save">Save</button>
                 <button class="btn btn-default" id="test-load">Load</button>
             </div>
+        </div> -->
+        <div id="design-objectives-zone">
+        <!-- ///////////////////////////////////////////////////////////////////// -->
+
+            <?php
+                @include "design-objectives.php";
+            ?>
+
+        <!-- ///////////////////////////////////////////////////////////////////// -->
         </div>
     </div>
 
-
+    <!-- 学习评价区域 -->
     <div class="col-md-4" id="design-tasks">
-        <div class="text-center design-header navbar navbar-default"><h4>任务环节</h4></div>
+        <div class="text-center design-header navbar navbar-default"><h4>学习评价
+            <button class="btn btn-default hidden" id="design-tasks-resetModal">重选模式</button></h4>
+        </div>
+
+        <div id="design-introduction-zone">
+        <!-- ///////////////////////////////////////////////////////// -->
+
+            <?php
+                @include "design-introduction.php";
+            ?>
+
+        <!-- //////////////////////////////////////////////////////// -->
+        </div>
 
         <div id="design-tasksZone" class="row hidden" style="height: auto">
             <div class="col-md-5 first-level taskZone">
@@ -44,7 +66,7 @@
             </div>
         </div>
 
-        <div id="design-initTaskZone">
+        <!-- <div id="design-initTaskZone">
             <button class="btn btn-default" id="design-initTaskBtn">添加任务</button>
             <div class="panel panel-info hidden">
                 <div class="panel-heading">
@@ -53,7 +75,7 @@
                 <div class="panel-body" id="design-initTask-panelBody">
                 </div>
             </div>
-        </div>
+        </div> -->
         
         <div class="hidden design-editTaskZone">
             <div class="panel panel-info">
@@ -97,14 +119,10 @@
         </div><!-- end design-initSubTaskZone -->
     </div>
 
-
-    <div class="col-md-6" id="design-activities">
+    <!-- 学习活动区域 -->
+    <div class="col-md-4" id="design-activities">
         <div class="text-center design-header navbar navbar-default"><h4>学习活动</h4></div>
         <div id="design-activities-zone">
         </div>
     </div>
 </div>
-
-<!-- <script src="js/design-tree.js"></script> -->
-<script src="js/design-zone.js"></script>
-<script src="js/design-tasks.js"></script>

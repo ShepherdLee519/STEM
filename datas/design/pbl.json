@@ -1,26 +1,26 @@
 {
     "tasktype" : "PBL",
-    "imagepath" : "image/nodes/DBL/",
+    "imagepath" : "image/nodes/PBL/",
     "nodes" : [
         {
-            "nodename" : "PBL1",
-            "imgsrc" : "pic.png",
+            "nodename" : "分析问题",
+            "imgsrc" : "PBL-1.png",
             "taskname" : "test",
             "taskcontent" : "test-content",
             "level" : 1,
             "next" : ""
         },
         {
-            "nodename" : "PBL2",
-            "imgsrc" : "pic.png",
+            "nodename" : "自主学习",
+            "imgsrc" : "PBL-2.png",
             "taskname" : "",
             "taskcontent" : "",
             "level" : 1,
             "next" : ""
         },
         {
-            "nodename" : "PBL3",
-            "imgsrc" : "pic.png",
+            "nodename" : "方案反思",
+            "imgsrc" : "PBL-3.png",
             "taskname" : "",
             "taskcontent" : "",
             "level" : 1,

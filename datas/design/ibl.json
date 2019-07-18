@@ -1,10 +1,10 @@
 {
     "tasktype" : "IBL",
-    "imagepath" : "image/nodes/DBL/",
+    "imagepath" : "image/nodes/IBL/",
     "nodes" : [
         {
             "nodename" : "自主探究",
-            "imgsrc" : "pic.png",
+            "imgsrc" : "IBL-1.png",
             "taskname" : "test",
             "taskcontent" : "test-content",
             "level" : 1,
@@ -12,7 +12,7 @@
         },
         {
             "nodename" : "分析解释",
-            "imgsrc" : "pic.png",
+            "imgsrc" : "IBL-2.png",
             "taskname" : "",
             "taskcontent" : "",
             "level" : 1,
@@ -20,7 +20,7 @@
         },
         {
             "nodename" : "迁移",
-            "imgsrc" : "pic.png",
+            "imgsrc" : "IBL-3.png",
             "taskname" : "",
             "taskcontent" : "",
             "level" : 1,
@@ -28,7 +28,7 @@
         },
         {
             "nodename" : "汇报与反思",
-            "imgsrc" : "pic.png",
+            "imgsrc" : "IBL-4.png",
             "taskname" : "",
             "taskcontent" : "",
             "level" : 1,

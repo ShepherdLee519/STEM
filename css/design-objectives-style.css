@@ -1,0 +1,80 @@
+#objectives-zone div.objectives-rows-wrap{
+    display: flex;
+    flex-flow: column;
+}
+
+
+
+
+
+
+
+/* 课程主题表单 courseTheme区域
+-----------------------------------*/
+#courseTheme-people-view-zone{
+    /* 课程主题区域的 view 的参与人员的对齐修改 */
+    margin-left: -25%;
+}
+
+#courseTheme-people-view-zone > div label:not(:first-child),
+#courseTheme-people-view-zone > div div:last-child{
+    /* 课程主题区域的 view 的参与人员的对齐修改 */
+    left: -8%;
+}
+
+
+
+
+
+
+
+
+
+
+/* 问题表单区域 questionDesign
+-----------------------------------*/
+#questionDesign form#questionDesign-realForm label.control-label{
+    font-size: 87%;
+}
+
+form#questionDesign-realForm div.questionDesign-coreQuestion-eachQuestion{
+    font-size: 120%;
+    position: relative;
+}
+
+form#questionDesign-realForm div.questionDesign-coreQuestion-eachQuestion span.glyphicon-plus{
+    position: absolute;
+    font-size: 150%;
+    opacity: 0.5;
+    left: 100%;
+    top: 5px;
+}
+
+form#questionDesign-realForm div.questionDesign-coreQuestion-eachQuestion span.glyphicon-minus{
+    position: absolute;
+    font-size: 150%;
+    opacity: 0.5;
+    left: 100%;
+}
+
+form#questionDesign-realForm div.questionDesign-coreQuestion-eachQuestion span.glyphicon:hover{
+    opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+/* 课程标准显示区域 questionDesign-courseStandard
+-----------------------------------*/
+#questionDesign-courseStandard label[for^="questionDesign-courseStandard-"]:hover{
+    cursor: pointer;
+}
+
+#questionDesign-courseStandard legend:hover{
+    cursor: pointer;
+}

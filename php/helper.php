@@ -18,5 +18,9 @@ function _post($str){
     $val = !empty($_POST[$str]) ? $_POST[$str] : null; 
     return $val; 
 }
+
+function _space($num = 8){
+    echo str_repeat("&nbsp;", $num);
+}
  
 ?>

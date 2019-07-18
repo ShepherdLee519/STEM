@@ -1,4 +1,6 @@
 @import url("style.css");
+@import url("design-task-style.css");
+@import url("design-activity-style.css");
 
 .row{
     /* max-height: 100%; */
@@ -36,6 +38,22 @@ div .structure-header{
 
 
 
+
+/* 显示学习目标的区域
+------------------------------------------*/
+#design-objectives{
+    height: 100%;
+    max-height: 100%;
+}
+
+
+
+
+
+
+
+
+
 /* 显示任务节点的区域
 ------------------------------------------*/
 #design-tasksZone{
@@ -44,272 +62,18 @@ div .structure-header{
 }
 
 #design-activities-zone{
-    height: 660px;
+    height: 920px;
+    /* height: 100%; */
     /* height: 510px; */
     /* background-color: pink; */
     overflow-y: scroll;
 }
 
 #design-tasksZone{
-    /* height: 660px; */
-    height: 100%;
+    max-height: 920px;
+    /* height: 100%; */
     /* overflow-y: scroll; */
 }
-
-
-
-
-
-
-
-/* 添加任务的面板区域
--------------------------------------------*/
-#design-initTaskZone #design-initTaskBtn{
-    display: block;
-    margin: 10px auto;
-}
-
-#design-initTaskZone div.panel{
-    margin: 0px 15%;
-}
-
-
-
-
-
-
-
-
-/* 节点本身的效果
-------------------------------------------*/
-#design-tasksZone div.node{
-    text-align: center;
-    position: relative;
-}
-
-#design-tasksZone div.node img{
-    width: 65%;
-    display: block;
-    padding: 5px;
-    margin: 0px auto;
-    /* border: 1.5px dashed #ccc; */
-}
-
-/* #design-tasksZone div.node img.arrow{
-    position: absolute;
-    left: -35px;
-    top: 19%;
-} */
-
-#design-tasksZone div .selected-parent{
-    background-color: white;
-    border-top-left-radius: 120px;
-    border-bottom-left-radius: 120px;
-    padding: 10px 40.7px 10px 0px;
-    margin-right: -40.7px;
-    margin-left: -10px;
-    /* border: 12px solid #EEE;  */
-    border-right-color: white;
-    background-color: #F4F4F4;
-}
-
-#design-tasksZone div.node img:hover{
-    cursor: pointer;
-}
-
-#design-tasksZone div.node .nodename{
-    position: relative;
-    font-weight: bold;
-    left: 5px;
-}
-
-#design-tasksZone div.node > span{
-    font-size: 25px;
-    color: #ccc;
-    display: inline-block;
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
-#design-tasksZone div.node > span.hasSubNode{
-    color: red;
-    font-size: 27px;
-}
-
-#design-tasksZone div.node:last-child > span{
-    display: none;
-}
-
-#design-tasksZone div.first-level{
-    margin-left: calc(50% - 20.83%);
-}
-
-/* #design-tasksZone div.taskZone:hover{
-    border-top: 1px solid;
-    border-bottom: 2px solid;
-    border-left: 1px solid;
-    border-right: 3px solid;
-    border-color: lightskyblue;
-    border-color: #ccc;
-} */
-
-#design-tasksZone div.taskZone .delete-task{
-    color: red !important;
-    position: absolute;
-    left: 85%;
-    top: 0px;
-    z-index: 100;
-}
-
-#design-tasksZone div.taskZone .delete-task:hover{
-    font-size: 150%;
-    /* left: 80%; */
-    /* top: -15px; */
-}
-
-/*------子任务节点-------*/
-#design-tasksZone div[id ^= "subTaskZone-"]{
-    min-height: 740px;
-    /* background-color: pink; */
-    background-color: #F4F4F4;
-    /* border: 12px solid #EEE; */
-    padding-top: 60px;
-    padding-bottom: 60px;
-    margin-bottom: 10px;
-    border-radius: 95px;
-}
-
-
-
-
-
-/* 节点编辑区域
-------------------------------------------*/
-#design-tasksZone .design-editTaskZone{
-    position: absolute;
-    margin: 0px;
-    left: 95%;
-    top: 19%;
-    width:500px;
-    z-index: 200;
-}
-
-#design-tasksZone .design-initSubTaskZone{
-    text-align: left;
-    position: absolute;
-    margin: 0px;
-    left: 95%;
-    top: 8%;
-    width:300px;
-    z-index: 200;
-}
-
-.design-editTaskZone button,
-.design-initSubTaskZone button{
-    width: 80px;
-}
-
-.design-editTaskZone .panel-title span:hover{
-    cursor: pointer;
-}
-
-
-
-
-
-
-
-/* 学习活动区域 - zone
------------------------------------------*/
-div.design-act-zone,
-div.design-act-subZone{
-    margin: 0px auto;
-    margin-bottom: 20px;
-    width: 300px;
-}
-
-div.design-act-subZone{
-    width: 240px;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-}
-
-div.design-act-zone .design-act-zone-title,
-div.design-act-subZone .design-act-zone-title{
-    font-size: 13px;
-}
-
-.design-act-zone-hassub{
-    margin: 0px auto;
-    text-align: center;
-    top: 20px;
-    border-top: 1px solid #EEE;
-}
-
-.design-act-zone-hassub span{
-    font-size: 25px;
-    display: block;
-    color: #0099CC !important;
-}
-
-div.design-act-zone .design-act-zone-title span,
-div.design-act-subZone .design-act-zone-title span{
-    font-size: 16px;
-    font-weight: bold;
-}
-
-div.design-act-zone-content .init-act button{
-    display: block;
-    margin: 0px auto;
-}
-
-div.design-initActivityZone{
-    position: absolute;
-    width: 300px;
-    z-index: 200;
-    left: calc(50% - 150px);
-    top: 0px;
-}
-
-
-
-
-
-
-/* 学习活动区域 - node
-----------------------------*/
-div.design-act-node{
-    border-radius: 15px;
-}
-
-div.design-act-node .panel-heading{
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    font-size: 10px;
-}
-
-div.design-act-node-wrapper > span.glyphicon{
-    font-size: 130%;
-    display: block;
-    color: #FF6666;
-    margin-left: 50%;
-}
-
-div.design-act-node-wrapper > span:last-child{
-    top: -18px;
-}
-
-div.design-act-node-wrapper > span.glyphicon:hover{
-    font-size: 150%;
-    color: red;
-}
-
-div.design-act-node-wrapper span.glyphicon-remove{
-    top: -15px;
-    font-size: 150%;
-    color: red;
-}
-
 
 
 
@@ -364,6 +128,7 @@ div.design-act-node-wrapper span.glyphicon-remove{
 
 
 
+
 /*切换节点的span
 --------------------------------------*/
 span.togglebtn{
@@ -375,6 +140,7 @@ span.togglebtn{
 span.togglebtn:hover{
     cursor: pointer;
 }
+
 
 
 
@@ -416,6 +182,9 @@ span.togglebtn:hover{
     width: 16.67%;
     animation: firstC 0.2s;
 }
+
+
+
 
 
 

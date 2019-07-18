@@ -1,7 +1,7 @@
 /**
  * author: Shepherd.Lee
- * Date: 2019-05-30
- * info: 学习任务相关
+ * Date: 2019-07-17
+ * info: 学习评价相关(原学习任务)
  * index: 
  *      Init()
  *          > initPanel() 
@@ -21,6 +21,28 @@
  *          > reset()
  *          > showData()
  */
+
+// nodeInfo = {
+//     $div: $div, index: index,
+//     isSubNode: isSubNode, parentIndex: parentIndex,
+//     nodes: nodes, node: node
+// };
+
+const SIZE_FIRST = 60,
+      SIZE_FIRST_STRONG = 65,
+      SIZE_SECOND = 55,
+      SIZE_SECOND_STRONG = 62;
+
+$(function(){
+    log("Hello! -design-tasks.js");
+
+    //重选模式
+    $("#design-tasks-resetModal").click(function(){
+        TASKZONE.reset();
+        $("#design-tasks-resetModal").addClass("hidden");
+    });
+})
+
 
 function Init(){
     let that = this;
@@ -268,6 +290,8 @@ function Task(){
                 tools.hideSubNodes();
                 INIT.initSubTaskNode(val, nodeInfo.index);
                 $span.addClass("hasSubNode");
+                nodeInfo.$div.find(".node").eq(nodeInfo.index)
+                    .find(".img-zone").addClass("selected-parent");
     
                 $("#design-cancelSubTaskSelectBtn").click();
             });//确认添加二级节点
@@ -282,8 +306,14 @@ function Task(){
         let $div = nodeInfo.$div, index = nodeInfo.index,
             len = nodeInfo.nodes.length;
         $img.click(function(){
-            $div.find("img").css("width", "65%");
-            $(this).css("width", "75%");
+            if(nodeInfo.isSubNode){
+                $div.find("img").css("width", `${SIZE_SECOND}%`);
+                $(this).css("width", `${SIZE_SECOND_STRONG}%`);
+            }else{
+                $div.find("img").css("width", `${SIZE_FIRST}%`);
+                $(this).css("width", `${SIZE_FIRST_STRONG}%`);
+            }
+            
     
             $div.find(".design-editTaskZone").remove();
             let $editzone = $(".design-editTaskZone").clone();
@@ -313,7 +343,11 @@ function Task(){
     
         //点击右上角的X关闭编辑区域
         $edit.find(".panel-title span").click(() => {
-            $target.find("img").css("width", "65%");
+            if(nodeInfo.isSubNode){
+                $target.find("img").css("width", `${SIZE_SECOND}%`);
+            }else{
+                $target.find("img").css("width", `${SIZE_FIRST}%`);
+            }
             $edit.remove();
         });
     
@@ -377,11 +411,14 @@ function TaskZone(){
                     //可能的警示框
                     return;
                 }
-    
+
                 //如果作为子节点
                 let parentIndex = Number.parseInt($(zone).attr("data-parent")),
                     id = $(zone).attr("id");
-    
+                
+                //将父节点的selected-parent样式删除
+                $("#design-tasksZone div:first-child div.node .img-zone.selected-parent")
+                    .removeClass("selected-parent");
                 //从DATA中删除
                 DATA.nodes[parentIndex].next = "";
                 //从taskZone中删除
@@ -400,14 +437,19 @@ function TaskZone(){
         //重置DATA、 学习活动与任务区域
         DATA = [];//重置DATA
         ZONE.clear();//重置学习活动
-        // TREE.build();
     
         //重置任务区域
         _addClass($("#design-tasksZone"), "hidden");
-        _removeClass($("#design-initTaskZone"), "hidden");
+        resetIntroduction();
+        // _removeClass($("#design-initTaskZone"), "hidden");
+        _addClass($("#design-tasks-resetModal"),"hidden");
         let $divs = $("#design-tasksZone").children("div.taskZone");
         _addClass($divs.eq(0), "first-level");
-        $divs.eq(0).html("");
+        let deleteSpan = `
+            <span class="glyphicon glyphicon-remove pull-right delete-task" 
+                title="删除任务环节"></span>
+        `.trim();
+        $divs.eq(0).html(deleteSpan);
         [...$divs].forEach((div, index) => {
             if(index == 0) return;
             $(div).remove();

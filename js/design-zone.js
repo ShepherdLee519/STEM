@@ -89,11 +89,12 @@ function Zone(node){
                 <div class="panel-body design-act-zone-content">
                     ${initBtn}
                 </div>
+                <div class="menu-box"></div>
             </div>
         `.trim()),
         $initActivity = $(`
             <div class="design-initActivityZone">
-                <div class="panel panel-info">
+                <div class="panel panel-success">
                     <div class="panel-heading">
                         <h3 class="panel-title">选择活动类型</h3>
                     </div>
@@ -112,32 +113,27 @@ function Zone(node){
         $content = $self.find(".design-act-zone-content");
     
     //点击面板的header部分展开/收回面板
-    $heading.click(() => $content.toggleClass("hidden"));
-    //新建学习活动的按钮的click事件处理
-    let initBtnHandler = () => {
-        $button = $content.find("button").eq(0);
-        $button.click(() => {
-            $self.after($initActivity);
-
-            // let node = new Node(num++);
-            // node.bindZone(this);
-            // nodelist.push(node);
-            // $content.html("").append(node.self());
-            // return false;
-        });
-    }
-    initBtnHandler();
+    $heading.click(() => {
+        $content.toggleClass("hidden");
+        clearActivityMenu();
+    });
+    
 
     /**
      * Zone对外可见的方法
+     * --------------------------------
      * self - 返回自己的DOM引用
      * inserBefore - 在指定节点前插入节点
      * insertAfter - 在指定节点后插入节点
      * deleteNode - 删除指定节点
+     * 
      * toSub - 将当前Zone转为子节点的特征，修改一些样式
      * getParent - 获取当前节点的父节点index(默认-1)
      * mark - 表示当前Zone有附属子节点，修改一些样式与功能
      * demark - 取消mark状态
+     * 
+     * initFirstActivity - 点击新建活动后添加的第一个活动节点
+     * resetActivityRadio - 重置新建活动列表中的radio选项
      */
     this.self = () => $self;
     this.insertBefore = (target) => {
@@ -164,7 +160,7 @@ function Zone(node){
         if(nodelist.length == 0){
             //如果节点全删除，回复新建学习活动的按钮
             $content.append(initBtn);
-            initBtnHandler();
+            this.initFirstActivity();
             num = 1;
         }
     };
@@ -179,11 +175,53 @@ function Zone(node){
         let $span = $self.find(".design-act-zone-hassub span");
         $span.click(() => {
             $self.next(".subZones").toggleClass("hidden");
+            clearActivityMenu();
         });
     };
     this.demark = () => {
         let $mark = $self.find(".panel-body").next(".design-act-zone-hassub");
         $mark.remove();
+    };
+    //新建学习活动的按钮的click事件处理
+    this.initFirstActivity = () => {
+        $button = $content.find("button").eq(0);
+        $button.click(() => {
+            clearActivityMenu();
+            _addClass($initActivity.find(".alert"), "hidden");
+            let $btn = $initActivity.find(".confirm-addActivity").eq(0),
+                that = this;
+            $btn.click(function(){
+                const NAME = "activity-type-select";
+                let $radiozone = $(this).parent().prev(),
+                    value = $radiozone.find(`input[name=${NAME}]:checked`).val(),
+                    $warnMsg = $radiozone.find(".alert");
+                if(typeof value !== "undefined"){
+                    clearActivityMenu();
+                    _addClass($warnMsg, "hidden");
+                    log(value);
+                    // TODO
+                    let node = new Node(num++, activity.typemap(value));
+                    node.bindZone(that);
+                    nodelist.push(node);
+                    $content.html("").append(node.self());
+                    return false;
+                }else{
+                    $warnMsg.removeClass("hidden");
+                    return;
+                }
+            });
+            
+            $self.find(".menu-box").eq(0).html($initActivity);
+            this.resetActivityRadio();
+        });
+    };
+    //这里要立即执行该函数，实现第一次初始化的新建
+    this.initFirstActivity();
+    this.resetActivityRadio = () => {
+        let radios = document.getElementsByName("activity-type-select");
+        for(let radio of [...radios]){
+            radio.checked = false;
+        }
     };
 }
 
@@ -195,7 +233,7 @@ function Zone(node){
 
 
 
-function Node(num){
+function Node(num, typename){
     let $self = $(`
         <div class="design-act-node-wrapper">
             <span class="glyphicon glyphicon-triangle-top insertbefore-node"
@@ -219,6 +257,10 @@ function Node(num){
         $after = $self.find(".insertafter-node"),
         $delete = $self.find(".glyphicon-remove");
     
+    //根据typename修改title
+    if(typeof typename != "undefined"){
+        $self.find(".design-act-node-title").html(`<b>${typename}</b>`);
+    }
     //插入、删除的click响应后，将节点本身的引用传给Zone，再由Zone处理
     $before.click(() => zone.insertBefore(this));
     $after.click(() => zone.insertAfter(this));
@@ -231,33 +273,4 @@ function Node(num){
      */
     this.self = () => $self;
     this.bindZone = (that) => zone = that;
-}
-
-
-
-
-
-
-function Activity(){
-    let ActivityType = ["活动类型1", "活动类型2", "活动类型3", "活动类型4", "活动类型5"];
-
-    this.init = () => {
-        let str = "";
-        [...ActivityType].forEach((act, index) => {
-            str += `
-            <div class='radio'>
-                <label>
-                    <input type='radio' name='activity-select' value=${index}>
-                    ${act}
-                </label>
-            </div>`.trim();
-        });
-        str += `
-            <div class='btn-group'>
-                <button class='btn btn-primary'>确定</button>
-                <button class='btn btn-default'>取消</button>
-            </div>
-        `.trim();
-        return str;
-    }
 }
