@@ -1,0 +1,11 @@
+/*
+ * author: Shepherd.Lee
+ * 中央文本显示(选择模式前)的样式效果
+ * 需要在design-style.css 导入
+ * Date: 2019-07-25
+ */
+
+#designIntro-selectModal li .row-level .col{
+    float: left;
+    margin: 0px 2.5px 0px 2.5px;
+}

@@ -1,7 +1,8 @@
 /**
  * author: Shepherd.Lee
- * Date: 2019-07-17
- * info: 学习评价相关(原学习任务)
+ * Date: 2019-07-27
+ * version: 2.0.0
+ * info: 学习评价相关(原学习任务) 注，页面调整后新的选择模式逻辑在introduction下
  * index: 
  *      Init()
  *          > initPanel() 
@@ -28,17 +29,18 @@
 //     nodes: nodes, node: node
 // };
 
-const SIZE_FIRST = 60,
-      SIZE_FIRST_STRONG = 65,
-      SIZE_SECOND = 55,
-      SIZE_SECOND_STRONG = 62;
+const SIZE_FIRST = 55,
+      SIZE_FIRST_STRONG = 60,
+      SIZE_SECOND = 50,
+      SIZE_SECOND_STRONG = 55;
 
 $(function(){
-    log("Hello! -design-tasks.js");
+    _hello("design-tasks");
 
     //重选模式
     $("#design-tasks-resetModal").click(function(){
         TASKZONE.reset();
+        toggleTrigger("off");//见design-animation.js
         $("#design-tasks-resetModal").addClass("hidden");
     });
 })
@@ -278,7 +280,8 @@ function Task(){
             $body = $initsubzone.find(".panel-body");
             INIT.createInitPanel($body);
             let $bodyBtns = $body.find("button");
-            $bodyBtns.eq(0).attr("id", "design-confirmSubTaskSelectBtn");
+            $bodyBtns.eq(0).attr("id", "design-confirmSubTaskSelectBtn")
+                .removeClass("btn-primary").addClass("btn-warning");
             $bodyBtns.eq(1).attr("id", "design-cancelSubTaskSelectBtn");
         
             $("#design-confirmSubTaskSelectBtn").click(function(){
@@ -287,6 +290,7 @@ function Task(){
                     alert("您没有选择子节点类型!");
                     return;
                 }
+                _removeClass(nodeInfo.$div.find(".node").find(".img-zone"), ("selected-parent"));
                 tools.hideSubNodes();
                 INIT.initSubTaskNode(val, nodeInfo.index);
                 $span.addClass("hasSubNode");
@@ -306,6 +310,8 @@ function Task(){
         let $div = nodeInfo.$div, index = nodeInfo.index,
             len = nodeInfo.nodes.length;
         $img.click(function(){
+            // let width = $(this).css("width");
+            // width = Number.parseFloat(width);
             if(nodeInfo.isSubNode){
                 $div.find("img").css("width", `${SIZE_SECOND}%`);
                 $(this).css("width", `${SIZE_SECOND_STRONG}%`);
@@ -320,8 +326,9 @@ function Task(){
             $editzone.toggleClass("hidden").insertBefore($(this).parent().next());
             $editzone.find(".panel-title label").eq(0).html(` - ${nodeInfo.node.nodename}`);
     
-            if(index > len - 3){
-                $editzone.css("top", -160 + 45 * (len-index-1) + "%");
+            if((len >= 4 && index > len - 3) || (len < 4 && index > len - 2)){
+                let length = Number.parseFloat($editzone.css("length"));
+                $editzone.css("top", `-${length}px`);
             }
     
             if(Number.parseInt(nodeInfo.node.level) == 1){
@@ -351,40 +358,83 @@ function Task(){
             $edit.remove();
         });
     
-        //点击编辑按钮
-        $("#design-taskEditBtn").click(() => {
-            $edit.find("input").removeAttr("readonly");
-            $edit.find("textarea").removeAttr("readonly");
-            flag = true;
-            return false;
-        });
+        // 点击编辑按钮
+        // $("#design-taskEditBtn").click(() => {
+        //     $edit.find("input").removeAttr("readonly");
+        //     $edit.find("textarea").removeAttr("readonly");
+        //     flag = true;
+        //     return false;
+        // });
     
         //点击确认按钮
-        $("#design-confirmTaskEditBtn").click(() => {
-            if(!flag){
-                $edit.find(".panel-title span").click();
-                return;
-            }else{
-                //保存编辑的内容
-                let taskname = $("#taskname").val(), 
-                    taskcontent = $("#taskcontent").val(),
-                    node = nodeInfo.node,  level = node.level, 
-                    index = nodeInfo.index, parentIndex = nodeInfo.parentIndex;
+        // $("#design-confirmTaskEditBtn").click(() => {
+        //     if(!flag){
+        //         $edit.find(".panel-title span").click();
+        //         return;
+        //     }else{
+        //         //保存编辑的内容
+        //         let taskname = $("#taskname").val(), 
+        //             taskcontent = $("#taskcontent").val(),
+        //             node = nodeInfo.node,  level = node.level, 
+        //             index = nodeInfo.index, parentIndex = nodeInfo.parentIndex;
     
-                log(`level: ${level}, index: ${index}, parent: ${parentIndex}`);
-                if(Number.parseInt(level) == 1){
-                    DATA.nodes[index].taskname = taskname;
-                    DATA.nodes[index].taskcontent = taskcontent;
-                }else{
-                    node.taskname = taskname;
-                    node.taskcontent = taskcontent;
-                    DATA.nodes[parentIndex].next.nodes[index] = node;
-                }
-                $edit.find("input").attr("readonly", "readonly");
-                $edit.find("textarea").attr("readonly", "readonly");
-                flag = false;
+        //         log(`level: ${level}, index: ${index}, parent: ${parentIndex}`);
+        //         if(Number.parseInt(level) == 1){
+        //             DATA.nodes[index].taskname = taskname;
+        //             DATA.nodes[index].taskcontent = taskcontent;
+        //         }else{
+        //             node.taskname = taskname;
+        //             node.taskcontent = taskcontent;
+        //             DATA.nodes[parentIndex].next.nodes[index] = node;
+        //         }
+        //         $edit.find("input").attr("readonly", "readonly");
+        //         $edit.find("textarea").attr("readonly", "readonly");
+        //         flag = false;
+        //         return false;
+        //     }
+        // });
+
+        $("#taskCoreQuestion-btn").click(function(e){
+            e.preventDefault();
+            let $show = $("#taskCoreQuestion-ShowZone"),
+                $select = $("#taskCoreQuestion-SelectZone");
+            $show.removeClass("hidden");
+            $select.removeClass("hidden");
+
+            let str = "", coreQuestions = getCoreQuestions();
+            coreQuestions.forEach((q, index) => {
+                str += `
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="${index}">${q}
+                </label><br />
+                `.trim();
+            });
+            str += `<button class="btn btn-default" id="taskCoreQuestion-confirmSelect">确定</button>`;
+            $select.html(str);
+
+
+            $("#taskCoreQuestion-confirmSelect").click(function(){
+                e.preventDefault();
+                let values = [], str = "<ul class='list-group'>";
+                let $boxes = $(this).parent().find("input[type='checkbox']");
+                [...$boxes].forEach(box => {
+                    if($(box).is(":checked")) values.push($(box).val());
+                });
+
+                values.forEach((value) => {
+                    str += `
+                        <li class="list-group-item">${coreQuestions[value]}</li>
+                    `.trim();
+                });
+                str += "</ul>";
+                $show.html(str);
+                $select.addClass("hidden");
+                // $show.removeClass("hidden");
                 return false;
-            }
+            });
+
+            log("Hello");
+            return false;
         });
     }
 }

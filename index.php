@@ -1,7 +1,7 @@
 <?php
 /**
  * author: Shepherd.Lee
- * Date: 2019-07-18
+ * Date: 2019-07-27
  * version: 2.0.0
  * dependencies: php/helper.php; views视图; 
  * info: 
@@ -10,6 +10,7 @@
  */
 
     require_once('php/helper.php'); //导入辅助函数
+
     $VIEW_PATH = 'views/'; //视图php的文件夹
     $p = _get('p'); //_get于helper中，安全获取$_GET中的变量
 ?>
@@ -19,7 +20,8 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /> 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, 
+            maximum-scale=1.0, user-scalable=no" />
         <title>STEM学习设计工具</title>
 
         <!-- 网站的favicon -->
@@ -31,7 +33,8 @@
         <!-- 导入自定义css文件 -->
         <!-- ///////////////////////////////////////////////////////////////////// -->
 
-        <link rel="stylesheet" href="css/<?php echo $p;/* 渲染p值对应的css文件 */ ?>-style.css" />
+        <!-- 渲染p值对应的css文件 格式:p-style.css -->
+        <link rel="stylesheet" href="css/<?php echo ucfirst($p)."/".$p; ?>-style.css" />
 
         <!-- ///////////////////////////////////////////////////////////////////// -->
     </head>
@@ -51,7 +54,6 @@
                 <div>
                     <!-- /切换功能的静态按钮 -->
                     <ul class="nav navbar-nav" id="top-navbar" style="margin-left: 100px;">
-                        <!-- <li><a href="index.php?p=baseinfo" id="baseinfo-link">基本信息</a></li> -->
                         <li><a href="index.php?p=design" id="design-link">学习设计</a></li>
                         <li><a href="index.php?p=result" id="A-link">设计结果</a></li>
                         <li><a href="#" id="B-link">分析数据</a></li>
@@ -60,6 +62,9 @@
 
                     <!-- /导航栏右侧的账户管理 -->
                     <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" id="test-saveBtn"><b>Save</b></a>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 账户管理<b class="caret"></b>
@@ -79,8 +84,9 @@
             <!-- ///////////////////////////////////////////////////////////////////// -->
 
             <?php
-                /* 根据p值，渲染对应的视图php */
-                if(!@include $VIEW_PATH.$p.".php"){
+                /** 根据p值，渲染对应的视图php */
+                /** 格式：($VIEW_PATH/)Design/design.php */
+                if(!@include $VIEW_PATH.ucfirst($p).'/'.$p.".php"){
                     include $VIEW_PATH."default.php";
                 }
             ?>
@@ -90,7 +96,9 @@
 
         <!-- 可能的页脚区域 -->
         <footer style="background-color: #CCCCFF; height: 50px;">
-            <h3 class="text-center" style="padding-top:10px">版权声明</h1>
+            <h3 class="text-center" style="padding-top:10px">
+                Copyright &copy;2019 STEM学习设计工具
+            </h3>
         </footer>
 
         <!------------------------- javascript ---------------------------->
@@ -106,20 +114,36 @@
         <?php
             // 根据p值，加载对应的js文件 - 某个p值可能对应多个文件，这里用数组的方式记录js文件名
             $design_js = array(
+                "Design/",//path name
                 "design", "design-zone", "design-tasks", "design-activity",
-                "design-objectives", "design-introduction"
+                "design-objectives", "design-introduction", "design-animation"
             );
             // $XXX.js = array();
             
             switch($p){
                 case "design":
-                    for($i = 0; $i < count($design_js); $i++){
-                        ?><script src="js/<?php echo $design_js[$i];?>.js"></script><?php
+                    for($i = 1; $i < count($design_js); $i++){
+                        ?><script src="js/<?php echo $design_js[0].$design_js[$i];?>.js"></script><?php
                     }
                     break;
             }
         ?>
 
         <!-- ///////////////////////////////////////////////////////////////////// -->
+        
+        <!-- 保存本地功能测试 -->
+        <script>
+            $("#test-saveBtn").click(function(){
+                log("hello");
+                let testData = {
+                    "type":"design",
+                    "typename":"学习设计"
+                };
+                $.post("./php/design/test_save_local.php", {data:testData}, (res) => {
+                    log(res);
+                });
+                return false;
+            }); 
+        </script>
     </body>
 </html>

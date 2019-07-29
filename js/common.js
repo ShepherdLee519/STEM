@@ -1,6 +1,6 @@
 /**
  * author: Shepherd.Lee
- * Date: 2019-05-21
+ * Date: 2019-07-25
  * version: 1.0.0
  * info: 网页的公共功能的调用以及部分辅助函数
  */
@@ -9,6 +9,14 @@ const log = console.log;
 
 function _ok(){
     log("OK!!!!!!!!!");
+}
+
+function _hello(filename, suffix = "js"){
+    log(`Hello! - ${filename}.${suffix}`);
+}
+
+function _space(num = 8){
+    return "&nbsp;".repeat(num);
 }
 
 function _async(){
@@ -33,7 +41,7 @@ function _removeClass(node, classname){
 }
 
 $(function(){
-    log("Hello! - common.js");
+    _hello("common");
 
     let querystring = window.location.search.substring(1),
         pattern = /p=([a-zA-Z0-9]*)&?/g;

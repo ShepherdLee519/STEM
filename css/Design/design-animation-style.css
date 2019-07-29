@@ -1,0 +1,90 @@
+/*
+ * author: Shepherd.Lee
+ * design区域的伸缩菜单效果
+ * 需要在design-style.css 导入
+ * Date: 2019-07-25
+ */
+
+ /* 节点过渡的效果等
+----------------------------------------*/
+/*
+    1: 8.33     2: 16.67    3: 25       4: 33.33 
+    5: 41.67    6: 50       7: 58.33    8: 66.67 
+    9: 75       10: 83.33   11: 91.67   12: 100 
+*/
+
+@keyframes firstA{
+    /* 5 → 4 → 3 */
+    0%   {  width:41.67%; }
+    75%  {  width:33.33%; }
+    100% {  width:25%;    }
+}
+@keyframes firstB{
+    /* 6 → 5 → 4 */
+    0%   {  width:50%;    }
+    75%  {  width:41.67%; }
+    100% {  width:33.33%; }
+}
+@keyframes firstC{
+    /* 1 → 4 → 5 */
+    0%   {  width:8.33%;  }
+    75%  {  width:33.33%; }
+    100% {  width:41.67%; }
+}
+
+/* type-1- */
+/* 5 6 1 -> 3 4 5 */
+#design-objectives.type-1-A{
+    width: 25%;
+    animation: firstA 0.1s;
+}
+#design-tasks.type-1-B{
+    width: 33.33%;
+    animation: firstB 0.1s;
+}
+#design-activities.type-1-C{
+    width: 41.67%;
+    animation: firstC 0.1s;
+}
+
+
+@keyframes re-firstA{
+    /* 3 → 4 → 5 */
+    0%   {  width:25%;    }
+    75%  {  width:33.33%; }
+    100% {  width:41.67%; }
+}
+@keyframes re-firstB{
+    /* 4 → 5 → 6 */
+    0%   {  width:33.33%; }
+    75%  {  width:41.67%; }
+    100% {  width:50%;    }
+}
+@keyframes re-firstC{
+    /* 5 → 4 → 1 */
+    0%   {  width:41.67%;  }
+    75%  {  width:25%;     }
+    100% {  width:8.33%;   }
+}
+
+/* re-type-1- */
+/* 3 4 5 -> 5 6 1 */
+#design-objectives.re-type-1-A{
+    width: 41.67%;
+    animation: re-firstA 0.1s;
+}
+#design-tasks.re-type-1-B{
+    width: 50%;
+    animation: re-firstB 0.1s;
+}
+#design-activities.re-type-1-C{
+    width: 8.33%;
+    animation: re-firstC 0.1s;
+}
+
+
+
+
+
+
+

@@ -1,19 +1,22 @@
 /**
  * author: Shepherd.Lee
- * Date: 2019-07-17
+ * Date: 2019-07-27
+ * version: 2.0.0
  * info: 学习目标相关
  * index:
  *      initStandards()
  *      standardsHandlers()
  *      editCourseTheme()
  *      questionsHandlers()
+ *      getCoreQuestions()
+ *      coreQuestionTypeMap()
  */
 
 const STANDARD_PATH = "datas/standard/standard.json",
     STD = ["science", "technology", "engineering", "mathematics"];
 
 $(function(){
-    log("hello!! -design-objectives.js");
+    _hello("design-objectives");
     initStandards();
     questionsHandlers();
 });
@@ -101,9 +104,10 @@ function questionsHandlers(){
         </div>
     `.trim();
     $(`#${prefix} .addCoreQuestion`).click(function(){
-        // alert($(this).parent().prev().html()); //科学:
         let $this = $(this), $newnode = $(template),
+            coreType = $this.parent().find("input:first-child").attr("data-coretype"),
             nodenumber = [...$this.parent().find("input")].length;
+        $newnode.find("input").eq(0).attr("data-coretype", coreType);
         $newnode.find(".deleteCoreQuestion").css("top", `${5+nodenumber*55}px`);
         $newnode.find(".deleteCoreQuestion").click(function(){
             let $self = $(this).parent(),
@@ -119,5 +123,45 @@ function questionsHandlers(){
         [...$parent.find(".newCoreQuestion")].forEach((node, index) => {
             $(node).find(".deleteCoreQuestion").css("top", `${5+(index+1)*55}px`);
         });
+    }
+}
+
+
+
+
+
+
+
+function getCoreQuestions(){
+    const id = 'questionDesign-coreQuestion';
+    let questions = [], value, dataType;
+    [...$(`#${id} div.${id}-eachQuestion`)].forEach((div) => {
+        [...$(div).find("input")].forEach((input) => {
+            value = $(input).val();
+            if(value !== ""){
+                dataType = $(input).attr("data-coretype");
+                questions.push({
+                    value:value, 
+                    type:dataType,
+                    typename:coreQuestionTypeMap(dataType)
+                });
+            }
+        })
+    })
+    return questions;
+}
+
+
+
+
+
+function coreQuestionTypeMap(key){
+    let typeMap = {
+        "science":"科学", "technology":"技术",
+        "engineering":"工程", "mathematics":"数学"
+    };
+    for(let [k, v] of Object.entries(typeMap)){
+        if(k === key) return v;
+        else if(v === key) return k;
     }
 }

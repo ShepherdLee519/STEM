@@ -1,0 +1,179 @@
+/*
+ * author: Shepherd.Lee
+ * 学习活动区域的样式 主要与节点样式相关
+ * 需要在design-style.css 导入
+ * Date: 2019-07-30
+ */
+
+/* 学习活动区域 - zone
+-----------------------------------------*/
+div.design-act-zone,
+div.design-act-subZone{
+    margin: 0px auto;
+    margin-bottom: 20px;
+    width: 400px;
+}
+
+div.design-act-subZone{
+    width: 350px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+div.design-act-zone .design-act-zone-title,
+div.design-act-subZone .design-act-zone-title{
+    font-size: 13px;
+}
+
+.design-act-zone-hassub{
+    margin: 0px auto;
+    text-align: center;
+    top: 20px;
+    border-top: 1px solid #EEE;
+}
+
+.design-act-zone-hassub span{
+    font-size: 25px;
+    display: block;
+    color: #0099CC !important;
+}
+
+div.design-act-zone .design-act-zone-title span,
+div.design-act-subZone .design-act-zone-title span{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+div.design-act-zone-content .init-act button{
+    display: block;
+    margin: 0px auto;
+}
+
+
+
+
+
+
+
+
+/* 学习活动区域 - node
+----------------------------*/
+div.design-act-node{
+    border-radius: 15px;
+}
+
+div.design-act-node .panel-heading{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    font-size: 10px;
+}
+
+div.design-act-node-wrapper > span.glyphicon{
+    font-size: 130%;
+    display: block;
+    color: #FF6666;
+    margin-left: 50%;
+}
+
+div.design-act-node-wrapper > span:last-child{
+    top: -18px;
+}
+
+div.design-act-node-wrapper > span.glyphicon:hover{
+    font-size: 150%;
+    color: red;
+}
+
+div.design-act-node-wrapper span.glyphicon-remove{
+    top: -15px;
+    font-size: 150%;
+    color: red;
+}
+
+
+
+
+
+
+
+/* 新建活动的选择活动菜单
+---------------------------*/
+div.design-initActivityZone{
+    display: block;
+    /* left: 55px; */
+    width: 90%;
+    margin-left: 5%;
+}
+
+div.design-initActivityZone .panel{
+    border: none;
+}
+
+div.design-initActivityZone .panel-heading{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border: 2px solid #d6e9c6;
+}
+
+div.design-initActivityZone .panel-body{
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border: 2px solid #d6e9c6;
+    border-top-width: 0px;
+}
+
+div.design-initActivityZone .panel-body .radio{
+    margin-left: 10%;
+}
+div.design-initActivityZone .panel-body .radio:hover{
+    font-size: 105%;
+}
+
+
+
+
+
+
+
+/* 学习活动的活动节点样式
+-------------------------------------*/
+.design-act-node-wrapper .panel-content{
+
+}
+
+
+.design-act-node-wrapper .edit-activity-btn{
+    border-radius: 20px;
+    outline: none;
+}
+
+.design-act-node-wrapper .design-activity-name{
+    font-size: 120%;
+}
+
+.design-act-node-wrapper .menu-box{
+    display: inline-block;
+    width: 110%;
+    margin-top:6px;
+    margin-left: -5%;
+}
+
+.design-act-node-wrapper .panel.panel-toggle{
+    background-color: #FF8888;
+    width: 80%;
+    margin-left: 10%;
+    color: white;
+    box-shadow: 4px 4px 10px #CCC;
+}
+
+.design-act-node-wrapper .panel.panel-toggle:hover{
+    background-color: #FF6666;
+}
+
+.design-act-node-wrapper .panel-toggle span.glyphicon{
+    color: red;
+    font-size: 145%;
+    display: inline-block;
+    padding-left: 5px;
+    border-left: 5px solid white;
+}

@@ -1,11 +1,12 @@
 <?php
 /**
  * author: Shepherd.Lee
- * Date: 2019-04-23
- * version: 1.0.0
- * info: 简化一些操作的php辅助函数
+ * Date: 2019-07-27
+ * version: 2.0.0
+ * info: 简化一些操作的php辅助函数 考虑将mysql的连接等也包装起来
  * index:
  *          1. _get()/_post()
+ *          2. _space()
  */
 
  

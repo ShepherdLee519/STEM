@@ -9,7 +9,7 @@
 
 
 $(function(){
-    log("hello!! -design-introduction.js");
+    _hello("design-introduction");
     selectNodeHandler();
 });
 
@@ -31,6 +31,7 @@ function selectNodeHandler(){
             //显示 重选模式 按钮
             $("#design-tasks-resetModal").removeClass("hidden");
             let $div = $("#design-tasksZone div:first-child");
+            toggleTrigger("on");
             TASKZONE.taskZoneHandler();//taskZone本身的删除等效果
             INIT.initTaskNodes($div, value);//新建节点
         }
@@ -46,6 +47,7 @@ function selectNodeHandler(){
 function resetIntroduction(){
     //恢复该界面的显示
     _removeClass($("#design-introduction-zone"), "hidden");
+    toggleTrigger("off");
 
     //将原先的选中取消 技术原因，使用原生js
     const NAME = "design-taskSelect";

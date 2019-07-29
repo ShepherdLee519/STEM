@@ -1,10 +1,14 @@
 /**
  * author: Shepherd.Lee
  * Date: 2019-05-30
- * info: 学习结构
+ * info: 学习结构 - 目前暂时作废
  * index:
  *      Tree()
  */
+
+$(function(){
+    _hello("design-tree");
+});
 
 function Tree(){
     let that = this, 

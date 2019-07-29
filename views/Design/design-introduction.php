@@ -1,15 +1,15 @@
 <?php
 /**
  * author: Shepherd.Lee
- * Date: 2019-07-17
- * version: 1.0.0
+ * Date: 2019-07-27
+ * version: 2.0.0
  * info:
  *      design.php中导入，作为第二栏
  *      学习评价部分的主要内容的html编写(文本为主)
+ *      注：_space函数见helper.php
  */
 ?>
 
-<link rel="stylesheet" href="css/design-introduction-style.css" />
 <p><?php _space();?>在本模块中，需要您构建STEM课程的任务模式（课程单元）。
     您可以选择我们已为您准备好的模式，也可以根据您的设计风格自由定制模式。</p>
 
@@ -27,8 +27,8 @@
 
 <p><b>知识建构：</b>学生组成学生群体，对知识展开探讨，通过探究与论证建构集体认知。
 其特征是学生自由发表观点，可通过协作不断改进观点。</p>
-
 <br />
+
 <h4>二、定制模式</h4>
 <p><?php _space();?>如果上述模式不能满足您的需求，您可以自由定制模式，跳转至定制模式界面，选择已有的任务块或
 添加自定义任务块组成新任务模式，回到本页面进行模式选择。<b>任务模式选择完毕后，您可以对其进行模式嵌套，
@@ -53,6 +53,7 @@
     <?php  
         for($i = 0; $i < count($tasks); $i++){
             ?>
+            <!-- 先显示一个radio -->
             <li>
             <div class="col-md-3">
                 <div class='radio'>
@@ -63,6 +64,7 @@
                     </label>
                 </div>
             </div>
+            <!-- 再显示该模式的所有图片 -->
             <div class="col-md-9 row-level">
                 <?php
                     for($j = 0; $j < $number[$i] && $number[$i] != 0; $j++){
