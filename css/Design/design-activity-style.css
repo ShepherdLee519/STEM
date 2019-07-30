@@ -137,11 +137,6 @@ div.design-initActivityZone .panel-body .radio:hover{
 
 /* 学习活动的活动节点样式
 -------------------------------------*/
-.design-act-node-wrapper .panel-content{
-
-}
-
-
 .design-act-node-wrapper .edit-activity-btn{
     border-radius: 20px;
     outline: none;
@@ -176,4 +171,55 @@ div.design-initActivityZone .panel-body .radio:hover{
     display: inline-block;
     padding-left: 5px;
     border-left: 5px solid white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* 学习活动的编辑菜单的样式
+-------------------------------------*/
+#design-editActivityZone{
+    position: absolute;
+    width: 86%;
+    left: 0px;
+    top: 0px;
+    margin: 150px 7% 0px 7%;
+    z-index: 400;
+}
+
+.design-editActivityZone-body{
+    max-height: 450px;
+    overflow-y: scroll;
+}
+
+.design-editActivity-table tbody tr{
+    vertical-align: middle;
+    height: 50px;
+}
+
+.design-editActivity-table td:first-child{
+    width: 80px;
+    font-weight: bolder;
+}
+
+.design-editActivity-table thead{
+    background-color: #dff0d8;
+}
+
+.editActivity-pyramidZone{
+    position: relative;
+}
+
+.editActivity-img{
+    position: absolute;
+    left: 0px;
+    top:-10px;
 }

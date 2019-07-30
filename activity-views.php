@@ -8,7 +8,7 @@
  */
 
     require_once('php/helper.php'); //导入辅助函数
-    $VIEW_PATH = 'views/activity/'; //activity视图php的文件夹
+    $VIEW_PATH = 'views/Activity/'; //activity视图php的文件夹
 ?>
 
 <!DOCTYPE html>

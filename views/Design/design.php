@@ -103,13 +103,13 @@
         </div>
 
         <!-- 编辑节点的菜单 -->
-        <div class="hidden" id="design-editActivityZone">
+        <div id="design-editActivityZone">
         <!-- ///////////////////////////////////////////////////////// -->
 
-            <?php
-                //编辑节点菜单的样式- 同样需要位置固定
-                @include "design-editActivity.php";
-            ?>
+        <?php
+            //学习活动的菜单(不同)导入
+            @include "design-editActivity.php";
+        ?>
 
         <!-- //////////////////////////////////////////////////////// -->
         </div>

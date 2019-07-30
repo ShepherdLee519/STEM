@@ -5,11 +5,18 @@
  * info: 学习活动中 具体的创建不同类型的活动
  * index:
  *      Activity()
+ *          - init()
+ *          - typemap()
+ *          - editActivityZone()
+ *          - hideEditActivityZones()
+ *          - editActivityTable()
+ *          - initEditActivityHandlers()
  *      clearActivityMenu()
  */
  
 $(function(){
     _hello("design-activity");
+    var INIT_ACTIVITY_HANDLERS= false;
 });
 
 function Activity(){
@@ -70,7 +77,82 @@ function Activity(){
             }
         }
         return;
-    }
+    };
+    this.editActivityZone = (key, activityName) => {
+        //根据key 找寻对应的editActivity菜单并显示
+        let type = this.typemap(key),
+            $editZone = $(`#design-editActivityZone-${type}`);
+        this.hideEditActivityZones();
+        $editZone.removeClass("hidden");
+        //活动名称的input赋值
+        $editZone.find(".editActivity-activityName").val(activityName); 
+    };
+    this.hideEditActivityZones = () => {
+        //将所有的editActivity菜单隐藏
+        [...$(".design-editActivityZone")].forEach((editzone) => {
+            _addClass($(editzone), "hidden");
+        });
+    };
+    this.editActivityTable = () => {
+        $("#design-editActivityZone td").off("click").click(function(event){
+            //已经有input，跳过
+            if($(this).children("input").length > 0) 
+                return false;
+            
+            let tdObj = $(this),
+                preText = tdObj.html(),
+                inputObj = $(`<input type="text" />`);
+            
+            tdObj.html("");
+            inputObj
+                .width(tdObj.width())
+                .height(tdObj.height())
+                .css({border:"0px", fontSize:"17px",font:"宋体"})
+                .val(preText).appendTo(tdObj)
+                .trigger("focus").trigger("select");
+        
+            inputObj.keyup(function(event){
+                if(13 == event.which){
+                    //按下回车
+                    let text = $(this).val();
+                    tdObj.html(text);
+                }else if(27 == event.which){
+                    //ESC键
+                    tdObj.html(preText);
+                }
+            });
+            inputObj.mouseout(function(event){
+                let text = $(this).val();
+                    tdObj.html(text);
+            });
+            inputObj.click(function(){
+                return false;
+            });
+        }); 
+    };
+    //编辑学习活动的菜单内的相关按钮的事件初始化
+    this.initEditActivityHandlers = () => {
+        if(window.INIT_ACTIVITY_HANDLERS) return;
+        //立即执行，初始化表单的td的点击编辑能力
+        this.editActivityTable();
+        //editActivity菜单中的取消按钮的事件
+        $(".design-editActivity-cancel").click(() => {
+            this.hideEditActivityZones();
+        });
+        //editActivity菜单中的确认按钮的事件
+        $(".design-editActivity-confirm").click(() => {
+            this.hideEditActivityZones();
+        });
+        //editActivity表单的清空事件
+        $(".reset-editActivityTable").click(function(){
+            let $table = $(this).parent().parent().parent().find("table");
+            [...$table.find("td:not(:first-child)")].forEach((td) => {
+                $(td).html("");
+            });
+        });
+        window.INIT_ACTIVITY_HANDLERS = true;
+    };
+    this.initEditActivityHandlers();//立即调用并初始化
 }
 
 

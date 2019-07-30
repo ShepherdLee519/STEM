@@ -67,6 +67,7 @@
 #design-tasksZone div.node .node-wrap:hover,
 #design-tasksZone div[id ^= "subTaskZone-"] div.node .node-wrap:hover{
     border: 3px solid #FF6666;
+    box-shadow: 4px 4px 10px #CCC;
 }
 
 

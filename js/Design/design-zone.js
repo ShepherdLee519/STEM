@@ -137,6 +137,7 @@ function Zone(node){
      * Zone对外可见的方法
      * --------------------------------
      * self - 返回自己的DOM引用
+     * activity - 返回zone拥有的activity的引用
      * inserBefore - 在指定节点前插入节点
      * insertAfter - 在指定节点后插入节点
      * deleteNode - 删除指定节点
@@ -153,6 +154,7 @@ function Zone(node){
      * addActivityNum
      */
     this.self = () => $self;
+    this.activity = () => activity;
     this.insertBefore = (target) => {
         this.initActivityBtnHandler(-1, target);
         target.self().find(".menu-box").eq(0).html(this.adjustInitActivity($initActivity, -1));
@@ -334,7 +336,8 @@ function Node(num, activityInfo){
         $heading = $self.find(".panel-heading"),
         $body = $self.find(".panel-body"),
         $title = $self.find(".design-act-node-title"),
-        $activityName = $self.find(".design-activity-name");
+        $activityName = $self.find(".design-activity-name"),
+        $edit = $self.find(".edit-activity-btn");
     
     //根据typename修改title
     if(typeof activityInfo != "undefined"){
@@ -359,6 +362,16 @@ function Node(num, activityInfo){
         }else{
             $title.html(`<b>${activityInfo.typename}</b>`);
         }
+    });
+
+    //点击编辑按钮的事件
+    $edit.click(() => {
+        let typename = $title.find("b").html();
+        if(zone != null){
+            let activity = zone.activity();
+            activity.editActivityZone(typename, $activityName.html());
+        }
+        return false;
     });
     
     /**
