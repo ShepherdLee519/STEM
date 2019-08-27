@@ -16,16 +16,17 @@
     </thead>
     <tbody>
         <tr>
-        <td>思考</td><td></td><td></td>
+            <td><label>思考</label></td>
+            <td><textarea class="activity-student-think" rows=6></textarea></td>
+            <td><textarea class="activity-teacher-think" rows=6></textarea></td>
         </tr><tr>
-        <td>配对</td><td></td><td></td>
+            <td><label>配对</label></td>
+            <td><textarea class="activity-student-pair" rows=6></textarea></td>
+            <td><textarea class="activity-teacher-pair" rows=6></textarea></td>
         </tr><tr>
-        <td>共享</td><td></td><td></td>
+            <td><label>共享</label></td>
+            <td><textarea class="activity-student-share" rows=6></textarea></td>
+            <td><textarea class="activity-teacher-share" rows=6></textarea></td>
         </tr>
     </tbody>
 </table>
-<div class="form-group">
-    <div class="btn btn-group pull-right">
-        <button class="btn btn-default reset-editActivityTable">清空表格</button>
-    </div>
-</div>

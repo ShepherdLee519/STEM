@@ -5,8 +5,11 @@
         {
             "nodename" : "分析问题",
             "imgsrc" : "PBL-1.png",
-            "taskname" : "test",
-            "taskcontent" : "test-content",
+            "taskname" : "",
+            "taskcontent" : "",
+            "taskcorequestion":[],
+            "taskevidence":"",
+            "taskevaluate":[],
             "level" : 1,
             "next" : ""
         },
@@ -15,6 +18,9 @@
             "imgsrc" : "PBL-2.png",
             "taskname" : "",
             "taskcontent" : "",
+            "taskcorequestion":[],
+            "taskevidence":"",
+            "taskevaluate":[],
             "level" : 1,
             "next" : ""
         },
@@ -23,6 +29,9 @@
             "imgsrc" : "PBL-3.png",
             "taskname" : "",
             "taskcontent" : "",
+            "taskcorequestion":[],
+            "taskevidence":"",
+            "taskevaluate":[],
             "level" : 1,
             "next" : ""
         }

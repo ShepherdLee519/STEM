@@ -1,144 +1,115 @@
-/**
+/*
  * author: Shepherd.Lee
- * Date: 2019-07-30
- * version: 2.2.0
+ * Date: 2019 - 08 - 27
  * info: 学习活动相关
  * index:
- *      Zones() 
- *          > addSubActivity()
- *          > deleteSubActivity()
- *          > clear()
  *      Zone()
  *          > self()
- *          > inserBefore()
+ *          > insertBefore()
  *          > insertAfter()
  *          > deleteNode()
+ * 
  *          > toSub()
  *          > getParent()
  *          > mark()
  *          > demark()
+ * 
  *          > initFirstActivity()
  *          > initActivityBtnHandler()
  *          > adjustInitActivity()
  *          > resetActivityRadio()
- *      Node()
- *          > self()
- *          > bindZone()
+ * 
+ *          > addActivityNum()
+ * 
+ *          > getData()
  */
+
 
 $(function(){
     _hello("design-zone");
 });
 
-function Zones(nodes){
-    let zones = [], newzone = null, 
-        $div = $("#design-activities-zone");
 
-    [...nodes].forEach((node) => {
-        newzone = new Zone(node);
-        zones.push(newzone);
-        $div.append(newzone.self());
-    });
-    zones.push(new Array(zones.length).fill([]));
+
+/**
+ * 通过表示不同模式的其中一个环节的tasknode对象组装出一个zone
+ * 一个zone只表示模型中的一个环节 例如需求分析
+ * 但一个zone可能包含N个Node对象，表示包含的诸多学习活动
+ * @param {Object} tasknode -此处的tasknode等表示模型中一个环节的对象 
+ */
+function Zone(tasknode){
+    let nodelist    = [],   //该区域包含的学习活动的对象
+        num         = 1,    //原定义是每新建一个学习活动递增的学习活动的序列号，暂无实际用处
+        parent      = -1,   //对子节点而言，这个值是父节点的index
+        that        = this, //该zone自身的引用备份
+        activity    = new Activity(), //该zone对应的activity对象
+
+        //从imgsrc中提取结点所属模式类型 eg pbl
+        tasknode_type = ((tasknode.imgsrc).match(/(.*?)-(.*)/))[1];
     
-    /**
-     * Zones对外可见的方法
-     * addSubActivity - 添加子活动的，初始化子活动的Zone
-     * deleteSubActivity - 删除某个子活动
-     * clear - 清空Zone区域
-     */
-    this.addSubActivity = (index, nodes) => {
-        let $target = $div.children(".design-act-zone").eq(index);
-
-        $target.after(`<div class="subZones"></div>`);
-        $target = $target.next();
-
-        [...nodes].forEach((node) => {
-            newzone = new Zone(node);
-            newzone.toSub(index);
-            $target.append(newzone.self());
-        });
-        zones[index].mark();
-        // log(zones);
-        zones[zones.length-1][index] = newzone;
-    };
-    this.deleteSubActivity = (index) => {
-        let $subzone = $div.children(".design-act-zone").eq(index).next();
-        zones[index].demark();
-        zones[zones.length-1][index] = [];
-        $subzone.remove();
-    };
-    this.clear = () => {
-        this.zones = [];
-        $div.html("");
-    };
-} 
-
-
-
-
-
-
-
-
-
-function Zone(node){
-    let nodelist = [], num = 1, parent = -1,
-        activity = new Activity(),
-        that = this,
-        initBtn = `
-            <div class="init-act">
-                <button class="btn btn-default">新建活动</button>
-            </div>
+    let initBtn = `
+        <div class="init-act">
+            <button class="btn btn-default">新建活动</button>
+        </div>
         `.trim(),
+        //Zone相关的html
         $self = $(`
-            <div class="panel panel-info design-act-zone">
-                <div class="panel-heading">
-                    <h3 class="panel-title design-act-zone-title">
-                        <span>${node.nodename}</span> - 学习活动
-                        <span class="badge pull-right activity-number">0</span>
-                    </h3>
-                </div>
-                <div class="panel-body design-act-zone-content">
-                    ${initBtn}
-                </div>
-                <div class="menu-box"></div>
+        <div class="panel panel-info design-act-zone">
+
+            <div class="panel-heading">
+                <h3 class="panel-title design-act-zone-title">
+                    <img src="image/nodes/${tasknode_type}/${tasknode.imgsrc}" 
+                        class="pull-left design-act-zone-icon" />
+                    <span>${tasknode.nodename}</span> - 学习活动
+                    <span class="badge pull-right activity-number">0</span>
+                </h3>
             </div>
+
+            <div class="panel-body design-act-zone-content">
+                ${initBtn}
+            </div>
+            <div class="menu-box"></div>
+        </div>
         `.trim()),
+        //新建活动的选择框的html相关
         $initActivity = $(`
-            <div class="design-initActivityZone">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">选择活动类型</h3>
-                    </div>
-                    <div class="panel-body">
-                        ${activity.init()}
-                    </div>
+        <div class="design-initActivityZone">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">选择活动类型</h3>
+                </div>
+                <div class="panel-body">
+                    ${activity.init()}
                 </div>
             </div>
+        </div>
         `.trim()),
+        //对于有sub-zone的zone对象增加的折叠subzones的html
         hasSub = `
-            <div class="design-act-zone-hassub">
-                <span class="glyphicon glyphicon-chevron-down"></span>
-            </div>
+        <div class="design-act-zone-hassub">
+            <span class="glyphicon glyphicon-chevron-down"></span>
+        </div>
         `.trim(),
+
+        //Zone区域的几个元素
         $heading = $self.find(".panel-heading"),
         $content = $self.find(".design-act-zone-content"),
-        $number = $self.find(".activity-number");
+        $number  = $self.find(".activity-number");
     
     //点击面板的header部分展开/收回面板
     $heading.click(() => {
         $content.toggleClass("hidden");
         clearActivityMenu();
     });
-    
 
-    /**
+
+    /*-----------------------------------------------------------//
      * Zone对外可见的方法
      * --------------------------------
      * self - 返回自己的DOM引用
      * activity - 返回zone拥有的activity的引用
-     * inserBefore - 在指定节点前插入节点
+     * 
+     * insertBefore - 在指定节点前插入节点
      * insertAfter - 在指定节点后插入节点
      * deleteNode - 删除指定节点
      * 
@@ -149,69 +120,123 @@ function Zone(node){
      * 
      * initFirstActivity - 点击新建活动后添加的第一个活动节点
      * initActivityBtnHandler - 点击新建活动后的事件处理
+     * adjustInitActivity - 调整$initActivity中的panel-title的内容
      * resetActivityRadio - 重置新建活动列表中的radio选项
      * 
-     * addActivityNum
+     * addActivityNum - 修改节点数
+     * 
+     * getData - 返回管辖的所有Node的数据集合
+     */
+    //-----------------------------------------------------------//
+    /**
+     * 返回自身区域的jQuery对象引用
+     * @returns {Object}
      */
     this.self = () => $self;
+    /**
+     * 返回自身对应的activity对象的引用
+     * @returns {Object}
+     */
     this.activity = () => activity;
+
+
+    /**
+     * 经由Node对象调用，在传入的target的前面插入新节点
+     * @param {Object} target - Node对象的this
+     */
     this.insertBefore = (target) => {
-        this.initActivityBtnHandler(-1, target);
-        target.self().find(".menu-box").eq(0).html(this.adjustInitActivity($initActivity, -1));
-        this.resetActivityRadio();//重置选项
+        that.initActivityBtnHandler(-1, target);
+        target.self().find(".menu-box").eq(0).html(that.adjustInitActivity($initActivity, -1));
+        that.resetActivityRadio();//重置选项
         $initActivity.find("input[name='activity-name']").eq(0).val("");//清空活动名	
     };
+    /**
+     * 经由Node对象调用，在传入的target的后面插入新节点
+     * @param {Object} target - Node对象的this
+     */
     this.insertAfter = (target) => {
-        this.initActivityBtnHandler(1, target);
-        target.self().find(".menu-box").eq(0).html(this.adjustInitActivity($initActivity, 1));
-        this.resetActivityRadio();//重置选项
+        that.initActivityBtnHandler(1, target);
+        target.self().find(".menu-box").eq(0).html(that.adjustInitActivity($initActivity, 1));
+        that.resetActivityRadio();//重置选项
         $initActivity.find("input[name='activity-name']").eq(0).val("");//清空活动名	
     };
+    /**
+     * 经由Node对象调用，删除传入的target对应的Node对象
+     * @param {Object} target - Node对象的this
+     */
     this.deleteNode = (target) => {
         let index = nodelist.indexOf(target);
 
         nodelist.splice(index, 1);
         $content.children().eq(index).remove();
-        this.addActivityNum(-1);
+        that.addActivityNum(-1);
         if(nodelist.length == 0){
             //如果节点全删除，回复新建学习活动的按钮
             $content.append(initBtn);
-            this.initFirstActivity();
+            that.initFirstActivity();
             num = 1;
         }
     };
+
+
+    /**
+     * 将一个Zone装饰为sub-Zone
+     * @param {Number} parentIndex 该subZone的对应父Zone的index
+     */
     this.toSub = (parentIndex) => {
         $self.removeClass("design-act-zone").removeClass("panel-info");
         $self.addClass("design-act-subZone").addClass("panel-warning");
-        this.parent = parentIndex;
+        parent = parentIndex;
     };
-    this.getParent = () => this.parent;
+    /**
+     * 返回该Zone的index值，对于非subZone，该值为-1
+     * @returns {Number}
+     */
+    this.getParent = () => parent;
+    /**
+     * 为含有子区域的父区域增加hasSub的click-span
+     */
     this.mark = () => {
         $self.children(".panel-body").after(hasSub);
         let $span = $self.find(".design-act-zone-hassub span");
+
         $span.click(() => {
             $self.next(".subZones").toggleClass("hidden");
             clearActivityMenu();
         });
     };
+    /**
+     * 当子区域被删除时候，取消hasSub
+     */
     this.demark = () => {
         let $mark = $self.find(".panel-body").next(".design-act-zone-hassub");
         $mark.remove();
     };
-    //新建学习活动的按钮的click事件处理
+
+
+    /**
+     * 新建学习活动的按钮的click事件处理
+     * 即当区域内无学习活动下，第一次新建学习活动时候的事件处理
+     */
     this.initFirstActivity = () => {
         $button = $content.find("button").eq(0);
+
         $button.click(() => {
-            this.initActivityBtnHandler();
-            this.adjustInitActivity($initActivity, 0);
+            that.initActivityBtnHandler();
+            that.adjustInitActivity($initActivity, 0);
             $self.find(".menu-box").eq(0).html($initActivity);
-            this.resetActivityRadio();//重置选项
+            that.resetActivityRadio();//重置选项
             $initActivity.find("input[name='activity-name']").eq(0).val("");//清空活动名
         });
     };
     //这里要立即执行该函数，实现第一次初始化的新建
     this.initFirstActivity();
-    //新建学习活动/前后添加学习活动的具体时事件处理函数
+
+    /**
+     * 新建学习活动/前后添加学习活动的具体时事件处理函数
+     * @param {Number} pos - 0(default)新建，1 before，-1 after
+     * @param {Object} target
+     */
     this.initActivityBtnHandler = function(pos = 0, target){
         clearActivityMenu();
         _addClass($initActivity.find(".alert"), "hidden");
@@ -220,53 +245,57 @@ function Zone(node){
         //新建活动的确认按钮点击
         $btn.click(function(){
             //pos = 0 新建/ pos = 1 insertAfter/ pos = -1 insertBefore
-            const NAME = "activity-name",
-                    SELECT = "activity-type-select";
-            let $radiozone = $(this).parent().prev(),
-                $warnMsg = $radiozone.find(".alert"),
-                value = $radiozone.find(`input[name=${SELECT}]:checked`).val(),
+            const NAME       = "activity-name",
+                  SELECT     = "activity-type-select";
+            let $radiozone   = $(this).parent().prev(),//此处的this相对于$btn
+                $warnMsg     = $radiozone.find(".alert"),
+                value        = $radiozone.find(`input[name=${SELECT}]:checked`).val(),
                 activityname = $radiozone.find(`input[name='${NAME}']`).val();
 
             //活动名称填写与活动类型选择了
-            if(typeof value !== "undefined" && activityname !== ""){
+            if(!_isundef(value) && activityname !== ""){
                 clearActivityMenu();
                 _addClass($warnMsg, "hidden");
 
+                //用于新建Node的activityInfo
                 let activityInfo = {
-                    typename: activity.typemap(value),//pyramid
-                    activityname: activityname//金字塔
+                    type        : value, //pyramid
+                    typename    : activity.typemap(value),//金字塔
+                    activityname: activityname//具体的活动名
                 };
 
-                that.addActivityNum(1);
-                if(pos !== 0){
-                    let index = nodelist.indexOf(target),
-                        node = new Node(num++, activityInfo);
-                    node.bindZone(that);
-                    if(pos == 1){
-                        //向后插入结点
-                        nodelist.splice(index+1, 0, node);
+                that.addActivityNum(1);//区域右上角显示的节点数增加
+                if(pos !== 0){ //向前/后插入
+                    let index   = nodelist.indexOf(target),
+                        node    = new Node(num++, activityInfo);
+                    node.bindZone(that);//绑定父Zone的引用
+
+                    if(pos == 1){ //向后插入结点
+                        nodelist.splice(index + 1, 0, node);
                         $content.children().eq(index).after(node.self());
-                    }else if(pos == -1){
-                        //向前插入结点
+                    }else if(pos == -1){ //向前插入结点
                         nodelist.splice(index, 0, node);
                         $content.children().eq(index).before(node.self());
                     }
-                    return false;
-                }else if(pos == 0){
-                    //默认值 新建节点
+                }else if(pos == 0){//默认值 新建节点
                     let node = new Node(num++, activityInfo);
                     node.bindZone(that);
                     nodelist.push(node);
                     $content.html("").append(node.self());
-                    return false;
-                }   
+                }
+                return false;   
             }else{
                 $warnMsg.removeClass("hidden");
-                return;
+                return false;
             }
-        });
+        });//end - $btn.click()
     };
-    //根据pos(1,-1)调整$initActivity中的panel-title的内容
+    /**
+     * 根据pos(1,-1)调整$initActivity中的panel-title的内容
+     * @param {Object} $init - $initActivity引用
+     * @param {Number} pos 1 before -1 after
+     * @returns {Object} 返回修改后的$initActivity对象的引用
+     */
     this.adjustInitActivity = ($init, pos) => {
         let $title = $init.find(".panel-title");
         if(pos == 1){
@@ -279,114 +308,45 @@ function Zone(node){
         $init.find("input[name='activity-name']").eq(0).val("");//清空活动名	
         return $init;
     };
+    /**
+     * 重置新建活动菜单中的radios的选中情况
+     */
     this.resetActivityRadio = () => {
         let radios = document.getElementsByName("activity-type-select");
         for(let radio of [...radios]){
             radio.checked = false;
         }
     };
+
+
+    /**
+     * 修改右上角区域显示的节点数，将已有值与传入的参数值相加
+     * @param {Number} num 节点数的修改量
+     */
     this.addActivityNum = (num) => {
         let num_old = Number.parseInt($number.html());
         $number.html(num_old + num);
     };
-}
 
 
 
-
-
-
-
-
-
-function Node(num, activityInfo){
-    let $self = $(`
-        <div class="design-act-node-wrapper">
-            <span class="glyphicon glyphicon-triangle-top insertbefore-node"
-                title="向前添加新活动节点"></span>
-            <div class="panel panel-default design-act-node">
-                <div class="panel-heading">
-                    <h3 class="panel-title design-act-node-title">
-                        学习活动${num}</h3>
-                    <span class="glyphicon glyphicon-remove pull-right" 
-                        title="删除活动节点"></span>
-                </div>
-                <div class="panel-body design-act-node-content">
-                    <div class="col-sm-12 panel-content">
-                        <label class="design-activity-name"></label>
-                        <button class="btn btn-danger edit-activity-btn pull-right">
-                            编辑
-                            <span class="glyphicon glyphicon-edit"></span>
-                        </button>
-                    </div>
-                    <br />
-                    <div class="menu-box"></div>
-                </div>
-            </div>
-            <span class="glyphicon glyphicon-triangle-bottom insertafter-node"
-                title="向后添加新活动节点"></span>
-        </div>
-        `.trim()),
-        zone = null, //父节点 - 区域zone的引用
-        //箭头与删除图标
-        $before = $self.find(".insertbefore-node"),
-        $after = $self.find(".insertafter-node"),
-        $delete = $self.find(".glyphicon-remove"),
-        //几个区域与元素
-        $heading = $self.find(".panel-heading"),
-        $body = $self.find(".panel-body"),
-        $title = $self.find(".design-act-node-title"),
-        $activityName = $self.find(".design-activity-name"),
-        $edit = $self.find(".edit-activity-btn");
-    
-    //根据typename修改title
-    if(typeof activityInfo != "undefined"){
-        $title.html(`<b>${activityInfo.typename}</b>`);
-        $activityName.html(activityInfo.activityname);
-    }
-    //插入、删除的click响应后，将节点本身的引用传给Zone，再由Zone处理
-    $before.click(() => {
-        this.resetToggle(); zone.insertBefore(this);
-    });
-    $after.click(() => {
-        this.resetToggle(); zone.insertAfter(this);
-    });
-    $delete.click(() => zone.deleteNode(this));
-
-    //点击heading的折叠效果
-    $heading.click(() => {
-        $body.toggleClass("hidden");
-        $heading.parent().toggleClass("panel-default").toggleClass("panel-toggle");
-        if($body.hasClass("hidden")){
-            $title.html(`<b>${activityInfo.typename}</b> - ${activityInfo.activityname}`);
-        }else{
-            $title.html(`<b>${activityInfo.typename}</b>`);
-        }
-    });
-
-    //点击编辑按钮的事件
-    $edit.click(() => {
-        let typename = $title.find("b").html();
-        if(zone != null){
-            let activity = zone.activity();
-            activity.editActivityZone(typename, $activityName.html());
-        }
-        return false;
-    });
-    
     /**
-     * Node对外可见的方法
-     * self - 返回自己的DOM引用
-     * bindZone - 传入Zone的js对象引用，绑定至Node的zone变量
-     * resetToggle - 将可能收缩的面板先还原
+     * 返回该区域管辖的所有Node的数据(nodedata)
+     * 并将这些nodedata封装成一个data返回
+     * @returns {Object}
      */
-    this.self = () => $self;
-    this.bindZone = (that) => zone = that;
-    this.resetToggle = () => {
-        _removeClass($body, "hidden");
-        _removeClass($heading.parent(), "panel-toggle");
-        _addClass($heading.parent(), "panel-default");
-        $title.html(`<b>${activityInfo.typename}</b>`);
+    this.getData = () => {
+        let data = {
+            nodename: tasknode.nodename,
+            activities: []
+        };
+
+        nodelist.forEach((node) => {
+            data["activities"].push(node.getData());
+        });
+
+        return data;
     };
 }
+
 

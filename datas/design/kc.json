@@ -5,8 +5,11 @@
         {
             "nodename" : "个人准备",
             "imgsrc" : "KC-1.png",
-            "taskname" : "test",
-            "taskcontent" : "test-content",
+            "taskname" : "",
+            "taskcontent" : "",
+            "taskcorequestion":[],
+            "taskevidence":"",
+            "taskevaluate":[],
             "level" : 1,
             "next" : ""
         },
@@ -15,6 +18,9 @@
             "imgsrc" : "KC-2.png",
             "taskname" : "",
             "taskcontent" : "",
+            "taskcorequestion":[],
+            "taskevidence":"",
+            "taskevaluate":[],
             "level" : 1,
             "next" : ""
         },
@@ -23,6 +29,9 @@
             "imgsrc" : "KC-3.png",
             "taskname" : "",
             "taskcontent" : "",
+            "taskcorequestion":[],
+            "taskevidence":"",
+            "taskevaluate":[],
             "level" : 1,
             "next" : ""
         },
@@ -31,6 +40,9 @@
             "imgsrc" : "KC-4.png",
             "taskname" : "",
             "taskcontent" : "",
+            "taskcorequestion":[],
+            "taskevidence":"",
+            "taskevaluate":[],
             "level" : 1,
             "next" : ""
         }

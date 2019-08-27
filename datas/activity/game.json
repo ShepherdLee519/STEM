@@ -1,0 +1,10 @@
+{
+    "type":"game",
+    "typename":"游戏教学",
+    "activity":{
+        "rule":"游戏规则",
+        "student":"学生活动",
+        "teacher":"教师活动",
+        "reward":"奖惩规则"
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "type":"roleplay",
+    "typename":"角色扮演",
+    "activity":{
+        "name":"活动名称",
+        "setting":"角色设置",
+        "student":{
+            "describe":"学生活动 - 角色刻画",
+            "show":"学生活动 - 模拟表演",
+            "evaluate":"学生活动 - 点评总结"
+        },
+        "teacher":{
+            "describe":"教师活动 - 角色刻画",
+            "show":"教师活动 - 模拟表演",
+            "evaluate":"教师活动 - 点评总结"
+        }
+    }
+}

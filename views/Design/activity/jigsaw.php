@@ -17,9 +17,15 @@
     </thead>
     <tbody>
         <tr>
-        <td>专家组</td><td></td><td></td><td></td>
+            <td>专家组</td>
+            <td class="activity-expert-task"></td>
+            <td class="activity-expert-student"></td>
+            <td class="activity-expert-teacher"></td>
         </tr><tr>
-        <td>原属小组</td><td></td><td></td><td></td>
+            <td>原属小组</td>
+            <td class="activity-former-task"></td>
+            <td class="activity-former-student"></td>
+            <td class="activity-former-teacher"></td>
         </tr>
     </tbody>
 </table>

@@ -25,6 +25,16 @@ div.design-act-subZone .design-act-zone-title{
     font-size: 13px;
 }
 
+div.design-act-zone .design-act-zone-icon,
+div.design-act-subZone .design-act-zone-icon{
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    position: relative;
+    top: -7.5px;
+    left: -8.5px;
+}
+
 .design-act-zone-hassub{
     margin: 0px auto;
     text-align: center;
@@ -62,6 +72,15 @@ div.design-act-node{
     border-radius: 15px;
 }
 
+div.design-act-node .design-act-node-icon{
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+    position: relative;
+    top: -5.5px;
+    left: -8.5px;
+}
+
 div.design-act-node .panel-heading{
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -90,7 +109,19 @@ div.design-act-node-wrapper span.glyphicon-remove{
     color: red;
 }
 
+div.design-act-node .panel-heading span.glyphicon-remove{
+    display: inline-block;
+    font-size: 2.3em;
+    margin-top: -6px;
+    padding: 2px 4px 2px 4px;
+}
 
+div.design-act-node .panel-heading span.glyphicon-remove:hover{
+    font-size: 2.7em;
+    margin-top: -8px;
+    margin-left: 6px;
+    margin-right: -2px;
+}
 
 
 
@@ -200,6 +231,13 @@ div.design-initActivityZone .panel-body .radio:hover{
     overflow-y: scroll;
 }
 
+.design-editActivityZone-body textarea{
+    width: calc(100% + 17px);
+    height: 100%;
+    margin: -8px;
+    margin-bottom: -16px;
+}
+
 .design-editActivity-table tbody tr{
     vertical-align: middle;
     height: 50px;
@@ -208,6 +246,13 @@ div.design-initActivityZone .panel-body .radio:hover{
 .design-editActivity-table td:first-child{
     width: 80px;
     font-weight: bolder;
+}
+
+.design-editActivity-table td:first-child label{
+    display: inline-block;
+    height: 20px;
+    margin-top: calc(50% + 10px);
+    margin-left: 5px;
 }
 
 .design-editActivity-table thead{

@@ -1,6 +1,6 @@
 /**
  * author: Shepherd.Lee
- * Date: 2019-07-27
+ * Date: 2019-08-09
  * version: 2.0.0
  * info: 学习目标相关
  * index:
@@ -10,13 +10,25 @@
  *      questionsHandlers()
  *      getCoreQuestions()
  *      coreQuestionTypeMap()
+ * 
+ *      saveTheme()
+ *      saveQuestion()
  */
 
+//存储学习目标表单数据的全局变量
+var THEME, //对应课程主题区域的存储
+    QUESTION; //对应问题设计区域的存储
 const STANDARD_PATH = "datas/standard/standard.json",
     STD = ["science", "technology", "engineering", "mathematics"];
 
 $(function(){
     _hello("design-objectives");
+    _async();
+    let path_theme = "datas/objectives/theme.json",
+        path_question = "datas/objectives/question.json";
+    $.get(path_theme, (data) => THEME = data);
+    $.get(path_question, (data) => QUESTION = data);
+    _async();
     initStandards();
     questionsHandlers();
 });
@@ -164,4 +176,60 @@ function coreQuestionTypeMap(key){
         if(k === key) return v;
         else if(v === key) return k;
     }
+}
+
+
+
+
+
+
+function saveTheme(){
+    if(_isundef(THEME)){
+        log("Please Init THEME");
+        return;
+    }
+
+    const prefix = "courseTheme";
+    ["themeName", "themeSituation"].forEach((key) => {
+        _store(
+            THEME, key,
+            $(`#${prefix}-${key}`).val()
+        );
+    });
+    STD.forEach((key) => {
+        _store(
+            THEME, ["people", key],
+            $(`#${prefix}-people-${key}`).val()
+        );
+    });
+    _store(
+        THEME, "grade",
+        $(`#${prefix}-grade option:selected`).val()
+    );
+}
+
+
+
+
+
+function saveQuestion(){
+    if(_isundef(QUESTION)){
+        log("Please Init QUESTION");
+        return;
+    }
+
+    const prefix = "questionDesign";
+    _store(
+        QUESTION, "driverQuestion",
+        $(`#${prefix}-driverQuestion`).val()
+    );
+    STD.forEach((key) => {
+        let $zone = $(`#${prefix}-coreQuestion-${key}`);
+        [...$zone.find("input")].forEach((input) => {
+            _store(
+                QUESTION, ["coreQuestion", key],
+                $(input).val()
+            );
+        });
+    });
 }

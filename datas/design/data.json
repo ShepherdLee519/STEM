@@ -1,1 +1,21 @@
-{"tasktype":"IBL","imagepath":"image\/nodes\/DBL\/","nodes":[{"nodename":"\u81ea\u4e3b\u63a2\u7a76","imgsrc":"pic.png","taskname":"\u81ea\u4e3b\u63a2\u7a76 \u540d\u79f0","taskcontent":"\u81ea\u4e3b\u63cf\u8ff0\u7684\u4efb\u52a1\u63cf\u8ff0","level":"1","next":{"tasktype":"KC","imagepath":"image\/nodes\/DBL\/","nodes":[{"nodename":"KC1","imgsrc":"pic.png","taskname":"KC1","taskcontent":"hello World","level":"2","next":""},{"nodename":"KC2","imgsrc":"pic.png","taskname":"\u4e2d\u6587\u6d4b\u8bd5","taskcontent":"lalala","level":"2","next":""},{"nodename":"KC3","imgsrc":"pic.png","taskname":"\u5582","taskcontent":"\u563f","level":"2","next":""}]}},{"nodename":"\u5206\u6790\u89e3\u91ca","imgsrc":"pic.png","taskname":"\u5206\u6790\u89e3\u91ca \u540d\u79f0","taskcontent":"\u5206\u6790\u89e3\u91ca \u4efb\u52a1\u63cf\u8ff0","level":"1","next":{"tasktype":"IBL","imagepath":"image\/nodes\/DBL\/","nodes":[{"nodename":"\u81ea\u4e3b\u63a2\u7a76","imgsrc":"pic.png","taskname":"\u81ea\u4e3b\u63a2\u7a762","taskcontent":"2222","level":"2","next":""},{"nodename":"\u5206\u6790\u89e3\u91ca","imgsrc":"pic.png","taskname":"\u5206\u6790\u89e3\u91ca2","taskcontent":"333333333","level":"2","next":""},{"nodename":"\u8fc1\u79fb","imgsrc":"pic.png","taskname":"\u8fc1\u79fb\u540d","taskcontent":"\u8fc1\u79fb\u63cf\u8ff0","level":"2","next":""},{"nodename":"\u6c47\u62a5\u4e0e\u53cd\u601d","imgsrc":"pic.png","taskname":"","taskcontent":"","level":"2","next":""}]}},{"nodename":"\u8fc1\u79fb","imgsrc":"pic.png","taskname":"","taskcontent":"","level":"1","next":{"tasktype":"DBL","imagepath":"image\/nodes\/DBL\/","nodes":[{"nodename":"\u9700\u6c42\u5206\u6790","imgsrc":"pic.png","taskname":"test1","taskcontent":"test-content1","level":"2","next":""},{"nodename":"\u8bbe\u8ba1\u65b9\u6848","imgsrc":"pic.png","taskname":"test2","taskcontent":"test2-content2","level":"2","next":""},{"nodename":"\u8bc4\u4ef7\u6d4b\u8bd5","imgsrc":"pic.png","taskname":"\u8bc4\u4ef7\u6d4b\u8bd5","taskcontent":"lalalala","level":"2","next":""},{"nodename":"\u6539\u8fdb\u8bbe\u8ba1","imgsrc":"pic.png","taskname":"","taskcontent":"","level":"2","next":""},{"nodename":"\u6c47\u62a5\u4e0e\u53cd\u601d","imgsrc":"pic.png","taskname":"","taskcontent":"","level":"2","next":""}]}},{"nodename":"\u6c47\u62a5\u4e0e\u53cd\u601d","imgsrc":"pic.png","taskname":"\u6c47\u62a5\u4e0e\u53cd\u601d","taskcontent":"","level":"1","next":""}]}
+{
+    "tasktype" : "DBL",
+    "imagepath" : "image/nodes/DBL/",
+    "nodes" : [
+        {
+            "nodename" : "需求分析",
+            "imgsrc" : "DBL-1.png",
+            "taskname" : "任务名称",
+            "taskcontent" : "任务描述",
+            "taskcorequestion":[
+                "核心问题1", "核心问题2", "核心问题3"
+            ],
+            "taskevidence":"学习证据",
+            "taskevaluate":[
+                "评价方法1", "评价方法2"
+            ],
+            "level" : 1,
+            "next" : ""
+        }
+    ]
+}

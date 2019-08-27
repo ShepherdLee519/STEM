@@ -1,7 +1,7 @@
 <?php
 /**
  * author: Shepherd.Lee
- * Date: 2019-07-27
+ * Date: 2019-08-27
  * version: 2.0.0
  * dependencies: php/helper.php; views视图; 
  * info: 
@@ -12,7 +12,6 @@
     require_once('php/helper.php'); //导入辅助函数
 
     $VIEW_PATH = 'views/'; //视图php的文件夹
-    $p = _get('p'); //_get于helper中，安全获取$_GET中的变量
 ?>
 
 <!DOCTYPE html>
@@ -31,12 +30,7 @@
         <!-- 导入bootstrap的css文件 -->
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
         <!-- 导入自定义css文件 -->
-        <!-- ///////////////////////////////////////////////////////////////////// -->
-
-        <!-- 渲染p值对应的css文件 格式:p-style.css -->
-        <link rel="stylesheet" href="css/<?php echo ucfirst($p)."/".$p; ?>-style.css" />
-
-        <!-- ///////////////////////////////////////////////////////////////////// -->
+        <link rel="stylesheet" href="css/Design/design-style.css" />
     </head>
     <body>
         <!-- ///导航栏 -->
@@ -45,7 +39,7 @@
                 <!-- /导航栏最左侧的标题栏 -->
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#" style="margin:0;padding:0;margin-right:5px;">
-                        <img src="image/logo.ico" class="img-responsive" width=50 alt="logo" />
+                        <img src="image/icon/logo.ico" class="img-responsive" width=50 alt="logo" />
                     </a>
                     <a class="navbar-brand" href="#">STEM学习设计工具</a>
                 </div><!-- /end -->
@@ -84,9 +78,7 @@
             <!-- ///////////////////////////////////////////////////////////////////// -->
 
             <?php
-                /** 根据p值，渲染对应的视图php */
-                /** 格式：($VIEW_PATH/)Design/design.php */
-                if(!@include $VIEW_PATH.ucfirst($p).'/'.$p.".php"){
+                if(!@include $VIEW_PATH.'Design/design.php'){
                     include $VIEW_PATH."default.php";
                 }
             ?>
@@ -112,20 +104,15 @@
         <!-- ///////////////////////////////////////////////////////////////////// -->
 
         <?php
-            // 根据p值，加载对应的js文件 - 某个p值可能对应多个文件，这里用数组的方式记录js文件名
             $design_js = array(
                 "Design/",//path name
-                "design", "design-zone", "design-tasks", "design-activity",
+                "design", "design-node", "design-zone", "design-zones",
+                "design-tasks", "design-activity",
                 "design-objectives", "design-introduction", "design-animation"
             );
-            // $XXX.js = array();
             
-            switch($p){
-                case "design":
-                    for($i = 1; $i < count($design_js); $i++){
-                        ?><script src="js/<?php echo $design_js[0].$design_js[$i];?>.js"></script><?php
-                    }
-                    break;
+            for($i = 1; $i < count($design_js); $i++){
+                ?><script src="js/<?php echo $design_js[0].$design_js[$i];?>.js"></script><?php
             }
         ?>
 

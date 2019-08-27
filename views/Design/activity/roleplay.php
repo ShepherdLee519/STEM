@@ -10,10 +10,10 @@
 
 <!-- 角色设置 -->
 <div class="form-group has-feedback">
-    <label for="" class="col-sm-3 control-label">角色设置:</label>
+    <label class="col-sm-3 control-label">角色设置:</label>
     <div class="col-sm-9">
-        <input type="text" class="form-control" id="" 
-            name="" placeholder="">
+        <input type="text" class="form-control activity-setting"
+            placeholder="">
         <span class="glyphicon form-control-feedback"></span>
     </div>
 </div>
@@ -27,11 +27,17 @@
     </thead>
     <tbody>
         <tr>
-        <td>角色刻画</td><td></td><td></td>
+            <td>角色刻画</td>
+            <td class="activity-student-describe"></td>
+            <td class="activity-teacher-describe"></td>
         </tr><tr>
-        <td>模拟表演</td><td></td><td></td>
+            <td>模拟表演</td>
+            <td class="activity-student-show"></td>
+            <td class="activity-teacher-show"></td>
         </tr><tr>
-        <td>点评总结</td><td></td><td></td>
+            <td>点评总结</td>
+            <td class="activity-student-evaluate"></td>
+            <td class="activity-teacher-evaluate"></td>
         </tr>
     </tbody>
 </table>

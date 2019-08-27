@@ -1,0 +1,17 @@
+{
+    "type":"jigsaw",
+    "typename":"拼图策略",
+    "activity":{
+        "name":"活动名称",
+        "expert":{
+            "task":"专家组 - 任务",
+            "student":"专家组 - 学生活动",
+            "teacher":"专家组 - 教师活动"
+        },
+        "former":{
+            "task":"原组 - 任务",
+            "student":"原组 - 学生活动",
+            "teacher":"原组 - 教师活动"
+        }
+    }
+}

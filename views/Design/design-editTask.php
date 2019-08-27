@@ -43,25 +43,25 @@
         <div class="form-group">
             <label for="taskEvidence" class="col-sm-3 control-label">学习证据:</label>
             <div class="col-sm-9">
-                <textarea class="form-control" name="taskEvidence" id="taskContent"
+                <textarea class="form-control" name="taskEvidence" id="taskEvidence"
                     rows="4" placeholder="学习证据描述"></textarea>
             </div>      
         </div>
         <div class="form-group">
             <label for="taskEvaluate" class="col-sm-3 control-label">学习评价:</label>
-            <div class="col-sm-9">
+            <div class="col-sm-9 taskEvaluate">
                 <?php
                     $evaluate_ways = array(
                         "书面测试", "调查问卷", "口头汇报",
                         "同行评审", "概念图"  , "观察记录",
                         "制作成果", "展示绩效"
                     );
-                    $i = 0;
+                    // $i = 0;
                     foreach($evaluate_ways as $way){
                         echo '
                             <div class="col-sm-5">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" value='.$i++.'>'.$way.'
+                                    <input type="checkbox" value='.$way.'>'.$way.'
                                 </label>
                             </div>';
                     }

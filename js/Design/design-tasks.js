@@ -131,7 +131,8 @@ function Init(){
 
 
 function Task(){
-    let that = this;
+    let that = this,
+        $edit = $("#design-editTaskZone");
 
     this.addTaskNode = function($div, data, isSubNode, parentIndex){
         let nodes = data.nodes, imagePath = data.imagepath;
@@ -294,38 +295,35 @@ function Task(){
             }
             
     
-            let $editzone = $("#design-editTaskZone");
-            _removeClass($editzone, "hidden");
-            $editzone.find(".panel-title label").eq(0).html(` - ${nodeInfo.node.nodename}`);
-    
-            if(Number.parseInt(nodeInfo.node.level) == 1){
-                $div.find("#taskname").val(DATA.nodes[index].taskname);
-                $div.find("#taskcontent").val(DATA.nodes[index].taskcontent);
-            }else{
-                let parentIndex = nodeInfo.parentIndex;
-                $div.find("#taskname").val(DATA.nodes[parentIndex].next.nodes[index].taskname);
-                $div.find("#taskcontent").val(DATA.nodes[parentIndex].next.nodes[index].taskcontent);
-            }
-            
+            _removeClass($edit, "hidden");
+            $edit.find(".panel-title label").eq(0).html(` - ${nodeInfo.node.nodename}`);          
             that.editTask($div, nodeInfo);
         });
     };
 
     this.editTask = function($target, nodeInfo){
-        let $edit = $("#design-editTaskZone");
-    
-        //点击右上角的X关闭编辑区域
-        $edit.find(".panel-title span").click(() => {
+        //点击取消按钮关闭编辑区域
+        $("#design-cancelTaskEditBtn").off("click").click(() => {
             if(nodeInfo.isSubNode){
                 $target.find("img").css("width", `${SIZE_SECOND}%`);
             }else{
                 $target.find("img").css("width", `${SIZE_FIRST}%`);
             }
             $edit.addClass("hidden");
+            [...$edit.find("div.taskEvaluate")
+                .find("input")].forEach((input) => {
+                $(input).prop("checked", false);
+            });
+            return false;
+        });
+
+        //点击右上角的X关闭编辑区域
+        $edit.find(".panel-title span").click(() => {
+            $("#design-cancelTaskEditBtn").click();
         });
     
         //点击核心问题的按钮，添加对应的核心问题
-        $("#taskCoreQuestion-AddBtn").click(function(e){
+        $("#taskCoreQuestion-AddBtn").off("click").click(function(e){
             e.preventDefault();
             let $show = $("#taskCoreQuestion-ShowZone"),
                 $select = $("#taskCoreQuestion-SelectZone");
@@ -385,9 +383,9 @@ function Task(){
                 values.forEach((value) => {
                     str += `
                         <li class="list-group-item">
-                        <span class="badge badge-${coreQuestions[value].type}">
-                            ${coreQuestions[value].typename}</span>
-                        ${coreQuestions[value].value}</li>
+                        <span class="badge badge-${coreQuestions[value].type}">${coreQuestions[value].typename}</span>
+                        <span class="li-content">${coreQuestions[value].value}</span>
+                        </li>
                     `.trim();
                 });
                 str += "</ul>";
@@ -406,12 +404,88 @@ function Task(){
             return false;
         });
 
-        $("#design-confirmTaskEditBtn").click(function(e){
+        //点击按钮确定编辑
+        $("#design-confirmTaskEditBtn").off("click").click(function(e){
+            e.stopPropagation();//阻止事件冒泡
+            log(nodeInfo.index);
+            that.saveTask(nodeInfo);
             $edit.addClass("hidden");
-            // log(DATA);
             return false;
         });
-    }
+
+        that.loadTask(nodeInfo);//读入DATA中数据初始化$edit区域
+    };
+
+    this.loadTask = function(nodeInfo){
+        //根据全局DATA中的值 DATA.nodes[index].XXX填上对应的值
+        //注意，子节点的情况下为DATA.nodes[parentIndex].next.nodes[index].XXX
+        // log(`load: ${nodeInfo.index}`);
+        let target = (!nodeInfo.isSubNode) ? 
+            DATA.nodes[nodeInfo.index]:
+            DATA.nodes[nodeInfo.parentIndex].next.nodes[nodeInfo.index];
+        let editZoneId_val = ["taskName", "taskContent", "taskEvidence"];
+        editZoneId_val.forEach((id) => {
+            $(`#${id}`).val(target[id.toLowerCase()]);
+        });
+
+        let taskevaluate = target["taskevaluate"];
+        if(taskevaluate.length){
+            [...$edit.find(".taskEvaluate input")].forEach((input) => {
+                if(taskevaluate.indexOf($(input).val()) >= 0){
+                    $(input).prop("checked", true);
+                }
+            });
+        }
+
+        let taskcorequestion = target["taskcorequestion"];
+        $("#taskCoreQuestion-ShowZone").html("");
+        if(taskcorequestion.length){
+            let str = "<ul class='list-group'>";
+            taskcorequestion.forEach((corequestion) => {
+                str += `
+                    <li class="list-group-item">
+                    <span class="badge badge-${coreQuestionTypeMap(corequestion.type)}">${corequestion.type}</span>
+                    <span class="li-content">${corequestion.content}</span>
+                    </li>
+                `.trim();
+            });
+            str += "</ul>";
+            $("#taskCoreQuestion-ShowZone").html(str);
+        }
+
+        // log("loadTask");
+    };
+
+    this.saveTask = function(nodeInfo){
+        //将$edit区域中填写的最新内容同步至DATA
+        // log(`save: ${nodeInfo.index}`);
+        var target = (!nodeInfo.isSubNode) ? 
+            DATA.nodes[nodeInfo.index]:
+            DATA.nodes[nodeInfo.parentIndex].next.nodes[nodeInfo.index];
+
+        let editZoneId_val = ["taskName", "taskContent", "taskEvidence"];
+        editZoneId_val.forEach((id) => {
+            target[id.toLowerCase()] = $(`#${id}`).val();
+        });
+
+        target["taskevaluate"] = [];
+        [...$edit.find(".taskEvaluate input")].forEach((input) => {
+            if($(input).is(":checked")){
+                target["taskevaluate"].push($(input).val());
+            }
+        });
+
+        target["taskcorequestion"] = [];
+        [...$edit.find("#taskCoreQuestion-ShowZone").find("li")].forEach((li) => {
+            let type = $(li).find("span.badge").html(),
+                content = $(li).find("span.li-content").html();
+            target["taskcorequestion"].push({
+                type: type, content:content
+            });
+        });
+        
+        log("saveTask");
+    };
 }
 
 

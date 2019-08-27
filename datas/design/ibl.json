@@ -5,8 +5,11 @@
         {
             "nodename" : "自主探究",
             "imgsrc" : "IBL-1.png",
-            "taskname" : "test",
-            "taskcontent" : "test-content",
+            "taskname" : "",
+            "taskcontent" : "",
+            "taskcorequestion":[],
+            "taskevidence":"",
+            "taskevaluate":[],
             "level" : 1,
             "next" : ""
         },
@@ -15,6 +18,9 @@
             "imgsrc" : "IBL-2.png",
             "taskname" : "",
             "taskcontent" : "",
+            "taskcorequestion":[],
+            "taskevidence":"",
+            "taskevaluate":[],
             "level" : 1,
             "next" : ""
         },
@@ -23,6 +29,9 @@
             "imgsrc" : "IBL-3.png",
             "taskname" : "",
             "taskcontent" : "",
+            "taskcorequestion":[],
+            "taskevidence":"",
+            "taskevaluate":[],
             "level" : 1,
             "next" : ""
         },
@@ -31,6 +40,9 @@
             "imgsrc" : "IBL-4.png",
             "taskname" : "",
             "taskcontent" : "",
+            "taskcorequestion":[],
+            "taskevidence":"",
+            "taskevaluate":[],
             "level" : 1,
             "next" : ""
         }
