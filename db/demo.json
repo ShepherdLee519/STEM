@@ -1,0 +1,514 @@
+{
+	"theme": {
+		"themeName": "主题名称",
+		"themeSituation": "学习情境的内容",
+		"people": {
+			"science": "科学-人员 ",
+			"technology": "技术-人员",
+			"engineering": "工程-人员",
+			"mathematics": "数学-人员"
+		},
+		"grade": "4"
+	},
+	"question": {
+		"driverQuestion": "驱动问题名",
+		"coreQuestion": {
+			"science": ["科学1-1", "科学1-2"],
+			"technology": ["技术2-1", "技术2-2", "技术2-3"],
+			"engineering": ["工程3-1"],
+			"mathematics": ["数学4-1", "数学4-2", "数学4-3", "数学4-4", "数学4-5"]
+		}
+	},
+	"tasks": {
+		"tasktype": "DBL",
+		"imagepath": "image\/nodes\/DBL\/",
+		"nodes": [{
+			"nodename": "需求分析",
+			"imgsrc": "DBL-1.png",
+			"taskname": "设计-需求分析",
+			"taskcontent": "这里是任务的描述-需求分析",
+			"taskcorequestion": [{
+				"type": "科学",
+				"content": "科学1-1"
+			}, {
+				"type": "科学",
+				"content": "科学1-2"
+			}],
+			"taskevidence": "这里是学习证据-需求分析",
+			"taskevaluate": ["书面测试", "调查问卷"],
+			"level": "1",
+			"next": ""
+		}, {
+			"nodename": "设计方案",
+			"imgsrc": "DBL-2.png",
+			"taskname": "设计方案名",
+			"taskcontent": "这里是任务描述-设计方案",
+			"taskcorequestion": [{
+				"type": "技术",
+				"content": "技术2-1"
+			}, {
+				"type": "技术",
+				"content": "技术2-2"
+			}, {
+				"type": "工程",
+				"content": "工程3-1"
+			}],
+			"taskevidence": "这里是学习证据-设计方案",
+			"taskevaluate": ["口头汇报", "同行评审"],
+			"level": "1",
+			"next": {
+				"tasktype": "KC",
+				"imagepath": "image\/nodes\/KC\/",
+				"nodes": [{
+					"nodename": "个人准备",
+					"imgsrc": "KC-1.png",
+					"taskname": "个人准备",
+					"taskcontent": "个人准备 - 任务描述",
+					"taskcorequestion": [{
+						"type": "技术",
+						"content": "技术2-1"
+					}, {
+						"type": "工程",
+						"content": "工程3-1"
+					}],
+					"taskevidence": "学习证据 - 个人准备",
+					"taskevaluate": ["口头汇报"],
+					"level": "2",
+					"next": ""
+				}, {
+					"nodename": "分组讨论",
+					"imgsrc": "KC-2.png",
+					"taskname": "分组讨论",
+					"taskcontent": "分组讨论 - 任务描述",
+					"taskcorequestion": [{
+						"type": "技术",
+						"content": "技术2-1"
+					}],
+					"taskevidence": "分组讨论 - 学习证据",
+					"taskevaluate": ["口头汇报", "同行评审"],
+					"level": "2",
+					"next": ""
+				}, {
+					"nodename": "深入讨论",
+					"imgsrc": "KC-3.png",
+					"taskname": "深入讨论",
+					"taskcontent": "深入讨论 - 任务描述",
+					"taskcorequestion": [{
+						"type": "科学",
+						"content": "科学1-1"
+					}, {
+						"type": "科学",
+						"content": "科学1-2"
+					}, {
+						"type": "技术",
+						"content": "技术2-1"
+					}],
+					"taskevidence": "深入讨论 - 学习证据",
+					"taskevaluate": ["口头汇报", "同行评审"],
+					"level": "2",
+					"next": ""
+				}, {
+					"nodename": "总结反思",
+					"imgsrc": "KC-4.png",
+					"taskname": "总结反思",
+					"taskcontent": "总结反思  -任务描述",
+					"taskcorequestion": [{
+						"type": "数学",
+						"content": "数学4-2"
+					}],
+					"taskevidence": "学习证据 - 总结反思",
+					"taskevaluate": ["同行评审", "观察记录"],
+					"level": "2",
+					"next": ""
+				}]
+			}
+		}, {
+			"nodename": "评价测试",
+			"imgsrc": "DBL-3.png",
+			"taskname": "评价测试名",
+			"taskcontent": "这里是任务描述-评价测试",
+			"taskcorequestion": [{
+				"type": "技术",
+				"content": "技术2-1"
+			}, {
+				"type": "技术",
+				"content": "技术2-2"
+			}, {
+				"type": "数学",
+				"content": "数学4-2"
+			}],
+			"taskevidence": "学习证据",
+			"taskevaluate": ["展示绩效"],
+			"level": "1",
+			"next": ""
+		}, {
+			"nodename": "改进设计",
+			"imgsrc": "DBL-4.png",
+			"taskname": "改进设计",
+			"taskcontent": "任务描述 - 改进设计",
+			"taskcorequestion": [{
+				"type": "技术",
+				"content": "技术2-2"
+			}, {
+				"type": "数学",
+				"content": "数学4-1"
+			}, {
+				"type": "数学",
+				"content": "数学4-5"
+			}],
+			"taskevidence": "学习证据",
+			"taskevaluate": ["同行评审", "观察记录"],
+			"level": "1",
+			"next": {
+				"tasktype": "PBL",
+				"imagepath": "image\/nodes\/PBL\/",
+				"nodes": [{
+					"nodename": "分析问题",
+					"imgsrc": "PBL-1.png",
+					"taskname": "分析问题 - 名称",
+					"taskcontent": "分析问题 - 描述",
+					"taskevidence": "分析问题 - 证据",
+					"level": "2",
+					"next": ""
+				}, {
+					"nodename": "自主学习",
+					"imgsrc": "PBL-2.png",
+					"taskname": "自主学习 - 名称",
+					"taskcontent": "自主学习 -描述",
+					"taskcorequestion": [{
+						"type": "技术",
+						"content": "技术2-1"
+					}, {
+						"type": "技术",
+						"content": "技术2-2"
+					}, {
+						"type": "工程",
+						"content": "工程3-1"
+					}],
+					"taskevidence": "自主学习 证据",
+					"taskevaluate": ["书面测试", "口头汇报", "制作成果", "展示绩效"],
+					"level": "2",
+					"next": ""
+				}, {
+					"nodename": "方案反思",
+					"imgsrc": "PBL-3.png",
+					"taskname": "方案反思",
+					"taskcontent": "描述 - 反思",
+					"taskcorequestion": [{
+						"type": "科学",
+						"content": "科学1-2"
+					}],
+					"taskevidence": "学习证据 - 反思",
+					"taskevaluate": ["调查问卷", "口头汇报", "同行评审", "观察记录"],
+					"level": "2",
+					"next": ""
+				}]
+			}
+		}, {
+			"nodename": "汇报与反思",
+			"imgsrc": "DBL-5.png",
+			"taskname": "汇报与反思",
+			"taskcontent": "任务描述",
+			"taskcorequestion": [{
+				"type": "科学",
+				"content": "科学1-2"
+			}, {
+				"type": "技术",
+				"content": "技术2-1"
+			}, {
+				"type": "技术",
+				"content": "技术2-2"
+			}, {
+				"type": "工程",
+				"content": "工程3-1"
+			}, {
+				"type": "数学",
+				"content": "数学4-3"
+			}, {
+				"type": "数学",
+				"content": "数学4-4"
+			}],
+			"taskevidence": "学习证据",
+			"taskevaluate": ["书面测试", "口头汇报", "概念图", "制作成果"],
+			"level": "1",
+			"next": ""
+		}]
+	},
+	"activity": {
+		"prime": [{
+			"nodename": "需求分析",
+			"activities": [{
+				"type": "pair",
+				"typename": "思考-配对-共享",
+				"activity": {
+					"name": "活动名称",
+					"student": {
+						"think": "学生活动-思考",
+						"pair": "学生活动-配对",
+						"share": "学生活动-共享"
+					},
+					"teacher": {
+						"think": "教师活动-思考",
+						"pair": "教师活动-配对",
+						"share": "教师活动-共享"
+					}
+				}
+			}, {
+				"type": "pair",
+				"typename": "思考-配对-共享",
+				"activity": {
+					"name": "活动名称",
+					"student": {
+						"think": "学生活动-思考",
+						"pair": "学生活动-配对",
+						"share": "学生活动-共享"
+					},
+					"teacher": {
+						"think": "教师活动-思考",
+						"pair": "教师活动-配对",
+						"share": "教师活动-共享"
+					}
+				}
+			}]
+		}, {
+			"nodename": "设计方案",
+			"activities": [{
+				"type": "pyramid",
+				"typename": "金字塔",
+				"activity": {
+					"name": "活动名称",
+					"question": "问题",
+					"floor": {
+						"top": "顶层 - 规则",
+						"middle": "第二层 - 规则",
+						"bottom": "底层 - 规则"
+					}
+				}
+			}, {
+				"type": "pyramid",
+				"typename": "金字塔",
+				"activity": {
+					"name": "活动名称",
+					"question": "问题",
+					"floor": {
+						"top": "顶层 - 规则",
+						"middle": "第二层 - 规则",
+						"bottom": "底层 - 规则"
+					}
+				}
+			}]
+		}, {
+			"nodename": "评价测试",
+			"activities": [{
+				"type": "exp",
+				"typename": "实验教学",
+				"activity": {
+					"name": "实验教学活动",
+					"step": "实验安排",
+					"environment": "实验环境",
+					"student": "学生活动",
+					"teacher": "教师活动"
+				}
+			}, {
+				"type": "exp",
+				"typename": "实验教学",
+				"activity": {
+					"name": "活动名称",
+					"step": "实验安排",
+					"environment": "实验环境",
+					"student": "学生活动",
+					"teacher": "教师活动"
+				}
+			}]
+		}, {
+			"nodename": "改进设计",
+			"activities": [{
+				"type": "pyramid",
+				"typename": "金字塔",
+				"activity": {
+					"name": "活动名称",
+					"question": "问题",
+					"floor": {
+						"top": "顶层 - 规则",
+						"middle": "第二层 - 规则",
+						"bottom": "底层 - 规则"
+					}
+				}
+			}]
+		}, {
+			"nodename": "汇报与反思"
+		}],
+		"sub": [{
+			"index": "0"
+		}, {
+			"index": "1",
+			"nodes": [{
+				"nodename": "个人准备",
+				"activities": [{
+					"type": "jigsaw",
+					"typename": "拼图策略",
+					"activity": {
+						"name": "活动名称",
+						"expert": {
+							"task": "专家组 - 任务",
+							"student": "专家组 - 学生活动",
+							"teacher": "专家组 - 教师活动"
+						},
+						"former": {
+							"task": "原组 - 任务",
+							"student": "原组 - 学生活动",
+							"teacher": "原组 - 教师活动"
+						}
+					}
+				}, {
+					"type": "jigsaw",
+					"typename": "拼图策略",
+					"activity": {
+						"name": "活动名称",
+						"expert": {
+							"task": "专家组 - 任务",
+							"student": "专家组 - 学生活动",
+							"teacher": "专家组 - 教师活动"
+						},
+						"former": {
+							"task": "原组 - 任务",
+							"student": "原组 - 学生活动",
+							"teacher": "原组 - 教师活动"
+						}
+					}
+				}, {
+					"type": "jigsaw",
+					"typename": "拼图策略",
+					"activity": {
+						"name": "活动名称",
+						"expert": {
+							"task": "专家组 - 任务",
+							"student": "专家组 - 学生活动",
+							"teacher": "专家组 - 教师活动"
+						},
+						"former": {
+							"task": "原组 - 任务",
+							"student": "原组 - 学生活动",
+							"teacher": "原组 - 教师活动"
+						}
+					}
+				}]
+			}, {
+				"nodename": "分组讨论",
+				"activities": [{
+					"type": "roleplay",
+					"typename": "角色扮演",
+					"activity": {
+						"name": "活动名称",
+						"setting": "角色设置",
+						"student": {
+							"describe": "学生活动 - 角色刻画",
+							"show": "学生活动 - 模拟表演",
+							"evaluate": "学生活动 - 点评总结"
+						},
+						"teacher": {
+							"describe": "教师活动 - 角色刻画",
+							"show": "教师活动 - 模拟表演",
+							"evaluate": "教师活动 - 点评总结"
+						}
+					}
+				}]
+			}, {
+				"nodename": "深入讨论",
+				"activities": [{
+					"type": "game",
+					"typename": "游戏教学",
+					"activity": {
+						"name": "活动名称",
+						"rule": "游戏规则",
+						"student": "学生活动",
+						"teacher": "教师活动",
+						"reward": "奖惩规则"
+					}
+				}]
+			}, {
+				"nodename": "总结反思",
+				"activities": [{
+					"type": "exp",
+					"typename": "实验教学",
+					"activity": {
+						"name": "活动名称",
+						"step": "实验安排",
+						"environment": "实验环境",
+						"student": "学生活动",
+						"teacher": "教师活动"
+					}
+				}]
+			}]
+		}, {
+			"index": "2"
+		}, {
+			"index": "3",
+			"nodes": [{
+				"nodename": "分析问题",
+				"activities": [{
+					"type": "pair",
+					"typename": "思考-配对-共享",
+					"activity": {
+						"name": "活动名称",
+						"student": {
+							"think": "学生活动-思考",
+							"pair": "学生活动-配对",
+							"share": "学生活动-共享"
+						},
+						"teacher": {
+							"think": "教师活动-思考",
+							"pair": "教师活动-配对",
+							"share": "教师活动-共享"
+						}
+					}
+				}, {
+					"type": "pyramid",
+					"typename": "金字塔",
+					"activity": {
+						"name": "活动名称",
+						"question": "问题",
+						"floor": {
+							"top": "顶层 - 规则",
+							"middle": "第二层 - 规则",
+							"bottom": "底层 - 规则"
+						}
+					}
+				}, {
+					"type": "jigsaw",
+					"typename": "拼图策略",
+					"activity": {
+						"name": "活动名称",
+						"expert": {
+							"task": "专家组 - 任务",
+							"student": "专家组 - 学生活动",
+							"teacher": "专家组 - 教师活动"
+						},
+						"former": {
+							"task": "原组 - 任务",
+							"student": "原组 - 学生活动",
+							"teacher": "原组 - 教师活动"
+						}
+					}
+				}]
+			}, {
+				"nodename": "自主学习",
+				"activities": [{
+					"type": "game",
+					"typename": "游戏教学",
+					"activity": {
+						"name": "活动名称",
+						"rule": "游戏规则",
+						"student": "学生活动",
+						"teacher": "教师活动",
+						"reward": "奖惩规则"
+					}
+				}]
+			}, {
+				"nodename": "方案反思"
+			}]
+		}, {
+			"index": "4"
+		}]
+	}
+}

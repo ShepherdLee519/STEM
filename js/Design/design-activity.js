@@ -60,7 +60,7 @@ function Activity(){
             "roleplay", "game", "exp"
         ],
         "typename" : [
-            "思考-配对-分享", "金字塔", "拼图策略", 
+            "思考-配对-共享", "金字塔", "拼图策略", 
             "角色扮演", "游戏教学", "实验教学"
         ]
     };
@@ -142,13 +142,14 @@ function Activity(){
         let type        = that.typemap(key),
             $editZone   = $(`#design-editActivityZone-${type}`);
 
+        $edit_zone_now  = $editZone;
+        edit_type_now   = type;
+        loadActivityData();
+
         that.hideEditActivityZones();
         $editZone.removeClass("hidden");
-        $edit_zone_now = $editZone;
-
         //活动名称的input赋值
         $editZone.find(".activity-name").val(activityName); 
-        edit_type_now = type;
     };
     /**
      * 将所有的editActivity菜单隐藏
@@ -183,47 +184,4 @@ function Activity(){
         window.INIT_ACTIVITY_HANDLERS = true;
     };
     this.initEditActivityHandlers();//立即调用并初始化
-}
-
-
-
-/**
- * 专门负责在editActivity菜单中的确认后进行数据的保存
- * 活动类型在:edit_type_now
- * 目标区域在:$edit_zone_now
- * 目标数据:NODE.getData()
- * 
- * 保存完后 NODE.saveData();
- */
-function saveActivityData(){
-    let target = NODE.getData();
-    _inject($edit_zone_now);
-    //为了便于修改，直接通过switch选择类型，分别处理
-    switch(edit_type_now){
-        case "pair":
-            let pair_keys = [
-                ["activity", "name"],
-                ["activity", "student", "think"],
-                ["activity", "student", "pair"],
-                ["activity", "student", "share"]
-            ];
-            let pair_classes = [
-                ".activity-name",
-                ".activity-student-think",
-                ".activity-student-pair",
-                ".activity-student-share"
-            ];
-            pair_keys.forEach((key, index) => {
-                _store(
-                    target, key,
-                    _(pair_classes[index]).val()
-                );
-            });
-            break;
-        default:
-            err("WRONG TYPE!!!!");
-            return;
-    }
-    NODE.saveData(target);
-    _reject();
 }

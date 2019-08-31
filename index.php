@@ -87,7 +87,7 @@
         </div>
 
         <!-- 可能的页脚区域 -->
-        <footer style="background-color: #CCCCFF; height: 50px;">
+        <footer style="background-color: #CCCCFF; height: 50px;" id="footer">
             <h3 class="text-center" style="padding-top:10px">
                 Copyright &copy;2019 STEM学习设计工具
             </h3>
@@ -107,8 +107,9 @@
             $design_js = array(
                 "Design/",//path name
                 "design", "design-node", "design-zone", "design-zones",
-                "design-tasks", "design-activity",
-                "design-objectives", "design-introduction", "design-animation"
+                "design-tasks", "design-activity-sl", "design-activity",
+                "design-objectives", "design-introduction", "design-animation",
+                "design-load"
             );
             
             for($i = 1; $i < count($design_js); $i++){
@@ -117,20 +118,5 @@
         ?>
 
         <!-- ///////////////////////////////////////////////////////////////////// -->
-        
-        <!-- 保存本地功能测试 -->
-        <script>
-            $("#test-saveBtn").click(function(){
-                log("hello");
-                let testData = {
-                    "type":"design",
-                    "typename":"学习设计"
-                };
-                $.post("./php/design/test_save_local.php", {data:testData}, (res) => {
-                    log(res);
-                });
-                return false;
-            }); 
-        </script>
     </body>
 </html>

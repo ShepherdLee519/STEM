@@ -18,19 +18,14 @@
     <tbody>
         <tr>
             <td>专家组</td>
-            <td class="activity-expert-task"></td>
-            <td class="activity-expert-student"></td>
-            <td class="activity-expert-teacher"></td>
+            <td><textarea class="activity-expert-task" rows=6></textarea></td>
+            <td><textarea class="activity-expert-student" rows=6></textarea></td>
+            <td><textarea class="activity-expert-teacher" rows=6></textarea></td>
         </tr><tr>
             <td>原属小组</td>
-            <td class="activity-former-task"></td>
-            <td class="activity-former-student"></td>
-            <td class="activity-former-teacher"></td>
+            <td><textarea class="activity-former-task" rows=6></textarea></td>
+            <td><textarea class="activity-former-student" rows=6></textarea></td>
+            <td><textarea class="activity-former-teacher" rows=6></textarea></td>
         </tr>
     </tbody>
 </table>
-<div class="form-group">
-    <div class="btn btn-group pull-right">
-        <button class="btn btn-default reset-editActivityTable">清空表格</button>
-    </div>
-</div>

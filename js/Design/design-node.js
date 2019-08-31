@@ -10,6 +10,7 @@
  *          > resetToggle()
  * 
  *          > saveData()
+ *          > saveActivityName()
  *          > getData()
  */
 
@@ -167,7 +168,14 @@ function Node(num, activityInfo){
      */
     this.saveData = (data) => {
         nodedata = data;
-        log(nodedata);
+        that.saveActivityName();
+    };
+    /**
+     * 将nodedata中的activity-name的值存在本地的$activityName中
+     */
+    this.saveActivityName = () => {
+        $activityName.html(nodedata["activity"]["name"]);
+        activityInfo["activityname"] = nodedata["activity"]["name"];
     };
     /**
      * 返回自身的nodedata

@@ -2,6 +2,7 @@
     "type":"exp",
     "typename":"实验教学",
     "activity":{
+        "name":"活动名称",
         "step":"实验安排",
         "environment":"实验环境",
         "student":"学生活动",

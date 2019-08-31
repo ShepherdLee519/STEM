@@ -1,6 +1,6 @@
 /**
  * author: Shepherd.Lee
- * Date: 2019-07-27
+ * Date: 2019-08-29
  * version: 2.0.0
  * info: 学习活动相关
  */
@@ -12,7 +12,7 @@ const TASKTYPE = [
     {  "task": "kc"   ,    "name": "知识建构"        }, 
     {  "task": "user" ,    "name": "自定义"          }
 ];//任务类型名 - 对应php/json
-const PATH = "datas/design/";//节点的模板json文件保存位置
+
 var TASKS, TASKZONE, INIT, 
     DATA,  // 与任务环节相关的数据
     ZONE;   // 学习活动整个区域的Zones对象
@@ -26,3 +26,4 @@ $(function(){
 
     initToggles();//切换菜单的效果 - 见design-animation.js
 });
+

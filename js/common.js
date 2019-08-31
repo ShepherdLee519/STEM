@@ -105,6 +105,42 @@ function _store(global_var, key, value){
 }
 
 /**
+ * 提取对象对应键的值的方法：
+ *  example:
+ *  _withdraw(
+ *      THEME, ["people", key],
+ *      $(#${prefix}-people-${key})
+ *  );
+ * @param {Object} global_var 
+ * @param {String} key - 或者是一个String数组 
+ * @param {Object} value - 默认为null时将取出的值返回
+ */
+function _withdraw(global_var, key, value = null){
+    let place;
+    if(!Array.isArray(key)){
+        if(value == null) return global_var[key];
+        if(!Array.isArray(global_var[key])){
+            value.val(global_var[key]);
+        }else{
+            log(global_var[key]);
+        }
+    }else{
+        let pre_place;
+        place = global_var;
+        key.forEach((k) => {
+            pre_place = place;
+            place = pre_place[k];
+        });
+        if(value == null) return pre_place[key[key.length-1]];
+        if(!Array.isArray(pre_place[key[key.length-1]])){
+            value.val(pre_place[key[key.length-1]]);
+        }else{
+            log(pre_place[key[key.length-1]]);
+        }
+    }
+}
+
+/**
  * 注入节点 存于全局的_TARGET
  * @param {Object} target 
  */

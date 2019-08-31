@@ -60,6 +60,11 @@ function Zones(tasknodes){
      */
     this.getZones = () => zones;
     /**
+     * 返回自身的Zone个数
+     * @returns {Number}
+     */
+    this.len = () => zoneNum;
+    /**
      * 获取zones中的最后一个元素，默认返回整个subZones数组
      * 或者返回第index个子数组
      * @param {Number} index -default -1 表示全部

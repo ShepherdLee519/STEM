@@ -1,12 +1,14 @@
 /**
  * author: Shepherd.Lee
- * Date: 2019-08-09
+ * Date: 2019-08-29
  * version: 2.0.0
  * info: 学习目标相关
  * index:
  *      initStandards()
  *      standardsHandlers()
+ * 
  *      editCourseTheme()
+ * 
  *      questionsHandlers()
  *      getCoreQuestions()
  *      coreQuestionTypeMap()
@@ -15,32 +17,43 @@
  *      saveQuestion()
  */
 
-//存储学习目标表单数据的全局变量
-var THEME, //对应课程主题区域的存储
-    QUESTION; //对应问题设计区域的存储
-const STANDARD_PATH = "datas/standard/standard.json",
-    STD = ["science", "technology", "engineering", "mathematics"];
+/**
+ * 对应课程主题区域的存储
+ * @global
+ */
+var THEME = null;
+/**
+ * 对应问题设计区域的存储
+ * @global
+ */
+var QUESTION = null;
+
+const STANDARD_PATH = "./datas/standard/standard.json";
+const STD = ["science", "technology", "engineering", "mathematics"];
+
 
 $(function(){
     _hello("design-objectives");
-    _async();
-    let path_theme = "datas/objectives/theme.json",
-        path_question = "datas/objectives/question.json";
-    $.get(path_theme, (data) => THEME = data);
-    $.get(path_question, (data) => QUESTION = data);
-    _async();
-    initStandards();
-    questionsHandlers();
+
+    let path_theme      = "./datas/objectives/theme.json",
+        path_question   = "./datas/objectives/question.json";
+    
+    THEME       = _get(path_theme);
+    QUESTION    = _get(path_question);
+
+    initStandards();//初始化课程标准区域
+    questionsHandlers();//问题设计区域的事件处理函数
 });
 
+
+/**
+ * 初始化课程标准区域的textarea内容
+ */
 function initStandards(){
-    // 初始化课程标准区域的textarea内容
-    _async();
-    let stdData;
-    $.get(STANDARD_PATH, (data) => stdData = data);
-    _async();
+    let stdData = _get(STANDARD_PATH);
     const prefix = "questionDesign-courseStandard";
     let value = "";
+
     STD.forEach((type) => {
         value = "";
         stdData[type].forEach((std) => value += std + "\n\n");
@@ -51,15 +64,16 @@ function initStandards(){
 
 
 
-
-
-
-
+/**
+ * 1. 点击课程标准 收缩标准显示的form
+ * 2. 点击每个课程标准前的学科名，放大/还原textarea的大小
+ */
 function standardsHandlers(){
     const prefix = "questionDesign-courseStandard";
+
     // 1. 点击课程标准 收缩标准显示的form
-    let $legend = $(`#${prefix} fieldset legend`),
-        $label = $legend.find("label"),
+    let $legend     = $(`#${prefix} fieldset legend`),
+        $label      = $legend.find("label"),
         $fromGroups = $(`#${prefix} fieldset`).children(".form-group");
     $legend.click(function(){
         $label.toggle();
@@ -81,11 +95,10 @@ function standardsHandlers(){
 
 
 
-
-
-
+/**
+ * courseTheme表单的模态框提交事件处理函数
+ */
 function editCourseTheme(){
-    //courseTheme表单的模态框提交事件处理函数
     const prefix = "courseTheme";
     let targets = [
         "themeName", "themeSituation",
@@ -94,6 +107,7 @@ function editCourseTheme(){
         "grade"
     ],//目标节点的id名 要加上prefix-
     $value;
+
     targets.forEach((target) => {
         $value = $(`#${prefix}-${target}`).val();
         $(`#${prefix}-${target}-view`).val($value);//view - value
@@ -104,17 +118,18 @@ function editCourseTheme(){
 
 
 
-
-
-
+/**
+ * 问题设计区域的事件处理函数
+ */
 function questionsHandlers(){
     const prefix = "questionDesign-coreQuestion";
     let template = `
-        <div class="newCoreQuestion">
-            <input type="text" class="form-control" placeholder="请对任务内容进行大致描述"><br />
-            <span class="glyphicon glyphicon-minus deleteCoreQuestion">
-        </div>
+    <div class="newCoreQuestion">
+        <input type="text" class="form-control" placeholder="请对任务内容进行大致描述"><br />
+        <span class="glyphicon glyphicon-minus deleteCoreQuestion">
+    </div>
     `.trim();
+
     $(`#${prefix} .addCoreQuestion`).click(function(){
         let $this = $(this), $newnode = $(template),
             coreType = $this.parent().find("input:first-child").attr("data-coretype"),
@@ -128,6 +143,7 @@ function questionsHandlers(){
             adjustSpan($parent);
         });
         $this.before($newnode);
+        return false;
     });
 
     function adjustSpan($parent){
@@ -140,22 +156,23 @@ function questionsHandlers(){
 
 
 
-
-
-
-
+/**
+ * 获取问题设计的学科核心问题的数据
+ * @returns {Array}
+ */
 function getCoreQuestions(){
     const id = 'questionDesign-coreQuestion';
     let questions = [], value, dataType;
+
     [...$(`#${id} div.${id}-eachQuestion`)].forEach((div) => {
         [...$(div).find("input")].forEach((input) => {
             value = $(input).val();
             if(value !== ""){
                 dataType = $(input).attr("data-coretype");
                 questions.push({
-                    value:value, 
-                    type:dataType,
-                    typename:coreQuestionTypeMap(dataType)
+                    value   : value, 
+                    type    : dataType,
+                    typename: coreQuestionTypeMap(dataType)
                 });
             }
         })
@@ -165,13 +182,16 @@ function getCoreQuestions(){
 
 
 
-
-
+/**
+ * 学科类型的中英文的映射
+ * @param {String} key 
+ */
 function coreQuestionTypeMap(key){
     let typeMap = {
         "science":"科学", "technology":"技术",
         "engineering":"工程", "mathematics":"数学"
     };
+
     for(let [k, v] of Object.entries(typeMap)){
         if(k === key) return v;
         else if(v === key) return k;
@@ -180,9 +200,9 @@ function coreQuestionTypeMap(key){
 
 
 
-
-
-
+/**
+ * 保存课程主题区域的数据
+ */
 function saveTheme(){
     if(_isundef(THEME)){
         log("Please Init THEME");
@@ -206,12 +226,18 @@ function saveTheme(){
         THEME, "grade",
         $(`#${prefix}-grade option:selected`).val()
     );
+
+    $.post("./db/data_save.php", {data:THEME, zone:"theme"}, (res) => {
+        if(res) log("save theme successfully");
+        else err("save theme failed");
+    });
 }
 
 
 
-
-
+/**
+ * 保存问题设计区域的数据
+ */
 function saveQuestion(){
     if(_isundef(QUESTION)){
         log("Please Init QUESTION");
@@ -231,5 +257,10 @@ function saveQuestion(){
                 $(input).val()
             );
         });
+    });
+
+    $.post("./db/data_save.php", {data:QUESTION, zone:"question"}, (res) => {
+        if(res) log("save question successfully");
+        else err("save question failed");
     });
 }

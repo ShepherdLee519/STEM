@@ -122,6 +122,7 @@ function Zone(tasknode){
      * initActivityBtnHandler - 点击新建活动后的事件处理
      * adjustInitActivity - 调整$initActivity中的panel-title的内容
      * resetActivityRadio - 重置新建活动列表中的radio选项
+     * pushActivity - 加载数据时，通过数据直接推入一个新的activity
      * 
      * addActivityNum - 修改节点数
      * 
@@ -316,6 +317,21 @@ function Zone(tasknode){
         for(let radio of [...radios]){
             radio.checked = false;
         }
+    };
+    /**
+     * 加载数据时，手动向Zone内推入新的活动节点
+     * 1. 去掉新建活动按钮 2. 新建Node并绑定zone
+     * 3. Node推入nodelist 4. Node的html加入content
+     * 5. activityNum++
+     * @param {Object} activityInfo - type/typename/activityname
+     */
+    this.pushActivity = (activityInfo) => {
+        if(nodelist.length == 0) $content.html("");
+        let node = new Node(num++, activityInfo);
+        node.bindZone(that);
+        nodelist.push(node);
+        $content.append(node.self());
+        that.addActivityNum(1);//区域右上角显示的节点数增加
     };
 
 
