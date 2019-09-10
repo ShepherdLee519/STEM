@@ -53,29 +53,30 @@
     font-size: 87%;
 }
 
-form#questionDesign-realForm div.questionDesign-coreQuestion-eachQuestion{
-    font-size: 120%;
+#questionDesign-coreQuestion div.questionDesign-coreQuestion-eachQuestion{
+    font-size: 125%;
+}
+
+
+#questionDesign-coreQuestion div.questionDesign-coreQuestion-eachQuestion div{
+    margin-bottom: 10px;
+}
+
+form#questionDesign-realForm div.questionDesign-coreQuestion-eachQuestion ul{
+    max-height: 120px; 
+    overflow-y: scroll;
+    margin-top: 20px;
+    border-bottom: 1px solid #ddd;
+    width: 120%;
+    margin-left: -20%;
+}
+
+form#questionDesign-realForm div.questionDesign-coreQuestion-eachQuestion ul li input{
+    display: block;
     position: relative;
+    left: 8px;
 }
 
-form#questionDesign-realForm div.questionDesign-coreQuestion-eachQuestion span.glyphicon-plus{
-    position: absolute;
-    font-size: 150%;
-    opacity: 0.5;
-    left: 100%;
-    top: 5px;
-}
-
-form#questionDesign-realForm div.questionDesign-coreQuestion-eachQuestion span.glyphicon-minus{
-    position: absolute;
-    font-size: 150%;
-    opacity: 0.5;
-    left: 100%;
-}
-
-form#questionDesign-realForm div.questionDesign-coreQuestion-eachQuestion span.glyphicon:hover{
-    opacity: 1;
-}
 
 
 

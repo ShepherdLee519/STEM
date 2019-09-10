@@ -127,6 +127,7 @@ div.design-act-node .panel-heading span.glyphicon-remove:hover{
 
 
 
+
 /* 新建活动的选择活动菜单
 ---------------------------*/
 div.design-initActivityZone{
@@ -231,7 +232,7 @@ div.design-initActivityZone .panel-body .radio:hover{
     overflow-y: scroll;
 }
 
-.design-editActivityZone-body textarea{
+.design-editActivityZone-body td textarea{
     width: calc(100% + 17px);
     height: 100%;
     margin: -8px;
@@ -265,6 +266,6 @@ div.design-initActivityZone .panel-body .radio:hover{
 
 .editActivity-img{
     position: absolute;
-    left: 0px;
-    top:-10px;
+    left: -148px;
+    top: 7px;
 }

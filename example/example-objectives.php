@@ -181,107 +181,46 @@
 
 <div class="col-sm-12" id="questionDesign-coreQuestion">
 
-
 <div class="questionDesign-coreQuestion-eachQuestion">
     <label for="questionDesign-coreQuestion-science" class="col-sm-2 control-label">科学:</label>
-    <div class="col-sm-10" id="questionDesign-coreQuestion-science">
-        <div class="input-group">
-            <span class="input-group-btn">
-                <button class="btn btn-primary">
-                    <span class="glyphicon glyphicon-chevron-down toggleCoreQuestion"></span>
-                </button>
-            </span>
-
-            <input type="text" class="form-control editCoreQuestion" 
-                placeholder="当前核心问题数：0">
-
-            <span class="input-group-btn">
-                <button class="btn btn-info">
-                    <span class="glyphicon glyphicon-plus addCoreQuestion"></span>
-                </button>
-            </span>
-        </div>
-        
-        <ul class="list-group coreQuestionList hidden col-sm">
-        </ul>
+    <div class="col-sm-9" id="questionDesign-coreQuestion-science">
+        <input type="text" data-coretype="science" 
+            class="form-control" placeholder="请对任务内容进行大致描述"><br />
+        <span class="glyphicon glyphicon-plus addCoreQuestion">
     </div> 
 </div>
 <div class="questionDesign-coreQuestion-eachQuestion">
     <label for="questionDesign-coreQuestion-technology" class="col-sm-2 control-label">技术:</label>
-    <div class="col-sm-10" id="questionDesign-coreQuestion-technology">
-        <div class="input-group">
-            <span class="input-group-btn">
-                <button class="btn btn-primary">
-                    <span class="glyphicon glyphicon-chevron-down toggleCoreQuestion"></span>
-                </button>
-            </span>
-
-            <input type="text" class="form-control editCoreQuestion" 
-                placeholder="当前核心问题数：0">
-
-            <span class="input-group-btn">
-                <button class="btn btn-info">
-                    <span class="glyphicon glyphicon-plus addCoreQuestion"></span>
-                </button>
-            </span>
-        </div>
-        
-        <ul class="list-group coreQuestionList hidden">
-        </ul>
-    </div> 
+    <div class="col-sm-9" id="questionDesign-coreQuestion-technology">
+        <input type="text" data-coretype="technology" 
+            class="form-control" placeholder="请对任务内容进行大致描述"><br />
+        <span class="glyphicon glyphicon-plus addCoreQuestion"></span>
+    </div>
 </div>
 <div class="questionDesign-coreQuestion-eachQuestion">
     <label for="questionDesign-coreQuestion-engineering" class="col-sm-2 control-label">工程:</label>
-    <div class="col-sm-10" id="questionDesign-coreQuestion-engineering">
-        <div class="input-group">
-            <span class="input-group-btn">
-                <button class="btn btn-primary">
-                    <span class="glyphicon glyphicon-chevron-down toggleCoreQuestion"></span>
-                </button>
-            </span>
-
-            <input type="text" class="form-control editCoreQuestion" 
-                placeholder="当前核心问题数：0">
-
-            <span class="input-group-btn">
-                <button class="btn btn-info">
-                    <span class="glyphicon glyphicon-plus addCoreQuestion"></span>
-                </button>
-            </span>
-        </div>
-        
-        <ul class="list-group coreQuestionList hidden">
-        </ul>
-    </div> 
+    <div class="col-sm-9" id="questionDesign-coreQuestion-engineering">
+        <input type="text" data-coretype="engineering" 
+            class="form-control" placeholder="请对任务内容进行大致描述"><br />
+        <span class="glyphicon glyphicon-plus addCoreQuestion"></span>
+    </div>
 </div>
 <div class="questionDesign-coreQuestion-eachQuestion">
     <label for="questionDesign-coreQuestion-mathematics" class="col-sm-2 control-label">数学:</label>
-    <div class="col-sm-10" id="questionDesign-coreQuestion-mathematics">
-        <div class="input-group">
-            <span class="input-group-btn">
-                <button class="btn btn-primary">
-                    <span class="glyphicon glyphicon-chevron-down toggleCoreQuestion"></span>
-                </button>
-            </span>
-
-            <input type="text" class="form-control editCoreQuestion" 
-                placeholder="当前核心问题数：0">
-
-            <span class="input-group-btn">
-                <button class="btn btn-info">
-                    <span class="glyphicon glyphicon-plus addCoreQuestion"></span>
-                </button>
-            </span>
-        </div>
-        
-        <ul class="list-group coreQuestionList hidden">
-        </ul>
-    </div> 
+    <div class="col-sm-9" id="questionDesign-coreQuestion-mathematics">
+        <input type="text" data-coretype="mathematics"  
+            class="form-control" placeholder="请对任务内容进行大致描述"><br />
+        <span class="glyphicon glyphicon-plus addCoreQuestion"></span>
+    </div>
 </div>
 
 </div><!-- end questionDesign-coreQuestion -->
 </div>
 </form><!-- end questionDesign-realForm -->
+
+<div class="col-sm-12">
+    <button class="btn btn-info btn-md pull-right" style="width: 100px">确认</button>
+</div>
 
 </div>
 </div><!-- /end panel-primary -->

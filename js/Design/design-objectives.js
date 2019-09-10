@@ -1,15 +1,17 @@
 /**
  * author: Shepherd.Lee
- * Date: 2019-08-29
+ * Date: 2019-09-09
  * version: 2.0.0
  * info: 学习目标相关
  * index:
  *      initStandards()
  *      standardsHandlers()
  * 
- *      editCourseTheme()
- * 
  *      questionsHandlers()
+ *      questionsAdjust()
+ *      questionsNumberAdjust()
+ *      CoreQuestionLiGenerator()
+ * 
  *      getCoreQuestions()
  *      coreQuestionTypeMap()
  * 
@@ -95,64 +97,152 @@ function standardsHandlers(){
 
 
 
-/**
- * courseTheme表单的模态框提交事件处理函数
- */
-function editCourseTheme(){
-    const prefix = "courseTheme";
-    let targets = [
-        "themeName", "themeSituation",
-        "people-science", "people-technology",
-        "people-engineering", "people-mathematics",
-        "grade"
-    ],//目标节点的id名 要加上prefix-
-    $value;
-
-    targets.forEach((target) => {
-        $value = $(`#${prefix}-${target}`).val();
-        $(`#${prefix}-${target}-view`).val($value);//view - value
-    });
-    //修改了提交事件，最后要手动再关闭模态框
-    $("#editCourseTheme").modal("hide");
-}
-
-
 
 /**
- * 问题设计区域的事件处理函数
+ * 问题设计区域的事件处理函数 - 新
  */
 function questionsHandlers(){
-    const prefix = "questionDesign-coreQuestion";
-    let template = `
-    <div class="newCoreQuestion">
-        <input type="text" class="form-control" placeholder="请对任务内容进行大致描述"><br />
-        <span class="glyphicon glyphicon-minus deleteCoreQuestion">
-    </div>
-    `.trim();
+    STD.forEach((std_name, index) => {
+        _inject($(`#questionDesign-coreQuestion-${std_name}`));
+        let $toggle = _(".toggleCoreQuestion"),
+            $edit   = _(".editCoreQuestion"),
+            $add    = _(".addCoreQuestion"),
+            $list   = _(".coreQuestionList"),
+            $toggleBtn  = $toggle.parent(),
+            $addBtn     = $add.parent();
+        _reject();
 
-    $(`#${prefix} .addCoreQuestion`).click(function(){
-        let $this = $(this), $newnode = $(template),
-            coreType = $this.parent().find("input:first-child").attr("data-coretype"),
-            nodenumber = [...$this.parent().find("input")].length;
-        $newnode.find("input").eq(0).attr("data-coretype", coreType);
-        $newnode.find(".deleteCoreQuestion").css("top", `${5+nodenumber*55}px`);
-        $newnode.find(".deleteCoreQuestion").click(function(){
-            let $self = $(this).parent(),
-                $parent = $self.parent();
-            $self.remove();
-            adjustSpan($parent);
+        $addBtn.click(() => {
+            let val = $edit.val();
+            if(val !== ""){ 
+                $list.append(CoreQuestionLiGenerator(std_name, val));
+                $edit.val("");
+                questionsNumberAdjust(std_name);
+
+                if($list.children().length == 1){
+                    questionsAdjust(std_name, 1);
+                }else{
+                    questionsAdjust(std_name);
+                }
+                
+            }else{
+                //可能的提示信息
+            }
         });
-        $this.before($newnode);
-        return false;
+
+        $toggleBtn.click(() => {
+            if($toggle.hasClass("glyphicon-chevron-down")){
+                $toggle.removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-up");
+                $list.removeClass("hidden");
+                _replaceClass($toggleBtn, "btn-primary", "btn-info");
+            }else{
+                $toggle.removeClass("glyphicon-chevron-up").addClass("glyphicon-chevron-down");
+                $list.addClass("hidden");
+                _replaceClass($toggleBtn, "btn-info", "btn-primary");
+            }
+        });
+    });
+}
+
+
+
+
+/**
+ * 调整核心问题区域的 核心问题数目
+ * 调整coreQuestionList的显示与否：
+ * @param {String} std - science
+ * @param {Number} flag - 1显示、0隐藏、-1默认
+ */
+function questionsAdjust(std, flag = -1){
+    _inject($(`#questionDesign-coreQuestion-${std}`));
+    let $edit   = _(".editCoreQuestion"),
+        $toggle = _(".toggleCoreQuestion"),
+        $list   = _(".coreQuestionList"),
+        len     = $list.children().length;
+    
+    $edit.attr("placeholder", `当前核心问题数：${len}`);
+    _reject();
+
+    if(flag == 1){
+        if($toggle.hasClass("glyphicon-chevron-down")){
+            $toggle.parent().click();
+        }
+    }else if(flag == 0 || len == 0){
+        if($toggle.hasClass("glyphicon-chevron-up")){
+            $toggle.parent().click();
+        }
+    } 
+
+}
+
+
+
+
+
+
+/**
+ * 调整核心问题区域的 核心问题前的number值
+ * @param {String} std - science
+ */
+function questionsNumberAdjust(std){
+    _inject($(`#questionDesign-coreQuestion-${std}`));
+    let $list   = _(".coreQuestionList"),
+        $target = null, number = null;
+    
+    [...$list.find("li")].forEach((li, index) => {
+        $target = $(li).find(".coreQuestionNumber");
+        number = $target.attr("data-originNumber");
+        $target.html(number + (index + 1));
+    });
+    _reject();
+
+}
+
+
+
+
+/**
+ * 将传进来的参数组装出一个coreQuestionListItem
+ * 并就一些事件进行封装处理
+ * 并返回该listitem(<li>)的引用
+ * @param {String} coreType - science
+ * @param {String} val - input value
+ * @returns {Object}
+ */
+function CoreQuestionLiGenerator(coreType, val = ""){
+    let $li = $(`
+    <li class="list-group-item col-sm-12 coreQuestionListItem">
+    <div class="input-group">
+        <span class="input-group-btn">
+            <button class="btn btn-info badge-${coreType} coreQuestionNumber"
+                data-originNumber = "${coreType[0].toUpperCase()}-Q">
+            </button>
+        </span>
+        <input type="text" class="form-control showCoreQuestion" 
+            data-coretype="${coreType}" placeholder="">
+        <span class="input-group-btn">
+            <button class="btn btn-danger">
+                <span class="glyphicon glyphicon-minus deleteCoreQuestion"></span>
+            </button>
+        </span>
+    </div>
+    </li>`.trim()),
+
+    $show       = $li.find(".showCoreQuestion").eq(0),
+    $delete     = $li.find(".deleteCoreQuestion").eq(0),
+    $deleteBtn  = $delete.parent();
+
+    $show.val(val);
+    $deleteBtn.click(() => {
+        $li.remove(); 
+        questionsAdjust(coreType);
+        questionsNumberAdjust(coreType);
     });
 
-    function adjustSpan($parent){
-        //删除某一新建的核心问题节点后，对节点的-号的高度进行重新的调整
-        [...$parent.find(".newCoreQuestion")].forEach((node, index) => {
-            $(node).find(".deleteCoreQuestion").css("top", `${5+(index+1)*55}px`);
-        });
-    }
+    return $li;
 }
+
+
 
 
 
@@ -165,7 +255,7 @@ function getCoreQuestions(){
     let questions = [], value, dataType;
 
     [...$(`#${id} div.${id}-eachQuestion`)].forEach((div) => {
-        [...$(div).find("input")].forEach((input) => {
+        [...$(div).find("input.showCoreQuestion")].forEach((input) => {
             value = $(input).val();
             if(value !== ""){
                 dataType = $(input).attr("data-coretype");
@@ -251,7 +341,8 @@ function saveQuestion(){
     );
     STD.forEach((key) => {
         let $zone = $(`#${prefix}-coreQuestion-${key}`);
-        [...$zone.find("input")].forEach((input) => {
+        (QUESTION.coreQuestion)[key] = [];
+        [...$zone.find("input.showCoreQuestion")].forEach((input) => {
             _store(
                 QUESTION, ["coreQuestion", key],
                 $(input).val()

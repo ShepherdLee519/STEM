@@ -324,11 +324,15 @@ function Zone(tasknode){
      * 3. Node推入nodelist 4. Node的html加入content
      * 5. activityNum++
      * @param {Object} activityInfo - type/typename/activityname
+     * @param {Object} nodedata Node中的存储数据 通过node.saveData保存
      */
-    this.pushActivity = (activityInfo) => {
+    this.pushActivity = (activityInfo, nodedata = null) => {
         if(nodelist.length == 0) $content.html("");
         let node = new Node(num++, activityInfo);
         node.bindZone(that);
+        if(nodedata != null){
+            node.saveData(nodedata);
+        }
         nodelist.push(node);
         $content.append(node.self());
         that.addActivityNum(1);//区域右上角显示的节点数增加

@@ -68,6 +68,7 @@ let roleplay_keys = [
 let game_keys = [
     ["activity", "name"],
     ["activity", "rule"],
+    ["activity", "place"],
     ["activity", "student"],
     ["activity", "teacher"],
     ["activity", "reward"],

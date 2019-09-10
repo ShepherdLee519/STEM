@@ -20,14 +20,23 @@
 </div>
 <div class="editActivity-pyramidZone">
     <div class="editActivity-img">
-        <img src="image/activities/pyramid.png" width=300/>
+        <img src="image/activities/pyramid.png" width=550 />
     </div>
     <!-- 讨论规则 -->
     <div class="form-group has-feedback">
         <label for="" class="col-sm-3 control-label">讨论规则:</label>
         <div class="col-sm-9">
-            <input type="text" class="form-control activity-floor-top"
-                placeholder="">
+            <textarea class="form-control activity-floor-top" rows=3
+                placeholder=""></textarea>
+            <span class="glyphicon form-control-feedback"></span>
+        </div>
+    </div>
+    <!-- 讨论规则 -->
+    <div class="form-group has-feedback">
+        <label for="" class="col-sm-3 col-sm-push-1 control-label">讨论规则:</label>
+        <div class="col-sm-8 col-sm-push-1">
+            <textarea class="form-control activity-floor-middle" rows=4
+                placeholder=""></textarea>
             <span class="glyphicon form-control-feedback"></span>
         </div>
     </div>
@@ -35,17 +44,8 @@
     <div class="form-group has-feedback">
         <label for="" class="col-sm-3 col-sm-push-2 control-label">讨论规则:</label>
         <div class="col-sm-7 col-sm-push-2">
-            <input type="text" class="form-control activity-floor-middle" 
-                placeholder="">
-            <span class="glyphicon form-control-feedback"></span>
-        </div>
-    </div>
-    <!-- 讨论规则 -->
-    <div class="form-group has-feedback">
-        <label for="" class="col-sm-3 col-sm-push-4 control-label">讨论规则:</label>
-        <div class="col-sm-5 col-sm-push-4">
-            <input type="text" class="form-control activity-floor-bottom" 
-                placeholder="">
+            <textarea class="form-control activity-floor-bottom" rows=5
+                placeholder=""></textarea>
             <span class="glyphicon form-control-feedback"></span>
         </div>
     </div>

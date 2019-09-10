@@ -72,7 +72,7 @@ for($i = 0; $i < count($activities); $i++){
 <hr />
 <div class="btn-group pull-right">
     <button class="btn btn-success design-editActivity-confirm">确定</button>
-    <button class="btn btn-default design-editActivity-cancel">关闭</button>
+    <button class="btn btn-default design-editActivity-cancel">取消</button>
 </div>
 
 </div><!-- end panel-body -->

@@ -241,3 +241,16 @@ function _exClass(nodeA, nodeB, classname){
         $nodeA.addClass(classname);
     }
 }
+
+
+/**
+ * 删去A 换上B类
+ * @param {Object} node
+ * @param {String} classA
+ * @param {String} classB
+ */
+function _replaceClass(node, classA, classB){
+    let $node = $(node);
+    _removeClass($node, classA);
+    _addClass($node, classB);
+}

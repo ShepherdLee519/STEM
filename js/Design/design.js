@@ -1,6 +1,6 @@
 /**
  * author: Shepherd.Lee
- * Date: 2019-08-29
+ * Date: 2019-09-09
  * version: 2.0.0
  * info: 学习活动相关
  */
@@ -27,3 +27,5 @@ $(function(){
     initToggles();//切换菜单的效果 - 见design-animation.js
 });
 
+
+    

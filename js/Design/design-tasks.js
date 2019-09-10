@@ -522,17 +522,23 @@ function Task(){
         });
 
         let taskevaluate = target["taskevaluate"];
-        if(taskevaluate.length){
+        if(taskevaluate && taskevaluate.length){
             [...$edit.find(".taskEvaluate input")].forEach((input) => {
                 if(taskevaluate.indexOf($(input).val()) >= 0){
                     $(input).prop("checked", true);
+                }else{
+                    $(input).prop("checked", false);
                 }
+            });
+        }else{
+            [...$edit.find(".taskEvaluate input")].forEach((input) => {
+                $(input).prop("checked", false);
             });
         }
 
         let taskcorequestion = target["taskcorequestion"];
         $("#taskCoreQuestion-ShowZone").html("");
-        if(taskcorequestion.length){
+        if(taskcorequestion && taskcorequestion.length){
             let str = "<ul class='list-group'>";
             taskcorequestion.forEach((corequestion) => {
                 str += `
@@ -545,6 +551,7 @@ function Task(){
             str += "</ul>";
             $("#taskCoreQuestion-ShowZone").html(str);
         }
+        _removeClass($("#taskCoreQuestion-ShowZone"), "hidden");
     };
 
     /**

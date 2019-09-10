@@ -13,16 +13,27 @@
 <div class="form-group has-feedback">
     <label for="" class="col-sm-3 control-label">游戏规则:</label>
     <div class="col-sm-9">
-        <textarea class="form-control activity-rule" rows=2
+        <textarea class="form-control activity-rule" rows=7
             placeholder=""></textarea>
         <span class="glyphicon form-control-feedback"></span>
     </div>
 </div>
+<!-- 游戏地点 -->
+<div class="form-group has-feedback">
+    <label for="" class="col-sm-3 control-label">游戏地点:</label>
+    <div class="col-sm-9">
+        <input type="text" class="form-control activity-place"
+            placeholder="游戏地点" />
+        <span class="glyphicon form-control-feedback"></span>
+    </div>
+</div>
+
+<hr />
 <!-- 学生活动 -->
 <div class="form-group has-feedback">
     <label for="" class="col-sm-3 control-label">学生活动:</label>
     <div class="col-sm-9">
-        <textarea class="form-control activity-student" rows=2
+        <textarea class="form-control activity-student" rows=5
             placeholder=""></textarea>
         <span class="glyphicon form-control-feedback"></span>
     </div>
@@ -31,7 +42,7 @@
 <div class="form-group has-feedback">
     <label for="" class="col-sm-3 control-label">教师活动:</label>
     <div class="col-sm-9">
-        <textarea class="form-control activity-teacher" rows=2
+        <textarea class="form-control activity-teacher" rows=5
             placeholder=""></textarea>
         <span class="glyphicon form-control-feedback"></span>
     </div>

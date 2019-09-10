@@ -31,8 +31,26 @@
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
         <!-- 导入自定义css文件 -->
         <link rel="stylesheet" href="css/Design/design-style.css" />
+
+        <script type="text/javascript">
+            /**
+             * 页面触发 onbeforeunload 事件时进入
+             * 1）在页面被关闭前会进入
+             * 2）方法有返回值，才会自动弹框提示，否则不会弹框，但方法内容仍然会执行
+             * 3）方法返回的值与页面最终是否被关闭无关，即返回什么值都不会影响
+             */
+            // function pageClose() {
+            //     log(new Date() + "：用户准备离开页面...");
+            //     /*---------------------------------------*/
+            //     // saveTheme();//学习目标 - 课程主题
+            //     // saveQuestion();//学习目标 - 问题设计
+            //     // saveTasks();//学习评价
+            //     // saveActivity();//学习活动
+            //     return true;
+            // }
+        </script>
     </head>
-    <body>
+    <body onbeforeunload="return pageClose()">
         <!-- ///导航栏 -->
         <nav class="navbar navbar-default header" role="navigation" id="navbar">
             <div class="container-fluid">
@@ -57,7 +75,9 @@
                     <!-- /导航栏右侧的账户管理 -->
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#" id="test-saveBtn"><b>Save</b></a>
+                            <a href="#" id="test-saveBtn"><b>Save</b></a></li><li>
+                            <a href="#" onclick="saveTasks();"><b>SaveTasks</b></a></li><li>
+                            <a href="#" onclick="saveActivity();"><b>SaveActivity</b></a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

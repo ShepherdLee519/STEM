@@ -22,10 +22,10 @@ $(function(){
     _hello("design-load");
 
     loadDB();
-    loadTheme();
-    loadQuestion();
-    loadTasks();
-    loadActivity();
+    // loadTheme();
+    // loadQuestion();
+    // loadTasks();
+    // loadActivity();
 });
 
 
@@ -37,7 +37,12 @@ $(function(){
 function loadDB(){
     $.ajaxSetup ({ cache: false }); 
     DB = _get(DB_PATH);
+    // log(DB);
     $.ajaxSetup ({ cache: true }); 
+    loadTheme();
+    loadQuestion();
+    loadTasks();
+    loadActivity();
 }
 
 
@@ -110,23 +115,25 @@ function loadQuestion(){
         questionData, "driverQuestion",
         _("#questionDesign-driverQuestion")
     );
+    
     STD.forEach((std) => {
         let corequestion = _withdraw(
             questionData, ["coreQuestion", std]
         ), number = corequestion.length;
 
+        _inject($(`#questionDesign-coreQuestion-${std}`));
         if(number != 0){
-            let $zone = _(`#questionDesign-coreQuestion-${std}`),
-                $addBtn = $zone.find(".addCoreQuestion").eq(0);
-            for(let i = 1; i < number; i++) $addBtn.click();
+            let $addBtn = _(".addCoreQuestion"),
+                $edit = _(".editCoreQuestion");
 
-            let $inputs = $zone.find("input");
             for(let i = 0; i < number; i++){
-                $inputs.eq(i).val(corequestion[i]);
+                $edit.val(corequestion[i]);
+                $addBtn.click();
             }
-        }
+        } 
+        _reject();
     });
-    _reject();
+   
 }
 
 
@@ -152,12 +159,14 @@ function loadTasks(){
 
 /**
  * 加载学习活动中的活动
+ * 并将相关的节点的值通过Node.saveData()存入本地
  */
 function loadActivity(){
     if(_isundef(ZONE)){
         log("Please Init ZONE");
         return;
     }
+
 
     let zones       = ZONE.getZones(),
         subzones    = ZONE.getSubZones();
@@ -172,7 +181,7 @@ function loadActivity(){
                     typename: activity.typename,
                     activityname: activity.activity.name
                 };
-                zones[index].pushActivity(activityInfo);
+                zones[index].pushActivity(activityInfo, activity);
             });
         }
     });
@@ -187,7 +196,7 @@ function loadActivity(){
                     typename: activity.typename,
                     activityname: activity.activity.name
                 };
-                subzones[subZoneIndex][nodeIndex].pushActivity(activityInfo);
+                subzones[subZoneIndex][nodeIndex].pushActivity(activityInfo, activity);
             });
             }//end if-node.activities
         });

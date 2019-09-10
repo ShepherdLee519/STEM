@@ -4,6 +4,7 @@
     "activity":{
         "name":"活动名称",
         "rule":"游戏规则",
+        "place":"游戏地点",
         "student":"学生活动",
         "teacher":"教师活动",
         "reward":"奖惩规则"
