@@ -14,5 +14,13 @@
             "show":"教师活动 - 模拟表演",
             "evaluate":"教师活动 - 点评总结"
         }
+    },
+    "common":{
+        "evidence":"",
+        "material":{
+            "text":"",
+            "link":"",
+            "file":""
+        }
     }
 }

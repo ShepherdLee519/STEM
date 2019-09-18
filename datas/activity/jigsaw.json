@@ -13,5 +13,13 @@
             "student":"原组 - 学生活动",
             "teacher":"原组 - 教师活动"
         }
+    },
+    "common":{
+        "evidence":"",
+        "material":{
+            "text":"",
+            "link":"",
+            "file":""
+        }
     }
 }

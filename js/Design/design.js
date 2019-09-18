@@ -25,6 +25,15 @@ $(function(){
     TASKZONE = new TaskZone();
 
     initToggles();//切换菜单的效果 - 见design-animation.js
+
+    $("#saveData").click(() => {
+        log(new Date() + "：数据保存...");
+        /*---------------------------------------*/
+        saveTheme();//学习目标 - 课程主题
+        saveQuestion();//学习目标 - 问题设计
+        saveTasks();//学习评价
+        // saveActivity();//学习活动
+    });
 });
 
 

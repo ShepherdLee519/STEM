@@ -9,7 +9,6 @@
             "taskcontent" : "",
             "taskcorequestion":[],
             "taskevidence":"",
-            "taskevaluate":[],
             "level" : 1,
             "next" : ""
         },
@@ -20,7 +19,6 @@
             "taskcontent" : "",
             "taskcorequestion":[],
             "taskevidence":"",
-            "taskevaluate":[],
             "level" : 1,
             "next" : ""
         },
@@ -31,7 +29,6 @@
             "taskcontent" : "",
             "taskcorequestion":[],
             "taskevidence":"",
-            "taskevaluate":[],
             "level" : 1,
             "next" : ""
         },
@@ -42,7 +39,6 @@
             "taskcontent" : "",
             "taskcorequestion":[],
             "taskevidence":"",
-            "taskevaluate":[],
             "level" : 1,
             "next" : ""
         }

@@ -9,5 +9,13 @@
             "middle":"第二层 - 规则",
             "bottom":"底层 - 规则"
         }
+    },
+    "common":{
+        "evidence":"",
+        "material":{
+            "text":"",
+            "link":"",
+            "file":""
+        }
     }
 }

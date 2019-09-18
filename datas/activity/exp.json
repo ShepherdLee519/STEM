@@ -7,5 +7,13 @@
         "environment":"实验环境",
         "student":"学生活动",
         "teacher":"教师活动"
+    },
+    "common":{
+        "evidence":"",
+        "material":{
+            "text":"",
+            "link":"",
+            "file":""
+        }
     }
 }

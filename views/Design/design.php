@@ -86,7 +86,7 @@
         <div class="hidden design-initSubTaskZone">
             <div class="panel panel-warning">
                 <div class="panel-heading">
-                    <h3 class="panel-title">选择教学模式</h3>
+                    <h3 class="panel-title">选择子教学模式</h3>
                 </div>
                 <div class="panel-body">
                 </div>

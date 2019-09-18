@@ -8,5 +8,13 @@
         "student":"学生活动",
         "teacher":"教师活动",
         "reward":"奖惩规则"
+    },
+    "common":{
+        "evidence":"",
+        "material":{
+            "text":"",
+            "link":"",
+            "file":""
+        }
     }
 }

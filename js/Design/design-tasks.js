@@ -1,6 +1,6 @@
 /**
  * author: Shepherd.Lee
- * Date: 2019-08-30
+ * Date: 2019-09-14
  * version: 2.0.0
  * info: 学习评价相关(原学习任务) 注，页面调整后新的选择模式逻辑在introduction下
  * index: 
@@ -23,6 +23,8 @@
  *          > taskZoneHandler()
  *          > reset()
  *      
+ *      initEditNodeHandler()
+ *      
  *      saveData()
  */
 
@@ -34,8 +36,16 @@ const SIZE_FIRST = 55,
 const PATH = "datas/design/";//节点的模板json文件保存位置
 var OPEN = false;
 
+/**
+ * @global 当前正在编辑的task对象的引用
+ */
+var $edit_task_now  = null;
+
+
 $(function(){
     _hello("design-tasks");
+
+    initEditNodeHandler();
 });
 
 
@@ -157,6 +167,7 @@ function Init(){
  */
 function Task(){
     let that = this, //自身的this的备份
+        nodeInfo_backup = null,
         $edit = $("#design-editTaskZone");
 
     /**
@@ -393,6 +404,9 @@ function Task(){
      * @param {Object} nodeInfo
      */
     this.editTask = function($target, nodeInfo){
+        $edit_task_now = that;
+        nodeInfo_backup = nodeInfo;
+
         //点击取消按钮关闭编辑区域
         $("#design-cancelTaskEditBtn").off("click").click(() => {
             if(nodeInfo.isSubNode){
@@ -409,88 +423,8 @@ function Task(){
         });
 
         //点击右上角的X关闭编辑区域
-        $edit.find(".panel-title span").click(() => {
+        $edit.find(".panel-title span").off("click").click(() => {
             $("#design-cancelTaskEditBtn").click();
-        });
-    
-        //点击核心问题的按钮，添加对应的核心问题
-        $("#taskCoreQuestion-AddBtn").off("click").click(function(e){
-            e.preventDefault();
-            let $show = $("#taskCoreQuestion-ShowZone"),
-                $select = $("#taskCoreQuestion-SelectZone");
-            $show.addClass("hidden");
-            $select.removeClass("hidden");
-
-            let str = "", 
-                coreQuestions = getCoreQuestions();//见design-objectives.js
-
-            if(coreQuestions.length === 0){
-                //当前未填写核心问题
-                str += `
-                <p>${_space()}请先在<b>学习目标-问题设计-学科核心问题</b>中完善核心问题的内容
-                    ，完善后请重新点击上方"+"按钮</p>
-                <button class="btn btn-danger pull-right" 
-                    id="taskCoreQuestion-cancelSelect">关闭</button>
-                `.trim();
-            }else{
-                //填写了核心问题，组装复选框
-                coreQuestions.forEach((q, index) => {
-                    str += `
-                    <label class="checkbox-inline">
-                        <input type="checkbox" value="${index}">
-                        ${q.value}${_space(2)}
-                        <span class="badge pull-right badge-${q.type}">${q.typename}</span>
-                    </label>
-                    <br />
-                    `.trim();
-                });
-                str += `
-                <br />
-                <div class="btn-group pull-right">
-                    <button class="btn btn-default" id="taskCoreQuestion-confirmSelect">确定</button>
-                    <button class="btn btn-danger" id="taskCoreQuestion-cancelSelect">关闭</button>
-                </div>
-                `.trim();
-            }
-            $select.html(str);
-
-            //点击确认添加 将选择的核心问题组装成列表
-            $("#taskCoreQuestion-confirmSelect").click(function(){
-                e.preventDefault();
-                let values = [], types = [], str = "<ul class='list-group'>";
-                let $boxes = $(this).parent().parent().find("input[type='checkbox']");
-                [...$boxes].forEach(box => {
-                    if($(box).is(":checked")){
-                        values.push($(box).val());
-                        types.push($(box).attr("data-coretype"));
-                    }
-                });
-                if(values.length === 0){
-                    $select.addClass("hidden");
-                    return false;
-                }
-                values.forEach((value) => {
-                    str += `
-                    <li class="list-group-item">
-                    <span class="badge badge-${coreQuestions[value].type}">${coreQuestions[value].typename}</span>
-                    <span class="li-content">${coreQuestions[value].value}</span>
-                    </li>
-                    `.trim();
-                });
-                str += "</ul>";
-                $show.html(str);
-                $show.removeClass("hidden");
-                $select.addClass("hidden");
-                return false;
-            });
-
-            //关闭核心问题的区域框
-            $("#taskCoreQuestion-cancelSelect").click(function(){
-                $select.addClass("hidden");
-                return false;
-            });
-
-            return false;
         });
 
         //点击按钮确定编辑
@@ -516,26 +450,12 @@ function Task(){
         let target = (!nodeInfo.isSubNode) ? 
             DATA.nodes[nodeInfo.index]:
             DATA.nodes[nodeInfo.parentIndex].next.nodes[nodeInfo.index];
-        let editZoneId_val = ["taskName", "taskContent", "taskEvidence"];
+        let editZoneId_val = ["taskName", "taskContent"];
         editZoneId_val.forEach((id) => {
             $(`#${id}`).val(target[id.toLowerCase()]);
         });
 
-        let taskevaluate = target["taskevaluate"];
-        if(taskevaluate && taskevaluate.length){
-            [...$edit.find(".taskEvaluate input")].forEach((input) => {
-                if(taskevaluate.indexOf($(input).val()) >= 0){
-                    $(input).prop("checked", true);
-                }else{
-                    $(input).prop("checked", false);
-                }
-            });
-        }else{
-            [...$edit.find(".taskEvaluate input")].forEach((input) => {
-                $(input).prop("checked", false);
-            });
-        }
-
+        //装填核心问题区域
         let taskcorequestion = target["taskcorequestion"];
         $("#taskCoreQuestion-ShowZone").html("");
         if(taskcorequestion && taskcorequestion.length){
@@ -550,6 +470,75 @@ function Task(){
             });
             str += "</ul>";
             $("#taskCoreQuestion-ShowZone").html(str);
+
+            _addClass($("#taskCoreQuestion-AddBtn"), "hidden");
+            _removeClass($("#taskCoreQuestion-BtnGroup"), "hidden");
+        }else{
+            _removeClass($("#taskCoreQuestion-AddBtn"), "hidden");
+            _addClass($("#taskCoreQuestion-BtnGroup"), "hidden");
+        }
+        _removeClass($("#taskCoreQuestion-ShowZone"), "hidden");
+
+        //装填学习证据区域
+        let taskevidence = target["taskevidence"];
+        [...$("#evidence-body").children()].forEach((tr, index) => {
+            if(index == 0) return;
+            $(tr).remove();
+        });
+        if(taskevidence && taskevidence.length > 0){
+            let $addEvidenceBtn = $("#confirmAddEvidence"),
+                $content        = $("#add-evidenceContent"),
+                $coreQuestion   = $("#add-evidenceCoreQuestion"),
+                $evaluate       = $("#add-evidenceEvaluate");
+            
+            taskevidence.forEach(evidence => {
+                $content.val(evidence.content);
+                $coreQuestion.val(evidence.corequestion);
+                for(let option of [...$evaluate.children()]){
+                    $(option).prop("selected", false);
+                    if($(option).val() == evidence.evaluate){
+                        $(option).prop("selected", true);
+                    }
+                }
+                $addEvidenceBtn.click();
+            });
+        }
+    };
+
+    /**
+     * 填充核心问题区域的函数 用于在核心问题的选择过程中的必要的面板数据恢复
+     * 当flag = true 将coreQuestion的数据返回
+     * @param {Boolean} flag
+     */
+    this.loadCoreQuestion = function(flag = false){
+        let nodeInfo = nodeInfo_backup;
+        let target = (!nodeInfo.isSubNode) ? 
+            DATA.nodes[nodeInfo.index]:
+            DATA.nodes[nodeInfo.parentIndex].next.nodes[nodeInfo.index];
+
+        //装填核心问题区域
+        let taskcorequestion = target["taskcorequestion"];
+        if(flag) return taskcorequestion;
+
+        $("#taskCoreQuestion-ShowZone").html("");
+        if(taskcorequestion && taskcorequestion.length){
+            let str = "<ul class='list-group'>";
+            taskcorequestion.forEach((corequestion) => {
+                str += `
+                    <li class="list-group-item">
+                    <span class="badge badge-${coreQuestionTypeMap(corequestion.type)}">${corequestion.type}</span>
+                    <span class="li-content">${corequestion.content}</span>
+                    </li>
+                `.trim();
+            });
+            str += "</ul>";
+            $("#taskCoreQuestion-ShowZone").html(str);
+
+            _addClass($("#taskCoreQuestion-AddBtn"), "hidden");
+            _removeClass($("#taskCoreQuestion-BtnGroup"), "hidden");
+        }else{
+            _removeClass($("#taskCoreQuestion-AddBtn"), "hidden");
+            _addClass($("#taskCoreQuestion-BtnGroup"), "hidden");
         }
         _removeClass($("#taskCoreQuestion-ShowZone"), "hidden");
     };
@@ -564,18 +553,12 @@ function Task(){
             DATA.nodes[nodeInfo.index]:
             DATA.nodes[nodeInfo.parentIndex].next.nodes[nodeInfo.index];
 
-        let editZoneId_val = ["taskName", "taskContent", "taskEvidence"];
+        let editZoneId_val = ["taskName", "taskContent"];
         editZoneId_val.forEach((id) => {
             target[id.toLowerCase()] = $(`#${id}`).val();
         });
 
-        target["taskevaluate"] = [];
-        [...$edit.find(".taskEvaluate input")].forEach((input) => {
-            if($(input).is(":checked")){
-                target["taskevaluate"].push($(input).val());
-            }
-        });
-
+        //核心问题的存储处理
         target["taskcorequestion"] = [];
         [...$edit.find("#taskCoreQuestion-ShowZone").find("li")].forEach((li) => {
             let type = $(li).find("span.badge").html(),
@@ -584,6 +567,21 @@ function Task(){
                 type: type, content:content
             });
         });
+
+        //学习证据的存储处理
+        target["taskevidence"] = [];
+        [...$("#evidence-body").children()].forEach((tr, index) => {
+            if(index == 0) return;
+
+            _inject($(tr));
+            target["taskevidence"].push({
+                content: _(".evidenceContent").html(),
+                corequestion: _(".evidenceCoreQuestion").html(),
+                evaluate: _(".evidenceEvaluate").html()
+            });
+            _reject();
+        });
+        log(target["taskevidence"]);
 
         log("saveTask");
     };
@@ -676,12 +674,358 @@ function TaskZone(){
 }
 
 
+
+/**
+ * 编辑节点区域的公共事件处理 例如evidence的调用
+ * 考虑将关闭 取消等按钮事件也迁移至此
+ */
+function initEditNodeHandler(){
+    $("#addEvidenceModal").appendTo($("body").eq(0));
+    $("#editEvidenceModal").appendTo($("body").eq(0));
+
+    let evaluates = [
+        "请选择",
+        "书面测试", "调查问卷", "口头汇报",
+        "同行评审", "概念图"  , "观察记录",
+        "制作成果", "展示绩效"
+    ],
+    $content_editing        = null,
+    $coreQuestion_editing   = null,
+    $evaluate_editing       = null;
+
+    _inject($("#design-editTaskZone-body"));
+    let $tableEvidence = _(".table-evidence"),
+        $coreQuestionZone = _("#taskCoreQuestion").parent();
+    _reject();
+
+    /* 与学习证据有关的事件处理
+    --------------------------------------------------------------*/
+    _inject($tableEvidence);
+    let $add        = _("#addEvidence"),
+        $body       = _("#evidence-body"),
+        $template   = _("#evidence-template"),
+
+        //模态框相关jQuery对象
+        $addModal       = $("#addEvidenceModal"),
+        $editModal      = $("#editEvidenceModal"),
+        $confirmAdd     = $("#confirmAddEvidence"),
+        $confirmEdit    = $("#confirmEditEvidence"),
+        $cancelAdd      = $("#cancelAddEvidence"),
+        $cancelEdit     = $("#cancelEditEvidence");
+    
+    let evidenceClsName = [
+        "evidenceContent", "evidenceCoreQuestion", "evidenceEvaluate"
+    ];
+    _reject();
+
+    //点击开启添加学习证据的模态框
+    $add.click(function(e){
+        e.preventDefault();
+        $addModal.modal("show");
+
+        //与新建学习证据有关的模态框的事件处理
+        _inject($addModal);
+        let $showZone_origin    = $("#taskCoreQuestion-ShowZone"),
+            $showZone           = _("#addEvidenceModal-showEvidences");
+        
+        $showZone.html("").append($showZone_origin.html());
+        _reject();
+        
+        //清除已填写的数据
+        for(let i = 0; i <= 1; i++){
+            $(`#add-${evidenceClsName[i]}`).val("");
+        }
+        $("#add-evidenceEvaluate").find("option").eq(0).prop("selected", true);
+
+        return false;
+    });
+
+    //确认添加学习证据
+    $confirmAdd.click(function(e){
+        e.preventDefault();
+        let $newRow = $template.clone().removeAttr("id").removeClass("hidden");
+        evidenceClsName.forEach(clsname => {
+            $newRow.find(`td.${clsname}`).eq(0).html($(`#add-${clsname}`).val());
+        });
+        $newRow.find(".deleteEvidence").click(function(e){
+            e.preventDefault();
+            $(this).ancestor(3, "tr").remove();
+            return false;
+        });
+        $newRow.find(".editEvidence").click(function(e){
+            e.preventDefault();
+            $("#editEvidenceModal").modal("show");
+
+            //与编辑学习证据有关的模态框的事件处理
+            _inject($editModal);
+            let $showZone_origin    = $("#taskCoreQuestion-ShowZone"),
+                $showZone           = _("#editEvidenceModal-showEvidences"),
+                $showContent        = _("#edit-evidenceContent"),
+                $showCoreQuestion   = _("#edit-evidenceCoreQuestion"),
+                $showEvaluate       = _("#edit-evidenceEvaluate");
+            _reject();
+
+            _inject($(this).ancestor(3,"tr"));
+            let $content        = _(".evidenceContent"),
+                $coreQuestion   = _(".evidenceCoreQuestion"),
+                $evaluate       = _(".evidenceEvaluate");
+
+            $content_editing        = $content;
+            $coreQuestion_editing   = $coreQuestion;
+            $evaluate_editing       = $evaluate;
+            _reject();
+
+            $showZone.html("").append($showZone_origin.html());
+            $showContent.val($content.html());
+            $showCoreQuestion.val($coreQuestion.html());
+            let evaluate_index = evaluates.indexOf($evaluate.html());
+            if(evaluate_index != -1){
+                $showEvaluate.find("option").eq(evaluate_index).prop("selected", true);
+            }else{
+                $showEvaluate.find("option").eq(0).prop("selected", true);
+            }
+
+            return false;
+        });
+
+        $body.append($newRow);
+        $cancelAdd.click();
+        return false;
+    });
+
+    //确认保存学习证据的编辑
+    $confirmEdit.click(function(e){
+        e.preventDefault();
+
+        //与编辑学习证据有关的模态框的事件处理
+        _inject($editModal);
+        let $showContent        = _("#edit-evidenceContent"),
+            $showCoreQuestion   = _("#edit-evidenceCoreQuestion"),
+            $showEvaluate       = _("#edit-evidenceEvaluate");
+        _reject();
+
+        $content_editing.html($showContent.val());
+        $coreQuestion_editing.html($showCoreQuestion.val());
+        $evaluate_editing.html($showEvaluate.val());
+        $cancelEdit.click();
+        return false;
+    });
+
+    //关闭、取消学习证据的编辑
+    $cancelEdit.click(function(e){
+        e.preventDefault();
+        $content_editing = null;
+        $coreQuestion_editing = null;
+        $evaluate_editing = null;
+
+        $editModal.modal("hide");
+        return false;
+    });
+
+    /* 与添加核心问题有关的事件处理
+    --------------------------------------------------------------*/
+    _inject($coreQuestionZone);
+    let $addCQ      = _("#taskCoreQuestion-AddBtn"),
+        $resetCQ    = _("#taskCoreQuestion-ResetBtn"),
+        $supplyCQ   = _("#taskCoreQuestion-SupplyBtn"),
+        $btngroupCQ = $resetCQ.parent(),
+
+        $showCQ     = _("#taskCoreQuestion-ShowZone"),
+        $selectCQ   = _("#taskCoreQuestion-SelectZone");
+    _reject();
+
+    $addCQ.click(function(e){
+        e.preventDefault();
+        $showCQ.addClass("hidden");
+        $selectCQ.removeClass("hidden");
+
+        let str = "", 
+            coreQuestions = getCoreQuestions();//见design-objectives.js
+
+        if(coreQuestions.length === 0){
+            //当前未填写核心问题
+            str += `
+            <p>${_space()}请先在<b>学习目标-问题设计-学科核心问题</b>中完善核心问题的内容
+                ，完善后请重新点击上方"+"按钮</p>
+            <button class="btn btn-danger pull-right" 
+                id="taskCoreQuestion-cancelSelect">关闭</button>
+            `.trim();
+        }else{
+            //填写了核心问题，组装复选框
+            coreQuestions.forEach((q, index) => {
+                str += `
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="${index}">
+                    ${q.value}${_space(2)}
+                    <span class="badge pull-right badge-${q.type}">${q.typename}</span>
+                </label>
+                <br />
+                `.trim();
+            });
+            str += `
+            <br />
+            <div class="btn-group pull-right">
+                <button class="btn btn-default" id="taskCoreQuestion-confirmSelect">确定</button>
+                <button class="btn btn-danger" id="taskCoreQuestion-cancelSelect">取消</button>
+            </div>
+            `.trim();
+        }
+        $selectCQ.html(str);
+
+        _inject($selectCQ);
+        let $confirmCQ  = _("#taskCoreQuestion-confirmSelect"),
+            $cancelCQ   = _("#taskCoreQuestion-cancelSelect");
+        _reject();
+
+        //点击确认添加 将选择的核心问题组装成列表
+        $confirmCQ.click(function(e){
+            e.preventDefault();
+            
+            let values = [], types = [], str = "<ul class='list-group'>";
+            let $boxes = $(this).parent().parent().find("input[type='checkbox']");
+            [...$boxes].forEach(box => {
+                //每一个选中的核心问题
+                if($(box).is(":checked")){
+                    values.push($(box).val());
+                    types.push($(box).attr("data-coretype"));
+                }
+            });
+            if(values.length === 0){
+                $selectCQ.addClass("hidden");
+                return false;
+            }else{
+                _addClass($addCQ, "hidden");
+                _removeClass($btngroupCQ, "hidden");
+            }
+
+            values.forEach((value) => {
+                str += `
+                <li class="list-group-item">
+                <span class="badge badge-${coreQuestions[value].type}">${coreQuestions[value].typename}</span>
+                <span class="li-content">${coreQuestions[value].value}</span>
+                </li>
+                `.trim();
+            });
+            str += "</ul>";
+            $showCQ.html(str);
+            $showCQ.removeClass("hidden");
+            $selectCQ.addClass("hidden");
+            return false;
+        });
+
+        //关闭核心问题的区域框
+        $cancelCQ.click(function(){
+            $selectCQ.addClass("hidden");
+            //重新读入 恢复show区域的显示
+            $edit_task_now.loadCoreQuestion();
+            return false;
+        });
+
+        return false;
+    });
+
+    //重选核心问题
+    $resetCQ.click(function(e){
+        e.preventDefault();
+        $addCQ.click();
+        return false;
+    });
+
+    //补充核心问题
+    $supplyCQ.click(function(e){
+        e.preventDefault();
+        $showCQ.addClass("hidden");
+        $selectCQ.removeClass("hidden");
+
+        let str = "", 
+            selectedCQ = $edit_task_now.loadCoreQuestion(true),
+            coreQuestions = getCoreQuestions(selectedCQ);//见design-objectives.js
+
+        //填写了核心问题，组装复选框
+        coreQuestions.forEach((q, index) => {
+            str += `
+            <label class="checkbox-inline">
+                <input type="checkbox" value="${index}" ${(q.flag)?"checked":""} >
+                ${q.value}${_space(2)}
+                <span class="badge pull-right badge-${q.type}">${q.typename}</span>
+            </label>
+            <br />
+            `.trim();
+        });
+        str += `
+        <br />
+        <div class="btn-group pull-right">
+            <button class="btn btn-default" id="taskCoreQuestion-confirmSupply">确定</button>
+            <button class="btn btn-danger" id="taskCoreQuestion-cancelSupply">取消</button>
+        </div>
+        `.trim();
+        $selectCQ.html(str);
+
+        _inject($selectCQ);
+        let $confirmCQ  = _("#taskCoreQuestion-confirmSupply"),
+            $cancelCQ   = _("#taskCoreQuestion-cancelSupply");
+        _reject();
+
+        //点击确认添加 将选择的核心问题组装成列表
+        $confirmCQ.click(function(e){
+            e.preventDefault();
+            
+            let values = [], types = [], str = "<ul class='list-group'>";
+            let $boxes = $(this).parent().parent().find("input[type='checkbox']");
+            [...$boxes].forEach(box => {
+                //每一个选中的核心问题
+                if($(box).is(":checked")){
+                    values.push($(box).val());
+                    types.push($(box).attr("data-coretype"));
+                }
+            });
+            if(values.length === 0){
+                $selectCQ.addClass("hidden");
+                return false;
+            }else{
+                _addClass($addCQ, "hidden");
+                _removeClass($btngroupCQ, "hidden");
+            }
+
+            values.forEach((value) => {
+                str += `
+                <li class="list-group-item">
+                <span class="badge badge-${coreQuestions[value].type}">${coreQuestions[value].typename}</span>
+                <span class="li-content">${coreQuestions[value].value}</span>
+                </li>
+                `.trim();
+            });
+            str += "</ul>";
+            $showCQ.html(str);
+            $showCQ.removeClass("hidden");
+            $selectCQ.addClass("hidden");
+            return false;
+        });
+
+        //关闭核心问题的区域框
+        $cancelCQ.click(function(){
+            $selectCQ.addClass("hidden");
+            //重新读入 恢复show区域的显示
+            $edit_task_now.loadCoreQuestion();
+            return false;
+        });
+
+        return false;
+    });
+
+}
+
+
+
+
 /**
  * 保存DATA数据至本地
  */
 function saveTasks(){
-   $.post("./db/data_save.php", {data:DATA, zone:"tasks"}, (res) => {
-       if(res) log("save tasks successfully");
-       else err("save tasks failed");
-   });
+    let postdata = (DATA.length == 0)? null:DATA;
+    $.post("./db/data_save.php", {data:postdata, zone:"tasks"}, (res) => {
+        if(res) log("save tasks successfully");
+        else err("save tasks failed");
+    });
+    saveActivity();
 }

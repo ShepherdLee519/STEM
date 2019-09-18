@@ -33,21 +33,23 @@
         <div class="form-group">
             <label for="taskCoreQuestion" class="col-sm-3 control-label" id="taskCoreQuestion">核心问题:</label>
             <div class="col-sm-9">
-                <button class="btn btn-danger text-center" id="taskCoreQuestion-AddBtn" style="width: 35px">
-                    <span class="glyphicon glyphicon-plus" ></span>
+                <button class="btn btn-info text-center" id="taskCoreQuestion-AddBtn" style="width: 65px">
+                    添加 <span class="glyphicon glyphicon-plus" ></span>
                 </button>
+                <div class="btn-group hidden" id="taskCoreQuestion-BtnGroup">
+                    <button class="btn btn-danger text-center" id="taskCoreQuestion-ResetBtn" style="width: 65px">
+                        重选 <span class="glyphicon glyphicon-plus" ></span>
+                    </button>
+                    <button class="btn btn-default text-center" id="taskCoreQuestion-SupplyBtn" style="width: 65px">
+                        补充 <span class="glyphicon glyphicon-plus" ></span>
+                    </button>
+                </div>
             </div>
             <div class="col-sm-9 pull-right hidden" id="taskCoreQuestion-ShowZone"></div>
             <div class="col-sm-9 pull-right well hidden" id="taskCoreQuestion-SelectZone"></div>
         </div>
-        <div class="form-group">
-            <label for="taskEvidence" class="col-sm-3 control-label">学习证据:</label>
-            <div class="col-sm-9">
-                <textarea class="form-control" name="taskEvidence" id="taskEvidence"
-                    rows="4" placeholder="学习证据描述"></textarea>
-            </div>      
-        </div>
-        <div class="form-group">
+        
+        <div class="form-group hidden">
             <label for="taskEvaluate" class="col-sm-3 control-label">学习评价:</label>
             <div class="col-sm-9 taskEvaluate">
                 <?php
@@ -68,11 +70,178 @@
                 ?>
             </div>
         </div>
+
+
+
+
+
+        <div class="form-group">
+        <label for="taskEvidence" class="col-sm-3 control-label">学习证据:</label>
+        <div class="col-sm-12">
+        <table class="table table-striped table-evidence">
+            <thead>
+                <tr><th class="content-header">证据内容</th>
+                    <th class="coreQuestion-header">核心问题</th>
+                    <th class="evaluate-header">学习评价</th>
+                    <th class="add-header">
+                        <button class="btn btn-info" id="addEvidence">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </th></tr>
+            </thead>
+            <tbody id="evidence-body">
+            <tr id="evidence-template" class="hidden">
+                <td class="evidenceContent"></td>
+                <td class="evidenceCoreQuestion"></td>
+                <td class="evidenceEvaluate"></td>
+                <td>
+                    <div class="btn-group">
+                    <button class="btn btn-danger deleteEvidence">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                    <button class="btn btn-default editEvidence">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+        </div>
         <div class="btn-group pull-right">
-            <!-- <button class='btn btn-info' id="design-taskEditBtn">编辑</button> -->
             <button class='btn btn-default' id="design-confirmTaskEditBtn" style="width:80px">确定</button>
             <button class='btn btn-danger' id="design-cancelTaskEditBtn" style="width:80px">取消</button>
         </div>
     </form>
 </div><!-- end design-editTaskZone-body -->
+</div>
+
+
+<!-- 新建学习证据 -->
+<div class="modal fade" id="addEvidenceModal" tabindex="-1" 
+    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">新建学习证据</h4>
+</div>
+
+<div class="modal-body">
+<form class="form form-horizontal">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">已选核心问题</label>
+        <div class="col-sm-9 pull-right" id="addEvidenceModal-showEvidences"></div>
+    </div>
+    <hr />
+    <div class="form-group">
+        <label class="col-sm-3 control-label" for="evidenceContent">证据内容:</label>
+        <div class="col-sm-9">
+            <textarea class="form-control" name="evidenceContent" id="add-evidenceContent"
+                rows="4" placeholder="证据内容"></textarea>
+        </div> 
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label" for="evidenceCoreQuestion">核心问题:</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" name="evidenceCoreQuestion" id="add-evidenceCoreQuestion"
+                placeholder="对应的核心问题的序号 eg.S-Q1,T-Q1">
+        </div> 
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label" for="evidenceEvaluate">学习评价:</label>
+        <div class="col-sm-4">
+            <select class="form-control" id="add-evidenceEvaluate">
+            <option value="">请选择</option>
+            <?php
+                $evaluate_ways = array(
+                    "书面测试", "调查问卷", "口头汇报",
+                    "同行评审", "概念图"  , "观察记录",
+                    "制作成果", "展示绩效"
+                );
+                // $i = 0;
+                foreach($evaluate_ways as $way){
+                    echo '<option value='.$way.'>'.$way.'</option>';
+                }
+            ?>
+            </select>
+        </div>
+    </div>
+</form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelAddEvidence">关闭</button>
+    <button type="button" class="btn btn-info" id="confirmAddEvidence">新建</button>
+</div>
+
+</div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+
+
+
+<!-- 编辑学习证据 -->
+<div class="modal fade" id="editEvidenceModal" tabindex="-1" 
+    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">编辑学习证据</h4>
+</div>
+
+<div class="modal-body">
+<form class="form form-horizontal">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">已选核心问题</label>
+        <div class="col-sm-9 pull-right" id="editEvidenceModal-showEvidences"></div>
+    </div>
+    <hr />
+    <div class="form-group">
+        <label class="col-sm-3 control-label" for="evidenceContent">证据内容:</label>
+        <div class="col-sm-9">
+            <textarea class="form-control" name="evidenceContent" id="edit-evidenceContent"
+                rows="4" placeholder="证据内容"></textarea>
+        </div> 
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label" for="evidenceCoreQuestion">核心问题:</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" name="evidenceCoreQuestion" id="edit-evidenceCoreQuestion"
+                placeholder="对应的核心问题的序号 eg.S-Q1,T-Q1">
+        </div> 
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label" for="evidenceEvaluate">学习评价:</label>
+        <div class="col-sm-4">
+            <select class="form-control" id="edit-evidenceEvaluate">
+            <option value="">请选择(无)</option>
+            <?php
+                $evaluate_ways = array(
+                    "书面测试", "调查问卷", "口头汇报",
+                    "同行评审", "概念图"  , "观察记录",
+                    "制作成果", "展示绩效"
+                );
+                // $i = 0;
+                foreach($evaluate_ways as $way){
+                    echo '<option value='.$way.'>'.$way.'</option>';
+                }
+            ?>
+            </select>
+        </div>
+    </div>
+</form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelEditEvidence">取消</button>
+    <button type="button" class="btn btn-info" id="confirmEditEvidence">确认修改</button>
+</div>
+
+</div><!-- /.modal-content -->
+</div><!-- /.modal -->
 </div>

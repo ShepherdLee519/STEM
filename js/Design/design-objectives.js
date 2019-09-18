@@ -213,10 +213,8 @@ function CoreQuestionLiGenerator(coreType, val = ""){
     let $li = $(`
     <li class="list-group-item col-sm-12 coreQuestionListItem">
     <div class="input-group">
-        <span class="input-group-btn">
-            <button class="btn btn-info badge-${coreType} coreQuestionNumber"
-                data-originNumber = "${coreType[0].toUpperCase()}-Q">
-            </button>
+        <span class="input-group-addon data-badge-${coreType} coreQuestionNumber"
+            data-originNumber = "${coreType[0].toUpperCase()}-Q">
         </span>
         <input type="text" class="form-control showCoreQuestion" 
             data-coretype="${coreType}" placeholder="">
@@ -248,25 +246,48 @@ function CoreQuestionLiGenerator(coreType, val = ""){
 
 /**
  * 获取问题设计的学科核心问题的数据
+ * @param {Object} selectedCQ
  * @returns {Array}
  */
-function getCoreQuestions(){
+function getCoreQuestions(selectedCQ = null){
     const id = 'questionDesign-coreQuestion';
     let questions = [], value, dataType;
 
-    [...$(`#${id} div.${id}-eachQuestion`)].forEach((div) => {
-        [...$(div).find("input.showCoreQuestion")].forEach((input) => {
-            value = $(input).val();
-            if(value !== ""){
-                dataType = $(input).attr("data-coretype");
-                questions.push({
-                    value   : value, 
-                    type    : dataType,
-                    typename: coreQuestionTypeMap(dataType)
-                });
-            }
-        })
-    })
+    if(selectedCQ != null){
+        let selectedContent = [];
+        for(let CQ of selectedCQ){
+            selectedContent.push(CQ.content);
+        }
+        [...$(`#${id} div.${id}-eachQuestion`)].forEach((div) => {
+            [...$(div).find("input.showCoreQuestion")].forEach((input) => {
+                value = $(input).prev().text() + " " + $(input).val();
+                let flag = (selectedContent.indexOf(value) >= 0);
+                if(value !== ""){
+                    dataType = $(input).attr("data-coretype");
+                    questions.push({
+                        value   : value, 
+                        type    : dataType,
+                        typename: coreQuestionTypeMap(dataType),
+                        flag    : flag
+                    });
+                }
+            })
+        });
+    }else{
+        [...$(`#${id} div.${id}-eachQuestion`)].forEach((div) => {
+            [...$(div).find("input.showCoreQuestion")].forEach((input) => {
+                value = $(input).prev().text() + " " + $(input).val();
+                if(value !== ""){
+                    dataType = $(input).attr("data-coretype");
+                    questions.push({
+                        value   : value, 
+                        type    : dataType,
+                        typename: coreQuestionTypeMap(dataType)
+                    });
+                }
+            })
+        });
+    }
     return questions;
 }
 

@@ -96,10 +96,11 @@
                 </div>
             </div>
         </form>
-
+        <!--         
         <div class="col-sm-12">
             <button class="btn btn-default btn-md pull-right" style="width:100px;">确认</button>
-        </div>
+        </div> 
+        -->
     </div>
     </div><!-- /end panel-primary -->
 </div>

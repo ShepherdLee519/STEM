@@ -42,6 +42,8 @@ function Node(num, activityInfo){
     let nodedata = null, //自身的存储数据
         that     = this, //该Node的this引用的备份
         zone     = null; //父节点 - 区域zone的引用
+
+    let myEvidence = "";//给节点拥有的学习证据
     
     //node相关的html - 不包含编辑框
     let $self = $(`
@@ -135,6 +137,10 @@ function Node(num, activityInfo){
      * 
      * resetToggle - 将可能收缩的面板先还原
      * 
+     * setMyEvidence - 设置该结点的学习证据
+     * getMyEvidence - 获取该结点的学习证据
+     * getEvidence - 获取可供选择的学习证据以组装选择列表
+     * 
      * saveData - 保存nodedata
      * getData - 获取nodedata
      */
@@ -163,11 +169,33 @@ function Node(num, activityInfo){
 
 
     /**
+     * 设置学习证据
+     * @param {Object} evidence
+     */
+    this.setMyEvidence = (evidence) => {
+        myEvidence = evidence;
+    };
+
+    /**
+     * 获取学习证据
+     * @returns {Object}
+     */
+    this.getMyEvidence = () => myEvidence;
+
+    /**
+     * 获取可供选择的所有学习证据
+     * 经由zone的getEvidence获得
+     */
+    this.getEvidence = () => zone.getEvidence();
+
+
+    /**
      * 编辑完成后调用，将最新的数据保存至本地nodedata
      * @param {Object} data
      */
     this.saveData = (data) => {
         nodedata = data;
+        that.setMyEvidence(data.common.evidence);
         that.saveActivityName();
     };
     /**

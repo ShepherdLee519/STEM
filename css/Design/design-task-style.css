@@ -229,10 +229,11 @@
 ------------------------------------------*/
 #design-editTaskZone{
     position: absolute;
-    width: 80%;
-    left: 0px;
+    width: 100%;
+    max-width: 780px;
+    /* left: -35px; */
     top: 0px;
-    margin: 150px 10% 0px 10%;
+    margin: 150px 0px 0px 0px;
     z-index: 200;
 }
 
@@ -283,4 +284,42 @@
     background-color: #CCCCCC !important;
     border-color: #CCCCCC !important;
     
+}
+
+
+
+
+
+
+
+/* table-evidence
+--------------------------------------------*/
+.table-evidence th,
+.table-evidence td{
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-evidence #addEvidence{
+    width: 30px;
+    height: 30px;
+    padding-left: 7.5px;
+    border-radius: 25px;
+    outline: none;
+}
+
+.table-evidence th.content-header{
+    width: 30%;
+}
+
+.table-evidence th.coreQuestion-header{
+    width: 20%;
+}
+
+.table-evidence th.evaluate-header{
+    width: 20%;
+}
+
+.table-evidence th.add-header{
+    width: 30%;
 }

@@ -143,6 +143,8 @@ function loadQuestion(){
  * 加载学习模式中的节点的数据
  */
 function loadTasks(){
+    if(!DB.tasks) return;
+
     let tasksData = DB.tasks,
         nodes = tasksData.nodes;
         
@@ -162,8 +164,10 @@ function loadTasks(){
  * 并将相关的节点的值通过Node.saveData()存入本地
  */
 function loadActivity(){
+    if(!DB.activity || !DB.tasks) return;
     if(_isundef(ZONE)){
         log("Please Init ZONE");
+        ZONE = new Zones(DATA.nodes);
         return;
     }
 

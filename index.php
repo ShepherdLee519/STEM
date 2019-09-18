@@ -39,15 +39,15 @@
              * 2）方法有返回值，才会自动弹框提示，否则不会弹框，但方法内容仍然会执行
              * 3）方法返回的值与页面最终是否被关闭无关，即返回什么值都不会影响
              */
-            // function pageClose() {
-            //     log(new Date() + "：用户准备离开页面...");
-            //     /*---------------------------------------*/
-            //     // saveTheme();//学习目标 - 课程主题
-            //     // saveQuestion();//学习目标 - 问题设计
-            //     // saveTasks();//学习评价
-            //     // saveActivity();//学习活动
-            //     return true;
-            // }
+            function pageClose() {
+                log(new Date() + "：用户准备离开页面...");
+                /*---------------------------------------*/
+                saveTheme();//学习目标 - 课程主题
+                saveQuestion();//学习目标 - 问题设计
+                saveTasks();//学习评价
+                // saveActivity();//学习活动
+                return true;
+            }
         </script>
     </head>
     <body onbeforeunload="return pageClose()">
@@ -75,9 +75,10 @@
                     <!-- /导航栏右侧的账户管理 -->
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#" id="test-saveBtn"><b>Save</b></a></li><li>
-                            <a href="#" onclick="saveTasks();"><b>SaveTasks</b></a></li><li>
-                            <a href="#" onclick="saveActivity();"><b>SaveActivity</b></a>
+                            <!-- <a href="#" id="test-saveBtn"><b>Save</b></a></li><li> -->
+                            <!-- <a href="#" onclick="saveTasks();"><b>SaveTasks</b></a></li><li> -->
+                            <!-- <a href="#" onclick="saveActivity();"><b>SaveActivity</b></a> -->
+                            <a href="#" id="saveData"><b>保存数据</b></a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

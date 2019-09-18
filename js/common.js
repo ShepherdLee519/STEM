@@ -167,6 +167,22 @@ function _(target_attr = null){
     return window._TARGET.find(target_attr).eq(0);
 }
 
+/**
+ * 求当前对象的第n个祖先(parent的parent...)
+ * @param {Number} 第几代
+ * @param {String} 验证祖先的选择器
+ */
+function ancestor(n, selector = null){
+    let $goal = $(this);
+    for(let i = 1; i <= n; i++){
+        $goal = $goal.parent();
+    }
+    if(selector) return ($goal.is(selector))?$goal:null;
+    else return $goal;
+}
+$.fn.extend({
+    ancestor:ancestor
+});
 
 
 

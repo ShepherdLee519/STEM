@@ -30,8 +30,8 @@ function Zones(tasknodes){
         that    = this,//Zones自身的this的备份
         $div    = $("#design-activities-zone");
 
-    [...tasknodes].forEach((tasknode) => {
-        let newzone = new Zone(tasknode);
+    [...tasknodes].forEach((tasknode, index) => {
+        let newzone = new Zone(tasknode, index);
         zones.push(newzone);
         $div.append(newzone.self());
     });
@@ -91,8 +91,8 @@ function Zones(tasknodes){
         $target.after(`<div class="subZones"></div>`);
         $target = $target.next();
 
-        [...subtasknodes].forEach((subtasknode) => {
-            let newzone = new Zone(subtasknode);
+        [...subtasknodes].forEach((subtasknode, i) => {
+            let newzone = new Zone(subtasknode, i);
             newzone.toSub(index);
             $target.append(newzone.self());
             subzones.push(newzone);

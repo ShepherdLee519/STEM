@@ -13,5 +13,13 @@
             "pair":"教师活动-配对",
             "share":"教师活动-共享"
         }
+    },
+    "common":{
+        "evidence":"",
+        "material":{
+            "text":"",
+            "link":"",
+            "file":""
+        }
     }
 }

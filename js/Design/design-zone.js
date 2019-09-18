@@ -35,11 +35,13 @@ $(function(){
  * 通过表示不同模式的其中一个环节的tasknode对象组装出一个zone
  * 一个zone只表示模型中的一个环节 例如需求分析
  * 但一个zone可能包含N个Node对象，表示包含的诸多学习活动
- * @param {Object} tasknode -此处的tasknode等表示模型中一个环节的对象 
+ * @param {Object} tasknode -此处的tasknode等表示模型中一个环节的对象
+ * @param {Number} nodeindex - 该区域的index值
  */
-function Zone(tasknode){
+function Zone(tasknode, nodeindex = -1){
     let nodelist    = [],   //该区域包含的学习活动的对象
         num         = 1,    //原定义是每新建一个学习活动递增的学习活动的序列号，暂无实际用处
+        index       = nodeindex,    //该区域本身的index，在新建区域加入zones的时候获得
         parent      = -1,   //对子节点而言，这个值是父节点的index
         that        = this, //该zone自身的引用备份
         activity    = new Activity(), //该zone对应的activity对象
@@ -107,6 +109,7 @@ function Zone(tasknode){
      * Zone对外可见的方法
      * --------------------------------
      * self - 返回自己的DOM引用
+     * setIndex - 设置该结点的index
      * activity - 返回zone拥有的activity的引用
      * 
      * insertBefore - 在指定节点前插入节点
@@ -124,6 +127,9 @@ function Zone(tasknode){
      * resetActivityRadio - 重置新建活动列表中的radio选项
      * pushActivity - 加载数据时，通过数据直接推入一个新的activity
      * 
+     * getEvidence - 获取学习证据
+     * filterEvidence - 过滤学习证据
+     * 
      * addActivityNum - 修改节点数
      * 
      * getData - 返回管辖的所有Node的数据集合
@@ -134,6 +140,13 @@ function Zone(tasknode){
      * @returns {Object}
      */
     this.self = () => $self;
+    /**
+     * 设置该区域的index值
+     * @param {Number} index
+     */
+    this.setIndex = (index) => {
+        that.index = index;
+    };
     /**
      * 返回自身对应的activity对象的引用
      * @returns {Object}
@@ -336,6 +349,51 @@ function Zone(tasknode){
         nodelist.push(node);
         $content.append(node.self());
         that.addActivityNum(1);//区域右上角显示的节点数增加
+    };
+
+
+    /**
+     * 获取学习证据 需要根据该Zone的index与parentIndex特点从DATA中获取
+     * 并经由filterEvidence过滤
+     * @returns {Object}
+     */
+    this.getEvidence = () => {
+        let evidences = "";
+        if(parent == -1){
+            evidences = (DATA.nodes)[index].taskevidence;
+        }else{ 
+            evidences = ((((DATA.nodes)[parent]).next).nodes)[index].taskevidence;
+        }
+
+        return that.filterEvidence(evidences);
+    };
+
+    /**
+     * 过滤学习证据，访问nodelist中的每个node，过滤掉已选的学习证据
+     * @param {Object} evidences_before 过滤前该zone对应的所有学习证据
+     */
+    this.filterEvidence = (evidences_before) => {
+        let evidences_after = [],
+            evidences_selected = [],
+            nodeEvidence;
+        
+        for(let node of nodelist){
+            nodeEvidence = node.getMyEvidence();
+            if(nodeEvidence != "")
+                evidences_selected = evidences_selected.concat(nodeEvidence);
+        }
+        evidences_after = evidences_before.filter((evidence) => {
+            let flag = false;
+            evidences_selected.forEach(evi => {
+                if(evi.content == evidence.content && 
+                    evi.evaluate == evidence.evaluate){
+                    flag = true;
+                }
+            });
+            return !flag;
+        });
+
+        return evidences_after;
     };
 
 

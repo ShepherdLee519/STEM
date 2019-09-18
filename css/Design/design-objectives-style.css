@@ -74,7 +74,16 @@ form#questionDesign-realForm div.questionDesign-coreQuestion-eachQuestion ul{
 form#questionDesign-realForm div.questionDesign-coreQuestion-eachQuestion ul li input{
     display: block;
     position: relative;
-    left: 8px;
+
+}
+
+form#questionDesign-realForm li.coreQuestionListItem{
+    height: 45px;
+    border: none !important;
+}
+
+form#questionDesign-realForm ul.coreQuestionList{
+    border: 1.4px solid #DDD;
 }
 
 
