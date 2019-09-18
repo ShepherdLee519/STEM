@@ -6,7 +6,7 @@
  * info: 将不同的编辑学习活动菜单一次性导入
  */
 
-$PATH = "/activity/";
+$PATH_activity = "activity/";
 $activities = array(
     "pair", "pyramid", "jigsaw", 
     "roleplay", "game", "exp"
@@ -43,7 +43,7 @@ for($i = 0; $i < count($activities); $i++){
 <!--////////////////////////////////////////////////-->
 <?php 
     //学习活动编辑菜单的表单部分(活动名称以外)
-    @include $PATH.$activities[$i].".php";
+    include $PATH_activity.$activities[$i].".php";
 ?>
 <!--////////////////////////////////////////////////-->
 
@@ -128,6 +128,7 @@ for($i = 0; $i < count($activities); $i++){
 </div><!-- end panel-body -->
 </div><!-- end panel -->
 </div>
+
 <?php
 }
 

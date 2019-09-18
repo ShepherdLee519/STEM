@@ -17,6 +17,7 @@
  */
 var DB = null;
 var DB_PATH = "./db/localdata/data.json";
+// var DB_PATH = "C:/STEM/localdata/data.json";
 
 $(function(){
     _hello("design-load");
