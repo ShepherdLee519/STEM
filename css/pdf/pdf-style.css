@@ -1,0 +1,27 @@
+@import url("pdf-cover.css");
+@import url("pdf-theme.css");
+@import url("pdf-coreQuestion.css");
+@import url("pdf-taskModal.css");
+@import url("pdf-course.css");
+@import url("pdf-appendix.css");
+
+/* body{
+    width: 70%;
+    margin-left: 15%;
+    background-color: #DDD;
+} */
+
+body > *{
+    background-color: white;
+}
+
+body main > article{
+    margin: 30px 25px 20px 25px;
+}
+
+body
+{
+	columns:500px 1;
+	-webkit-columns:500px 1; /* Safari and Chrome */
+	-moz-columns:500px 1; /* Firefox */
+}

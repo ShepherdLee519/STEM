@@ -73,7 +73,7 @@
                             <div class="img-zone">
                                 <img width=60 src="<?php 
                                     $PATH = "image/nodes/";
-                                    echo $PATH.strtoupper($tasks[$i]).'/'.strtoupper($tasks[$i])."-".($j+1);?>">
+                                    echo $PATH.strtoupper($tasks[$i]).'/'.strtoupper($tasks[$i])."-".($j+1).".png";?>">
                             </div>
                             <label>
                                 <?php echo $labels[$i][$j];?>

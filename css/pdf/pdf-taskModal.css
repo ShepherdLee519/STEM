@@ -1,0 +1,24 @@
+/*
+ * author: Shepherd.Lee
+ * 任务模式区域
+ * 需要在pdf-style.css 导入
+ * Date: 2019-09-19
+ */
+
+#taskModalZone h4{
+    color: #336699;
+}
+
+#taskModalZone li{
+    position: relative;
+    margin-right: 15px;
+}
+
+#taskModalZone li .taskModal-image{
+    width: 100px;
+}
+
+#taskModalZone li .taskModal-nodename{
+    position: absolute;
+    left: 20px;
+}

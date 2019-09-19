@@ -1,0 +1,121 @@
+/*
+ * author: Shepherd.Lee
+ * 课程设计区域
+ * 需要在pdf-style.css 导入
+ * Date: 2019-09-19
+ */
+
+#courseZone > h4{
+    color: #336699;
+}
+
+
+
+
+/* task
+----------------------------------------------*/
+#courseZone .task .task-title{
+    text-align: center;
+}
+
+#courseZone .task .task-title span{
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#courseZone .task .task-title span.task-nodename{
+    color:#336699;
+}
+
+#courseZone .task .task-info h4{
+    color:#336699;
+    font-weight: bold;
+}
+
+#courseZone .task .task-info p,
+#courseZone .task .task-info li
+{
+    font-size: 120%;
+}
+
+#courseZone .task .task-info .task-activity{
+    margin-bottom: 100px;
+}
+
+#courseZone .task .task-info .task-activity li{
+    position: relative;
+    margin-left: 50px;
+    margin-right: 80px;
+}
+
+#courseZone .task .task-info .task-activity p{
+    text-align: center;
+    position: absolute;
+    font-size: 100%;
+    width: 210px;
+    left: -45%;
+}
+
+#courseZone .task .task-info .taskActivity-image{
+    width: 100px;
+}
+#courseZone .task .task-info .taskActivity-nodenumber{
+    color: #336699;
+}
+
+#courseZone .task .task-info .taskActivity-nodename{
+    font-size: 90%;
+}
+
+
+
+
+
+/* activity
+----------------------------------------------*/
+#courseZone .activity .activity-title{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#courseZone .activity .activity-title img{
+    width: 45px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#courseZone .activity .activity-title .activity-number{
+    color: #336699;
+    font-weight:  bold;
+    font-size:  18px;
+}
+
+#courseZone .activity .activity-title .activity-name{
+    font-size: 18px;
+}
+
+
+
+
+/* activity - pair
+----------------------------------------------*/
+.activity-pair th,
+.activity-pair td.pair-step{
+    color: #336699;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.activity-pair td.pair-step:first-child{
+    width: 100px;
+}
+
+.activity-pair td.pair-student{
+    width: 300px;
+    vertical-align: middle;
+}
+
+.activity-pair td.pair-teacher{
+    vertical-align: middle;
+}

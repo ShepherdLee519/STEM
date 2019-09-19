@@ -1,0 +1,73 @@
+/*
+ * author: Shepherd.Lee
+ * 封面部分的样式
+ * 需要在pdf-style.css 导入
+ * Date: 2019-09-19
+ */
+
+
+#coverZone{
+    padding-bottom: 80px;
+}
+
+
+
+/* 主标题 STEM学习单元设计报告 区域
+---------------------------------------------*/
+#coverZone .cover-title{
+    border-left: #444 solid 80px;
+    margin: 0px 20px 0px 20px;
+    height: 450px;
+    text-align: center;
+}
+
+#coverZone .cover-title h1{
+    margin-top: auto;
+    font-weight: bold;
+    font-size: 60px;
+    position: relative;
+    left: -20px;
+    top: 45%;
+}
+
+
+
+
+/* 设计者显示区域
+--------------------------------------------*/
+#coverZone .cover-designer{ 
+    margin: 0px auto 0px auto;
+    width: 600px;
+}
+
+#coverZone .cover-designer h2{
+    font-weight: bold;
+    font-size:  30px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#coverZone .cover-designer table{
+    text-align: center;
+    width: 450px;
+    margin: 0px auto 0px auto;
+    position: relative;
+    left: 60px;
+    border: none;
+}
+
+#coverZone th.cover-designer-type{
+    width: 20px !important;
+}
+
+#coverZone th.cover-designer-name{
+    width: 90px !important;
+    
+}
+
+#coverZone .cover-designer th,
+#coverZone .cover-designer td{
+    font-size:  30px;
+    text-align: left;
+    border: none;
+}

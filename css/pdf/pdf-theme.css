@@ -1,0 +1,27 @@
+/*
+ * author: Shepherd.Lee
+ * 主题内容与情境部分的样式
+ * 需要在pdf-style.css 导入
+ * Date: 2019-09-19
+ */
+
+#themeZone h4{
+    font-weight: bold;
+}
+
+#themeZone .theme-background{
+    border: 2px #336699 dashed;
+    padding: 5px 10px 5px 10px;
+    border-radius: 25px;
+}
+
+#themeZone .theme-background label{
+    font-weight: bold;
+    display: inline-block;
+    color: #336699;
+    margin-top: 6px;
+}
+
+#themeZone .theme-background p{
+    display: inline;
+}

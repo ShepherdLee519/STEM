@@ -38,12 +38,12 @@ downPdf.onclick = function() {
             }
             
             pdf.save('content.pdf');
-            var datauri = pdf.output('dataurlstring');
-            //去掉前面的字符串后，就是文件的加密字符串
-            var base64 = datauri.substring(28);
-            $.post("./save.php", {data:base64}, (res) => {
-                console.log(res);
-            });
+            // var datauri = pdf.output('dataurlstring');
+            // //去掉前面的字符串后，就是文件的加密字符串
+            // var base64 = datauri.substring(28);
+            // $.post("./save.php", {data:base64}, (res) => {
+            //     console.log(res);
+            // });
         }
     })
 }
