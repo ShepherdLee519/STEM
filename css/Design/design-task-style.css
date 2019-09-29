@@ -112,6 +112,11 @@
     margin-bottom: 20px;
 }
 
+#design-tasksZone div.node > span:hover{
+    font-size: 27px;
+    color: #0099cc;
+}
+
 #design-tasksZone div.node > span.hasSubNode{
     color: red;
     font-size: 27px;
@@ -237,8 +242,9 @@
     z-index: 200;
 }
 
-#design-editTaskZone-body{
+#design-editTaskZone-body form{
     max-height: 450px;
+    overflow-x: hidden;
     overflow-y: scroll;
 }
 
@@ -301,10 +307,10 @@
 }
 
 .table-evidence #addEvidence{
-    width: 30px;
+    /* width: 30px;
     height: 30px;
     padding-left: 7.5px;
-    border-radius: 25px;
+    border-radius: 25px; */
     outline: none;
 }
 

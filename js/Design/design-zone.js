@@ -281,7 +281,7 @@ function Zone(tasknode, nodeindex = -1){
                 that.addActivityNum(1);//区域右上角显示的节点数增加
                 if(pos !== 0){ //向前/后插入
                     let index   = nodelist.indexOf(target),
-                        node    = new Node(num++, activityInfo);
+                        node    = new ActivityNode(num++, activityInfo);
                     node.bindZone(that);//绑定父Zone的引用
 
                     if(pos == 1){ //向后插入结点
@@ -292,7 +292,7 @@ function Zone(tasknode, nodeindex = -1){
                         $content.children().eq(index).before(node.self());
                     }
                 }else if(pos == 0){//默认值 新建节点
-                    let node = new Node(num++, activityInfo);
+                    let node = new ActivityNode(num++, activityInfo);
                     node.bindZone(that);
                     nodelist.push(node);
                     $content.html("").append(node.self());
@@ -341,7 +341,7 @@ function Zone(tasknode, nodeindex = -1){
      */
     this.pushActivity = (activityInfo, nodedata = null) => {
         if(nodelist.length == 0) $content.html("");
-        let node = new Node(num++, activityInfo);
+        let node = new ActivityNode(num++, activityInfo);
         node.bindZone(that);
         if(nodedata != null){
             node.saveData(nodedata);

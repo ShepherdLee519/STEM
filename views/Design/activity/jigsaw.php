@@ -18,14 +18,26 @@
     <tbody>
         <tr>
             <td>专家组</td>
-            <td><textarea class="activity-expert-task" rows=6></textarea></td>
-            <td><textarea class="activity-expert-student" rows=6></textarea></td>
-            <td><textarea class="activity-expert-teacher" rows=6></textarea></td>
+            <td>
+                <textarea class="activity-expert-task" rows=6
+                    placeholder="请填写该环节下专家组对应内容"></textarea></td>
+            <td>
+                <textarea class="activity-expert-student" rows=6
+                    placeholder="请填写该环节下专家组对应内容"></textarea></td>
+            <td>
+                <textarea class="activity-expert-teacher" rows=6
+                    placeholder="请填写该环节下专家组对应内容"></textarea></td>
         </tr><tr>
             <td>原属小组</td>
-            <td><textarea class="activity-former-task" rows=6></textarea></td>
-            <td><textarea class="activity-former-student" rows=6></textarea></td>
-            <td><textarea class="activity-former-teacher" rows=6></textarea></td>
+            <td>
+                <textarea class="activity-former-task" rows=6
+                    placeholder="请填写该环节下原属小组对应内容"></textarea></td>
+            <td>
+                <textarea class="activity-former-student" rows=6
+                    placeholder="请填写该环节下原属小组对应内容"></textarea></td>
+            <td>
+                <textarea class="activity-former-teacher" rows=6
+                    placeholder="请填写该环节下原属小组对应内容"></textarea></td>
         </tr>
     </tbody>
 </table>

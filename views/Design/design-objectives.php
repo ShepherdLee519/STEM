@@ -1,7 +1,7 @@
 <?php
 /**
  * author: Shepherd.Lee
- * Date: 2019-09 - 09
+ * Date: 2019-09-25
  * version: 2.0.0
  * info: 
  *      原p=baseinfo => 渲染的基本信息页面
@@ -88,19 +88,14 @@
             <div class="form-group has-feedback">
                 <label for="courseTheme-grade" class="col-sm-2 control-label">教学对象:</label>
                 <div class="col-sm-6">
-                    <select class="form-control" name="courseTheme-grade" id="courseTheme-grade">
+                    <select class="form-control" name="courseTheme-grade" id="courseTheme-grade" disabled>
                         <option value="1">一年级</option>  <option value="2">二年级</option>
                         <option value="3">三年级</option>  <option value="4">四年级</option>
-                        <option value="5">五年级</option>  <option value="6">六年级</option>
+                        <option value="5" selected="selected">五年级</option>  <option value="6">六年级</option>
                     </select>
                 </div>
             </div>
         </form>
-        <!--         
-        <div class="col-sm-12">
-            <button class="btn btn-default btn-md pull-right" style="width:100px;">确认</button>
-        </div> 
-        -->
     </div>
     </div><!-- /end panel-primary -->
 </div>
@@ -122,7 +117,7 @@
         </legend>
 
         <!-- 这里是展示四种不同的课程标准 应当以只读的形式进行展示 -->
-        <div class="form-group has-feedback hidden">
+        <div class="form-group has-feedback">
             <label for="questionDesign-courseStandard-science" class="col-sm-2 control-label"
                 title = "点击以放大/收缩文本框来显示课程标准">科学:</label>
             <div class="col-sm-10">
@@ -131,7 +126,7 @@
                 <span class="glyphicon form-control-feedback"></span>
             </div> 
         </div>
-        <div class="form-group has-feedback hidden">
+        <div class="form-group has-feedback">
             <label for="questionDesign-courseStandard-technology" class="col-sm-2 control-label"
                 title = "点击以放大/收缩文本框来显示课程标准">技术:</label>
             <div class="col-sm-10">
@@ -140,7 +135,7 @@
                 <span class="glyphicon form-control-feedback"></span>
             </div> 
         </div>
-        <div class="form-group has-feedback hidden">
+        <div class="form-group has-feedback">
             <label for="questionDesign-courseStandard-engineering" class="col-sm-2 control-label"
                 title = "点击以放大/收缩文本框来显示课程标准">工程:</label>
             <div class="col-sm-10">
@@ -149,7 +144,7 @@
                 <span class="glyphicon form-control-feedback"></span>
             </div> 
         </div>
-        <div class="form-group has-feedback hidden">
+        <div class="form-group has-feedback">
             <label for="questionDesign-courseStandard-mathematics" class="col-sm-2 control-label"
                 title = "点击以放大/收缩文本框来显示课程标准">数学:</label>
             <div class="col-sm-10">
@@ -180,28 +175,23 @@
 <label for="questionDesign-coreQuestion" class="col-sm-3 control-label">学科核心问题:</label>
 <br /><br />
 
-<div class="col-sm-12" id="questionDesign-coreQuestion">
+<div class="col-sm-12" id="questionDesign-coreQuestion" style="margin-top: 10px;">
 
 
 <div class="questionDesign-coreQuestion-eachQuestion">
     <label for="questionDesign-coreQuestion-science" class="col-sm-2 control-label">科学:</label>
     <div class="col-sm-10" id="questionDesign-coreQuestion-science">
-        <div class="input-group">
-            <span class="input-group-btn">
-                <button class="btn btn-primary">
-                    <span class="glyphicon glyphicon-chevron-down toggleCoreQuestion"></span>
-                </button>
-            </span>
-
-            <input type="text" class="form-control editCoreQuestion" 
-                placeholder="当前核心问题数：0">
-
-            <span class="input-group-btn">
-                <button class="btn btn-info">
-                    <span class="glyphicon glyphicon-plus addCoreQuestion"></span>
-                </button>
-            </span>
+        <div class="btn-group">
+            <button class="btn btn-primary">
+                <span class="glyphicon glyphicon-chevron-down toggleCoreQuestion"></span>
+            </button>
+            <button class="btn btn-info">
+                <span class="glyphicon glyphicon-plus addCoreQuestion"></span>
+            </button>
         </div>
+
+        <input type="text" class="form-control editCoreQuestion" 
+            placeholder="当前核心问题数：0">
         
         <ul class="list-group coreQuestionList hidden col-sm">
         </ul>
@@ -210,23 +200,22 @@
 <div class="questionDesign-coreQuestion-eachQuestion">
     <label for="questionDesign-coreQuestion-technology" class="col-sm-2 control-label">技术:</label>
     <div class="col-sm-10" id="questionDesign-coreQuestion-technology">
-        <div class="input-group">
+        <div class="btn-group">
             <span class="input-group-btn">
                 <button class="btn btn-primary">
                     <span class="glyphicon glyphicon-chevron-down toggleCoreQuestion"></span>
                 </button>
             </span>
-
-            <input type="text" class="form-control editCoreQuestion" 
-                placeholder="当前核心问题数：0">
-
             <span class="input-group-btn">
                 <button class="btn btn-info">
                     <span class="glyphicon glyphicon-plus addCoreQuestion"></span>
                 </button>
             </span>
         </div>
-        
+
+        <input type="text" class="form-control editCoreQuestion" 
+            placeholder="当前核心问题数：0">
+
         <ul class="list-group coreQuestionList hidden">
         </ul>
     </div> 
@@ -234,23 +223,22 @@
 <div class="questionDesign-coreQuestion-eachQuestion">
     <label for="questionDesign-coreQuestion-engineering" class="col-sm-2 control-label">工程:</label>
     <div class="col-sm-10" id="questionDesign-coreQuestion-engineering">
-        <div class="input-group">
+        <div class="btn-group">
             <span class="input-group-btn">
                 <button class="btn btn-primary">
                     <span class="glyphicon glyphicon-chevron-down toggleCoreQuestion"></span>
                 </button>
             </span>
-
-            <input type="text" class="form-control editCoreQuestion" 
-                placeholder="当前核心问题数：0">
-
             <span class="input-group-btn">
                 <button class="btn btn-info">
                     <span class="glyphicon glyphicon-plus addCoreQuestion"></span>
                 </button>
             </span>
         </div>
-        
+
+        <input type="text" class="form-control editCoreQuestion" 
+            placeholder="当前核心问题数：0">
+            
         <ul class="list-group coreQuestionList hidden">
         </ul>
     </div> 
@@ -258,22 +246,21 @@
 <div class="questionDesign-coreQuestion-eachQuestion">
     <label for="questionDesign-coreQuestion-mathematics" class="col-sm-2 control-label">数学:</label>
     <div class="col-sm-10" id="questionDesign-coreQuestion-mathematics">
-        <div class="input-group">
+        <div class="btn-group">
             <span class="input-group-btn">
                 <button class="btn btn-primary">
                     <span class="glyphicon glyphicon-chevron-down toggleCoreQuestion"></span>
                 </button>
             </span>
-
-            <input type="text" class="form-control editCoreQuestion" 
-                placeholder="当前核心问题数：0">
-
             <span class="input-group-btn">
                 <button class="btn btn-info">
                     <span class="glyphicon glyphicon-plus addCoreQuestion"></span>
                 </button>
             </span>
         </div>
+
+        <input type="text" class="form-control editCoreQuestion" 
+            placeholder="当前核心问题数：0">
         
         <ul class="list-group coreQuestionList hidden">
         </ul>

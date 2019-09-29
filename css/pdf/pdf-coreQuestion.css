@@ -40,3 +40,12 @@
 #coreQuestionZone td.coreQuestion-question span.coreQuestion-number:after{
     content: ": ";
 }
+
+#coreQuestionZone  table td,
+#coreQuestionZone  table th{
+    border: 1.6px solid #ccc !important;
+}
+
+#coreQuestionZone  table{
+    border: 1.6px solid #ccc !important;
+}

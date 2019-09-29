@@ -1,6 +1,6 @@
 /**
  * author: Shepherd.Lee
- * Date: 2019-09-09
+ * Date: 2019-09-25
  * version: 2.0.0
  * info: 学习目标相关
  * index:
@@ -29,6 +29,12 @@ var THEME = null;
  * @global
  */
 var QUESTION = null;
+/**
+ * 对应课程标准内容的全局存储
+ * @global
+ */
+var stdData = null;
+
 
 const STANDARD_PATH = "./datas/standard/standard.json";
 const STD = ["science", "technology", "engineering", "mathematics"];
@@ -52,7 +58,7 @@ $(function(){
  * 初始化课程标准区域的textarea内容
  */
 function initStandards(){
-    let stdData = _get(STANDARD_PATH);
+    stdData = _get(STANDARD_PATH);
     const prefix = "questionDesign-courseStandard";
     let value = "";
 
@@ -92,6 +98,11 @@ function standardsHandlers(){
                 newrows = (rows > DEFAULT_ROWS)?DEFAULT_ROWS:10;
             $textarea.attr("rows", newrows);
         });
+        $(`#${prefix}-${type}`).click(function(){
+            let rows = $(this).attr("rows"),
+                newrows = (rows > DEFAULT_ROWS)?DEFAULT_ROWS:10;
+            $(this).attr("rows", newrows);
+        });
     })
 }
 
@@ -114,20 +125,20 @@ function questionsHandlers(){
 
         $addBtn.click(() => {
             let val = $edit.val();
-            if(val !== ""){ 
-                $list.append(CoreQuestionLiGenerator(std_name, val));
-                $edit.val("");
-                questionsNumberAdjust(std_name);
 
-                if($list.children().length == 1){
-                    questionsAdjust(std_name, 1);
-                }else{
-                    questionsAdjust(std_name);
-                }
-                
+            $list.append(CoreQuestionLiGenerator(std_name, val));
+            $edit.val("");
+            questionsNumberAdjust(std_name);
+
+            if($list.children().length == 1){
+                questionsAdjust(std_name, 1);
             }else{
-                //可能的提示信息
+                questionsAdjust(std_name);
             }
+
+            //增加完后，将滚轮移动到最末端
+            let scrollHeight = $list.prop("scrollHeight");
+            $list.animate({scrollTop:scrollHeight}, 400);
         });
 
         $toggleBtn.click(() => {
@@ -308,6 +319,7 @@ function coreQuestionTypeMap(key){
         else if(v === key) return k;
     }
 }
+
 
 
 

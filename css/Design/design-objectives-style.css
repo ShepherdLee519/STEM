@@ -50,25 +50,33 @@
 /* 问题表单区域 questionDesign
 -----------------------------------*/
 #questionDesign form#questionDesign-realForm label.control-label{
-    font-size: 87%;
+    font-size: 125%;
 }
 
-#questionDesign-coreQuestion div.questionDesign-coreQuestion-eachQuestion{
-    font-size: 125%;
+#questionDesign-coreQuestion div.questionDesign-coreQuestion-eachQuestion label{
+    /* font-size: 125%; */
+    margin-left: -30px;
+}
+
+#questionDesign-coreQuestion div.questionDesign-coreQuestion-eachQuestion div.col-sm-10{
+    width: calc(83.33% + 30px);
+    position: relative;
+    left: 15px;
 }
 
 
 #questionDesign-coreQuestion div.questionDesign-coreQuestion-eachQuestion div{
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 form#questionDesign-realForm div.questionDesign-coreQuestion-eachQuestion ul{
-    max-height: 120px; 
+    max-height: 158px; 
     overflow-y: scroll;
-    margin-top: 20px;
     border-bottom: 1px solid #ddd;
     width: 120%;
     margin-left: -20%;
+    margin-top: 5px;
+    margin-bottom: 0px;
 }
 
 form#questionDesign-realForm div.questionDesign-coreQuestion-eachQuestion ul li input{
@@ -78,12 +86,20 @@ form#questionDesign-realForm div.questionDesign-coreQuestion-eachQuestion ul li 
 }
 
 form#questionDesign-realForm li.coreQuestionListItem{
-    height: 45px;
+    height: 100%;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
     border: none !important;
+    /* border: 1px solid skyblue !important; */
 }
 
 form#questionDesign-realForm ul.coreQuestionList{
     border: 1.4px solid #DDD;
+}
+
+form#questionDesign-realForm .editCoreQuestion{
+    /* visibility: hidden; */
+    display: none;
 }
 
 
@@ -103,4 +119,9 @@ form#questionDesign-realForm ul.coreQuestionList{
 
 #questionDesign-courseStandard legend:hover{
     cursor: pointer;
+}
+
+#questionDesign-courseStandard div label{
+    font-size: 125%;
+    margin-left: -15px;
 }

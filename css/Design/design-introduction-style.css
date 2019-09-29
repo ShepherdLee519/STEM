@@ -9,3 +9,16 @@
     float: left;
     margin: 0px 2.5px 0px 2.5px;
 }
+
+#designIntro-selectModal .radio label{
+    font-weight: bold;
+    font-size: 110%;
+}
+
+#designIntro-selectModal .radio input{
+    height: 20px;
+    width: 20px;
+    position: relative;
+    left: -2px;
+    top: 4px;
+}

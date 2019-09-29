@@ -1,8 +1,7 @@
 <?php
 /**
  * author: Shepherd.Lee
- * Date: 2019-07-27
- * version: 2.0.0
+ * Date: 2019-09-25
  * info:
  *      design.php中导入，学习评价节点的编辑菜单
  *      考虑将该菜单置为绝对的固定位置
@@ -40,7 +39,7 @@
                     <button class="btn btn-danger text-center" id="taskCoreQuestion-ResetBtn" style="width: 65px">
                         重选 <span class="glyphicon glyphicon-plus" ></span>
                     </button>
-                    <button class="btn btn-default text-center" id="taskCoreQuestion-SupplyBtn" style="width: 65px">
+                    <button class="btn btn-default text-center hidden" id="taskCoreQuestion-SupplyBtn" style="width: 65px">
                         补充 <span class="glyphicon glyphicon-plus" ></span>
                     </button>
                 </div>
@@ -72,9 +71,6 @@
         </div>
 
 
-
-
-
         <div class="form-group">
         <label for="taskEvidence" class="col-sm-3 control-label">学习证据:</label>
         <div class="col-sm-12">
@@ -85,6 +81,7 @@
                     <th class="evaluate-header">学习评价</th>
                     <th class="add-header">
                         <button class="btn btn-info" id="addEvidence">
+                            添加
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                     </th></tr>
@@ -108,12 +105,17 @@
             </tbody>
         </table>
         </div>
+        
         </div>
-        <div class="btn-group pull-right">
+        <!-- <div class="btn-group pull-right">
             <button class='btn btn-default' id="design-confirmTaskEditBtn" style="width:80px">确定</button>
             <button class='btn btn-danger' id="design-cancelTaskEditBtn" style="width:80px">取消</button>
-        </div>
+        </div> -->
     </form>
+    <div class="btn-group pull-right" style="margin-top: 15px">
+        <button class='btn btn-primary' id="design-confirmTaskEditBtn" style="width:80px">确定</button>
+        <button class='btn btn-danger' id="design-cancelTaskEditBtn" style="width:80px">取消</button>
+    </div>
 </div><!-- end design-editTaskZone-body -->
 </div>
 
@@ -140,7 +142,7 @@
         <label class="col-sm-3 control-label" for="evidenceContent">证据内容:</label>
         <div class="col-sm-9">
             <textarea class="form-control" name="evidenceContent" id="add-evidenceContent"
-                rows="4" placeholder="证据内容"></textarea>
+                rows="1" placeholder="证据内容"></textarea>
         </div> 
     </div>
     <div class="form-group">
@@ -173,8 +175,8 @@
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelAddEvidence">关闭</button>
-    <button type="button" class="btn btn-info" id="confirmAddEvidence">新建</button>
+    <button type="button" class="btn btn-info" id="confirmAddEvidence">确定</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelAddEvidence">取消</button>
 </div>
 
 </div><!-- /.modal-content -->
@@ -205,7 +207,7 @@
         <label class="col-sm-3 control-label" for="evidenceContent">证据内容:</label>
         <div class="col-sm-9">
             <textarea class="form-control" name="evidenceContent" id="edit-evidenceContent"
-                rows="4" placeholder="证据内容"></textarea>
+                rows="1" placeholder="证据内容"></textarea>
         </div> 
     </div>
     <div class="form-group">
@@ -238,8 +240,8 @@
 </div>
 
 <div class="modal-footer">
+    <button type="button" class="btn btn-info" id="confirmEditEvidence">确定</button>
     <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelEditEvidence">取消</button>
-    <button type="button" class="btn btn-info" id="confirmEditEvidence">确认修改</button>
 </div>
 
 </div><!-- /.modal-content -->

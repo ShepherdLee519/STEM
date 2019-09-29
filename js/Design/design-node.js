@@ -3,7 +3,7 @@
  * Date: 2019 - 08 - 27
  * info: 学习活动相关
  * index:
- *      Node()
+ *      ActNode()
  *          > self()
  *          > bindZone()
  * 
@@ -38,7 +38,7 @@ $(function(){
  *      activityname: activityname//具体的活动名
  *  }
  */
-function Node(num, activityInfo){
+function ActivityNode(num, activityInfo){
     let nodedata = null, //自身的存储数据
         that     = this, //该Node的this引用的备份
         zone     = null; //父节点 - 区域zone的引用

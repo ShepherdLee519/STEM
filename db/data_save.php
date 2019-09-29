@@ -1,7 +1,6 @@
 <?php
 
 $FILE_PATH = "./localData/";
-// $FILE_PATH = "C:/STEM/localdata/";
 $post_data = $_POST["data"];
 $zone = $_POST["zone"];
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * author: Shepherd.Lee
- * Date: 2019-09-16
+ * Date: 2019-09-25
  * version: 2.0.0
  * info: 将不同的编辑学习活动菜单一次性导入
  */
@@ -53,7 +53,7 @@ for($i = 0; $i < count($activities); $i++){
 <div class="form-group">
     <label for="" class="col-sm-7 control-label"><b>选择本活动对应的学习证据</b></label>
     <div class="col-sm-4">
-        <button class="btn btn-success select-activityEvidence">选择</button>
+        <button class="btn btn-success select-activityEvidence">添加 <span class="glyphicon glyphicon-plus" ></span></button>
         <button class="btn btn-default hidden reset-activityEvidence">清空重置</button>
     </div>
 </div>
@@ -79,14 +79,7 @@ for($i = 0; $i < count($activities); $i++){
 </div>
 <hr />
 <div class="form-group">
-    <label for="" class="col-sm-3 control-label">材料工具：</label>
-    <div class="col-sm-9">
-        <textarea class="form-control material-text" rows=4 
-            placeholder="使用的材料或相关工具的文本描述"></textarea>
-    </div>
-</div>
-<div class="form-group">
-    <label for="" class="col-sm-3 control-label">链接资源：</label>
+    <label for="" class="col-sm-3 control-label">链接：</label>
     <div class="col-sm-9">
     <table class="table table-striped">
         <thead>
@@ -102,18 +95,25 @@ for($i = 0; $i < count($activities); $i++){
         </tbody>
     </table>
     <div class="btn-group pull-right">
-        <button class="btn btn-success change-link">管理链接资源</button>
+        <button class="btn btn-success change-link">链接资源管理</button>
     </div>
     </div>
 </div>
 <div class="form-group">
-    <label for="" class="col-sm-3 control-label">上传资源：</label>
+    <label for="" class="col-sm-3 control-label">文件：</label>
     <div class="col-sm-9">
     <ul class="list-group list-unstyled file-ul">
     </ul>
     <div class="btn-group pull-right">
         <button class="btn btn-success change-file">文件资源管理</button>
     </div>
+    </div>
+</div>
+<div class="form-group">
+    <label for="" class="col-sm-3 control-label">其他：</label>
+    <div class="col-sm-9">
+        <textarea class="form-control material-text" rows=4 
+            placeholder="可以列出所需的软件工具、手工材料等"></textarea>
     </div>
 </div>
 
@@ -133,6 +133,12 @@ for($i = 0; $i < count($activities); $i++){
 }
 
 ?>
+
+
+
+
+
+
 
 
 
@@ -176,9 +182,9 @@ for($i = 0; $i < count($activities); $i++){
 </div>
 
 <div class="modal-footer">
+    <button type="button" class="btn btn-success" id="confirmActivityEvidence">确定</button>
     <button type="button" class="btn btn-default" data-dismiss="modal" 
         id="cancelActivityEvidence">取消</button>
-    <button type="button" class="btn btn-success" id="confirmActivityEvidence">确认</button>
 </div>
 
 </div><!-- /.modal-content -->
@@ -261,9 +267,9 @@ for($i = 0; $i < count($activities); $i++){
 </div>
 
 <div class="modal-footer">
+    <button type="button" class="btn btn-success" id="confirmLink">确定</button>
     <button type="button" class="btn btn-default" data-dismiss="modal" 
         id="cancelLink">取消</button>
-    <button type="button" class="btn btn-success" id="confirmLink">确认修改</button>
 </div>
 
 </div><!-- /.modal-content -->
@@ -350,11 +356,9 @@ for($i = 0; $i < count($activities); $i++){
         </div>
     </div>
     <div class="form-group">
-        <div class="col-sm-3 pull-right">
-            <div class="btn-group">
-            <button class="btn btn-default" id="addFile-reset">重置</button>
-            <button class="btn btn-success" id="addFile-upload">上传</button>
-            </div>
+        <div class="col-sm-2 pull-right">
+            <button class="btn btn-success" id="addFile-upload" style="width:60px;">上传</button>
+            <button class="btn btn-default hidden" id="addFile-reset">重置</button>
         </div>
     </div>
 </div>
@@ -362,8 +366,8 @@ for($i = 0; $i < count($activities); $i++){
 </div>
 
 <div class="modal-footer">
-    <button type="button" id="cancelFile" class="btn btn-default" data-dismiss="modal">关闭</button>
-    <button type="button" id="confirmFile" class="btn btn-success">确认</button>
+    <button type="button" id="confirmFile" class="btn btn-success">确定</button>
+    <button type="button" id="cancelFile" class="btn btn-default" data-dismiss="modal">取消</button>
 </div>
 
 <!-- ///////////////////////////////////// -->

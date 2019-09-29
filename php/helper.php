@@ -23,5 +23,20 @@ function _post($str){
 function _space($num = 8){
     echo str_repeat("&nbsp;", $num);
 }
- 
+
+function _deleteFile($file){
+    $file = iconv('utf-8', 'gbk', $file);
+    if(file_exists($file)){
+        if(!unlink($file)){
+            return 0;
+        }else{
+            return 1;
+        }
+    }
+}
+
+function _mkdir($FILE_PATH){
+    is_dir($FILE_PATH) or mkdir($FILE_PATH, 0777, true);//文件夹不存在则创建
+}
+
 ?>

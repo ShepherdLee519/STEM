@@ -222,11 +222,11 @@ function loadActivityData(){
             </tr>`.trim();
         }
         $evidences_body.html(str);
-        _removeClass(_(".reset-activityEvidence"), "hidden");
-        _addClass(_(".select-activityEvidence"), "hidden");
+        // _removeClass(_(".reset-activityEvidence"), "hidden");
+        // _addClass(_(".select-activityEvidence"), "hidden");
     }else{
-        _addClass(_(".reset-activityEvidence"), "hidden");
-        _removeClass(_(".select-activityEvidence"), "hidden");
+        // _addClass(_(".reset-activityEvidence"), "hidden");
+        // _removeClass(_(".select-activityEvidence"), "hidden");
     }
 
     /* 材料与工具区域的装填
@@ -296,6 +296,21 @@ function saveActivity(){
         return;
     }
 
+    let activityFullData = getActivity();
+
+    $.post("./db/data_save.php", {data:activityFullData, zone:"activity"}, (res) => {
+        if(res) log("save activity successfully");
+        else err("save activity failed");
+    });
+}
+
+
+
+
+/**
+ * 获取本地的activity的数据封装并返回
+ */
+function getActivity(){
     if(_isundef(ZONE)){
         log("Please Init ZONE");
         return;
@@ -327,8 +342,5 @@ function saveActivity(){
         sub     : subActivityData
     };
 
-    $.post("./db/data_save.php", {data:activityFullData, zone:"activity"}, (res) => {
-        if(res) log("save activity successfully");
-        else err("save activity failed");
-    });
+    return activityFullData;
 }

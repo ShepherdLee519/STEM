@@ -72,6 +72,23 @@ function _isundef(target){
     return typeof target == "undefined";
 }
 
+
+/**
+ * 判断某个js对象的键值存在且非空
+ * @param {Object} target
+ * @param {String} key
+ */
+function _exist(target, key){
+    if(!_isundef(target) && 
+       !_isundef(target[key]) &&
+       target[key] !== "" && 
+       target[key] !== [])
+        return true;
+    else
+        return false;
+}
+
+
 /**
  * 保存对象对应键的值的方法：
  *  example:
@@ -113,7 +130,7 @@ function _store(global_var, key, value){
  *  );
  * @param {Object} global_var 
  * @param {String} key - 或者是一个String数组 
- * @param {Object} value - 默认为null时将取出的值返回
+ * @param {Object} value - 默认为null时将取出的值返回 或存于value对应位置(val())
  */
 function _withdraw(global_var, key, value = null){
     let place;
@@ -134,6 +151,41 @@ function _withdraw(global_var, key, value = null){
         if(value == null) return pre_place[key[key.length-1]];
         if(!Array.isArray(pre_place[key[key.length-1]])){
             value.val(pre_place[key[key.length-1]]);
+        }else{
+            log(pre_place[key[key.length-1]]);
+        }
+    }
+}
+
+
+/**
+ * 将对象中制定位置的值存于html中(调用html())
+ *  example:
+ *  _html(
+ *      THEME, ["people", key],
+ *      $(#${prefix}-people-${key})
+ *  );
+ * @param {Object} global_var 
+ * @param {String} key - 或者是一个String数组 
+ * @param {Object} value - 存于value对应位置(val())
+ */
+function _html(global_var, key, value){
+    let place;
+    if(!Array.isArray(key)){
+        if(!Array.isArray(global_var[key])){
+            value.html(global_var[key]);
+        }else{
+            log(global_var[key]);
+        }
+    }else{
+        let pre_place;
+        place = global_var;
+        key.forEach((k) => {
+            pre_place = place;
+            place = pre_place[k];
+        });
+        if(!Array.isArray(pre_place[key[key.length-1]])){
+            value.html(pre_place[key[key.length-1]]);
         }else{
             log(pre_place[key[key.length-1]]);
         }

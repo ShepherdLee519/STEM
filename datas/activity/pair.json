@@ -4,14 +4,14 @@
     "activity":{
         "name":"活动名称",
         "student":{
-            "think":"学生活动-思考",
-            "pair":"学生活动-配对",
-            "share":"学生活动-共享"
+            "think":"",
+            "pair":"",
+            "share":""
         },
         "teacher":{
-            "think":"教师活动-思考",
-            "pair":"教师活动-配对",
-            "share":"教师活动-共享"
+            "think":"",
+            "pair":"",
+            "share":""
         }
     },
     "common":{

@@ -2,7 +2,6 @@
 /**
  * author: Shepherd.Lee
  * Date: 2019-08-27
- * version: 2.0.0
  * dependencies: php/helper.php; views视图; 
  * info: 
  *      网页工具的入口(相当于index.html)，根据querystring中的p值，来选择渲染对应的views/中的视图与css/js文件
@@ -31,8 +30,9 @@
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
         <!-- 导入自定义css文件 -->
         <link rel="stylesheet" href="css/Design/design-style.css" />
+        <link rel="stylesheet" href="css/pdf/pdf-style.css" />
 
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
             /**
              * 页面触发 onbeforeunload 事件时进入
              * 1）在页面被关闭前会进入
@@ -42,13 +42,13 @@
             function pageClose() {
                 log(new Date() + "：用户准备离开页面...");
                 /*---------------------------------------*/
-                saveTheme();//学习目标 - 课程主题
-                saveQuestion();//学习目标 - 问题设计
-                saveTasks();//学习评价
+                // saveTheme();//学习目标 - 课程主题
+                // saveQuestion();//学习目标 - 问题设计
+                // saveTasks();//学习评价
                 // saveActivity();//学习活动
                 return true;
             }
-        </script>
+        </script> -->
     </head>
     <body onbeforeunload="return pageClose()">
         <!-- ///导航栏 -->
@@ -59,26 +59,29 @@
                     <a class="navbar-brand" href="#" style="margin:0;padding:0;margin-right:5px;">
                         <img src="image/icon/logo.ico" class="img-responsive" width=50 alt="logo" />
                     </a>
-                    <a class="navbar-brand" href="#">STEM学习设计工具</a>
+                    <a class="navbar-brand navbar-title" href="#">STEM学习设计工具</a>
                 </div><!-- /end -->
 
                 <!-- //导航栏标题外的内容功能区 -->
                 <div>
                     <!-- /切换功能的静态按钮 -->
                     <ul class="nav navbar-nav" id="top-navbar" style="margin-left: 100px;">
-                        <li><a href="index.php?p=design" id="design-link">学习设计</a></li>
-                        <li><a href="index.php?p=result" id="A-link">设计结果</a></li>
-                        <li><a href="#" id="B-link">分析数据</a></li>
-                        <li><a href="#" id="C-link">定制模块</a></li>
+                        <li><a href="#" id="design-link">学习设计</a></li>
+                        <li><a href="#" id="preview-link">结果预览</a></li>
+                        <!-- <li><a href="#" id="B-link">分析数据</a></li> -->
+                        <!-- <li><a href="#" id="C-link">定制模块</a></li> -->
                     </ul><!-- /end -->
 
                     <!-- /导航栏右侧的账户管理 -->
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <!-- <a href="#" id="test-saveBtn"><b>Save</b></a></li><li> -->
-                            <!-- <a href="#" onclick="saveTasks();"><b>SaveTasks</b></a></li><li> -->
-                            <!-- <a href="#" onclick="saveActivity();"><b>SaveActivity</b></a> -->
                             <a href="#" id="saveData"><b>保存数据</b></a>
+                        </li>
+                        <li>
+                            <a href="#" id="savePDF" class="hidden"><b>提交报告</b></a>
+                        </li>
+                        <li>
+                            <a href="#" id="downloadPDF" class="hidden"><b>下载报告</b></a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -95,13 +98,17 @@
         </nav><!-- ///end -->
 
         <!-- 主要内容区域 -->
-        <div class="container-fluid">
+        <div class="container-fluid" id="containers-wrapper">
             <!-- ///////////////////////////////////////////////////////////////////// -->
 
             <?php
                 if(!@include $VIEW_PATH.'Design/design.php'){
                     include $VIEW_PATH."default.php";
                 }
+            ?>
+
+            <?php
+                @include $VIEW_PATH."preview.php";
             ?>
 
             <!-- ///////////////////////////////////////////////////////////////////// -->
@@ -122,9 +129,11 @@
         <script src="js/bootstrap/bootstrapValidator.min.js"></script>
         <!-- 导入自定义的js文件 -->
         <script src="js/common.js"></script>
+        <script src="js/navigator.js"></script>
         <!-- ///////////////////////////////////////////////////////////////////// -->
 
         <?php
+            // design部分相关
             $design_js = array(
                 "Design/",//path name
                 "design", "design-node", "design-zone", "design-zones",
@@ -135,6 +144,19 @@
             
             for($i = 1; $i < count($design_js); $i++){
                 ?><script src="js/<?php echo $design_js[0].$design_js[$i];?>.js"></script><?php
+            }
+
+            //预览 - 生成pdf部分相关
+            $preview_js = array(
+                "pdf/", //path name
+                "html2canvas", "jsPdf.debug",
+                "render",
+                "inject/inject", "inject/cover", "inject/theme", "inject/coreQuestion",
+                "inject/taskModal","inject/course", "inject/course-activity"
+            );
+
+            for($i = 1; $i < count($preview_js); $i++){
+                ?><script src="js/<?php echo $preview_js[0].$preview_js[$i];?>.js"></script><?php
             }
         ?>
 

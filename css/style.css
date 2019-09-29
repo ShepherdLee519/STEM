@@ -6,6 +6,18 @@ body{
     background-color: #CCCCFF;
     border-color: #CCCCFF;
 }
+
+#navbar a{
+    color: #444 !important;
+    font-size: 130%;
+}
+
+#navbar a.navbar-title{
+    color: #666 !important;
+    font-weight: bold;
+    font-size: 140%;
+}
+
 #navbar .active a{
     /*被选中的链接的底色*/
     background-color: white;
@@ -21,3 +33,10 @@ body{
 .panel-title{
     font-size: 1.5em;
 }
+
+
+/*导航栏区域的按钮
+---------------------------------------*/
+/* #navbar #saveData{
+    
+} */

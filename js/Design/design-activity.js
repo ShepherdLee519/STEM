@@ -221,6 +221,7 @@ function initActivityEvidenceHandler(){
         $(select).click(function(e){
             e.preventDefault();
             $modal.modal("show");
+            $(this).next().click();
             $zone = $(this).ancestor(2).next();
             $body = $zone.find(".activityEvidenceBody");
 
@@ -246,9 +247,10 @@ function initActivityEvidenceHandler(){
             e.preventDefault();
             $zone = $(this).ancestor(2).next();
             $body = $zone.find(".activityEvidenceBody");
-            $body.html("");
+            if($body.html() === "") return;
+            else $body.html("");
             NODE.setMyEvidence("");
-            _exClass($(this), $(this).prev(), "hidden");
+            // _exClass($(this), $(this).prev(), "hidden");
             return false;
         });
     });
@@ -266,13 +268,33 @@ function initActivityEvidenceHandler(){
             }
         });
         if(flag){
-            _exClass(
-                $edit_zone_now.find(".select-activityEvidence"),
-                $edit_zone_now.find(".reset-activityEvidence"), 
-                "hidden"
-            );
+            // _exClass(
+            //     $edit_zone_now.find(".select-activityEvidence"),
+            //     $edit_zone_now.find(".reset-activityEvidence"), 
+            //     "hidden"
+            // );
         }
         // $zone.removeClass("hidden");
+        $modal.modal("hide");
+    });
+
+    //取消选择，回复原来的数据
+    $cancel.click(() => {
+        let target = NODE.getData();
+        //装填学习证据
+        $body.html("");//先清空
+
+        if(target.common.evidence != ""){
+            let str = "";
+            for(let evidence of target.common.evidence){
+                str += `
+                <tr>
+                    <td class="content-td">${evidence.content}</td>
+                    <td class="evaluate-td">${evidence.evaluate}</td>
+                </tr>`.trim();
+            }
+            $body.html(str);
+        }
         $modal.modal("hide");
     });
 }
@@ -560,6 +582,7 @@ function initActivityFileHandler(){
                 let $a = $(`<a href="${$(this).attr("data-fullpath")}" download></a>`);
                 $("body").eq(0).append($a);
                 $a[0].click();
+                $a.remove();
                 log($(this).attr("data-fullpath"));
                 return false;
             });

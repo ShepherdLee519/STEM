@@ -95,10 +95,10 @@ function Init(){
         tasktype = tasktype.toLowerCase();//DBL -> dbl
 
         //自定义模式尚未定义，跳过
-        if(tasktype == "user"){
-            log("Undefined user type");
-            return;
-        }
+        // if(tasktype == "user"){
+        //     log("Undefined user type");
+        //     return;
+        // }
         log("The task type is: " + tasktype);
 
         _async();
@@ -118,6 +118,7 @@ function Init(){
         //重选模式
         $("#design-tasks-resetModal").off("click").click(function(){
             TASKZONE.reset();
+            new Activity().hideEditActivityZones();//隐藏编辑学习活动，如果有的话
             toggleTrigger("off");//见design-animation.js
             $("#design-tasks-resetModal").addClass("hidden");
         });
@@ -197,7 +198,8 @@ function Task(){
                         <img title='点击以编辑/查看' src="${imagePath}${node.imgsrc}">
                     </div>
                 </div>
-                <span class='glyphicon glyphicon-chevron-down'></span>
+                <span class='glyphicon glyphicon-chevron-down'
+                    title="点击添加子模式"></span>
             </div>
             `.trim());
     
@@ -883,6 +885,7 @@ function initEditNodeHandler(){
             
             let values = [], types = [], str = "<ul class='list-group'>";
             let $boxes = $(this).parent().parent().find("input[type='checkbox']");
+
             [...$boxes].forEach(box => {
                 //每一个选中的核心问题
                 if($(box).is(":checked")){
@@ -892,6 +895,8 @@ function initEditNodeHandler(){
             });
             if(values.length === 0){
                 $selectCQ.addClass("hidden");
+                _removeClass($addCQ, "hidden");
+                _addClass($btngroupCQ, "hidden");
                 return false;
             }else{
                 _addClass($addCQ, "hidden");

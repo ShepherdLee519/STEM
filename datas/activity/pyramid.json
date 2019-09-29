@@ -3,11 +3,11 @@
     "typename":"金字塔",
     "activity":{
         "name":"活动名称",
-        "question":"问题",
+        "question":"",
         "floor":{
-            "top":"顶层 - 规则",
-            "middle":"第二层 - 规则",
-            "bottom":"底层 - 规则"
+            "top":"",
+            "middle":"",
+            "bottom":""
         }
     },
     "common":{

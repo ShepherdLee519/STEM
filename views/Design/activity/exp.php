@@ -14,7 +14,7 @@
     <label for="" class="col-sm-3 control-label">实验安排:</label>
     <div class="col-sm-9">
         <textarea class="form-control activity-step" rows=5
-            placeholder=""></textarea>
+            placeholder="实验安排内容"></textarea>
         <span class="glyphicon form-control-feedback"></span>
     </div>
 </div>
@@ -34,7 +34,7 @@
     <label for="" class="col-sm-3 control-label">学生活动:</label>
     <div class="col-sm-9">
         <textarea class="form-control activity-student" rows=8
-            placeholder=""></textarea>
+            placeholder="实验中学生活动描述说明"></textarea>
         <span class="glyphicon form-control-feedback"></span>
     </div>
 </div>
@@ -43,7 +43,7 @@
     <label for="" class="col-sm-3 control-label">教师活动:</label>
     <div class="col-sm-9">
         <textarea class="form-control activity-teacher" rows=8
-            placeholder=""></textarea>
+            placeholder="实验中教师活动描述说明"></textarea>
         <span class="glyphicon form-control-feedback"></span>
     </div>
 </div>
