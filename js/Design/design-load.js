@@ -36,6 +36,13 @@ $(function(){
  * 并调用loadTheme等加载数据
  */
 function loadDB(){
+    let userid = sessionStorage.getItem("userid"),
+        username = sessionStorage.getItem("username");
+    
+    if(userid != null && username != null){
+        DB_PATH = `./userdata/${userid}_${username}/data.json`;
+    }
+
     $.ajaxSetup ({ cache: false }); 
     DB = _get(DB_PATH);
     // log(DB);
@@ -54,18 +61,21 @@ function loadDB(){
  * 
  * DB.theme:
  * "theme":{
-		"themeName":"主题名称",
-		"themeSituation":"学习情境",
-		"people":{
-			"science":"科学-人员 ",
-			"technology":"技术-人员",
-			"engineering":"工程-人员",
-			"mathematics":"数学-人员"
-		},
-		"grade":"5"
-	}
+        "themeName":"主题名称",
+        "themeSituation":"学习情境",
+        "people":{
+            "science":"科学-人员 ",
+            "technology":"技术-人员",
+            "engineering":"工程-人员",
+            "mathematics":"数学-人员"
+        },
+        "grade":"5"
+    }
  */
 function loadTheme(){
+    if(_isundef(DB) || _isundef(DB.theme)){
+        return;
+    }
     let themeData = DB.theme;
     THEME = themeData;
     _inject($("#courseTheme"));
@@ -99,16 +109,19 @@ function loadTheme(){
  * 并更新对应区域的内容
  * 
  * "question":{
-		"driverQuestion":"驱动问题名",
-		"coreQuestion":{
-			"science":["科学1-1","科学1-2"],
-			"technology":["技术2-1","技术2-2","技术2-3"],
-			"engineering":["工程3-1"],
-			"mathematics":["数学4-1","数学4-2","数学4-3","数学4-4","数学4-5"]
-		}
-	}
+        "driverQuestion":"驱动问题名",
+        "coreQuestion":{
+            "science":["科学1-1","科学1-2"],
+            "technology":["技术2-1","技术2-2","技术2-3"],
+            "engineering":["工程3-1"],
+            "mathematics":["数学4-1","数学4-2","数学4-3","数学4-4","数学4-5"]
+        }
+    }
  */
 function loadQuestion(){
+    if(_isundef(DB) || _isundef(DB.question)){
+        return;
+    }
     let questionData = DB.question;
     QUESTION = DB.question;
     _inject($("#questionDesign-realForm"));
@@ -117,6 +130,7 @@ function loadQuestion(){
         _("#questionDesign-driverQuestion")
     );
     
+    if(_isundef(questionData.coreQuestion) || !questionData.coreQuestion) return;
     STD.forEach((std) => {
         let corequestion = _withdraw(
             questionData, ["coreQuestion", std]
@@ -144,8 +158,9 @@ function loadQuestion(){
  * 加载学习模式中的节点的数据
  */
 function loadTasks(){
-    if(!DB.tasks) return;
-
+    if(_isundef(DB) || _isundef(DB.tasks)){
+        return;
+    }
     let tasksData = DB.tasks,
         nodes = tasksData.nodes;
         
@@ -165,7 +180,7 @@ function loadTasks(){
  * 并将相关的节点的值通过Node.saveData()存入本地
  */
 function loadActivity(){
-    if(!DB.activity || !DB.tasks) return;
+    if(_isundef(DB) || !DB.activity || !DB.tasks) return;
     if(_isundef(ZONE)){
         log("Please Init ZONE");
         ZONE = new Zones(DATA.nodes);

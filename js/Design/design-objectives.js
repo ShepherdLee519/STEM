@@ -350,10 +350,10 @@ function saveTheme(){
         $(`#${prefix}-grade option:selected`).val()
     );
 
-    $.post("./db/data_save.php", {data:THEME, zone:"theme"}, (res) => {
-        if(res) log("save theme successfully");
-        else err("save theme failed");
-    });
+    // $.post("./db/data_save.php", {data:THEME, zone:"theme"}, (res) => {
+    //     if(res) log("save theme successfully");
+    //     else err("save theme failed");
+    // });
 }
 
 
@@ -372,6 +372,10 @@ function saveQuestion(){
         QUESTION, "driverQuestion",
         $(`#${prefix}-driverQuestion`).val()
     );
+
+    if(_isundef(QUESTION.coreQuestion) || !QUESTION.coreQuestion){
+        QUESTION.coreQuestion = {};
+    }
     STD.forEach((key) => {
         let $zone = $(`#${prefix}-coreQuestion-${key}`);
         (QUESTION.coreQuestion)[key] = [];
@@ -382,9 +386,11 @@ function saveQuestion(){
             );
         });
     });
+    log(QUESTION);
+    log(QUESTION.coreQuestion);
 
-    $.post("./db/data_save.php", {data:QUESTION, zone:"question"}, (res) => {
-        if(res) log("save question successfully");
-        else err("save question failed");
-    });
+    // $.post("./db/data_save.php", {data:QUESTION, zone:"question"}, (res) => {
+    //     if(res) log("save question successfully");
+    //     else err("save question failed");
+    // });
 }

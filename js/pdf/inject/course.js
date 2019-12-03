@@ -21,6 +21,9 @@ function injectPreviewCourse(){
         $courseZone = _();//#courseZone
     _reject();
 
+    $courseZone.find(".task").remove();
+    $courseZone.append($template);
+
     let number_map = ["一","二","三","四","五","六","七","八","九"];
     DATA.nodes.forEach((node, index) => {
         // log(node);
@@ -63,7 +66,7 @@ function injectPreviewCourse(){
 
         //活动设计组装
         str = "";
-        let activities = DB.activity.prime[index].activities;
+        let activities = getActivity().prime[index].activities;
         if(activities !== "" && !_isundef(activities)){
             _(".task-info-hasActivity").removeClass("hidden");
             let activitiesLen = activities.length;
@@ -96,6 +99,7 @@ function injectPreviewCourse(){
         let subNodes =  DATA.nodes[index].next;
         if(subNodes !== ""){
             _(".task-info-hasSubNode").removeClass("hidden");
+            _(".subnode-wrapper").append(injectPreviewSubTaskModal(subNodes.tasktype, subNodes.nodes));
             injectPreviewSubCourse(subNodes.nodes, _(".subnode-wrapper"), index);
         }
 
@@ -161,7 +165,7 @@ function injectPreviewSubCourse(nodes, $zone, parentIndex){
 
         //活动设计组装
         str = "";
-        let activities = DB.activity.sub[parentIndex].nodes[index].activities;
+        let activities = getActivity().sub[parentIndex].nodes[index].activities;
         if(activities !== "" && !_isundef(activities)){
             _(".task-info-hasActivity").removeClass("hidden");
             let activitiesLen = activities.length;

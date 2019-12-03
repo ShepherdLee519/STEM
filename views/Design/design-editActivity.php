@@ -12,7 +12,7 @@ $activities = array(
     "roleplay", "game", "exp"
 );
 $activities_name = array(
-    "思考-配对-分享", "金字塔", "拼图策略",
+    "思考-配对-共享", "金字塔", "拼图策略",
     "角色扮演", "游戏教学", "实验教学"
 );
 
@@ -51,7 +51,9 @@ for($i = 0; $i < count($activities); $i++){
 <!-- 添加学习证据区域 -->
 <hr />
 <div class="form-group">
-    <label for="" class="col-sm-7 control-label"><b>选择本活动对应的学习证据</b></label>
+    <label for="" class="col-sm-5 control-label"
+        style="display:inline-block;margin-left: 35px;"    
+    ><b style="font-size: 16px;">选择本活动对应的学习证据</b></label>
     <div class="col-sm-4">
         <button class="btn btn-success select-activityEvidence">添加 <span class="glyphicon glyphicon-plus" ></span></button>
         <button class="btn btn-default hidden reset-activityEvidence">清空重置</button>
@@ -74,7 +76,7 @@ for($i = 0; $i < count($activities); $i++){
 <!-- 材料工具显示区域 -->
 <div class="form-group text-center">
     <h4>
-        <label class="col-sm-12">相关材料与工具</label>
+        <label class="col-sm-6" style="font-size: 16px">相关材料与工具</label>
     </h4>
 </div>
 <hr />
@@ -120,12 +122,13 @@ for($i = 0; $i < count($activities); $i++){
 </form>
 
 <hr />
-<div class="btn-group pull-right">
+
+
+</div><!-- end panel-body -->
+<div class="btn-group pull-right" style="margin-top: 15px;">
     <button class="btn btn-success design-editActivity-confirm">确定</button>
     <button class="btn btn-default design-editActivity-cancel">取消</button>
 </div>
-
-</div><!-- end panel-body -->
 </div><!-- end panel -->
 </div>
 

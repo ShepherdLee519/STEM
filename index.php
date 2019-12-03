@@ -84,13 +84,7 @@
                             <a href="#" id="downloadPDF" class="hidden"><b>下载报告</b></a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                账户管理<b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">退出</a></li>
-                                <li><a href="#">切换账户</a></li>
-                            </ul>
+                            <a href="#"><b id="username"></b></a>
                         </li>
                     </ul><!-- /end -->
                 </div><!-- //end -->

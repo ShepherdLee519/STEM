@@ -13,8 +13,7 @@
 <p><?php _space();?>在本模块中，需要您构建STEM课程的任务模式（课程单元）。我们已经为您准备好了一些模式可供选择。</p>
     <!-- 您可以选择我们已为您准备好的模式，也可以根据您的设计风格自由定制模式。</p> -->
 
-<h4>一、选用系统自带的模式</h4>
-<p><?php _space();?>我们为您准备好的模式有四种，具体内容如下：</p>
+<p><?php _space();?>具体内容如下：</p>
 
 <p><b>基于设计的学习：</b>学生会面对真实的劣构性问题，他们需要设计/创造一个能解决问题的产品
 （如，防止水土流失的堤坝）。其特征是具有设计——再设计的循环过程。</p>
@@ -68,8 +67,8 @@
                 <?php
                     for($j = 0; $j < $number[$i] && $number[$i] != 0; $j++){
                         ?>
-                        <div class="col">
-                            <div class="img-zone">
+                        <div class="col text-center">
+                            <div class="img-zone" style="height:60px;">
                                 <img width=60 src="<?php 
                                     $PATH = "image/nodes/";
                                     echo $PATH.strtoupper($tasks[$i]).'/'.strtoupper($tasks[$i])."-".($j+1).".png";?>">

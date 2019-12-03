@@ -209,6 +209,9 @@ function transformLink(links){
  */
 function transformFile(files){
     if(files === "") return "";
+    let userid = sessionStorage.getItem("userid"),
+        username = sessionStorage.getItem("username"),
+        path = `./userdata/${userid}_${username}/upload/`;
 
     let str = "", 
         $appendix = $("#appendixZone");
@@ -218,7 +221,7 @@ function transformFile(files){
         }
         str += file.filename;
         $appendix.append(`
-            <p data-path="${(file.path).replace("./upload/", "")}">${file.filename}</p>
+            <p data-path="${(file.path).replace(path, "")}">${file.filename}</p>
         `);
     });
     return str;

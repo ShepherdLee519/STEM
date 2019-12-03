@@ -123,7 +123,7 @@
 }
 
 #design-tasksZone div.node:last-child > span{
-    display: none;
+    /* display: none; */
 }
 
 #design-tasksZone div.first-level{

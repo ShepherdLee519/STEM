@@ -7,6 +7,7 @@
 
 $(function(){
     _hello("navigator");
+    $("#username").html(sessionStorage.getItem("username"));
 
     let links = ["design", "preview"];
     
@@ -15,6 +16,7 @@ $(function(){
             e.preventDefault();
 
             if(link === "preview"){
+                saveData();//先保存数据
                 _addClass($("#saveData"),"hidden");
                 _removeClass($("#savePDF"), "hidden");
                 _removeClass($("#downloadPDF"), "hidden");

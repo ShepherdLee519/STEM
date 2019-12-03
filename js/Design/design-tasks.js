@@ -1,6 +1,6 @@
 /**
  * author: Shepherd.Lee
- * Date: 2019-09-14
+ * Date: 2019-12-03
  * version: 2.0.0
  * info: 学习评价相关(原学习任务) 注，页面调整后新的选择模式逻辑在introduction下
  * index: 
@@ -562,13 +562,15 @@ function Task(){
 
         //核心问题的存储处理
         target["taskcorequestion"] = [];
-        [...$edit.find("#taskCoreQuestion-ShowZone").find("li")].forEach((li) => {
-            let type = $(li).find("span.badge").html(),
-                content = $(li).find("span.li-content").html();
-            target["taskcorequestion"].push({
-                type: type, content:content
+        if($edit.find("#taskCoreQuestion-ShowZone").html() !== ""){
+            [...$edit.find("#taskCoreQuestion-ShowZone").find("li")].forEach((li) => {
+                let type = $(li).find("span.badge").html(),
+                    content = $(li).find("span.li-content").html();
+                target["taskcorequestion"].push({
+                    type: type, content:content
+                });
             });
-        });
+        }
 
         //学习证据的存储处理
         target["taskevidence"] = [];
@@ -836,6 +838,7 @@ function initEditNodeHandler(){
         $selectCQ   = _("#taskCoreQuestion-SelectZone");
     _reject();
 
+    //点击添加核心问题
     $addCQ.click(function(e){
         e.preventDefault();
         $showCQ.addClass("hidden");
@@ -867,8 +870,8 @@ function initEditNodeHandler(){
             str += `
             <br />
             <div class="btn-group pull-right">
-                <button class="btn btn-default" id="taskCoreQuestion-confirmSelect">确定</button>
-                <button class="btn btn-danger" id="taskCoreQuestion-cancelSelect">取消</button>
+                <button class="btn btn-danger" id="taskCoreQuestion-confirmSelect">确定</button>
+                <button class="btn btn-default" id="taskCoreQuestion-cancelSelect">取消</button>
             </div>
             `.trim();
         }
@@ -893,10 +896,12 @@ function initEditNodeHandler(){
                     types.push($(box).attr("data-coretype"));
                 }
             });
+
             if(values.length === 0){
                 $selectCQ.addClass("hidden");
                 _removeClass($addCQ, "hidden");
                 _addClass($btngroupCQ, "hidden");
+                $showCQ.html("");
                 return false;
             }else{
                 _addClass($addCQ, "hidden");
@@ -960,8 +965,8 @@ function initEditNodeHandler(){
         str += `
         <br />
         <div class="btn-group pull-right">
-            <button class="btn btn-default" id="taskCoreQuestion-confirmSupply">确定</button>
-            <button class="btn btn-danger" id="taskCoreQuestion-cancelSupply">取消</button>
+            <button class="btn btn-danger" id="taskCoreQuestion-confirmSupply">确定</button>
+            <button class="btn btn-default" id="taskCoreQuestion-cancelSupply">取消</button>
         </div>
         `.trim();
         $selectCQ.html(str);

@@ -1,14 +1,18 @@
 <?php
 /**
  * author: Shepherd.Lee
- * Date: 2019-09-18
+ * Date: 2019-09-29
  * info: 上传文件资源
  * index:
  */
 
 $name = $_POST["name"];
+$userid = $_POST["userid"];
+$username = $_POST["username"];
+
 $str = "addFile";//name(input)
 $FILE_PATH = "../../upload/"; //文件上传文件夹，注意文件夹的路径末尾需要有'/'
+// $FILE_PATH = "../../userdata/".$userid."_".$username."/upload/";
 is_dir($FILE_PATH) or mkdir($FILE_PATH, 0777, true);//文件夹不存在则创建
 $FILE_MAX_SIZE = 8 * 1024 * 1024; //当前最大上传大小为8M - 需要在php.ini中修改
 
@@ -48,6 +52,8 @@ if(is_uploaded_file($_FILES[$str]['tmp_name'])){
         echo 0;
     }
 }
+
+// chmod(iconv("UTF-8","gb2312", $upload_file), 0777);
 
 class FileInfo{
     public $fullpath;

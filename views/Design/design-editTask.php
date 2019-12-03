@@ -113,8 +113,8 @@
         </div> -->
     </form>
     <div class="btn-group pull-right" style="margin-top: 15px">
-        <button class='btn btn-primary' id="design-confirmTaskEditBtn" style="width:80px">确定</button>
-        <button class='btn btn-danger' id="design-cancelTaskEditBtn" style="width:80px">取消</button>
+        <button class='btn btn-danger' id="design-confirmTaskEditBtn" style="width:80px">确定</button>
+        <button class='btn btn-default' id="design-cancelTaskEditBtn" style="width:80px">取消</button>
     </div>
 </div><!-- end design-editTaskZone-body -->
 </div>
@@ -142,7 +142,7 @@
         <label class="col-sm-3 control-label" for="evidenceContent">证据内容:</label>
         <div class="col-sm-9">
             <textarea class="form-control" name="evidenceContent" id="add-evidenceContent"
-                rows="1" placeholder="证据内容"></textarea>
+                rows="1" placeholder="填写学习证据名称 eg. 过滤实验报告"></textarea>
         </div> 
     </div>
     <div class="form-group">

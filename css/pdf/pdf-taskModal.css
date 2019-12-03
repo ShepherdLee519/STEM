@@ -5,20 +5,24 @@
  * Date: 2019-09-19
  */
 
-#taskModalZone h4{
+#taskModalZone h4,
+.subTaskModalZone h4{
     color: #336699;
 }
 
-#taskModalZone li{
+#taskModalZone li,
+.subTaskModalZone li{
     position: relative;
     margin-right: 15px;
 }
 
-#taskModalZone li .taskModal-image{
+#taskModalZone li .taskModal-image,
+.subTaskModalZone li .subTaskModal-image{
     width: 100px;
 }
 
-#taskModalZone li .taskModal-nodename{
+#taskModalZone li .taskModal-nodename,
+.subTaskModalZone li .subTaskModal-nodename{
     position: absolute;
     left: 20px;
 }

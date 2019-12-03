@@ -28,6 +28,7 @@ function injectPreviewCoreQuestion(){
 
         str = "";
         let std_suffix = std.substring(0,1).toUpperCase() + "-Q";
+        if(_isundef(QUESTION) || _isundef(QUESTION["coreQuestion"])) return;
         QUESTION["coreQuestion"][std].forEach((question, index) => {
             str += `
             <li><span class="coreQuestion-number">${std_suffix + (index+1)}</span>

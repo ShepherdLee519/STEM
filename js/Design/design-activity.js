@@ -427,7 +427,10 @@ function initActivityLinkHandler(){
  * 学习活动中的材料和工具区域中的文件资源上传部分
  */
 function initActivityFileHandler(){
-    let Path = "./upload/";//这个路径是相对于index.php的 末尾需要/
+    let userid = sessionStorage.getItem("userid"),
+        username = sessionStorage.getItem("username");
+    // let Path = "./upload/";//这个路径是相对于index.php的 末尾需要/
+    let Path = `./userdata/${userid}_${username}/upload/`;
     let $btn        = $(".change-file"),
         //模态框相关的引用部分
         $modal      = $("#fileModal"),
@@ -473,7 +476,7 @@ function initActivityFileHandler(){
                     let path = $(this).ancestor(2)
                         .find(".fileModal-show-filename").eq(0)
                         .attr("data-fullpath");
-                    path = path.replace(Path, "../../upload/");
+                    path = path.replace(Path, `../../userdata/${userid}_${username}/upload/`);
                     $.post("./php/upload/delete_file.php", {filepath:path},function(res){
                         if(res){
                             $that.ancestor(2).remove();
@@ -512,13 +515,14 @@ function initActivityFileHandler(){
         e.preventDefault();
 
         var formData = new FormData($form[0]);
-        // formData.append("XX", XXX);
+        formData.append("userid", userid);
+        formData.append("username", username);
 
         $.ajax({
             type:"POST",
             url:"./php/upload/upload_file.php",
             data: formData, cache:false, dataType:"json",
-            contentType:false,processData:false,
+            contentType:false, processData:false,
             success:function(res){
                 log(res);
 
@@ -533,7 +537,7 @@ function initActivityFileHandler(){
                     let path = $(this).ancestor(2)
                         .find(".fileModal-show-filename").eq(0)
                         .attr("data-fullpath");
-                    path = path.replace(Path, "../../upload/");
+                    path = path.replace(Path, `../../userdata/${userid}_${username}/upload/`);
                     $.post("./php/upload/delete_file.php", {filepath:path},function(res){
                         if(res){
                             $that.ancestor(2).remove();
@@ -547,6 +551,7 @@ function initActivityFileHandler(){
                 $showBody.append($newrow);
             },
             error:function(res){
+                err(path);
                 err(res);
                 alert("文件上传失败！");
             }

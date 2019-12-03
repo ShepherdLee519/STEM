@@ -43,6 +43,10 @@
     margin-right: -6%;
 }
 
+#courseTheme form > div.form-group > label{
+    /* color:red; */
+    font-size: 18px;
+}
 
 
 
@@ -50,7 +54,7 @@
 /* 问题表单区域 questionDesign
 -----------------------------------*/
 #questionDesign form#questionDesign-realForm label.control-label{
-    font-size: 125%;
+    /* font-size: 125%; */
 }
 
 #questionDesign-coreQuestion div.questionDesign-coreQuestion-eachQuestion label{
@@ -102,6 +106,19 @@ form#questionDesign-realForm .editCoreQuestion{
     display: none;
 }
 
+#questionDesign form#questionDesign-realForm label.control-label{
+    font-size: 18px;
+}
+
+#questionDesign form#questionDesign-realForm label[for="questionDesign-driverQuestion"]{
+    margin-left: -11.5px;
+    font-size: 18px;
+}
+
+#questionDesign form#questionDesign-realForm label[for="questionDesign-coreQuestion"]{
+    margin-left: -11.5px;
+    font-size: 18px;
+}
 
 
 

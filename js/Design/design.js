@@ -28,6 +28,7 @@ $(function(){
 
     $("#saveData").click(() => {
         saveData();
+        alert("保存成功！");
         // log(new Date() + "：数据保存...");
         /*---------------------------------------*/
         // saveTheme();//学习目标 - 课程主题
@@ -46,7 +47,7 @@ $(function(){
  */
 function saveData(){
     let tasksData, activityData;
-    if(DATA.length == 0 || _isundef(DATA)){
+    if(_isundef(DATA) || DATA.length == 0){
         //当为选择模式时，DATA为[]
         tasksData = null;
         activityData = null;
@@ -54,6 +55,10 @@ function saveData(){
         tasksData = DATA;
         activityData = getActivity();
     }
+
+    saveTheme();
+    saveQuestion();
+    log(QUESTION);
 
     let data = {
         theme: THEME,
@@ -63,8 +68,23 @@ function saveData(){
     };
 
     log(new Date() + "：数据保存...");
-    $.post("./db/data_save_all.php", {data:data}, (res) => {
-        if(res) log("save ALL DATA successfully");
-        else err("save ALL DATA failed");
-    });
+    let userid = sessionStorage.getItem("userid"),
+        username = sessionStorage.getItem("username");
+    
+    if(userid == null || username == null){
+        $.post("./db/data_save_all.php", {data:data}, (res) => {
+            if(res) log("save ALL DATA successfully");
+            else err("save ALL DATA failed");
+        });
+    }else{
+        $.post("./php/data/data_save_local.php",
+            {data:data, userid:userid, username:username}, 
+            (res) => {
+                log(data.question);
+                if(res) log("save ALL DATA successfully --local");
+                else err("save ALL DATA failed --local");
+        });
+    }
+    
 }
+    

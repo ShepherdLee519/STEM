@@ -22,6 +22,7 @@ function injectPreview(){
     injectPreviewCover();
     injectPreviewTheme();
     injectPreviewCoreQuestion();
+    if(_isundef(DATA) || _isundef(DATA.tasktype)) return;
     injectPreviewTaskModal();
     injectPreviewCourse();
 }

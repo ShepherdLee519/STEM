@@ -2,16 +2,22 @@
 
 $pdfdata = $_POST["data"];
 $paths = $_POST["paths"];
+$userid = $_POST["userid"];
+$username = $_POST["username"];
 
 @include "../helper.php";
 
 $FILE_PATH = "../../upload/pdf/";
+// $FILE_PATH = "../../userdata/".$userid."_".$username."/";
 $APPENDIX_PATH = "../../upload/";
+// $APPENDIX_PATH = $FILE_PATH."upload/";
 _mkdir($FILE_PATH);
+chmod($FILE_PATH, 0777);
 
 $pdfpath = $FILE_PATH."stem_report.pdf";
 _deleteFile($pdfpath);
 file_put_contents($pdfpath, base64_decode($pdfdata));//保存pdf
+chmod($pdfpath, 0777);
 
 $zipname = $FILE_PATH."report.zip";
 _deleteFile($zipname);
@@ -27,6 +33,7 @@ foreach($paths as $path){
     ); //向压缩包中添加文件
 }
 $zip->close();
+chmod($zipname, 0777);
 echo 1;
 
 ?>
