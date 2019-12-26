@@ -1,6 +1,6 @@
 /**
  * author: Shepherd.Lee
- * Date: 2019-09-09
+ * Date: 2019-12-26
  * version: 2.0.0
  * info: 学习活动相关
  */
@@ -13,9 +13,16 @@ const TASKTYPE = [
     // {  "task": "user" ,    "name": "自定义"          }
 ];//任务类型名 - 对应php/json
 
-var TASKS, TASKZONE, INIT, 
+var TASKS, TASKZONE, INIT, //与任务相关，见design-tasks.js
     DATA,  // 与任务环节相关的数据
-    ZONE;   // 学习活动整个区域的Zones对象
+    ZONE;   // 学习活动整个区域的Zones对象，见design-zones.js
+
+/**
+ * 表示Load是否成功 - userid与username均正常
+ * 初始为false 此时无法saveData() - design.js
+ * Load 相关见design-load.js
+ */
+var LOAD_LOCK = false;
 
 
 $(function(){
@@ -44,8 +51,21 @@ $(function(){
 
 /**
  * 一次性封装出data，通过data_save_all保存
+ * ----------------------------------------
+ * 分别调用了
+ *      saveTheme() - 保存学习目标 - 课程主题 见design-objectives.js
+ *      saveQuestion() - 保存学习目标 - 问题设计 见design-objectives.js
+ *      saveTasks() - 保存学习评价 - 任务节点 见design-tasks.js
+ *      saveActivity() - 保存学习活动 见design-activity-ls.js
  */
 function saveData(){
+    //先检查LOAD_LOCK;
+    if(LOAD_LOCK == false){
+        //此时userid与username存在异常，考虑网络不良
+        alert("您的网络状态似乎不好");
+        return false;
+    }
+
     let tasksData, activityData;
     if(_isundef(DATA) || DATA.length == 0){
         //当为选择模式时，DATA为[]

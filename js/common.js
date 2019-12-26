@@ -312,7 +312,6 @@ function _exClass(nodeA, nodeB, classname){
     }
 }
 
-
 /**
  * 删去A 换上B类
  * @param {Object} node

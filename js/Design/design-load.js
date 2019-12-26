@@ -1,9 +1,11 @@
 /**
  * author: Shepherd.Lee
- * Date: 2019-08-31
+ * Date: 2019-12-26
  * version: 2.0.0
  * info: 从DB加载数据
+ *      注：保存数据至DB的相关逻辑见design.js
  * index:
+ *      loadDB()
  *      loadTheme()
  *      loadQuestion()
  *      loadTasks()
@@ -19,14 +21,16 @@ var DB = null;
 var DB_PATH = "./db/localdata/data.json";
 // var DB_PATH = "C:/STEM/localdata/data.json";
 
+/**
+ * 本地测试时候，将DB_local切换至true，读入本地数据
+ */
+var DB_local = false;
+
 $(function(){
     _hello("design-load");
 
+    //立即读入数据初始化，该js文件应在最后的位置被引入(html中)
     loadDB();
-    // loadTheme();
-    // loadQuestion();
-    // loadTasks();
-    // loadActivity();
 });
 
 
@@ -36,21 +40,47 @@ $(function(){
  * 并调用loadTheme等加载数据
  */
 function loadDB(){
+    //获取session中的userid 与 username
     let userid = sessionStorage.getItem("userid"),
         username = sessionStorage.getItem("username");
     
-    if(userid != null && username != null){
-        DB_PATH = `./userdata/${userid}_${username}/data.json`;
+    while(true && !DB_local){
+        if(userid != null && username != null){
+            DB_PATH = `./userdata/${userid}_${username}/data.json`;
+            $("#loading-aside").hide();
+            LOAD_LOCK = true;
+            break;
+        }else{
+            // alert("您的网络状态不佳！请尝试刷新！");
+            setInterval(() => {
+                let $span_dot = $("#loading-aside").find("span").eq(0),
+                    length = $span_dot.html().length;
+                $span_dot.html(".".repeat(length > 9?3:++length));
+            }, 180);
+            return;
+        }
     }
-
+    
     $.ajaxSetup ({ cache: false }); 
     DB = _get(DB_PATH);
+    log("DB_loaded");
     // log(DB);
     $.ajaxSetup ({ cache: true }); 
     loadTheme();
     loadQuestion();
     loadTasks();
     loadActivity();
+}
+
+
+/**
+ * 切换DB_local至true，读入本地数据
+ */
+function loadDB_test(){
+    DB_local = true;
+    $("#loading-aside").hide();
+    LOAD_LOCK = true;
+    loadDB();
 }
 
 

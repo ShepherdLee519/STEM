@@ -1,7 +1,7 @@
 <?php
 /**
  * author: Shepherd.Lee
- * Date: 2019-08-27
+ * Date: 2019-12-26
  * dependencies: php/helper.php; views视图; 
  * info: 
  *      网页工具的入口(相当于index.html)，根据querystring中的p值，来选择渲染对应的views/中的视图与css/js文件
@@ -35,12 +35,14 @@
         <!-- <script type="text/javascript">
             /**
              * 页面触发 onbeforeunload 事件时进入
+             * 此部分在服务器上开启
              * 1）在页面被关闭前会进入
              * 2）方法有返回值，才会自动弹框提示，否则不会弹框，但方法内容仍然会执行
              * 3）方法返回的值与页面最终是否被关闭无关，即返回什么值都不会影响
              */
             function pageClose() {
                 log(new Date() + "：用户准备离开页面...");
+                saveData();
                 /*---------------------------------------*/
                 // saveTheme();//学习目标 - 课程主题
                 // saveQuestion();//学习目标 - 问题设计
@@ -107,6 +109,11 @@
 
             <!-- ///////////////////////////////////////////////////////////////////// -->
         </div>
+
+        <!-- 网络不良时候的刷新界面 -->
+        <aside id="loading-aside">
+            <p>正在读入，请稍等<span></span></p>
+        </aside>
 
         <!-- 可能的页脚区域 -->
         <footer style="background-color: #CCCCFF; height: 50px;" id="footer">
