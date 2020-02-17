@@ -27,6 +27,7 @@ $(function () {
 function renderModal(){
     let $modal = $("#savePdfModal"),
         that = this;
+        
     _inject($modal);
     $uploading = _("#savePdf-uploading");
     $uploaded = _("#savePdf-uploaded");

@@ -83,7 +83,7 @@
         </div>
 
         <!-- 新建二级节点的选择菜单 -->
-        <div class="hidden design-initSubTaskZone">
+        <div class="hidden init-panel" id="design-initSubTaskZone">
             <div class="panel panel-warning">
                 <div class="panel-heading">
                     <h3 class="panel-title">选择子教学模式</h3>

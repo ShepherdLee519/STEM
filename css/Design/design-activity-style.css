@@ -169,6 +169,11 @@ div.design-initActivityZone .panel-body .radio:hover{
 
 /* 学习活动的活动节点样式
 -------------------------------------*/
+#design-activities-zone .panel-body{
+    overflow: hidden;
+    clear: both;
+}
+
 .design-act-node-wrapper .edit-activity-btn{
     border-radius: 20px;
     outline: none;
@@ -185,17 +190,29 @@ div.design-initActivityZone .panel-body .radio:hover{
     margin-left: -5%;
 }
 
+@keyframes togglePanel{
+    0% {width: 100%; margin-left: 0px;}
+    70% { width: 85%; margin-left: 7.5%;}
+    100% { width: 80%; margin-left: 10%;}
+}
+
 .design-act-node-wrapper .panel.panel-toggle{
     background-color: #FF8888;
     width: 80%;
     margin-left: 10%;
     color: white;
+    animation: togglePanel 0.1s;
     box-shadow: 4px 4px 10px #CCC;
+}
+
+.design-act-node-wrapper .panel.panel-default:hover > .panel-heading{
+    background-color: #eee;
 }
 
 .design-act-node-wrapper .panel.panel-toggle:hover{
     background-color: #FF6666;
 }
+
 
 .design-act-node-wrapper .panel-toggle span.glyphicon{
     color: red;
@@ -268,4 +285,25 @@ div.design-initActivityZone .panel-body .radio:hover{
     position: absolute;
     left: -148px;
     top: 7px;
+}
+
+
+
+
+
+/* 学习活动的学习证据的样式
+-------------------------------------*/
+#activityEvidenceSelectedZone{
+    background-color: white !important;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+#activityEvidenceModal .checkbox-td input{
+    zoom: 200%;
+}
+
+#activityEvidenceModal tr.cancel{
+    background-color: #eeeeee;
+    text-decoration: line-through;
 }

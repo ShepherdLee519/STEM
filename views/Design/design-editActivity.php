@@ -166,18 +166,41 @@ for($i = 0; $i < count($activities); $i++){
 
 <div class="form-group">
     <div class="col-sm-12">
-        <table class="table table-striped">
-            <thead>
-                <tr><th>学习证据内容</th>
-                    <th>学习评价</th>
-                    <th></th></tr>
-            </thead>
-            <tbody id="activityEvidenceShowZone">
-                <!-- <tr><td>学习证据内容1</td><td>问卷调查</td>
-                    <td><input class="form-control" type="checkbox"></td>
-                </tr> -->
-            </tbody>
-        </table>
+        <div>
+            <label style="font-weight:normal; font-size: 16px">当前学习证据</label>
+            <table class="table table-striped">
+                <caption><b></b></caption>
+                <thead>
+                    <tr><th>学习证据内容</th><th>学习评价</th><th></th></tr>
+                </thead>
+                <tbody id="activityEvidenceShowZone">
+                    <!-- <tr><td>学习证据内容1</td><td>问卷调查</td>
+                        <td><input class="form-control" type="checkbox"></td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <label style="font-weight:normal; font-size: 16px">可选学习证据</label>
+            <table class="table table-striped">
+                <thead>
+                    <tr><th>学习证据内容</th><th>学习评价</th><th></th></tr>
+                </thead>
+                <tbody id="activityEvidenceSelectZone"></tbody>
+            </table>
+        </div>
+        <hr />
+        
+        <label style="font-weight:normal; font-size: 16px" class="hidden">已选学习证据</label>
+        <div id="activityEvidenceSelectedZone" class="hidden well">
+            <table class="table table-striped table-condensed hidden">
+                <caption><b></b></caption>
+                <thead>
+                    <tr><th>学习证据内容</th><th>学习评价</th><th></th></tr>
+                </thead>
+                <tbody class="selectedZone"></tbody>
+            </table>
+        </div>
     </div>
 </div>
 

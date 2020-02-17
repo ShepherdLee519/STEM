@@ -1,0 +1,23 @@
+#fullScreen{
+    position: absolute;
+    top: 18px; 
+    left: calc(100% - 50px);
+    cursor: pointer;
+}
+
+.fullscreen{
+    width: 100% !important;
+}
+
+.fullscreen #design-activities-zone{
+    margin-left: -60%;
+}
+
+.fullscreen #design-editActivityZone{
+    width: 760px;
+    margin-left: 40%;
+}
+
+.fullscreen .design-editActivityZone-body{
+    max-height: 580px;
+}

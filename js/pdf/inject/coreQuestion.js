@@ -21,7 +21,7 @@ function injectPreviewCoreQuestion(){
     //STD见desing-objectives.js
     STD.forEach((std) => {
         let str = "";
-        stdData[std].forEach(standard => {
+        STDDATA[std].forEach(standard => {
             str += `<li>${standard}</li>`
         });
         _(`.coreQuestion-standard-${std}`).html(str);

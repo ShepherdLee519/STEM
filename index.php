@@ -52,7 +52,8 @@
             }
         </script> -->
     </head>
-    <body onbeforeunload="return pageClose()">
+    <!-- <body onbeforeunload="return pageClose()"> -->
+    <body>
         <!-- ///导航栏 -->
         <nav class="navbar navbar-default header" role="navigation" id="navbar">
             <div class="container-fluid">
@@ -131,22 +132,28 @@
         <!-- 导入自定义的js文件 -->
         <script src="js/common.js"></script>
         <script src="js/navigator.js"></script>
+
+        <script src="js/design.js"></script>
+
+        <script src="js/activity/activitynode.js"></script>
+        <script src="js/activity/activityhandler.module.js"></script>
+        <script src="js/activity/activityzone.js"></script>
+        <script src="js/activity/activityzones.js"></script>
+        <script src="js/activity/activity-sl.js"></script>
+        
+        <script src="js/task/taskzonehandler.module.js"></script>
+        <script src="js/task/taskzone.js"></script>
+        <script src="js/task/taskzone.prototype.js"></script>
+        <script src="js/task/savetask.js"></script>
+
+        <script src="js/objectives/objectives.js"></script>
+        <script src="js/objectives/objectives-save.js"></script>
+
+        <script src="js/design-animation.js"></script>
+        <script src="js/design-load.js"></script>
         <!-- ///////////////////////////////////////////////////////////////////// -->
 
         <?php
-            // design部分相关
-            $design_js = array(
-                "Design/",//path name
-                "design", "design-node", "design-zone", "design-zones",
-                "design-tasks", "design-activity-sl", "design-activity",
-                "design-objectives", "design-introduction", "design-animation",
-                "design-load"
-            );
-            
-            for($i = 1; $i < count($design_js); $i++){
-                ?><script src="js/<?php echo $design_js[0].$design_js[$i];?>.js"></script><?php
-            }
-
             //预览 - 生成pdf部分相关
             $preview_js = array(
                 "pdf/", //path name

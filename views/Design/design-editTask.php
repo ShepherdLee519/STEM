@@ -35,41 +35,13 @@
                 <button class="btn btn-info text-center" id="taskCoreQuestion-AddBtn" style="width: 65px">
                     添加 <span class="glyphicon glyphicon-plus" ></span>
                 </button>
-                <div class="btn-group hidden" id="taskCoreQuestion-BtnGroup">
-                    <button class="btn btn-danger text-center" id="taskCoreQuestion-ResetBtn" style="width: 65px">
-                        重选 <span class="glyphicon glyphicon-plus" ></span>
-                    </button>
-                    <button class="btn btn-default text-center hidden" id="taskCoreQuestion-SupplyBtn" style="width: 65px">
-                        补充 <span class="glyphicon glyphicon-plus" ></span>
-                    </button>
-                </div>
+                <button class="btn btn-danger text-center" id="taskCoreQuestion-ResetBtn" style="width: 65px">
+                    重选 <span class="glyphicon glyphicon-plus" ></span>
+                </button>
             </div>
             <div class="col-sm-9 pull-right hidden" id="taskCoreQuestion-ShowZone"></div>
             <div class="col-sm-9 pull-right well hidden" id="taskCoreQuestion-SelectZone"></div>
         </div>
-        
-        <div class="form-group hidden">
-            <label for="taskEvaluate" class="col-sm-3 control-label">学习评价:</label>
-            <div class="col-sm-9 taskEvaluate">
-                <?php
-                    $evaluate_ways = array(
-                        "书面测试", "调查问卷", "口头汇报",
-                        "同行评审", "概念图"  , "观察记录",
-                        "制作成果", "展示绩效"
-                    );
-                    // $i = 0;
-                    foreach($evaluate_ways as $way){
-                        echo '
-                            <div class="col-sm-5">
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" value='.$way.'>'.$way.'
-                                </label>
-                            </div>';
-                    }
-                ?>
-            </div>
-        </div>
-
 
         <div class="form-group">
         <label for="taskEvidence" class="col-sm-3 control-label">学习证据:</label>
@@ -107,10 +79,6 @@
         </div>
         
         </div>
-        <!-- <div class="btn-group pull-right">
-            <button class='btn btn-default' id="design-confirmTaskEditBtn" style="width:80px">确定</button>
-            <button class='btn btn-danger' id="design-cancelTaskEditBtn" style="width:80px">取消</button>
-        </div> -->
     </form>
     <div class="btn-group pull-right" style="margin-top: 15px">
         <button class='btn btn-danger' id="design-confirmTaskEditBtn" style="width:80px">确定</button>
@@ -135,7 +103,7 @@
 <form class="form form-horizontal">
     <div class="form-group">
         <label class="col-sm-3 control-label">已选核心问题</label>
-        <div class="col-sm-9 pull-right" id="addEvidenceModal-showEvidences"></div>
+        <div class="col-sm-9 pull-right" id="add-evidenceSelectedQuestion"></div>
     </div>
     <hr />
     <div class="form-group">
@@ -200,7 +168,7 @@
 <form class="form form-horizontal">
     <div class="form-group">
         <label class="col-sm-3 control-label">已选核心问题</label>
-        <div class="col-sm-9 pull-right" id="editEvidenceModal-showEvidences"></div>
+        <div class="col-sm-9 pull-right" id="edit-evidenceSelectedQuestion"></div>
     </div>
     <hr />
     <div class="form-group">

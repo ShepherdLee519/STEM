@@ -109,88 +109,22 @@
 </div>
 
 <div class="panel-body">
-    <!-- 课程标准的显示表格 -->
-    <form class="form-horizontal" id="questionDesign-courseStandard">
-    <fieldset>
-        <!-- <legend id="questionDesign-courseStandard-lengend">课程标准
-            <label style="font-size:80%"></label>
-        </legend> -->
 
-        <!-- 这里是展示四种不同的课程标准 应当以只读的形式进行展示 -->
-        <div class="form-group has-feedback hidden">
-            <label for="questionDesign-courseStandard-science" class="col-sm-2 control-label"
-                title = "点击以放大/收缩文本框来显示课程标准">科学:</label>
-            <div class="col-sm-10">
-                <textarea class="form-control" id="questionDesign-courseStandard-science" 
-                    name="questionDesign-courseStandard-science" rows=2 readonly></textarea>
-                <span class="glyphicon form-control-feedback"></span>
-            </div> 
-        </div>
-        <div class="form-group has-feedback hidden">
-            <label for="questionDesign-courseStandard-technology" class="col-sm-2 control-label"
-                title = "点击以放大/收缩文本框来显示课程标准">技术:</label>
-            <div class="col-sm-10">
-                <textarea class="form-control" id="questionDesign-courseStandard-technology" 
-                    name="questionDesign-courseStandard-technology" rows=2 readonly></textarea>
-                <span class="glyphicon form-control-feedback"></span>
-            </div> 
-        </div>
-        <div class="form-group has-feedback hidden">
-            <label for="questionDesign-courseStandard-engineering" class="col-sm-2 control-label"
-                title = "点击以放大/收缩文本框来显示课程标准">工程:</label>
-            <div class="col-sm-10">
-                <textarea class="form-control" id="questionDesign-courseStandard-engineering" 
-                    name="questionDesign-courseStandard-engineering" rows=2 readonly></textarea>
-                <span class="glyphicon form-control-feedback"></span>
-            </div> 
-        </div>
-        <div class="form-group has-feedback hidden">
-            <label for="questionDesign-courseStandard-mathematics" class="col-sm-2 control-label"
-                title = "点击以放大/收缩文本框来显示课程标准">数学:</label>
-            <div class="col-sm-10">
-                <textarea class="form-control" id="questionDesign-courseStandard-mathematics" 
-                    name="questionDesign-courseStandard-mathematics" rows=2 readonly></textarea>
-                <span class="glyphicon form-control-feedback"></span>
-            </div> 
-        </div>
-        <hr />
-
-        <table class="table table-bordered" style="width: 90%;margin-left:5%;">
-        <caption style="font-size:18px;color:black;font-weight:bold;">课程标准</caption>
-        <tbody>
-            <tr>
-                <td>科学</td>
-                <td>S1. 能够通过模型描述水循环系统；（模型举例：概念图、表格、流程图等）。<br />
-                    S2. 能够测量并绘制数据图，以证明过滤材料的吸附能力和其表面积相关。<br />
-                    S3. 能够设计控制变量的实验方案，以探究过滤材料与过滤效果的关系。<br />
-                    S4. 能够获取关于溶液过滤效果物理检测方法的信息。（如：肉眼检测法、色标法、分光光度计等）。
-                </td>
-            </tr>
-            <tr>
-                <td>技术</td>
-                <td>T1. 能使用数字工具绘制图表、探究数据的规律。<br />
-                    T2. 能够创建数字作品清晰的传达自己的思想。<br />
-                    T3. 能利用协作性数字工具与他建立联系去探索问题 。
-                </td>
-            </tr>
-            <tr>
-                <td>工程</td>
-                <td>E1. 定义一个简单的设计问题，用于反映某个需求，这个需求包括了在物料、时间和成本上的成功标准和约束条件。<br />
-                    E2. 基于问题的约束条件和成功标准，提出并比较多个可能的问题解决方案。<br />
-                    E3. 通过设计和实施控制变量的测试方案和故障测试方案，寻找模型或原型系统可改进的方面。
-                </td>
-            </tr>
-            <tr>
-                <td>数学</td>
-                <td>M1. 在具体情境中了解简单的数量关系，并能解决简单的实际问题。（如：总价=单价*数量）。<br />
-                    M2. 通过实例了解表面积的意义以及度量单位，能进行单位之间的换算，接受单位的实际意义。<br />
-                    M3. 了解比例尺，在具体情境中，能将实际距离与图上距离换算。
-                </td>
-            </tr>
-        </tbody>
-        </table>
-    </fieldset>
-    </form>
+<!-- 课程标准的显示表格 -->
+<table id="questionDesign-standards-table" class="table table-bordered" style="width: 90%;margin-left:5%;">
+<caption style="font-size:18px;color:black;font-weight:bold;">课程标准</caption>
+<tbody id="questionDesign-standards-tbody">
+    <tr>
+        <td>科学</td><td></td>
+    </tr><tr>
+        <td>技术</td><td></td>
+    </tr><tr>
+        <td>工程</td><td></td>
+    </tr><tr>
+        <td>数学</td><td></td>
+    </tr>
+</tbody>
+</table>
 
 <!-- 具体问题的填写/显示表格 -->
 <form class="form-horizontal" onsubmit="return false" id="questionDesign-realForm">
@@ -211,22 +145,21 @@
 <br /><br />
 
 <div class="col-sm-12" id="questionDesign-coreQuestion" style="margin-top: 10px;">
-
+ 
 
 <div class="questionDesign-coreQuestion-eachQuestion">
     <label for="questionDesign-coreQuestion-science" class="col-sm-2 control-label">科学:</label>
     <div class="col-sm-10" id="questionDesign-coreQuestion-science">
         <div class="btn-group">
-            <button class="btn btn-primary">
+            <button class="btn btn-primary toggleCoreQuestion-btn">
                 <span class="glyphicon glyphicon-chevron-down toggleCoreQuestion"></span>
             </button>
-            <button class="btn btn-info">
+            <button class="btn btn-info addCoreQuestion-btn" data-type="science">
                 <span class="glyphicon glyphicon-plus addCoreQuestion"></span>
             </button>
         </div>
 
-        <input type="text" class="form-control editCoreQuestion" 
-            placeholder="当前核心问题数：0">
+        <input type="text" class="form-control editCoreQuestion" />
         
         <ul class="list-group coreQuestionList hidden col-sm">
         </ul>
@@ -237,12 +170,12 @@
     <div class="col-sm-10" id="questionDesign-coreQuestion-technology">
         <div class="btn-group">
             <span class="input-group-btn">
-                <button class="btn btn-primary">
+                <button class="btn btn-primary toggleCoreQuestion-btn">
                     <span class="glyphicon glyphicon-chevron-down toggleCoreQuestion"></span>
                 </button>
             </span>
             <span class="input-group-btn">
-                <button class="btn btn-info">
+                <button class="btn btn-info addCoreQuestion-btn" data-type="technology">
                     <span class="glyphicon glyphicon-plus addCoreQuestion"></span>
                 </button>
             </span>
@@ -260,12 +193,12 @@
     <div class="col-sm-10" id="questionDesign-coreQuestion-engineering">
         <div class="btn-group">
             <span class="input-group-btn">
-                <button class="btn btn-primary">
+                <button class="btn btn-primary toggleCoreQuestion-btn">
                     <span class="glyphicon glyphicon-chevron-down toggleCoreQuestion"></span>
                 </button>
             </span>
             <span class="input-group-btn">
-                <button class="btn btn-info">
+                <button class="btn btn-info addCoreQuestion-btn" data-type="engineering">
                     <span class="glyphicon glyphicon-plus addCoreQuestion"></span>
                 </button>
             </span>
@@ -283,12 +216,12 @@
     <div class="col-sm-10" id="questionDesign-coreQuestion-mathematics">
         <div class="btn-group">
             <span class="input-group-btn">
-                <button class="btn btn-primary">
+                <button class="btn btn-primary toggleCoreQuestion-btn">
                     <span class="glyphicon glyphicon-chevron-down toggleCoreQuestion"></span>
                 </button>
             </span>
             <span class="input-group-btn">
-                <button class="btn btn-info">
+                <button class="btn btn-info addCoreQuestion-btn" data-type="mathematics">
                     <span class="glyphicon glyphicon-plus addCoreQuestion"></span>
                 </button>
             </span>
