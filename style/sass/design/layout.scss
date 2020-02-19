@@ -1,0 +1,67 @@
+
+@charset "utf-8";
+
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-02-19 16:59:49 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-02-19 17:00:09
+ */
+
+%colHeaders{
+    .design-tasks-header{
+        margin-left: -15px;
+        margin-right: -15px;
+        padding-top: 5px; 
+        ////////////////////
+        background-color: skyblue;
+
+        h4{
+            font-size: 140%;
+            letter-spacing: 5px;
+        }
+    }
+    .design-activities-header{
+        @extend .design-tasks-header;
+    }
+    .design-objectives-header{
+        @extend .design-tasks-header;
+        background-color: #DDD;
+    }
+}
+
+%colHeights{
+    min-height: 520px;
+    $maxHeight: 750px;
+    #design-objectives-zone{
+        max-height: $maxHeight;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+    #design-introduction-zone{
+        @extend #design-objectives-zone;
+    }
+    #design-tasksZone{
+        @extend #design-objectives-zone;
+        padding-bottom: 50px;
+        
+        div.taskZone{ height: 100%; }
+    }
+    #design-activities-zone{
+        @extend #design-objectives-zone;
+    }
+}
+
+.row{
+    display: -moz-box;
+    display: -webkit-box;
+
+    div[id ^= design-]{ background-color: white; }
+    > div[id^=design-]:not(:first-child):not(:last-child){
+        $middleDivBorder: 2px solid #999;
+        border-left: $middleDivBorder;
+        border-right: $middleDivBorder;
+    }
+    @extend %colHeaders;
+    @extend %colHeights;
+}

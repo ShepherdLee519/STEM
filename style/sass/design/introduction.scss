@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-02-18 21:33:45 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-02-18 21:37:40
+ */
+
+ #designIntro-selectModal{
+    .radio{
+        label{
+            font-weight: bold;
+            font-size: 110%;
+        }
+        input{
+            position: relative;
+            height: 20px;
+            width: 20px;
+            left: -2px;
+            top: 4px;
+        }
+    }
+    li .row-level .col{
+        float: left;
+        margin: 0px 2.5px 0px 2.5px;
+    }
+ }

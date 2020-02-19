@@ -63,10 +63,10 @@ for($i = 0; $i < count($activities); $i++){
     <div class="col-sm-12">
     <table class="table table-striped table-evidence">
         <thead>
-            <tr><th>学习证据内容</th>
-                <th>学习评价</th></tr>
+            <tr><th style="text-align: center;">学习证据内容</th>
+                <th style="text-align: center;">学习评价</th></tr>
         </thead>
-        <tbody class="activityEvidenceBody">
+        <tbody class="activityEvidenceBody" style="text-align: center;">
     
         </tbody>
     </table>

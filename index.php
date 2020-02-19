@@ -27,9 +27,10 @@
         
         <!------------------------- css & style ---------------------------->
         <!-- 导入bootstrap的css文件 -->
-        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+        <link rel="stylesheet" href="style/css/bootstrap/bootstrap.min.css" />
         <!-- 导入自定义css文件 -->
-        <link rel="stylesheet" href="css/Design/design-style.css" />
+        <link rel="stylesheet" href="style/css/design.min.css" />
+        <!-- <link rel="stylesheet" href="css/Design/design-style.css" /> -->
         <link rel="stylesheet" href="css/pdf/pdf-style.css" />
 
         <!-- <script type="text/javascript">

@@ -21,9 +21,9 @@ function initToggles(){
         zone3 = $("#design-activities");
 
     function addAnimations(type){
-        zone1.addClass(`${type}-A`);
-        zone2.addClass(`${type}-B`);
-        zone3.addClass(`${type}-C`);
+        zone1.addClass(`${type}-objectives`);
+        zone2.addClass(`${type}-tasks`);
+        zone3.addClass(`${type}-activities`);
         // log(zone1.attr("class") + " " + zone2.attr("class") + " " + zone3.attr("class"));
     }
 
@@ -42,12 +42,12 @@ function initToggles(){
             case "left":
                 $(this).html(right);
                 $(this).attr("data-direction", "right");
-                addAnimations("type-1");
+                addAnimations("toggleRight");
                 break;
             case "right":
                 $(this).html(left);
                 $(this).attr("data-direction", "left");
-                addAnimations("re-type-1");
+                addAnimations("toggleLeft");
                 break;
         }
     });

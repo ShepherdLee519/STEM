@@ -225,7 +225,7 @@ class TaskZone{
         nodes.forEach((node, index) => {
             //显示基本的节点
             str += `
-            <div class='node'>
+            <div class='node ${(~parentIndex)?"subnode":""}'>
                 <div class="node-content node-wrap">
                     <p class='nodename'>${node.nodename}</p>
                     <div class="img-zone">

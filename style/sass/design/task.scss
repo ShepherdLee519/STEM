@@ -1,0 +1,249 @@
+@charset "utf-8";
+
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-02-17 23:55:18 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-02-19 17:00:22
+ */
+
+//Palette
+$colorScience: #FF6666;
+$colorTechnology: #FF9966;
+$colorEngineering: #0099CC;
+$colorMathematics: #CCCCCC;
+
+//核心问题区域的四种badge样式颜色
+.badge-science{
+    @include bgAndborder($colorScience);
+}
+.badge-technology{
+    @include bgAndborder($colorTechnology);
+}
+.badge-engineering{
+    @include bgAndborder($colorEngineering);
+}
+.badge-mathematics{
+    @include bgAndborder($colorMathematics);
+}
+
+//学习评价区域
+#design-tasks{
+    position: relative;
+
+    //学习评价区域的重选按钮样式
+    #design-tasks-resetModal{
+        position: absolute;
+        display: block;
+        left: 100%;
+        margin-left: -90px;
+        margin-top: -29px;
+        ////////////////////
+        outline: none;
+        border-radius: 18px;
+    }
+}
+
+//学习任务节点的样式
+////学习任务节点的包围框样式
+@mixin node-wrap($color){
+.node-wrap{
+    width: 90%;
+    padding: 10px 0px 10px 0px;
+    /////////////////////
+    border: 1px solid $color;
+    border-radius: 25px;
+    border-width: 1px 2.5px 3.5px 5px;
+
+    &:hover{
+        border: 3px solid #FF6666;
+        box-shadow: 4px 4px 10px #CCC;
+    }//.node-wrap:hover
+}}
+////添加结点的span的样式
+%addNodeSpan{
+& > span{
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    ////////////////////
+    color: #ccc;
+    font-size: 25px;
+
+    &:hover{
+        color: #0099CC;
+        font-size: 27px;
+    }
+    &.hasSubNode{
+        color: red;
+        font-size: 27px;
+    }
+}}
+////组装学习任务节点的样式
+%taskNode{
+div.node{
+    position: relative;
+    ////////////////////
+    text-align: center;
+    
+    @include node-wrap(skyblue); 
+    &.subnode{ @include node-wrap(#FFCCCC); }
+    .nodename{
+        position: relative;
+        left: 5px;
+        ///////////////////
+        font-weight: bold;
+    }//.nodename
+    img{
+        display: block;
+        width: 55%;
+        margin: 0px auto;
+        padding: 5px;
+        &:hover{ cursor: pointer; }
+    }//.node img
+    .selected-parent{
+        margin-left: -10px;
+        margin-right: -40.7px;
+        padding: 10px 40.7px 10px 0px;
+        ////////////////////
+        background-color: #F4F4F4;
+        border-right-color: white;
+        border-top-left-radius: 120px;
+        border-bottom-left-radius: 120px;
+
+        &:hover{ width: 150%; }
+    }//.selected-parent
+    @extend %addNodeSpan;
+}}
+
+//学习任务区域的样式
+%taskZone{
+div.taskZone{
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    &:first-child{
+        &.first-level{ 
+            margin-left: calc(50% - 20.83%); 
+        }
+        &:not(.first-level){ 
+            margin-left: 45px; 
+        }
+    }//:first-child
+    &.hover{ 
+        border: 2.5px dashed #FF6666; 
+    }//taskZone.hover
+    .delete-task{
+        position: absolute;
+        left: 92%;
+        top: 0px;
+        z-index: 100;
+        ////////////////////
+        color: red !important;
+        &:hover{ font-size: 140%; }
+    }//.delete-task
+    &[id ^= "subTaskZone-"]{
+        height: 100%;
+        min-height: 750px;
+        margin-bottom: 10px;
+        padding-top: 60px;
+        padding-bottom: 60px;
+        ////////////////////
+        background-color: #F4F4F4;
+        border-radius: 95px;
+
+        img{ width: 50%; }
+    }//#subTaskZone-
+}}
+
+//新建学习任务的面板样式
+%initTask{
+.init-panel{
+    position: relative;
+    width: 170%;
+    margin: 0px;
+    margin-left: -40%;
+    z-index: 330;
+    ////////////////////
+    text-align: left;
+
+    &::before{
+        display: block;
+        transform: scale(4,1.5);
+        ////////////////////
+        content: "//////";
+        text-align: center;
+        color: orange;
+        font-weight: bold;
+        font-size: 130%;
+    }
+    .panel{
+        margin-top: 20px;
+        ////////////////////
+        border-radius: 0px 0px 20px 20px;
+    }
+}}
+//////组装学习任务区域的样式
+#design-tasksZone{    
+    @extend %taskNode;
+    @extend %taskZone;
+    @extend %initTask;
+}
+
+
+//编辑学习任务区域的样式
+////学习任务区域的核心问题选择样式
+%editTaskCoreQuestion{
+#taskCoreQuestion-SelectZone{
+    width: 67%;
+    margin-top: 10px;
+    margin-right: 15px;
+    ////////////////////
+    text-align: left;
+}
+#taskCoreQuestion-ShowZone{
+    margin-top: 10px;
+    ////////////////////
+    text-align: left;
+}}
+////学习任务区域的学习证据的样式
+%editTaskEvidence{
+.table-evidence{
+    td{
+        text-align: center;
+        vertical-align: middle;
+    }
+    th{
+        text-align: center;
+        vertical-align: middle;
+
+        .content-header{ width: 30%; }
+        .coreQuestion-header{ width: 20%; }
+        .evaluate-header{ width: 20%; }
+        .add-header{ width: 30%; }
+    }
+    #addEvidence{ outline: none; }
+}}
+////组装编辑学习任务区域的body
+%editTask{
+#design-editTaskZone-body{
+    form{
+        max-height: 450px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    @extend %editTaskCoreQuestion;
+    @extend %editTaskEvidence;
+}}
+//////组装节点编辑区域
+#design-editTaskZone{
+    position: absolute;
+    width: 100%;
+    max-width: 780px;
+    top: 0px;
+    margin: 150px 0px 0px 0px;
+    z-index: 200;
+
+    @extend %editTask;
+}

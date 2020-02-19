@@ -1,0 +1,300 @@
+@charset "utf-8";
+
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-02-18 15:34:30 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-02-19 17:00:29
+ */
+
+
+//学习活动区域的zone的样式
+////新建学习活动的菜单的样式
+%initActivity{
+.design-initActivityZone{
+    display: block;
+    width: 90%;
+    margin-left: 5%;
+
+    .panel{ border: none; }
+    .panel-heading{
+        border: 2px solid #D6E9C6;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }//.panel-heading
+    .panel-body{
+        overflow: hidden;
+        clear: both;
+        ////////////////////
+        border: 2px solid #D6E9C6;
+        border-top-width: 0px;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+    }//.panel-body
+    .radio{ 
+        margin-left: 10%; 
+        &:hover{ font-size: 105%; }
+    }//.radio
+}}
+////有子节点的父节点的尾部样式
+%hasSub{
+.design-act-zone-hassub{
+    margin: 0px auto;
+    top: 20px;
+    ////////////////////
+    text-align: center;
+    border-top: 1px solid #EEE;
+
+    span{
+        display: block;
+        ////////////////////
+        color: #0099CC !important;
+        font-size: 25px;
+    }
+}}
+////actZone区域的公共样式
+%actZone{
+    width: 400px;
+    margin: 0px auto;
+    margin-bottom: 20px;
+
+    .design-act-zone-title{ 
+        font-size: 13px; 
+
+        span{
+            font-weight: bold;
+            font-size: 16px;
+        }
+    }//.design-act-zone-title
+    .design-act-zone-icon{
+        display: inline-block;
+        position: relative;
+        width: 32px;
+        height: 32px;
+        top: -7.5px;
+        left: -8.5px;
+    }//.design-act-zone-icon
+    .design-act-zone-content{
+        overflow: hidden;
+        clear: both;
+    }//.design-act-zone-content
+    .init-act{
+        button{
+            display: block;
+            margin: 0px auto;
+        }
+    }//.init-act
+
+    @extend %initActivity;
+}
+
+
+////组装一级的actZone的样式
+div.design-act-zone{
+    @extend %actZone;
+    @extend %hasSub;
+}
+////组装二级的actZone的样式
+div.design-act-subZone{
+    @extend %actZone;
+
+    //二级活动区域的特殊样式
+    width: 350px;
+    ////////////////////
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+
+//学习活动区域的node的样式
+////学习活动node的heading部分样式
+%actNodeHeading{
+.panel-heading{
+    font-size: 10px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+    .design-act-node-icon{
+        display: inline-block;
+        position: relative;
+        width: 28px;
+        height: 28px;
+        top: -5.5px;
+        left: -8.5px;
+    }//.design-act-node-icon
+    .remove-node{
+        display: inline-block;
+        top: -15px;
+        margin-top: -6px;
+        padding: 2px 4px 2px 4px;
+        ////////////////////
+        color: red;
+        font-size: 2.3em;
+
+        &:hover{
+            margin-top: -8px;
+            margin-left: 6px;
+            margin-right: -2px;
+            ////////////////////
+            font-size: 2.7em;
+        }
+    }//.remove-node
+}}
+////学习活动node的body部分的样式
+%actNodeBody{
+.panel-body{
+    .design-activity-name{ font-size: 120%; }
+    .edit-activity-btn{
+        outline: none;
+        border-radius: 20px;
+    }//.edit-activity-btn
+    .menu-box{
+        display: inline-block;
+        width: 110%;
+        margin-top: 6px;
+        margin-left: -5%;
+    }//.menu-box
+}}
+
+
+////组装后的学习活动节点样式
+%actNode{
+.design-act-node{
+    border-radius: 15px;
+
+    @extend %actNodeHeading;    
+    @extend %actNodeBody;
+}}
+////前后插入节点的span的样式
+%insertActNode{
+> span{
+    &.glyphicon{
+        display: block;
+        margin-left: 50%;
+        ////////////////////
+        color: #FF6666;
+        font-size: 130%;
+
+        &:hover{
+            color: red;
+            font-size: 150%;
+        }
+    }
+    &:last-child{ top: -18px; }
+}}
+////node面板的toggle样式效果
+%toggleActPanel{
+.panel{
+    //toggle的动画效果
+    @keyframes toggleActPanel{
+        0% {width: 100%; margin-left: 0px;}
+        70% { width: 85%; margin-left: 7.5%;}
+        100% { width: 80%; margin-left: 10%;}
+    }
+    &.panel-toggle{
+        width: 80%;
+        margin-left: 10%;
+        ////////////////////
+        background-color: #FF8888;
+        color: white;
+        animation: toggleActPanel 0.1s;
+        box-shadow: 4px 4px 10px #CCC;
+
+        &:hover{ background-color: #FF6666; }
+        span.glyphicon{
+            display: inline-block;
+            margin-left: 4px;
+            ////////////////////
+            color: red;
+            font-size: 145%;
+            border-left: 3.5px solid white;
+        }
+    }
+    &.panel-default{
+        &:hover{ 
+            > .panel-heading{ background-color: #eee; }
+        }
+    }
+}}
+
+
+//////组装带wrapper的node样式
+div.design-act-node-wrapper{
+    @extend %insertActNode;
+    @extend %toggleActPanel;
+    @extend %actNode;
+}
+
+
+//编辑学习活动区域的样式
+////学习活动区域的表格的样式
+%editActivityTable{
+.design-editActivity-table{
+    thead{ background-color: #DFF0D8; }
+    tbody tr{
+        height: 50px;
+        ////////////////////
+        vertical-align: middle;
+    }
+    tbody td:first-child{
+        width: 80px;
+        ////////////////////
+        font-weight: bolder;
+
+        label{
+            display: inline-block;
+            height: 20px;
+            margin-top: calc(50% + 10px);
+            margin-left: 5px;
+        }
+    }
+}}
+////编辑学习活动区域的样式
+%editActivity{
+    .design-editActivityZone-body{
+        max-height: 450px;
+        overflow-y: scroll;
+
+        td textarea{
+            width: calc(100% + 17px);
+            height: 100%;
+            margin: -8px;
+            margin-bottom: -16px;
+        }
+    }//.design-editActivityZone-body
+    .editActivity-pyramidZone{ position: relative; }
+    .editActivity-img{
+        position: absolute;
+        left: -148px;
+        top: 7px;
+    }//.editActivity-img
+
+    @extend %editActivityTable;
+}
+//////组装编辑学习活动区域的总样式
+#design-editActivityZone{
+    position: absolute;
+    width: 86%;
+    top: 0px;
+    left: 0px;
+    margin: 150px 7% 0px 7%;
+    z-index: 400;
+
+    @extend %editActivity;
+}
+
+
+//学习证据的模态框的样式
+#activityEvidenceModal{
+    #activityEvidenceSelectedZone{
+        max-height: 300px;
+        overflow-y: scroll;
+        ////////////////////
+        background-color: white !important;
+    }
+    .checkbox-td input{ zoom: 200%; }
+    tr.cancel{
+        text-decoration: line-through;
+        background-color: #eeeeee;
+    }
+}

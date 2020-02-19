@@ -403,9 +403,9 @@ const TaskZoneHandlerModule = function(){
         .delegate(".editEvidence", "click", function(){
             $editEvidenceModal.modal("show");
             _inject($(this).closest("tr"));
-            let $content_editing        = _(".evidenceContent"),
-                $coreQuestion_editing   = _(".evidenceCoreQuestion"),
-                $evaluate_editing       = _(".evidenceEvaluate");
+            $content_editing        = _(".evidenceContent"),
+            $coreQuestion_editing   = _(".evidenceCoreQuestion"),
+            $evaluate_editing       = _(".evidenceEvaluate");
             _reject();
             
             $editSelectedCQ.html("").append($selectedCQ.html());

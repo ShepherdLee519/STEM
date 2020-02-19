@@ -1,0 +1,57 @@
+@charset "utf-8";
+
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-02-17 23:55:05 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-02-18 21:31:44
+ */
+
+
+body{
+    background-color: #EEEEEE;
+}
+
+@mixin bgAndborder(
+    $bgcolor,
+    $bordercolor: $bgcolor
+) 
+{
+    background-color: $bgcolor;
+    border-color: $bordercolor;
+}
+
+.header{
+    @include bgAndborder(#CCCCFF);
+}
+
+#navbar{
+    a{
+        color: #444 !important;
+        font-size: 130%;
+    }
+    a.navbar-title{
+        color: #666 !important;
+        font-weight: bold;
+        font-size: 140%;
+    }
+    //被选中的链接的颜色
+    .active a{
+        @include bgAndborder(white);
+    }
+}
+
+//刷新的遮层的样式
+#loading-aside{
+    position: absolute;
+    width: 100%;
+    height: 111%;
+    top: 0px;
+    padding-top: 20%;
+    ////////////////////
+    background-color: #666;
+    opacity: 0.6;
+    color: white;
+    text-align: center;
+    font-size: 250%;
+}

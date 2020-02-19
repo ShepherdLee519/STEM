@@ -1,0 +1,66 @@
+@charset "utf-8";
+
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-02-19 17:01:43 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-02-19 17:47:25
+ */
+
+
+//切换节点的span
+span.togglebtn{
+    display: block;
+    ////////////////////
+    color: #666;
+    font-size: 110%;
+
+    &:hover{ cursor: pointer; }
+}
+
+@mixin toggleKeyframes(
+    $name, 
+    $a, $b, $c
+) 
+{
+    $width: 8.33%;
+    
+    @keyframes toggleLeft-#{$name}{
+        0%   {  width: $c * $width; }
+        75%  {  width: $b * $width; }
+        100% {  width: $a * $width; }
+    }
+    @keyframes toggleRight-#{$name}{
+        0%   {  width: $a * $width; }
+        75%  {  width: $b * $width; }
+        100% {  width: $c * $width; }
+    }
+}
+
+@mixin toggleClass(
+    $name,
+    $widthLeft, $widthRight,
+) 
+{
+    #design-#{$name}{
+        &.toggleLeft-#{$name}{
+            width: $widthLeft;
+            animation: toggleLeft-#{$name} 0.1s;
+        }
+        &.toggleRight-#{$name}{
+            width: $widthRight;
+            animation: toggleRight-#{$name} 0.1s;
+        }
+    }
+}
+
+.row{
+    //5, 6, 1 => 0, 6, 6
+    @include toggleKeyframes(objectives, 5, 2, 0);
+    @include toggleKeyframes(tasks,      6, 7, 6);
+    @include toggleKeyframes(activities, 1, 3, 6);
+
+    @include toggleClass(objectives, 50%, 2% );
+    @include toggleClass(tasks,      50%, 49%);
+    @include toggleClass(activities, 0% , 49%);
+}
