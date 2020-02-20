@@ -1,3 +1,10 @@
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-02-20 21:35:17 
+ * @Last Modified by:   Shepherd.Lee 
+ * @Last Modified time: 2020-02-20 21:35:17 
+ */
+
 const ActivityHandlerModule = function(){
     let $activityZone     = $("#design-activities-zone"),
         $activityEditZone = $("#design-editActivityZone");
@@ -568,14 +575,15 @@ const ActivityHandlerModule = function(){
          */
         function extractFile($tbody){
             let str = "",
-                $filename;
+                $filename, filename;
             [...$tbody.find("tr:not(:first)")].forEach(tr => {
                 $filename = $(tr).find(".fileModal-show-filename");
+                filename = $filename.html().trim();
                 str +=  `
-                    <li class="list-group-item"
-                        data-fullpath=${$filename.attr("data-fullpath")}>
-                        ${$filename.html()}
-                    </li>
+                    <li class="list-group-item file-li"
+                        data-fullpath=${$filename.attr("data-fullpath")}
+                        title="点击下载< ${filename} >">
+                        ${filename}</li>
                 `.trim();
             });
             return str;
@@ -592,6 +600,13 @@ const ActivityHandlerModule = function(){
                 ).appendTo($showBody);
             }
             $modal.modal("show");
+            return false;
+        })
+        .delegate(".file-li", "click", function(){
+            let $a = $(`<a href="${$(this).data("fullpath")}" download></a>`)
+            $a.addClass("hidden").appendTo(document.body);
+            $a[0].click();
+            $a.remove();
             return false;
         });
 
@@ -642,18 +657,8 @@ const ActivityHandlerModule = function(){
             let $tr = $(this).closest("tr"),
                 fullpath = $tr.find(".fileModal-show-filename").data("fullpath");
             fullpath = fullpath.replace(path, '../.' + path);
-            $.post("./php/upload/delete_file.php", {filepath: fullpath}, res => {
-                if(!res) err("File Delete Occured ERROR!");
-            });
+            _beacon("./php/upload/delete_file.php", {filepath: fullpath});
             $tr.remove();
-            return false;
-        })
-        .delegate(".file-ul li", "click", function(){
-            let $a = $(`<a href="${$(this).data("fullpath")}" download></a>`)
-            $a.addClass("hidden").appendTo(document.body);
-            $a[0].click();
-            $a.remove();
-            // log($(this).data("fullpath"));
             return false;
         })
         .delegate("#confirmFile", "click", function(){

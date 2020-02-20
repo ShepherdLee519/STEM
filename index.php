@@ -137,10 +137,10 @@
         <script src="js/design.js"></script>
 
         <script src="js/activity/activitynode.js"></script>
+        <script src="js/activity/activitysaveload.module.js"></script>
         <script src="js/activity/activityhandler.module.js"></script>
         <script src="js/activity/activityzone.js"></script>
         <script src="js/activity/activityzones.js"></script>
-        <script src="js/activity/activity-sl.js"></script>
         
         <script src="js/task/taskzonehandler.module.js"></script>
         <script src="js/task/taskzone.js"></script>

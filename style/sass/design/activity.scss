@@ -4,7 +4,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-02-18 15:34:30 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-02-19 17:00:29
+ * @Last Modified time: 2020-02-20 18:19:27
  */
 
 
@@ -268,6 +268,13 @@ div.design-act-node-wrapper{
         left: -148px;
         top: 7px;
     }//.editActivity-img
+    .file-li{
+        &:hover{
+            background-color: #dff0d8;
+            color: #3c763d;
+            cursor: pointer;
+        }
+    }//.file-li
 
     @extend %editActivityTable;
 }

@@ -213,7 +213,7 @@ body {
  * @Author: Shepherd.Lee 
  * @Date: 2020-02-18 15:34:30 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-02-19 17:00:29
+ * @Last Modified time: 2020-02-20 18:19:27
  */
 div.design-act-zone .design-initActivityZone, div.design-act-subZone .design-initActivityZone {
   display: block;
@@ -380,6 +380,10 @@ div.design-act-node-wrapper .panel.panel-default:hover > .panel-heading {
   position: absolute;
   left: -148px;
   top: 7px; }
+#design-editActivityZone .file-li:hover {
+  background-color: #dff0d8;
+  color: #3c763d;
+  cursor: pointer; }
 
 #design-editActivityZone {
   position: absolute;

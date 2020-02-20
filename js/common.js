@@ -1,8 +1,8 @@
 /*
- * author: Shepherd.Lee
- * Date: 2020/02/03
- * info: 部分简化操作的公共功能与函数
- * index:
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-02-20 21:35:00 
+ * @Last Modified by:   Shepherd.Lee 
+ * @Last Modified time: 2020-02-20 21:35:00 
  */
 
 

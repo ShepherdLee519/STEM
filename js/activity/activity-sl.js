@@ -1,15 +1,10 @@
 /*
- * author: Shepherd.Lee
- * Date: 2019-09-14
- * version: 2.0.0
- * info: 学习活动编辑过程中读取/保存数据
- * index:
- *      keyToClass()
- *      saveActivityData()
- *      loadActivityData()
- * 
- *      saveActivity()
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-02-19 22:31:55 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-02-19 22:32:25
  */
+
 
 /**
  * 学习活动 - 思考-配对-分享
@@ -280,8 +275,6 @@ function loadActivityData(){
 }
 
 
-
-
 /**
  * 保存本地activity数据到DB
  */
@@ -301,8 +294,6 @@ function saveActivity(){
         else err("save activity failed");
     });
 }
-
-
 
 
 /**

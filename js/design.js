@@ -109,7 +109,11 @@ function saveData(){
         activityData = null;
     }else{
         tasksData = DATA;
-        activityData = getActivity();
+        if(_isundef(ZONE)){
+            log("Please Init ZONE");
+            return;
+        }
+        activityData = ZONE.data;
     }
 
     saveTheme();

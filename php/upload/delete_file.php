@@ -6,7 +6,7 @@
  * index:
  */
 
-$filepath = $_POST["filepath"];
+$filepath = $_GET["filepath"];
 $filepath = iconv('utf-8', 'gbk', $filepath);
 
 if(!unlink($filepath)){

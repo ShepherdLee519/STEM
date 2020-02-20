@@ -1,8 +1,5 @@
 $(function(){
     ActivityHandlerModule.init();
-    
-    // initActivityEvidenceHandler();
-    // initActivityMaterialHandler();
 });
 
 
