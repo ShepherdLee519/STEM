@@ -27,12 +27,11 @@
         
         <!------------------------- css & style ---------------------------->
         <!-- 导入bootstrap的css文件 -->
-        <link rel="stylesheet" href="src/style/css/bootstrap/bootstrap.min.css" />
+        <link rel="stylesheet" href="./dist/bootstrap/bootstrap.min.css" />
         <!-- 导入自定义css文件 -->
-        <link rel="stylesheet" href="src/style/css/design.min.css" />
-        <link rel="stylesheet" href="src/style/css/preview.min.css" />
-        <!-- <link rel="stylesheet" href="css/Design/design-style.css" /> -->
-        <!-- <link rel="stylesheet" href="src/style/css/pdf/pdf-style.css" /> -->
+        <link rel="stylesheet" href="./dist/design.min.css" />
+        <link rel="stylesheet" href="./dist/preview.min.css" />
+        <!-- <link rel="stylesheet" href="./test.css" /> -->
     </head>
     <!-- <body onbeforeunload="return pageClose()"> -->
     <body>

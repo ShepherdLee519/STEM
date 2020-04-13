@@ -4,7 +4,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-02-18 15:34:30 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-02-20 18:19:27
+ * @Last Modified time: 2020-04-13 23:22:55
  */
 
 
@@ -164,6 +164,11 @@ div.design-act-subZone{
 
     @extend %actNodeHeading;    
     @extend %actNodeBody;
+
+    &.edit{
+        box-shadow: 3px 5px 5px #AAA;
+        border-left: 1.5px solid #CCC;
+    }
 }}
 ////前后插入节点的span的样式
 %insertActNode{

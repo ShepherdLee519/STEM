@@ -215,7 +215,7 @@ body {
  * @Author: Shepherd.Lee 
  * @Date: 2020-02-18 15:34:30 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-02-20 18:19:27
+ * @Last Modified time: 2020-04-13 23:22:55
  */
 div.design-act-zone .design-initActivityZone, div.design-act-subZone .design-initActivityZone {
   display: block;
@@ -314,6 +314,9 @@ div.design-act-node-wrapper .design-act-node .panel-body .menu-box {
 
 div.design-act-node-wrapper .design-act-node {
   border-radius: 15px; }
+  div.design-act-node-wrapper .design-act-node.edit {
+    box-shadow: 3px 5px 5px #AAA;
+    border-left: 1.5px solid #CCC; }
 
 div.design-act-node-wrapper > span.glyphicon {
   display: block;
@@ -428,7 +431,7 @@ div.design-act-node-wrapper .panel.panel-default:hover > .panel-heading {
  * @Author: Shepherd.Lee 
  * @Date: 2020-02-18 21:40:38 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-02-18 22:27:46
+ * @Last Modified time: 2020-04-14 01:53:36
  */
 #objectives-zone .panel {
   border-color: skyblue !important; }
@@ -456,6 +459,11 @@ div.design-act-node-wrapper .panel.panel-default:hover > .panel-heading {
 
 #courseTheme form > div.form-group > label {
   font-size: 18px; }
+
+#standard {
+  display: none; }
+  #standard caption {
+    display: none; }
 
 #questionDesign-realForm .questionDesign-coreQuestion-eachQuestion label {
   margin-left: -30px; }
@@ -597,5 +605,48 @@ span.togglebtn {
 .row #design-activities.toggleRight-activities {
   width: 49%;
   animation: toggleRight-activities 0.1s; }
+
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-02-19 17:01:43 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-04-14 01:33:23
+ */
+.fullscreen-btn {
+  position: absolute;
+  top: 18px;
+  right: calc(100% - 50px);
+  cursor: pointer;
+  font-weight: bold;
+  color: white; }
+  .fullscreen-btn:hover {
+    color: #666; }
+
+.fullscreen #design-activities-zone {
+  margin-left: -60%; }
+.fullscreen #design-editActivityZone {
+  width: 760px;
+  margin-left: 40%; }
+.fullscreen .design-editActivityZone-body {
+  max-height: 580px; }
+
+.fullscreen #design-tasksZone div.taskZone {
+  width: 320px; }
+.fullscreen #design-tasksZone > div:first-child {
+  margin-left: 40px !important; }
+.fullscreen #design-tasksZone div.taskZone:first-child.first-level {
+  margin-left: 190px !important; }
+.fullscreen #design-tasksZone .init-panel {
+  width: 100%;
+  margin-left: -5%; }
+.fullscreen #design-editTaskZone {
+  width: 800px;
+  margin-left: 45%;
+  margin-top: 5%; }
+.fullscreen #design-editTaskZone-body form {
+  max-height: 510px !important; }
+
+.fullscreen {
+  width: 100% !important; }
 
 /*# sourceMappingURL=design.css.map */

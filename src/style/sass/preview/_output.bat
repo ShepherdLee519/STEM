@@ -1,1 +1,1 @@
-sass preview.scss ../../css/preview.css && sass --style compressed preview.scss ../../css/preview.min.css
+sass preview.scss ../../css/preview.css && sass --style compressed preview.scss ../../css/preview.min.css && sass --style compressed preview.scss ../../../../dist/preview.min.css

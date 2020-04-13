@@ -2,7 +2,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-03-20 04:24:35 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-03-27 17:04:02
+ * @Last Modified time: 2020-04-13 23:25:44
  */
 
 import { common as $$ } from "../../common/common";
@@ -56,6 +56,9 @@ let editActivity = function(){
         [zone, index] = getZoneIndex($this),
         node = zone.nodelist[index];
     
+    $activityZone.find('.design-act-node').removeClass('edit');
+    $this.closest('.design-act-node').addClass('edit');
+
     let type = node.type,
         $editZone   = $(`#design-editActivityZone-${type}`),
         activityname = $this.prev().html();

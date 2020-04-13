@@ -3,7 +3,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-02-18 21:40:38 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-04-13 14:46:41
+ * @Last Modified time: 2020-04-14 01:53:36
  */
 
 //学习目标的panel框的颜色
@@ -51,6 +51,12 @@
     @extend %courseThemePeople;
 }
 
+//课程标准区域
+#standard{
+    display: none;
+
+    caption{ display: none; }
+}
 
 //核心问题区域的四个学科问题的基本样式
 %eachQuestion{

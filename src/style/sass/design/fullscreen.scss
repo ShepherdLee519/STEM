@@ -1,0 +1,65 @@
+@charset "utf-8";
+
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-02-19 17:01:43 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-04-14 01:33:23
+ */
+
+.fullscreen-btn{
+    position: absolute;
+    top: 18px; 
+    right: calc(100% - 50px);
+    ////////////////////
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+
+    &:hover{ color: #666; }
+}
+
+%activityFullScreen{
+    #design-activities-zone{
+        margin-left: -60%;
+    }
+    #design-editActivityZone{
+        width: 760px;
+        margin-left: 40%;
+    }
+    .design-editActivityZone-body{
+        max-height: 580px;
+    }
+}
+
+%taskFullScreen{
+    #design-tasksZone{
+        div.taskZone{ width: 320px; }
+        > div:first-child{
+            margin-left: 40px !important;
+        }
+        div.taskZone:first-child.first-level{
+            margin-left: 190px !important;
+        }
+        .init-panel{
+            width: 100%;
+            margin-left: -5%;
+        }
+    }
+    #design-editTaskZone{
+        width: 800px;
+        margin-left: 45%;
+        margin-top: 5%;
+    }
+    #design-editTaskZone-body form{
+        max-height: 510px !important;
+    }
+}
+
+
+.fullscreen{
+    width: 100% !important;
+
+    @extend %taskFullScreen;
+    @extend %activityFullScreen;
+}

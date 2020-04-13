@@ -2,11 +2,11 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-03-20 04:48:04 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-03-27 17:04:05
+ * @Last Modified time: 2020-04-13 23:25:02
  */
 
 import { common as $$ } from "../../common/common";
-import { $activityEditZone } from "./activity.common";
+import { $activityZone, $activityEditZone } from "./activity.common";
 import { saveActivityData } from "./activity.saveload";
 import { editActivityEvidenceHandler } from "./editactivity/activity.edit.evidence";
 import { editActivityLinkHandler } from "./editactivity/activity.edit.link";
@@ -19,6 +19,7 @@ import { editActivityFileHandler } from "./editactivity/activity.edit.file";
 export function editActivityHandler(){
     let hideActivity = function(){
         $$.hide($activityEditZone.children());
+        $activityZone.find('.design-act-node').removeClass('edit');
         return false;
     };
 

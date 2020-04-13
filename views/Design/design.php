@@ -23,7 +23,7 @@
 
 <div class="row" style="overflow: hidden;" id="design-container">
     <!-- 学习目标区域 -->
-    <div class="col-md-5" id="design-objectives">
+    <div class="col-md-6" id="design-objectives">
         <div class="text-center design-objectives-header navbar navbar-default">
             <h4>学习目标
                 <a><span class="pull-right togglebtn" id="togglebtn" data-direction = "left"

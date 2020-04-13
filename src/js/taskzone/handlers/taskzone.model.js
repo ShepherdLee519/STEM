@@ -2,7 +2,7 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-03-18 03:17:05 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-03-29 04:06:45
+ * @Last Modified time: 2020-04-14 01:36:12
  */
 
 /*
@@ -16,7 +16,7 @@ import { $introZone, $resetModal, $taskZone } from './taskzone.common';
 import { TASKZONE } from '../taskzone.class';
 import { DATA } from '../../saveload/saveload';
 import { ACTIVITYZONE } from '../../activity/activity';
-import { toggleTrigger } from '../../navbar/navbar';
+import { toggleTrigger } from '../../resize/resize';
 
 
 /**
@@ -43,6 +43,8 @@ export function selectModal(value) {
 
     // 界面收放动画效果
     toggleTrigger('on');
+    // 全屏按钮
+    $$.show( $('.fullscreen-btn').eq(1) );
 
     const $div = $taskZone.children('.taskZone').eq(0);
     TASKZONE.initTaskNodes($div, value); // 新建节点
@@ -60,6 +62,8 @@ export function resetModal() {
     // 重置任务区域
     $$.hide([$taskZone, $resetModal]).show($introZone);
     toggleTrigger('off');
+    // 全屏按钮
+    $$.hide( $('.fullscreen-btn').eq(1) );
 
     // 将原先的选中取消
     [...$introZone.find('input')].forEach(radio => {

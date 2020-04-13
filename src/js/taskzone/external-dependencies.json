@@ -20,7 +20,7 @@
 			"taskzone.model.js": [
 				"import { DATA } from \"../../saveload/saveload\"",
 				"import { ACTIVITYZONE } from \"../../activity/activity\"",
-				"import { toggleTrigger } from \"../../navbar/navbar\""
+				"import { toggleTrigger } from \"../../resize/resize\""
 			],
 			"taskzone.tasknode.js": [
 				"import { DATA } from \"../../saveload/saveload\"",
