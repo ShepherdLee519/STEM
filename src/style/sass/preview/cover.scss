@@ -1,0 +1,66 @@
+@charset "utf-8";
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-04-13 14:38:28 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-04-13 15:33:26
+ */
+
+%coverTitle{
+.cover-title{
+    height: 450px;
+    margin: 0px 20px 0px 20px;
+    ////////////////////
+    text-align: center;
+    border-left: #444 solid 80px;
+
+    h1{
+        margin-top: auto;
+        position: relative;
+        left: -20px;
+        top: 45%;
+        ////////////////////
+        font-weight: bold;
+        font-size: 60px;
+    }
+}}
+
+%coverDesigner{
+.cover-designer{
+    width: 600px;
+    margin: 0px auto 0px auto;
+
+    h2{
+        margin-bottom: 20px;
+        ////////////////////
+        font-weight: bold;
+        text-align: center;
+        font-size:  30px;
+    }
+    table{
+        position: relative;
+        left: 60px;
+        width: 450px;
+        margin: 0px auto 0px auto;
+        ///////////////////
+        border: none;
+        text-align: center;
+
+        th.cover-designer-name{ width: 90px !important; }
+        th.cover-designer-type{ width: 20px !important; }
+        th,
+        td{
+            border: none;
+            text-align: left;
+            font-size:  30px;
+        }
+    }
+}}
+
+//封面部分的样式
+#coverZone{
+    padding-bottom: 80px;
+
+    @extend %coverTitle;
+    @extend %coverDesigner;
+}

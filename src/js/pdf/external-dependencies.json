@@ -1,0 +1,36 @@
+{
+	"root": "\\pdf",
+	"paths": {
+		".\\": {
+			"inject.js": [
+				"import { DATA } from \"../saveload/saveload\""
+			],
+			"render.js": [
+				"import html2canvas from \"html2canvas\"",
+				"import jsPDF from \"jspdf\""
+			]
+		},
+		"\\inject": {
+			"coreQuestion": [
+				"import { STDDATA, STD, QUESTION } from \"../../objectives/objectives\""
+			],
+			"course.js": [
+				"import { DATA } from \"../../saveload/saveload\"",
+				"import { ACTIVITYZONE } from \"../../activity/activity\""
+			],
+			"cover.js": [
+				"import { STD, THEME } from \"../../objectives/objectives\""
+			],
+			"subtaskzone.js": [
+				"import { TASKTYPE } from \"../../taskzone/taskzone\""
+			],
+			"taskzone.js": [
+				"import { DATA } from \"../../saveload/saveload\"",
+				"import { TASKTYPE } from \"../../taskzone/taskzone\""
+			],
+			"theme.js": [
+				"import { THEME, QUESTION } from \"../../objectives/objectives\""
+			]
+		}
+	}
+}

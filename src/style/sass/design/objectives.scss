@@ -1,0 +1,93 @@
+@charset "utf-8";
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-02-18 21:40:38 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-04-13 14:46:41
+ */
+
+//学习目标的panel框的颜色
+#objectives-zone{
+    .panel{
+        border-color: skyblue !important;
+    }
+    .panel-heading{
+        @include bgAndborder(skyblue !important);
+        color: #666;
+
+        .panel-title{ font-size: 1.5em; }
+    }
+    div.objectives-rows-wrap{
+        display: flex;
+        flex-flow: column;
+    }
+}
+
+
+//课程主题区域
+////课程主题参与人员
+%courseThemePeople{
+#courseTheme-people{
+    margin-left: -16%;
+
+    > div{
+        float: left;
+        width: 50%;
+        margin-right: -6%;
+        margin-top: 4px;
+        margin-bottom: 4px;
+
+        label{
+            display:inline-block;
+            margin-right: -6%;
+        }
+    }//#courseTheme-people > div
+}}
+////组装课程主题
+#courseTheme{
+    form > div.form-group > label{
+        font-size: 18px;
+    }
+    @extend %courseThemePeople;
+}
+
+
+//核心问题区域的四个学科问题的基本样式
+%eachQuestion{
+.questionDesign-coreQuestion-eachQuestion{
+    label{ margin-left: -30px; }
+    div{ margin-bottom: 5px; }
+    div.col-sm-10{
+        position: relative;
+        width: calc(83.33% + 30px);
+        left: 15px;
+    }
+    ul{
+        max-height: 158px; 
+        width: 120%;
+        margin-left: -20%;
+        margin-top: 5px;
+        margin-bottom: 0px;
+        ////////////////////
+        overflow-y: scroll;
+        border: 1.4px solid #DDD;
+    }
+    li{
+        height: 100%;
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        ////////////////////
+        border: none !important;
+
+        input{
+            position: relative;
+            display: block;
+        }
+    }
+    .editCoreQuestion{ display: none; }
+}}
+////组装包括驱动问题在内的核心问题区域
+#questionDesign-realForm{
+    @extend %eachQuestion;
+    label.control-label{ font-size: 18px; }
+}

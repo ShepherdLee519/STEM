@@ -1,0 +1,31 @@
+@charset "utf-8";
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-04-13 14:38:28 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-04-13 15:59:09
+ */
+
+@import "cover";
+@import "theme";
+@import "corequestion";
+@import "task";
+@import "course";
+@import "activity";
+
+#preview-container{
+    width: 70%;
+    margin-left: 15%;
+    columns: 500px 1;
+	-webkit-columns: 500px 1; /* Safari and Chrome */
+	-moz-columns: 500px 1; /* Firefox */
+    ////////////////////
+    background-color: #DDD;
+
+    & > *{
+        background-color: white;
+    }
+    main > article{
+        margin: 30px 25px 20px 25px;
+    }
+}

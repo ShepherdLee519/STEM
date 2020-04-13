@@ -1,0 +1,131 @@
+@charset "utf-8";
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-04-13 14:38:28 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-04-13 16:23:48
+ */
+
+%courseTaskActivity{
+.task-activity{
+    margin-bottom: 100px;
+
+    li{
+        position: relative;
+        margin-left: 50px;
+        margin-right: 80px;
+    }
+    p{
+        position: absolute;
+        width: 210px;
+        left: -45%;
+        ////////////////////
+        text-align: center;
+        font-size: 100%;
+    }
+    .taskActivity-image{ width: 100px; }
+    li.arrow-li{
+        position: relative;
+        top: -30px;
+        margin-left: -50px;
+        margin-right: -30px;
+    }
+    .arrow-image{ width: 55px; }
+    .taskActivity-nodenumber{ color: #336699; }
+    .taskActivity-nodename{ font-size: 90%; }
+}}
+
+%courseEvidence{
+.task-evidence-table{
+    width: 80%;
+
+    th{ color: #336699; }
+    .task-evidence-content{
+        width: 100px;
+        ////////////////////
+        font-weight: bold;
+    }
+    .task-evidence-coreQuestion{ width: 50px; }
+    .task-evidence-evaluate{ width: 50px; }
+}}
+
+%courseTask{
+.task{
+    .task-title{
+        width: 100%;
+        margin: 35px 0px 25px 5px;
+        padding: 6px;
+        ////////////////////
+        border: 2px solid #336699;
+        border-left: 15px solid #336699;
+
+        span{
+            font-weight: bold;
+            font-size: 25px;
+
+            &.task-nodename{ color:#336699; }
+            &.task-taskname{ color: #333 !important; }
+        }
+    }
+    
+    .task-info{
+        h4{
+            font-weight: bold;
+            color:#336699;
+        }
+        p,
+        li{
+            font-size: 120%;
+        }
+        
+        @extend %courseTaskActivity;
+    }
+
+    table{
+        border: 1.6px solid #ccc !important;
+
+        td,
+        th{
+            border: 1.6px solid #ccc !important;
+        }
+    }
+
+    @extend %courseEvidence;
+}}
+
+%courseActivity{
+.activity{
+    .activity-title{
+        width: 80%;
+        margin-bottom: 20px;
+
+        img{
+            display: inline-block;
+            width: 45px;
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+        .activity-number{
+            font-weight:  bold;
+            font-size:  18px;
+            color: #336699;
+        }
+        .activity-name{ font-size: 18px; }
+    }
+}}
+
+//课程设计区域
+#courseZone{
+    > h4{
+        color: #336699;
+    }
+
+    .subnode-wrapper{ border: 2.5px dashed #336699; }
+    .activity-wrapper{
+        background-color: white !important;
+        border-radius: 30px;
+    }
+
+    @extend %courseTask;
+    @extend %courseActivity;
+}

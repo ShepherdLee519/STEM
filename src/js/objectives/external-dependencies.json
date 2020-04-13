@@ -1,0 +1,16 @@
+{
+	"root": "\\objectives",
+	"paths": {
+		".\\": {
+			"question.js": [
+				"../../datas/objectives/question.json"
+			],
+			"standard.js": [
+				"../../datas/standard/standard.json"
+			],
+			"theme.js": [
+				"../../datas/objectives/theme.json"
+			]
+		}
+	}
+}

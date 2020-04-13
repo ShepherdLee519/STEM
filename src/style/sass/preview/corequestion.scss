@@ -1,0 +1,56 @@
+@charset "utf-8";
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-02-18 21:40:38 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-04-13 15:17:56
+ */
+
+%coreQuestion-td{
+    &.coreQuestion-subject{
+        width: 60px;
+        ////////////////////
+        vertical-align: middle;
+        text-align: center;
+        font-weight: bold;
+        color: #336699;
+    }
+    &.coreQuestion-standard{
+        color: #336699;
+        line-height: 170%;
+    }
+    &.coreQuestion-question{
+        line-height: 170%;
+        
+        span.coreQuestion-number{
+            font-weight: bold;
+            color: #336699;
+
+            &:after{ content: ": "; }
+        }
+    }
+}
+
+%coreQuestion-table{
+table{
+    border: 1.6px solid #ccc !important;
+
+    th{
+        font-weight: bold;
+        text-align: center;
+        color: #336699;
+        border: 1.6px solid #ccc !important;
+    }
+    td{
+        border: 1.6px solid #ccc !important;
+
+        @extend %coreQuestion-td;
+    }
+}}
+ 
+//学习目标与核心问题区域
+#coreQuestionZone{
+    h4{ color: #336699; }
+
+    @extend %coreQuestion-table;
+}

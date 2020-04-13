@@ -1,0 +1,11 @@
+{
+	"root": "\\navbar",
+	"paths": {
+		".\\": {
+			"navigator.js": [
+				"import { saveData, getSession, SESSION_INFO } from \"../saveload/saveload\"",
+				"import injectPreview from \"../pdf/inject\""
+			]
+		}
+	}
+}

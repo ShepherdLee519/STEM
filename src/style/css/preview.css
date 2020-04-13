@@ -1,0 +1,316 @@
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-04-13 14:38:28 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-04-13 15:59:09
+ */
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-04-13 14:38:28 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-04-13 15:33:26
+ */
+#coverZone .cover-title {
+  height: 450px;
+  margin: 0px 20px 0px 20px;
+  text-align: center;
+  border-left: #444 solid 80px; }
+  #coverZone .cover-title h1 {
+    margin-top: auto;
+    position: relative;
+    left: -20px;
+    top: 45%;
+    font-weight: bold;
+    font-size: 60px; }
+
+#coverZone .cover-designer {
+  width: 600px;
+  margin: 0px auto 0px auto; }
+  #coverZone .cover-designer h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 30px; }
+  #coverZone .cover-designer table {
+    position: relative;
+    left: 60px;
+    width: 450px;
+    margin: 0px auto 0px auto;
+    border: none;
+    text-align: center; }
+    #coverZone .cover-designer table th.cover-designer-name {
+      width: 90px !important; }
+    #coverZone .cover-designer table th.cover-designer-type {
+      width: 20px !important; }
+    #coverZone .cover-designer table th,
+    #coverZone .cover-designer table td {
+      border: none;
+      text-align: left;
+      font-size: 30px; }
+
+#coverZone {
+  padding-bottom: 80px; }
+
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-04-13 14:38:28 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-04-13 15:04:54
+ */
+#themeZone h4 {
+  font-weight: bold; }
+#themeZone .theme-background {
+  padding: 5px 10px 5px 10px;
+  border: 2px #336699 dashed;
+  border-radius: 25px; }
+  #themeZone .theme-background label {
+    display: inline-block;
+    margin-top: 6px;
+    font-weight: bold;
+    color: #336699; }
+  #themeZone .theme-background p {
+    display: inline; }
+
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-02-18 21:40:38 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-04-13 15:17:56
+ */
+#coreQuestionZone table td.coreQuestion-subject {
+  width: 60px;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: bold;
+  color: #336699; }
+#coreQuestionZone table td.coreQuestion-standard {
+  color: #336699;
+  line-height: 170%; }
+#coreQuestionZone table td.coreQuestion-question {
+  line-height: 170%; }
+  #coreQuestionZone table td.coreQuestion-question span.coreQuestion-number {
+    font-weight: bold;
+    color: #336699; }
+    #coreQuestionZone table td.coreQuestion-question span.coreQuestion-number:after {
+      content: ": "; }
+
+#coreQuestionZone table {
+  border: 1.6px solid #ccc !important; }
+  #coreQuestionZone table th {
+    font-weight: bold;
+    text-align: center;
+    color: #336699;
+    border: 1.6px solid #ccc !important; }
+  #coreQuestionZone table td {
+    border: 1.6px solid #ccc !important; }
+
+#coreQuestionZone h4 {
+  color: #336699; }
+
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-04-13 14:38:28 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-04-13 15:23:07
+ */
+#taskModalZone h4,
+.subTaskModalZone h4 {
+  color: #336699; }
+#taskModalZone li,
+.subTaskModalZone li {
+  position: relative;
+  margin-right: 15px; }
+  #taskModalZone li .taskModal-image,
+  .subTaskModalZone li .taskModal-image,
+  #taskModalZone li .subTaskModal-image,
+  .subTaskModalZone li .subTaskModal-image {
+    width: 100px; }
+  #taskModalZone li .taskModal-nodename,
+  .subTaskModalZone li .taskModal-nodename,
+  #taskModalZone li .subTaskModal-nodename,
+  .subTaskModalZone li .subTaskModal-nodename {
+    position: absolute;
+    left: 20px; }
+
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-04-13 14:38:28 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-04-13 16:20:11
+ */
+#courseZone .task .task-info .task-activity {
+  margin-bottom: 100px; }
+  #courseZone .task .task-info .task-activity li {
+    position: relative;
+    margin-left: 50px;
+    margin-right: 80px; }
+  #courseZone .task .task-info .task-activity p {
+    position: absolute;
+    width: 210px;
+    left: -45%;
+    text-align: center;
+    font-size: 100%; }
+  #courseZone .task .task-info .task-activity .taskActivity-image {
+    width: 100px; }
+  #courseZone .task .task-info .task-activity li.arrow-li {
+    position: relative;
+    top: -30px;
+    margin-left: -50px;
+    margin-right: -30px; }
+  #courseZone .task .task-info .task-activity .arrow-image {
+    width: 55px; }
+  #courseZone .task .task-info .task-activity .taskActivity-nodenumber {
+    color: #336699; }
+  #courseZone .task .task-info .task-activity .taskActivity-nodename {
+    font-size: 90%; }
+
+#courseZone .task .task-evidence-table {
+  width: 80%; }
+  #courseZone .task .task-evidence-table th {
+    color: #336699; }
+  #courseZone .task .task-evidence-table .task-evidence-content {
+    width: 100px;
+    font-weight: bold; }
+  #courseZone .task .task-evidence-table .task-evidence-coreQuestion {
+    width: 50px; }
+  #courseZone .task .task-evidence-table .task-evidence-evaluate {
+    width: 50px; }
+
+#courseZone .task .task-title {
+  width: 100%;
+  margin: 35px 0px 25px 5px;
+  padding: 6px;
+  border: 2px solid #336699;
+  border-left: 15px solid #336699; }
+  #courseZone .task .task-title span {
+    font-weight: bold;
+    font-size: 25px; }
+    #courseZone .task .task-title span.task-nodename {
+      color: #336699; }
+    #courseZone .task .task-title span.task-taskname {
+      color: #333 !important; }
+#courseZone .task .task-info h4 {
+  font-weight: bold;
+  color: #336699; }
+#courseZone .task .task-info p,
+#courseZone .task .task-info li {
+  font-size: 120%; }
+#courseZone .task table {
+  border: 1.6px solid #ccc !important; }
+  #courseZone .task table td,
+  #courseZone .task table th {
+    border: 1.6px solid #ccc !important; }
+
+#courseZone .activity .activity-title {
+  width: 80%;
+  margin-bottom: 20px; }
+  #courseZone .activity .activity-title img {
+    display: inline-block;
+    width: 45px;
+    margin-right: 10px;
+    margin-left: 10px; }
+  #courseZone .activity .activity-title .activity-number {
+    font-weight: bold;
+    font-size: 18px;
+    color: #336699; }
+  #courseZone .activity .activity-title .activity-name {
+    font-size: 18px; }
+
+#courseZone > h4 {
+  color: #336699; }
+#courseZone .subnode-wrapper {
+  border: 2.5px dashed #336699; }
+#courseZone .activity-wrapper {
+  background-color: white !important;
+  border-radius: 30px; }
+
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-04-13 14:38:28 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-04-13 16:19:49
+ */
+.activity-pair th,
+.activity-pair td.pair-step {
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  color: #336699; }
+.activity-pair td.pair-step:first-child {
+  width: 100px; }
+.activity-pair td.pair-student {
+  width: 300px;
+  vertical-align: middle; }
+.activity-pair td.pair-teacher {
+  vertical-align: middle; }
+
+.activity-game th,
+.activity-game td.game-td {
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  color: #336699; }
+.activity-game td:first-child {
+  width: 100px; }
+.activity-game .game-row {
+  width: 400px; }
+
+.activity-exp th,
+.activity-exp td.exp-td {
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  color: #336699; }
+.activity-exp td:first-child {
+  width: 100px; }
+.activity-exp .exp-row {
+  width: 400px; }
+
+.activity-roleplay th,
+.activity-roleplay td.roleplay-td {
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  color: #336699; }
+.activity-roleplay td:first-child {
+  width: 100px; }
+.activity-roleplay .roleplay-row {
+  width: 400px; }
+
+.activity-jigsaw th,
+.activity-jigsaw td.jigsaw-td {
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  color: #336699; }
+.activity-jigsaw td:first-child {
+  width: 100px; }
+.activity-jigsaw .jigsaw-row {
+  width: 400px; }
+
+.activity-pyramid th,
+.activity-pyramid td.pyramid-td {
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  color: #336699; }
+.activity-pyramid td:first-child {
+  width: 100px; }
+.activity-pyramid .pyramid-row {
+  width: 100px; }
+
+#preview-container {
+  width: 70%;
+  margin-left: 15%;
+  columns: 500px 1;
+  -webkit-columns: 500px 1;
+  /* Safari and Chrome */
+  -moz-columns: 500px 1;
+  /* Firefox */
+  background-color: #DDD; }
+  #preview-container > * {
+    background-color: white; }
+  #preview-container main > article {
+    margin: 30px 25px 20px 25px; }
+
+/*# sourceMappingURL=preview.css.map */

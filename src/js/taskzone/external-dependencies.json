@@ -1,0 +1,34 @@
+{
+	"root": "\\task",
+	"paths": {
+		".\\": {
+			"taskzone.class.js": [
+				"import { DATA } from \"../saveload/saveload\"",
+				"import ActivityZones, { ACTIVITYZONE } from \"../activity/activity\""
+			],
+			"taskzone.data.js": [
+				"../../datas/design/dbl.json",
+				"../../datas/design/ibl.json",
+				"../../datas/design/kc.json",
+				"../../datas/design/pbl.json"
+			]
+		},
+		"\\handlers": {
+			"taskzone.edit.js": [
+				"import { getCoreQuestions, questionTypeMap } from \"../../objectives/objectives\""
+			],
+			"taskzone.model.js": [
+				"import { DATA } from \"../../saveload/saveload\"",
+				"import { ACTIVITYZONE } from \"../../activity/activity\"",
+				"import { toggleTrigger } from \"../../navbar/navbar\""
+			],
+			"taskzone.tasknode.js": [
+				"import { DATA } from \"../../saveload/saveload\"",
+				"import { ACTIVITYZONE } from \"../../activity/activity\""
+			],
+			"taskzone.common.js": [
+				"import { DATA } from \"../../saveload/saveload\""
+			]
+		}
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"root": "\\saveload",
+	"paths": {
+		".\\": {
+			"data.js": [
+				"import data from \"../../datas/data.json\""
+			],
+			"loaddata.js": [
+				"import { ACTIVITYZONE } from \"../activity/activity\"",
+				"import { selectModal, TASKZONE } from \"../taskzone/taskzone\"",
+				"import { THEME, QUESTION, STD } from \"../objectives/objectives\""
+			],
+			"savedata.js": [
+				"import { ACTIVITYZONE } from \"../activity/activity\"",
+				"import { saveQuestion, saveTheme, THEME, QUESTION } from \"../objectives/objectives\""
+			]
+		}
+	}
+}

@@ -26,7 +26,7 @@
     <div class="col-md-5" id="design-objectives">
         <div class="text-center design-objectives-header navbar navbar-default">
             <h4>学习目标
-                <a><span class="pull-right togglebtn" id="togglebtn1" data-direction = "left"
+                <a><span class="pull-right togglebtn" id="togglebtn" data-direction = "left"
                     title="点击此处展开">&lt;&lt;</span></a>
             </h4>
         </div>

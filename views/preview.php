@@ -196,7 +196,7 @@
     @include "Preview/activity/pyramid.php";
 
     //模态框
-    @include "Preview/modal/save_pdf_modal.php";
+    include "Preview/modal/save_pdf_modal.php";
 ?>
 
 <!-- ///////////////////////////////////////////////// -->

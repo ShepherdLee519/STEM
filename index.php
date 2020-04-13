@@ -10,7 +10,7 @@
 
     require_once('php/helper.php'); //导入辅助函数
 
-    $VIEW_PATH = 'views/'; //视图php的文件夹
+    $VIEW_PATH = './views/'; //视图php的文件夹
 ?>
 
 <!DOCTYPE html>
@@ -27,31 +27,12 @@
         
         <!------------------------- css & style ---------------------------->
         <!-- 导入bootstrap的css文件 -->
-        <link rel="stylesheet" href="style/css/bootstrap/bootstrap.min.css" />
+        <link rel="stylesheet" href="src/style/css/bootstrap/bootstrap.min.css" />
         <!-- 导入自定义css文件 -->
-        <link rel="stylesheet" href="style/css/design.min.css" />
+        <link rel="stylesheet" href="src/style/css/design.min.css" />
+        <link rel="stylesheet" href="src/style/css/preview.min.css" />
         <!-- <link rel="stylesheet" href="css/Design/design-style.css" /> -->
-        <link rel="stylesheet" href="css/pdf/pdf-style.css" />
-
-        <!-- <script type="text/javascript">
-            /**
-             * 页面触发 onbeforeunload 事件时进入
-             * 此部分在服务器上开启
-             * 1）在页面被关闭前会进入
-             * 2）方法有返回值，才会自动弹框提示，否则不会弹框，但方法内容仍然会执行
-             * 3）方法返回的值与页面最终是否被关闭无关，即返回什么值都不会影响
-             */
-            function pageClose() {
-                log(new Date() + "：用户准备离开页面...");
-                saveData();
-                /*---------------------------------------*/
-                // saveTheme();//学习目标 - 课程主题
-                // saveQuestion();//学习目标 - 问题设计
-                // saveTasks();//学习评价
-                // saveActivity();//学习活动
-                return true;
-            }
-        </script> -->
+        <!-- <link rel="stylesheet" href="src/style/css/pdf/pdf-style.css" /> -->
     </head>
     <!-- <body onbeforeunload="return pageClose()"> -->
     <body>
@@ -70,7 +51,7 @@
                 <div>
                     <!-- /切换功能的静态按钮 -->
                     <ul class="nav navbar-nav" id="top-navbar" style="margin-left: 100px;">
-                        <li><a href="#" id="design-link">学习设计</a></li>
+                        <li class="active"><a href="#" id="design-link">学习设计</a></li>
                         <li><a href="#" id="preview-link">结果预览</a></li>
                         <!-- <li><a href="#" id="B-link">分析数据</a></li> -->
                         <!-- <li><a href="#" id="C-link">定制模块</a></li> -->
@@ -106,14 +87,14 @@
             ?>
 
             <?php
-                @include $VIEW_PATH."preview.php";
+                include $VIEW_PATH."preview.php";
             ?>
 
             <!-- ///////////////////////////////////////////////////////////////////// -->
         </div>
 
         <!-- 网络不良时候的刷新界面 -->
-        <aside id="loading-aside">
+        <aside id="loadingcover"> 
             <p>正在读入，请稍等<span></span></p>
         </aside>
 
@@ -125,50 +106,8 @@
         </footer>
 
         <!------------------------- javascript ---------------------------->
-        <!-- 导入jquery库 -->
-        <script src="js/jquery.min.js"></script>
-        <!-- 导入bootstrap的相关js库 -->
-        <script src="js/bootstrap/bootstrap.min.js"></script>
-        <script src="js/bootstrap/bootstrapValidator.min.js"></script>
-        <!-- 导入自定义的js文件 -->
-        <script src="js/common.js"></script>
-        <script src="js/navigator.js"></script>
-
-        <script src="js/design.js"></script>
-
-        <script src="js/activity/activitynode.js"></script>
-        <script src="js/activity/activitysaveload.module.js"></script>
-        <script src="js/activity/activityhandler.module.js"></script>
-        <script src="js/activity/activityzone.js"></script>
-        <script src="js/activity/activityzones.js"></script>
+        <script src="./dist/bundle.js"></script>
         
-        <script src="js/task/taskzonehandler.module.js"></script>
-        <script src="js/task/taskzone.js"></script>
-        <script src="js/task/taskzone.prototype.js"></script>
-        <script src="js/task/savetask.js"></script>
-
-        <script src="js/objectives/objectives.js"></script>
-        <script src="js/objectives/objectives-save.js"></script>
-
-        <script src="js/design-animation.js"></script>
-        <script src="js/design-load.js"></script>
-        <!-- ///////////////////////////////////////////////////////////////////// -->
-
-        <?php
-            //预览 - 生成pdf部分相关
-            $preview_js = array(
-                "pdf/", //path name
-                "html2canvas", "jsPdf.debug",
-                "render",
-                "inject/inject", "inject/cover", "inject/theme", "inject/coreQuestion",
-                "inject/taskModal","inject/course", "inject/course-activity"
-            );
-
-            for($i = 1; $i < count($preview_js); $i++){
-                ?><script src="js/<?php echo $preview_js[0].$preview_js[$i];?>.js"></script><?php
-            }
-        ?>
-
         <!-- ///////////////////////////////////////////////////////////////////// -->
     </body>
 </html>

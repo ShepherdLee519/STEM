@@ -1,0 +1,108 @@
+@charset "utf-8";
+/*
+ * @Author: Shepherd.Lee 
+ * @Date: 2020-04-13 14:38:28 
+ * @Last Modified by: Shepherd.Lee
+ * @Last Modified time: 2020-04-13 16:19:49
+ */
+
+// activity - pair
+.activity-pair{
+    th,
+    td.pair-step{
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+        color: #336699;
+    }
+
+    td.pair-step:first-child{ width: 100px; }
+
+    td.pair-student{
+        width: 300px;
+        ////////////////////
+        vertical-align: middle;
+    }
+
+    td.pair-teacher{ vertical-align: middle; }
+}
+
+
+// activity - game
+.activity-game{
+    th,
+    td.game-td{
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+        color: #336699;
+    }
+
+    td:first-child{ width: 100px; }
+
+    .game-row{ width: 400px; }
+}
+
+
+// activity - exp
+.activity-exp{
+    th,
+    td.exp-td{
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+        color: #336699;
+    }
+
+    td:first-child{ width: 100px; }
+
+    .exp-row{ width: 400px; }
+}
+
+
+// activity - roleplay
+.activity-roleplay{
+    th,
+    td.roleplay-td{
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+        color: #336699;
+    }
+
+    td:first-child{ width: 100px; }
+
+    .roleplay-row{ width: 400px; }
+}
+
+
+// activity - jigsaw
+.activity-jigsaw{
+    th,
+    td.jigsaw-td{
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+        color: #336699;
+    }
+
+    td:first-child{ width: 100px; }
+
+    .jigsaw-row{ width: 400px; }
+}
+
+
+// activity - pyramid
+.activity-pyramid{
+    th,
+    td.pyramid-td{
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+        color: #336699;
+    }
+
+    td:first-child{ width: 100px; }
+
+    .pyramid-row{ width: 100px; }
+}

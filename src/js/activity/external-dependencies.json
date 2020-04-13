@@ -1,0 +1,25 @@
+{
+	"root": "\\activity",
+	"paths": {
+		".\\": {
+			"activity.data.js": [
+				"../../datas/activity/pair.json",
+				"../../datas/activity/pyramid.json",
+				"../../datas/activity/jigsaw.json",
+				"../../datas/activity/roleplay.json",
+				"../../datas/activity/game.json",
+				"../../datas/activity/exp.json"
+			]
+		},
+		"\\class": {
+			"activityzone.js": [
+				"import { DATA } from \"../../saveload/saveload\""
+			]
+		},
+		"\\handlers\\editactivity": {
+			"activity.edit.file.js": [
+				"import { SESSION_INFO } from \"../../../saveload/saveload\""
+			]
+		}
+	}
+}
