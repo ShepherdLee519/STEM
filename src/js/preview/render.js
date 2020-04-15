@@ -2,30 +2,21 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-03-23 03:28:41 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-03-27 17:05:58
+ * @Last Modified time: 2020-04-15 22:04:04
  */
 
-import { common as $$ } from "../common/common";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+import { common as $$ } from '../common/common';
+import { SESSION_INFO } from './../saveload/saveload';
 
-var RENDER_MODAL;//控制生成pdf的模态框的对象
+let $modal = $("#savePdfModal");
+$modal.appendTo($("body").eq(0));
 
-const log = console.log;
+var RENDER_MODAL; // 全局的控制生成pdf的模态框的对象
 
-$(function () {
-    $$.hello("render");
+RENDER_MODAL = new renderModal(); // 初始化save_pdf_modal的相关事件处理
 
-    let $modal = $("#savePdfModal");
-    $modal.appendTo(document.body);
-
-    // RENDER_MODAL = new renderModal();//初始化save_pdf_modal的相关事件处理
-
-    initRenderPDF();//初始化渲染pdf
-    initRenderBtnHandler();//初始化提交报告按钮的点击事件
-});
-
-
+initRenderPDF(); // 初始化渲染pdf
+initRenderBtnHandler(); // 初始化提交报告按钮的点击事件
 
 
 /**
@@ -35,42 +26,41 @@ $(function () {
 function renderModal(){
     let $modal = $("#savePdfModal"),
         that = this;
-        
-    let $uploading, $uploaded, $cancel;
-
-
-    // $$._inject($modal);
-    // $uploading = $$._("#savePdf-uploading");
-    // $uploaded = $$._("#savePdf-uploaded");
-    // $cancel = $$._("#savePdf-cancel");
-    // $$._reject();
-
-    $modal.appendTo($("body").eq(0));
 
     this.hideBody = () => {
-        $$.hide([$uploaded, $uploading]);
+        $$.inject($modal);
+        let $uploading = $$._("#savePdf-uploading");
+        let $uploaded = $$._("#savePdf-uploaded");
+        $$.reject();
+
+        $$.hide([$uploading, $uploaded]);
     };
     this.exist = () => {
+        let userid = SESSION_INFO.userid;
+        let username = SESSION_INFO.username; 
         let result;
         $$.async();
-        $.get("./php/pdf/pdf_check.php", (res) => {
+        $.post("./php/pdf/pdf_check.php", 
+            {userid: userid, username: username},
+            (res) => {
             result = res;
         });
-        $$async();
+        $$.async();
         return result;
     };
     this.open = () => {
         $$.inject($modal);
-        $uploading = $$._("#savePdf-uploading");
-        $uploaded = $$._("#savePdf-uploaded");
-        $cancel = $$._("#savePdf-cancel");
+        let $uploading = $$._("#savePdf-uploading");
         $$.reject();
-        
+
         that.hideBody();
         $uploading.removeClass("hidden");
         $modal.modal("show");
     };
     this.uploaded = () => {
+        $$.inject($modal);
+        let $uploaded = $$._("#savePdf-uploaded");
+        $$.reject();
         that.hideBody();
         $uploaded.removeClass("hidden");
     };
@@ -132,13 +122,21 @@ function initRenderPDF(){
             //去掉前面的字符串后，就是文件的加密字符串
             let base64 = datauri.substring(28);
 
+            // let userid = sessionStorage.getItem("userid"),
+            //     username = sessionStorage.getItem("username");
+            let userid = SESSION_INFO.userid;
+            let username = SESSION_INFO.username;
+
             $.post("./php/pdf/pdf_save.php", 
                 {
-                    data:base64, 
-                    paths:getAppendixes()
+                    data: base64, 
+                    paths: getAppendixes(),
+                    userid: userid,
+                    username: username
                 }, (res) => {
+                console.log('reaction');
                 if(res){
-                    log(res);
+                    console.log(res);
                     RENDER_MODAL.uploaded();
                 }
             });
@@ -166,10 +164,9 @@ function getAppendixes(){
  */
 function initRenderBtnHandler(){
     $("#savePDF").click(() => {
-        log("生成中......");
-        $("#renderPDF").click();
-        RENDER_MODAL = new renderModal();
+        console.log("生成中......");
         RENDER_MODAL.open();
+        $("#renderPDF").click();
         return false;
     });
 
@@ -178,7 +175,9 @@ function initRenderBtnHandler(){
             alert("您尚未提交过报告");
             return false;
         }else{
-            let $a = $(`<a href="./upload/pdf/report.zip" download></a>`);
+            let userid = SESSION_INFO.userid;
+            let username = SESSION_INFO.username;
+            let $a = $(`<a href="./userdata/${userid}_${username}/report.zip" download></a>`);
             $("body").eq(0).append($a);
             $a[0].click();
             $a.remove();

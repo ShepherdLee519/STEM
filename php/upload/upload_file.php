@@ -11,9 +11,9 @@ $userid = $_POST["userid"];
 $username = $_POST["username"];
 
 $str = "addFile";//name(input)
-$FILE_PATH = "../../upload/"; //文件上传文件夹，注意文件夹的路径末尾需要有'/'
-// $FILE_PATH = "../../userdata/".$userid."_".$username."/upload/";
-is_dir($FILE_PATH) or mkdir($FILE_PATH, 0777, true);//文件夹不存在则创建
+// $FILE_PATH = "../../upload/"; //文件上传文件夹，注意文件夹的路径末尾需要有'/'
+$FILE_PATH = "../../userdata/".$userid."_".$username."/upload/";
+is_dir(iconv('utf-8', 'gbk', $FILE_PATH)) or mkdir(iconv('utf-8', 'gbk', $FILE_PATH), 0777, true);//文件夹不存在则创建
 $FILE_MAX_SIZE = 8 * 1024 * 1024; //当前最大上传大小为8M - 需要在php.ini中修改
 
 

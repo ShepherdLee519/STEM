@@ -2,10 +2,11 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-03-23 04:13:55 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-03-27 17:05:23
+ * @Last Modified time: 2020-04-15 22:30:05
  */
 
 import { common as $$ } from "../../common/common";
+import { SESSION_INFO } from "../../saveload/saveload";
 
 
 /**
@@ -207,8 +208,8 @@ function transformLink(links){
  */
 function transformFile(files){
     if(files === "") return "";
-    let userid = sessionStorage.getItem("userid"),
-        username = sessionStorage.getItem("username"),
+    let userid = SESSION_INFO.userid,
+        username = SESSION_INFO.username,
         path = `./userdata/${userid}_${username}/upload/`;
 
     let str = "", 

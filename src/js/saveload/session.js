@@ -2,14 +2,14 @@
  * @Author: Shepherd.Lee 
  * @Date: 2020-03-26 23:32:34 
  * @Last Modified by: Shepherd.Lee
- * @Last Modified time: 2020-03-27 04:47:42
+ * @Last Modified time: 2020-04-15 20:06:31
  */
 
 export var SESSION_INFO = {
-    local: true, //默认本地读入
-    session: false, //是否有session信息
+    local: false, // 默认本地读入
+    session: false, // 是否有session信息
 
-    //需保存的session内容
+    // 需保存的session内容
     userid: "", 
     username: ""
 };

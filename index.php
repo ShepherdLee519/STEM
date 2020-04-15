@@ -106,7 +106,11 @@
 
         <!------------------------- javascript ---------------------------->
         <script src="./dist/bundle.js"></script>
-        
+        <script src="./dist/vendors~main.bundle.js"></script>
+
+        <script async src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+        <script async src="https://cdn.bootcss.com/jspdf/1.3.4/jspdf.debug.js"></script>
+
         <!-- ///////////////////////////////////////////////////////////////////// -->
     </body>
 </html>

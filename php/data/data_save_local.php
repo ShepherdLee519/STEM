@@ -1,3 +1,4 @@
+
 <?php
 /**
  * author: Shepherd.Lee
@@ -8,7 +9,7 @@
 // @include "../mysqllink.php";
 @include "../helper.php";
 $id = $_POST["userid"];
-$name = $_POST["username"];
+$name = iconv('utf-8','gbk', $_POST["username"]);
 $data = $_POST["data"];
 
 $FILE_PATH = "../../userdata/".$id."_".$name."/";

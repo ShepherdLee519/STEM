@@ -353,7 +353,7 @@ for($i = 0; $i < count($activities); $i++){
 
 <hr />
 <form id="fileUpload-form" class="form-horizontal" role="form" 
-    method="POST" enctype="multipart/form-data">
+    method="POST" enctype="multipart/form-data" action="./php/upload/upload_file.php">
 <div id="fileModal-add">
     <div class="form-group">
         <h3>
